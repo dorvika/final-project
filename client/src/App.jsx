@@ -1,5 +1,5 @@
 import { Header, Footer } from "./components";
-import Router from "./router/Router";
+import Router from "./router/Router.jsx";
 
 function App() {
   return (

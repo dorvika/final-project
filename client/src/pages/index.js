@@ -1,5 +1,5 @@
-export { default as Home } from "./Home/Home";
-export { default as ProductDetails } from "./ProductDetails/ProductDetails";
-export { default as Cart } from "./Cart/Cart";
-export { default as Categories } from "./Categories/Categories";
-export { default as Error } from "./Error/Error";
+export { default as Home } from "./Home/Home.jsx";
+export { default as ProductDetails } from "./ProductDetails/ProductDetails.jsx";
+export { default as Cart } from "./Cart/Cart.jsx";
+export { default as Categories } from "./Categories/Categories.jsx";
+export { default as Error } from "./Error/Error.jsx";
