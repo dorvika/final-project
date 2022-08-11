@@ -3,3 +3,7 @@ export { default as ProductDetails } from "./ProductDetails/ProductDetails.jsx";
 export { default as Cart } from "./Cart/Cart.jsx";
 export { default as Categories } from "./Categories/Categories.jsx";
 export { default as Error } from "./Error/Error.jsx";
+export { default as Payment } from "./Payment&Deliveries/payment&deliveries.jsx";
+export { default as Returns } from "./Returns/Returns.jsx";
+export { default as PrivacyPolicy } from "./PrivacyPolicy/PrivacyPolicy.jsx";
+export { default as TermsOfService } from "./TermsOfService/TermsOfService.jsx";
