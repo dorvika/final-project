@@ -9,6 +9,9 @@ import {
   Returns,
   PrivacyPolicy,
   TermsOfService,
+  AboutUs,
+  Reviews,
+  Blog,
 } from "../pages";
 
 export default function Router() {
@@ -23,6 +26,9 @@ export default function Router() {
         <Route path="/returns" element={<Returns />} />
         <Route path="/privacypolicy" element={<PrivacyPolicy />} />
         <Route path="/termsofservice" element={<TermsOfService />} />
+        <Route path="/aboutus" element={<AboutUs />} />
+        <Route path="/reviews" element={<Reviews />} />
+        <Route path="/blog" element={<Blog />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </main>

@@ -36,10 +36,14 @@ const theme = createTheme({
     fontWeightExtraLight: 200,
     fontWeightMedium: 600,
     button: {
-      fontWeight: 400,
+      //   fontWeight: 400,
       fontFamily: "Abel",
-      color: "#373F41",
-      lineHeight: 32,
+      paddingLeft: "40px",
+      paddingRight: "40px",
+      paddingBottom: "15px",
+      paddingTop: "15px",
+      color: "#FFFFFF",
+      backgroundColor: "#373F41",
     },
     h2: {
       fontFamily: ["Abel", "san-serif"].join(","),
@@ -70,6 +74,35 @@ const theme = createTheme({
       fontWeight: 400,
       lineHeight: "25px",
       color: "#373F41",
+    },
+    subtitle2: {
+      fontFamily: ["Mulish", "san-serif"].join(","),
+      fontSize: 14,
+      fontWeight: 200,
+      lineHeight: "15px",
+      color: "#8A9394",
+    },
+  },
+  components: {
+    MuiListItem: {
+      styleOverrides: {
+        root: {
+          paddingLeft: 0,
+          paddingRight: 0,
+          paddingTop: 0,
+          paddingBottom: 15,
+        },
+      },
+    },
+    MuiButton: {
+      stylesOverrides: {
+        root: {
+          paddingBottom: 15,
+          paddingLeft: 40,
+          paddingRight: 40,
+          paddingTop: 15,
+        },
+      },
     },
   },
   // headerHeight: {
