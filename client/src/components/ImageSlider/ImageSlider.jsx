@@ -1,13 +1,19 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Box, Button, Typography } from "@mui/material";
-import {
-  ArrowBackIosNew,
-  ArrowForwardIos,
-  FiberManualRecord,
-} from "@mui/icons-material";
 import { fetchSlides } from "../../utils/api";
-import "./imageSlider.scss";
+import {
+  SliderContainer,
+  Slider,
+  LeftArrow,
+  Slide,
+  SlideContent,
+  SlideTitle,
+  SlideDescription,
+  SlideButton,
+  RightArrow,
+  SliderDots,
+  SliderDot,
+} from "./styles";
 
 const ImageSlider = () => {
   const [slides, setSlides] = useState([]);
@@ -41,46 +47,40 @@ const ImageSlider = () => {
   };
 
   return (
-    <Box component="div" className="slider__container">
-      <Box component="div" className="slider">
-        <ArrowBackIosNew className="arrow left" onClick={goToPreviousSlide} />
+    <SliderContainer>
+      <Slider>
+        <LeftArrow onClick={goToPreviousSlide} />
         <Link to="/categories">
-          <Box
-            className="slide__img"
+          <Slide
             sx={{
               backgroundImage: `url(${slides[currentIndex]?.imageUrl})`,
             }}
-          ></Box>
-          <Box component="div" className="slide__content">
+          ></Slide>
+          <SlideContent>
             <div>
-              <Typography component="h3" className="slide__title">
-                {slides[currentIndex]?.title}
-              </Typography>
+              <SlideTitle>{slides[currentIndex]?.title}</SlideTitle>
               <br />
               {slides[currentIndex]?.description && (
-                <Typography component="p" className="slide__description">
+                <SlideDescription>
                   {slides[currentIndex].description}
-                </Typography>
+                </SlideDescription>
               )}
             </div>
-            <Button variant="contained" className="slide__btn">
-              SHOP NEW ARRIVALS
-            </Button>
-          </Box>
+            <SlideButton>SHOP NEW ARRIVALS</SlideButton>
+          </SlideContent>
         </Link>
-        <ArrowForwardIos onClick={goToNextSlide} className="arrow right" />
-        <div className="slider__dots">
+        <RightArrow onClick={goToNextSlide} />
+        <SliderDots>
           {slides.map((slide, slideIndex) => (
-            <FiberManualRecord
-              className="dot"
+            <SliderDot
               key={slide.customId}
               sx={{ color: currentIndex === slideIndex ? "#373f41" : null }}
               onClick={() => goToSlide(slideIndex)}
             />
           ))}
-        </div>
-      </Box>
-    </Box>
+        </SliderDots>
+      </Slider>
+    </SliderContainer>
   );
 };
 
