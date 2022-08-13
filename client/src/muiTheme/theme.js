@@ -6,16 +6,18 @@ import { createTheme } from "@mui/material/styles";
 //xs, lg - optional, extra
 
 const theme = createTheme({
-  container: {
-    maxWidth: "1200px",
-  },
-  breakpoint: {
-    s: "320px",
-    xs: "580px",
-    md: "768px",
-    lg: "992px",
-    xl: "1200px",
-  },
+  // Такої property немає у Default Theme
+  // container: {
+  //   maxWidth: "1200px",
+  // },
+  // Пропоную залишити стандартні розміри, які вже є у Material UI, і не писати свої
+  // breakpoint: {
+  //   s: "320px",
+  //   xs: "580px",
+  //   md: "768px",
+  //   lg: "992px",
+  //   xl: "1200px",
+  // },
   palette: {
     primary: {
       main: "#373F41",
@@ -59,7 +61,6 @@ const theme = createTheme({
       color: "#FFFFFF",
       letterSpacing: "5px",
     },
-
     h6: {
       fontFamily: ["Mulish", "san-serif"].join(","),
       fontSize: 16,
@@ -83,6 +84,9 @@ const theme = createTheme({
       color: "#8A9394",
     },
   },
+  shape: {
+    borderRadius: 2,
+  },
   components: {
     MuiListItem: {
       styleOverrides: {
@@ -105,6 +109,7 @@ const theme = createTheme({
       },
     },
   },
+  // Таких properties немає у Default Theme
   // headerHeight: {
   //   mobile: "60px",
   //   desktop: "72px",
