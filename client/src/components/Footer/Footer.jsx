@@ -8,9 +8,10 @@ import {
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import InstagramIcon from "@mui/icons-material/Instagram";
+// import { FacebookOutlinedIcon } from "@mui/icons-material";
+// import TwitterIcon from "@mui/icons-material/Twitter";
+// import InstagramIcon from "@mui/icons-material/Instagram";
+import { FacebookOutlined, Twitter, Instagram } from "@mui/icons-material";
 import "./footer.scss";
 
 const Footer = () => {
@@ -84,7 +85,13 @@ const Footer = () => {
               Contact Us
             </Typography>
             <ListItem>
-              <Typography variant="body">hello@gmail.com</Typography>
+              <Link
+                to="javascript:void(0)"
+                onClick={() => (window.location = "mailto:hello@gmail.com")}
+                style={{ textDecoration: "none" }}
+              >
+                <Typography variant="body">hello@gmail.com</Typography>
+              </Link>
             </ListItem>
             <ListItem>
               <Typography variant="body">
@@ -92,7 +99,9 @@ const Footer = () => {
               </Typography>
             </ListItem>
             <ListItem>
-              <Typography variant="body">+38 093 875 9922</Typography>
+              <a href="tel:+38 067 218 2153" style={{ textDecoration: "none" }}>
+                <Typography variant="body">+38 067 218 2153</Typography>
+              </a>
             </ListItem>
           </Box>
           <Box sx={{ marginTop: "81px" }}>
@@ -129,7 +138,7 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   href="https://facebook.com"
                 >
-                  <FacebookOutlinedIcon
+                  <FacebookOutlined
                     color="primary"
                     sx={{ marginRight: "30px" }}
                   />
@@ -139,14 +148,14 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   href="https://twitter.com"
                 >
-                  <TwitterIcon color="primary" sx={{ marginRight: "30px" }} />
+                  <Twitter color="primary" sx={{ marginRight: "30px" }} />
                 </a>
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
                   href="https://instagram.com"
                 >
-                  <InstagramIcon color="primary" sx={{ marginRight: "30px" }} />
+                  <Instagram color="primary" sx={{ marginRight: "30px" }} />
                 </a>
               </Box>
             </ListItem>
