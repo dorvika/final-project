@@ -7,7 +7,7 @@ import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
   container: {
-    maxWidth: "1200px",
+    maxWidth: "1180px",
   },
   breakpoint: {
     s: "320px",
@@ -16,6 +16,7 @@ const theme = createTheme({
     lg: "992px",
     xl: "1200px",
   },
+  spacing: 2,
   palette: {
     primary: {
       main: "#373F41",
@@ -55,9 +56,12 @@ const theme = createTheme({
     h4: {
       fontFamily: ["Mulish", "san-serif"].join(","),
       fontSize: 24,
-      lineHeight: "38px",
+      // lineHeight: "38px",
       color: "#FFFFFF",
-      letterSpacing: "5px",
+      // letterSpacing: "5px",
+      [`@media screen and (max-width: 365px)`]: {
+        fontSize: 22
+      }
     },
 
     h6: {
@@ -74,6 +78,13 @@ const theme = createTheme({
       fontWeight: 400,
       lineHeight: "25px",
       color: "#373F41",
+    },
+    body2: {
+      fontFamily: ["Roboto", "san-serif"].join(","),
+      fontSize: 32,
+      fontWeight: 700,
+      // lineHeight: "25px",
+      color: "#FFFFFF",
     },
     subtitle2: {
       fontFamily: ["Mulish", "san-serif"].join(","),
@@ -103,6 +114,23 @@ const theme = createTheme({
           paddingTop: 15,
         },
       },
+    },
+    MuiCardContent: {
+      styleOverrides:{
+        root: {
+          padding: 0,
+          "&:last-child": {
+            paddingBottom: 0,
+         },
+        },
+      }
+    },
+    MuiTypography: {
+      styleOverrides:{
+        gutterBottom: {
+          marginBottom: 5,
+        },
+      }
     },
   },
   // headerHeight: {
