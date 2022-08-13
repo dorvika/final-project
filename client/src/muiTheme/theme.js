@@ -39,11 +39,11 @@ const theme = createTheme({
     fontWeightMedium: 600,
     button: {
       //   fontWeight: 400,
-      fontFamily: "Abel",
-      paddingLeft: "40px",
-      paddingRight: "40px",
-      paddingBottom: "15px",
-      paddingTop: "15px",
+      // fontFamily: "Abel",
+      // paddingLeft: "40px",
+      // paddingRight: "40px",
+      // paddingBottom: "15px",
+      // paddingTop: "15px",
       color: "#FFFFFF",
       backgroundColor: "#373F41",
     },
@@ -66,7 +66,6 @@ const theme = createTheme({
       fontSize: 16,
       fontWeight: 700,
       lineHeight: "19px",
-      marginBottom: "15px",
       color: "#373F41",
     },
     body: {
@@ -105,10 +104,23 @@ const theme = createTheme({
           paddingLeft: 40,
           paddingRight: 40,
           paddingTop: 15,
+          color: "#373F41",
+          backgroundColor: "#FFFFFF",
         },
       },
     },
+    // headerHeight: {
+    //   mobile: "60px",
+    //   desktop: "72px",
+    // },
+    // footerHeight: {
+    //   desktop: "386px",
+    // },
+    // navPanelHeight: {
+    //   mobile: "83px",
+    // },
   },
+
   // Таких properties немає у Default Theme
   // headerHeight: {
   //   mobile: "60px",
@@ -120,6 +132,7 @@ const theme = createTheme({
   // navPanelHeight: {
   //   mobile: "83px",
   // },
+
 });
 
 export default theme;
