@@ -11,8 +11,6 @@ import { Link } from "react-router-dom";
 import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
-//import logo from "./logo/logo_switch.png";
-// import theme from "../../muiTheme/theme";
 import "./footer.scss";
 
 const Footer = () => {
@@ -29,7 +27,9 @@ const Footer = () => {
           }}
         >
           <Box component="div" marginTop="81px">
-            <Typography variant="h6">Shop</Typography>
+            <Typography variant="h6" paddingBottom="15px">
+              Shop
+            </Typography>
             <List>
               <ListItem>
                 <Link to="/categories" style={{ textDecoration: "none" }}>
@@ -60,7 +60,9 @@ const Footer = () => {
           </Box>
 
           <Box marginTop="81px" component="div">
-            <Typography variant="h6">About</Typography>
+            <Typography variant="h6" paddingBottom="15px">
+              About
+            </Typography>
             <ListItem>
               <Link to="/aboutus" style={{ textDecoration: "none" }}>
                 <Typography variant="body">About Us</Typography>
@@ -77,8 +79,10 @@ const Footer = () => {
               </Link>
             </ListItem>
           </Box>
-          <Box sx={{ marginTop: "81px" }}>
-            <Typography variant="h6">Contact Us</Typography>
+          <Box sx={{ marginTop: "81px", maxWidth: "235px" }}>
+            <Typography variant="h6" paddingBottom="15px">
+              Contact Us
+            </Typography>
             <ListItem>
               <Typography variant="body">hello@gmail.com</Typography>
             </ListItem>
@@ -92,7 +96,9 @@ const Footer = () => {
             </ListItem>
           </Box>
           <Box sx={{ marginTop: "81px" }}>
-            <Typography variant="h6">Subscribe</Typography>
+            <Typography variant="h6" paddingBottom="15px">
+              Subscribe
+            </Typography>
             <ListItem>
               <Typography variant="subtitle2">
                 Subscribe now and get 15% off on your first order
@@ -100,8 +106,9 @@ const Footer = () => {
             </ListItem>
             <ListItem>
               <TextField
+                size="small"
                 id="outlined-basic"
-                label="Outlined"
+                label="E-mail"
                 variant="outlined"
               />
               <Button>Send</Button>
@@ -156,23 +163,24 @@ const Footer = () => {
             alignItems: "center",
           }}
         >
-          <Box
-            sx={{
-              display: "flex",
-              // justifyContent: "space-between",
-              alignItems: "center",
-              paddingTop: "25px",
-              paddingBottom: "21px",
-            }}
-          >
-            <img
-              src={process.env.PUBLIC_URL + "/logo/logo_switch.png"}
-              alt="logo"
-            ></img>
-            <Typography fontFamily="Roboto" variant="h6" paddingLeft="10px">
-              POSTEL&#39;
-            </Typography>
-          </Box>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                paddingTop: "25px",
+                paddingBottom: "21px",
+              }}
+            >
+              <img
+                src={process.env.PUBLIC_URL + "/logo/logo_switch.png"}
+                alt="logo"
+              ></img>
+              <Typography fontFamily="Roboto" variant="h6" paddingLeft="10px">
+                POSTEL&#39;
+              </Typography>
+            </Box>
+          </Link>
           <Typography variant="body">
             © 2021 — 2022 FE2_Online Studio
           </Typography>
