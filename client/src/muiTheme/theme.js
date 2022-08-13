@@ -31,6 +31,7 @@ const theme = createTheme({
       primary: "#373F41",
     },
   },
+  spacing: 2,
   typography: {
     htmlFontSize: 16,
     fontFamily: ["Abel", "Roboto", "Mulish", "sans-serif"].join(","),
@@ -57,9 +58,10 @@ const theme = createTheme({
     h4: {
       fontFamily: ["Mulish", "san-serif"].join(","),
       fontSize: 24,
-      lineHeight: "38px",
       color: "#FFFFFF",
-      letterSpacing: "5px",
+      [`@media screen and (max-width: 365px)`]: {
+        fontSize: 22
+      }
     },
     h6: {
       fontFamily: ["Mulish", "san-serif"].join(","),
@@ -74,6 +76,12 @@ const theme = createTheme({
       fontWeight: 400,
       lineHeight: "25px",
       color: "#373F41",
+    },
+    body2: {
+      fontFamily: ["Roboto", "san-serif"].join(","),
+      fontSize: 32,
+      fontWeight: 700,
+      color: "#FFFFFF",
     },
     subtitle2: {
       fontFamily: ["Mulish", "san-serif"].join(","),
@@ -108,6 +116,23 @@ const theme = createTheme({
           backgroundColor: "#FFFFFF",
         },
       },
+    },
+    MuiCardContent: {
+      styleOverrides:{
+        root: {
+          padding: 0,
+          "&:last-child": {
+            paddingBottom: 0,
+         },
+        },
+      }
+    },
+    MuiTypography: {
+      styleOverrides:{
+        gutterBottom: {
+          marginBottom: 5,
+        },
+      }
     },
     // headerHeight: {
     //   mobile: "60px",

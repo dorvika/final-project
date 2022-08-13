@@ -1,5 +1,5 @@
 import { Container } from "@mui/material";
-import { ImageSlider } from "../../components";
+import { ImageSlider, NewInSection } from "../../components";
 import { SliderWrapper } from "./styles";
 
 const Home = () => {
@@ -8,7 +8,10 @@ const Home = () => {
       <SliderWrapper>
         <ImageSlider />
       </SliderWrapper>
-      <Container>{/* решту компонентів Home Page писати сюди */}</Container>
+      <Container>
+        {/* решту компонентів Home Page писати сюди */}
+        <NewInSection/>
+        </Container>
     </>
   );
 };
