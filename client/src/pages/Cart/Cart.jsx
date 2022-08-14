@@ -1,16 +1,13 @@
-import { Box, Container, Typography } from "@mui/material";
+import { CartProductList } from "../../components";
+import { Container } from "@mui/system";
 
 const Cart = () => {
   return (
-    <main>
+    <>
       <Container>
-        <div>breadcrambs</div>
-        <Box>
-          <Typography variant="h4">shopping bag</Typography>
-        </Box>
-        <div>Cart</div>;
+        <CartProductList />
       </Container>
-    </main>
+    </>
   );
 };
 
