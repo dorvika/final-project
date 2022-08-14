@@ -54,14 +54,18 @@ const theme = createTheme({
       lineHeight: "58px",
       color: "#373F41",
       letterSpacing: "5px",
+      [`@media screen and (max-width: 396px)`]: {
+        fontSize: 26,
+        lineHeight: "38px",
+      },
     },
     h4: {
       fontFamily: ["Mulish", "san-serif"].join(","),
       fontSize: 24,
       color: "#FFFFFF",
       [`@media screen and (max-width: 365px)`]: {
-        fontSize: 22
-      }
+        fontSize: 22,
+      },
     },
     h6: {
       fontFamily: ["Mulish", "san-serif"].join(","),
@@ -118,21 +122,28 @@ const theme = createTheme({
       },
     },
     MuiCardContent: {
-      styleOverrides:{
+      styleOverrides: {
         root: {
           padding: 0,
           "&:last-child": {
             paddingBottom: 0,
-         },
+          },
         },
-      }
+      },
     },
     MuiTypography: {
-      styleOverrides:{
+      styleOverrides: {
         gutterBottom: {
           marginBottom: 5,
         },
-      }
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          boxShadow: "none",
+        },
+      },
     },
     // headerHeight: {
     //   mobile: "60px",
@@ -145,19 +156,6 @@ const theme = createTheme({
     //   mobile: "83px",
     // },
   },
-
-  // Таких properties немає у Default Theme
-  // headerHeight: {
-  //   mobile: "60px",
-  //   desktop: "72px",
-  // },
-  // footerHeight: {
-  //   desktop: "386px",
-  // },
-  // navPanelHeight: {
-  //   mobile: "83px",
-  // },
-
 });
 
 export default theme;

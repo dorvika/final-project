@@ -30,6 +30,7 @@ export const Slide = styled(Box)(({ theme }) => ({
   height: "100%",
   backgroundPosition: "center",
   backgroundSize: "cover",
+  backgroundRepeat: "no-repeat",
   [theme.breakpoints.down("md")]: {
     borderRadius: "0",
   },
