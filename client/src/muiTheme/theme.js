@@ -60,8 +60,8 @@ const theme = createTheme({
       fontSize: 24,
       color: "#FFFFFF",
       [`@media screen and (max-width: 365px)`]: {
-        fontSize: 22
-      }
+        fontSize: 22,
+      },
     },
     h6: {
       fontFamily: ["Mulish", "san-serif"].join(","),
@@ -90,6 +90,13 @@ const theme = createTheme({
       lineHeight: "15px",
       color: "#8A9394",
     },
+    caption: {
+      fontFamily: ["Abel", "san-serif"].join(","),
+      fontSize: 18,
+      fontWeight: 400,
+      lineHeight: "32px",
+      color: "#FFFFFF",
+    },
   },
   shape: {
     borderRadius: 2,
@@ -106,33 +113,64 @@ const theme = createTheme({
       },
     },
     MuiButton: {
-      stylesOverrides: {
+      styleOverrides: {
         root: {
+          fontFamily: ["Abel", "san-serif"].join(","),
+          fontWeight: 400,
+          fontSize: 18,
+          lineHeight: "32px",
+          borderRadius: 4,
           paddingBottom: 15,
           paddingLeft: 40,
           paddingRight: 40,
           paddingTop: 15,
+          color: "#FFFFFF",
+          backgroundColor: "#373F41",
+          "&:hover":{
+            backgroundColor: "#373F41"
+          }
+        },
+        outlined: {
+          padding: "10px 20px",
           color: "#373F41",
           backgroundColor: "#FFFFFF",
-        },
+          border: "1px solid #373F41",
+          fontFamily: ["Abel", "san-serif"].join(","),
+          fontWeight: 400,
+          fontSize: 16,
+          "&:hover": {
+            backgroundColor: "#FFFFFF"
+          }
+        }
       },
     },
     MuiCardContent: {
-      styleOverrides:{
+      styleOverrides: {
         root: {
           padding: 0,
           "&:last-child": {
             paddingBottom: 0,
-         },
+          },
         },
-      }
+      },
     },
     MuiTypography: {
-      styleOverrides:{
+      styleOverrides: {
         gutterBottom: {
           marginBottom: 5,
         },
-      }
+      },
+    },
+    MuiStepLabel: {
+      styleOverrides: {
+        label: {
+          fontFamily: ["Mulish", "san-serif"].join(","),
+          fontSize: 14,
+          fontWeight: 400,
+          lineHeight: "24px",
+          color: "#949697",
+        },
+      },
     },
     // headerHeight: {
     //   mobile: "60px",
@@ -157,7 +195,6 @@ const theme = createTheme({
   // navPanelHeight: {
   //   mobile: "83px",
   // },
-
 });
 
 export default theme;
