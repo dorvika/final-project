@@ -174,6 +174,14 @@ const theme = createTheme({
   // navPanelHeight: {
   //   mobile: "83px",
   // },
+  transitions: {
+    duration: {
+      standard: "0.5s",
+    },
+    easing: {
+      easeIn: "cubic-bezier(0.4, 0, 1, 1)",
+    },
+  },
 });
 
 export default theme;
