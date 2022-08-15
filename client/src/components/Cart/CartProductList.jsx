@@ -64,7 +64,15 @@ const CartProductList = () => {
           }}
         >
           <Button
-            sx={{ color: "secondary.main", justifySelf: "center", mt: "50px" }}
+            sx={{
+              color: "secondary.main",
+              justifySelf: "center",
+              mt: "50px",
+              p: "15px 35px",
+              "&:hover": {
+                color: "primary.main",
+              },
+            }}
           >
             proceed for checkout
           </Button>
