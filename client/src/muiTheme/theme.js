@@ -139,7 +139,7 @@ const theme = createTheme({
           fontWeight: 400,
           fontSize: 16,
           "&:hover": {
-            backgroundColor: "#FFFFFF"
+            backgroundColor: "transparent"
           }
         }
       },
