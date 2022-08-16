@@ -54,6 +54,10 @@ const theme = createTheme({
       lineHeight: "58px",
       color: "#373F41",
       letterSpacing: "5px",
+      [`@media screen and (max-width: 396px)`]: {
+        fontSize: 26,
+        lineHeight: "38px",
+      },
     },
     h4: {
       fontFamily: ["Mulish", "san-serif"].join(","),
@@ -151,6 +155,13 @@ const theme = createTheme({
         },
       },
     },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          boxShadow: "none",
+        },
+      },
+    },
     // headerHeight: {
     //   mobile: "60px",
     //   desktop: "72px",
@@ -162,7 +173,6 @@ const theme = createTheme({
     //   mobile: "83px",
     // },
   },
-
   // Таких properties немає у Default Theme
   // headerHeight: {
   //   mobile: "60px",
