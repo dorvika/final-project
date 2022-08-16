@@ -67,6 +67,15 @@ const theme = createTheme({
         fontSize: 22,
       },
     },
+    h5: {
+      fontFamily: ["Mulish", "san-serif"].join(","),
+      fontSize: 18,
+      fontWeight: 600,
+      color: "primary.main",
+      [`@media screen and (max-width: 365px)`]: {
+        fontSize: 16,
+      },
+    },
     h6: {
       fontFamily: ["Mulish", "san-serif"].join(","),
       fontSize: 16,
@@ -121,6 +130,14 @@ const theme = createTheme({
         },
       },
     },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          borderRadius: 0,
+          boxShadow: "none",
+        },
+      },
+    },
     MuiCardContent: {
       styleOverrides: {
         root: {
@@ -155,6 +172,25 @@ const theme = createTheme({
     // navPanelHeight: {
     //   mobile: "83px",
     // },
+  },
+  // Таких properties немає у Default Theme
+  // headerHeight: {
+  //   mobile: "60px",
+  //   desktop: "72px",
+  // },
+  // footerHeight: {
+  //   desktop: "386px",
+  // },
+  // navPanelHeight: {
+  //   mobile: "83px",
+  // },
+  transitions: {
+    duration: {
+      standard: "0.5s",
+    },
+    easing: {
+      easeIn: "cubic-bezier(0.4, 0, 1, 1)",
+    },
   },
 });
 
