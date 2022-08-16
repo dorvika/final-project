@@ -74,7 +74,7 @@ const CartProductList = () => {
               },
             }}
           >
-            proceed for checkout
+            proceed to checkout
           </Button>
         </Box>
       </Container>
