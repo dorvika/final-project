@@ -5,7 +5,7 @@ import {
   Categories,
   Error,
   Home,
-  ProductDetails,
+  ProductCard,
   Payment,
   Returns,
   PrivacyPolicy,
@@ -21,8 +21,8 @@ export default function Router() {
     <main>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/:id" element={<ProductDetails />} />
         <Route path="/categories" element={<Categories />} />
+        <Route path="/categories/:id" element={<ProductCard />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/bag" element={<Bag/>}/>
         <Route path="/payment" element={<Payment />} />

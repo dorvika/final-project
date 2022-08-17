@@ -54,6 +54,10 @@ const theme = createTheme({
       lineHeight: "58px",
       color: "#373F41",
       letterSpacing: "5px",
+      [`@media screen and (max-width: 396px)`]: {
+        fontSize: 26,
+        lineHeight: "38px",
+      },
     },
     h4: {
       fontFamily: ["Mulish", "san-serif"].join(","),
@@ -61,6 +65,15 @@ const theme = createTheme({
       color: "#FFFFFF",
       [`@media screen and (max-width: 365px)`]: {
         fontSize: 22,
+      },
+    },
+    h5: {
+      fontFamily: ["Mulish", "san-serif"].join(","),
+      fontSize: 18,
+      fontWeight: 600,
+      color: "primary.main",
+      [`@media screen and (max-width: 365px)`]: {
+        fontSize: 16,
       },
     },
     h6: {
@@ -126,9 +139,9 @@ const theme = createTheme({
           paddingTop: 15,
           color: "#FFFFFF",
           backgroundColor: "#373F41",
-          "&:hover":{
-            backgroundColor: "#373F41"
-          }
+          "&:hover": {
+            backgroundColor: "#373F41",
+          },
         },
         outlined: {
           padding: "10px 20px",
@@ -139,9 +152,17 @@ const theme = createTheme({
           fontWeight: 400,
           fontSize: 16,
           "&:hover": {
-            backgroundColor: "transparent"
-          }
-        }
+            backgroundColor: "transparent",
+          },
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          borderRadius: 0,
+          boxShadow: "none",
+        },
       },
     },
     MuiCardContent: {
@@ -182,19 +203,28 @@ const theme = createTheme({
     // navPanelHeight: {
     //   mobile: "83px",
     // },
-  },
+    // },
 
-  // Таких properties немає у Default Theme
-  // headerHeight: {
-  //   mobile: "60px",
-  //   desktop: "72px",
-  // },
-  // footerHeight: {
-  //   desktop: "386px",
-  // },
-  // navPanelHeight: {
-  //   mobile: "83px",
-  // },
+    // Таких properties немає у Default Theme
+    // headerHeight: {
+    //   mobile: "60px",
+    //   desktop: "72px",
+    // },
+    // footerHeight: {
+    //   desktop: "386px",
+    // },
+    // navPanelHeight: {
+    //   mobile: "83px",
+    // },
+  },
+  transitions: {
+    duration: {
+      standard: "0.5s",
+    },
+    easing: {
+      easeIn: "cubic-bezier(0.4, 0, 1, 1)",
+    },
+  },
 });
 
 export default theme;
