@@ -10,4 +10,4 @@ export { default as TermsOfService } from "./TermsOfService/TermsOfService.jsx";
 export { default as AboutUs } from "./AboutUs/AboutUs.jsx";
 export { default as Reviews } from "./Reviews/Reviews.jsx";
 export { default as Blog } from "./Blog/Blog.jsx";
-export { default as Bag } from "./Bag/Bag.jsx";
+export { default as CheckOut } from "./CheckOut/CheckOut.jsx";

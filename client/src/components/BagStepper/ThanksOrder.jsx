@@ -1,6 +1,7 @@
 import { Button, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const ThanksOrder = () => {
   return (
@@ -20,8 +21,9 @@ const ThanksOrder = () => {
         >
           Thank you for your order!
         </Typography>
-
-        <Button sx={{ p: "15px 85px" }}>Continue Shopping</Button>
+        <Link to="/categories" style={{ textDecoration: "none" }}>
+          <Button sx={{ p: "15px 85px" }}>Continue Shopping</Button>
+        </Link>
       </Box>
     </React.Fragment>
   );

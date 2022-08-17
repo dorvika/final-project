@@ -1,6 +1,6 @@
 import { BagStepper } from "../../components";
-const Bag = () => {
+const CheckOut = () => {
   return <BagStepper />;
 };
 
-export default Bag;
+export default CheckOut;
