@@ -64,7 +64,7 @@ const CartProductCard = ({
         }}
       >
         <Stack direction="row">
-          <Link to={`/${id}`} style={{ textDecoration: "none" }}>
+          <Link to={`/categories/${id}`} style={{ textDecoration: "none" }}>
             <CardMedia
               component="img"
               height="200px"
