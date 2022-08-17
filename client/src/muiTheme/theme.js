@@ -155,35 +155,7 @@ const theme = createTheme({
         },
       },
     },
-    MuiPaper: {
-      styleOverrides: {
-        root: {
-          boxShadow: "none",
-        },
-      },
-    },
-    // headerHeight: {
-    //   mobile: "60px",
-    //   desktop: "72px",
-    // },
-    // footerHeight: {
-    //   desktop: "386px",
-    // },
-    // navPanelHeight: {
-    //   mobile: "83px",
-    // },
   },
-  // Таких properties немає у Default Theme
-  // headerHeight: {
-  //   mobile: "60px",
-  //   desktop: "72px",
-  // },
-  // footerHeight: {
-  //   desktop: "386px",
-  // },
-  // navPanelHeight: {
-  //   mobile: "83px",
-  // },
   transitions: {
     duration: {
       standard: "0.5s",
