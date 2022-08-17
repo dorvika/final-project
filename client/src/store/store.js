@@ -5,19 +5,24 @@ import {
   applyMiddleware,
 } from "redux";
 import thunk from "redux-thunk";
+import modalReducer from "./Modal/reducer";
 
-// add reducers and uncomment code
+const initialState = {
+  modal: false,
+};
 
-//   export const rootReducer = combineReducers({
-//   });
+export const rootReducer = combineReducers({
+  modal: modalReducer,
+});
 
 const devTools = window.__REDUX_DEVTOOLS_EXTENSION__
   ? window.__REDUX_DEVTOOLS_EXTENSION__()
   : (f) => f;
 
-//   const store = createStore(
-//     rootReducer,
-//     compose(applyMiddleware(thunk), devTools)
-//   );
+const store = createStore(
+  rootReducer,
+  initialState,
+  compose(applyMiddleware(thunk), devTools)
+);
 
-// export default store;
+export default store;
