@@ -12,6 +12,7 @@ import {
   AboutUs,
   Reviews,
   Blog,
+  CheckOut,
 } from "../pages";
 
 export default function Router() {
@@ -22,6 +23,7 @@ export default function Router() {
         <Route path="/categories" element={<Categories />} />
         <Route path="/categories/:id" element={<ProductCard />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/cart/checkout" element={<CheckOut />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/returns" element={<Returns />} />
         <Route path="/privacypolicy" element={<PrivacyPolicy />} />

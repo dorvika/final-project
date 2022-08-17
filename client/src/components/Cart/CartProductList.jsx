@@ -1,7 +1,7 @@
 import { CartProductCard, CustomHr } from "./index";
-
 import { Box, Container, Typography, Button } from "@mui/material";
 import products from "./ProductsExamples.jsx";
+import { Link } from "react-router-dom";
 
 const CartProductList = () => {
   return (
@@ -63,19 +63,21 @@ const CartProductList = () => {
             alignItems: "center",
           }}
         >
-          <Button
-            sx={{
-              color: "secondary.main",
-              justifySelf: "center",
-              mt: "50px",
-              p: "15px 35px",
-              "&:hover": {
-                color: "primary.main",
-              },
-            }}
-          >
-            proceed to checkout
-          </Button>
+          <Link to="/cart/checkout" style={{ textDecoration: "none" }}>
+            <Button
+              sx={{
+                color: "secondary.main",
+                justifySelf: "center",
+                mt: "50px",
+                p: "15px 35px",
+                "&:hover": {
+                  color: "primary.main",
+                },
+              }}
+            >
+              proceed to checkout
+            </Button>
+          </Link>
         </Box>
       </Container>
     </>
