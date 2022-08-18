@@ -9,8 +9,6 @@ const Header = () => {
 
   const handleOpen = () => {
     dispatch(openModal());
-    console.log(dispatch(openModal));
-    console.log(modal);
   };
   return (
     <header>
