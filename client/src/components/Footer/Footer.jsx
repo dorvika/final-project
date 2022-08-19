@@ -2,22 +2,26 @@ import {
   Box,
   Button,
   Container,
+  Divider,
   List,
   ListItem,
   TextField,
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-// import { FacebookOutlinedIcon } from "@mui/icons-material";
-// import TwitterIcon from "@mui/icons-material/Twitter";
-// import InstagramIcon from "@mui/icons-material/Instagram";
 import { FacebookOutlined, Twitter, Instagram } from "@mui/icons-material";
-import "./footer.scss";
+import { styled } from "@mui/material/styles";
+
+const FooterHr = styled(Divider)(({ theme }) => ({
+  borderColor: theme.palette.primary.main,
+  margin: "0 auto",
+  maxWidth: "1310px",
+}));
 
 const Footer = () => {
   return (
     <footer>
-      <hr className="footerLine"></hr>
+      <FooterHr />
       <Container>
         <Box
           component="div"
@@ -120,7 +124,15 @@ const Footer = () => {
                 label="E-mail"
                 variant="outlined"
               />
-              <Button>Send</Button>
+              <Button
+                sx={{
+                  color: "secondary.main",
+                  p: "8px 40px",
+                  "&:hover": { color: "primary.main" },
+                }}
+              >
+                Send
+              </Button>
             </ListItem>
             <ListItem>
               <Box
@@ -163,7 +175,7 @@ const Footer = () => {
         </Box>
       </Container>
 
-      <hr className="footerLine"></hr>
+      <FooterHr />
       <Container>
         <Box
           sx={{

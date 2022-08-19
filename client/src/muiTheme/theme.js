@@ -67,6 +67,15 @@ const theme = createTheme({
         fontSize: 22,
       },
     },
+    h5: {
+      fontFamily: ["Mulish", "san-serif"].join(","),
+      fontSize: 18,
+      fontWeight: 600,
+      color: "primary.main",
+      [`@media screen and (max-width: 365px)`]: {
+        fontSize: 16,
+      },
+    },
     h6: {
       fontFamily: ["Mulish", "san-serif"].join(","),
       fontSize: 16,
@@ -87,12 +96,26 @@ const theme = createTheme({
       fontWeight: 700,
       color: "#FFFFFF",
     },
+    subtitle1: {
+      fontFamily: ["Mulish", "san-serif"].join(","),
+      fontSize: 14,
+      fontWeight: 300,
+      lineHeight: "20px",
+      color: "#373F41",
+    },
     subtitle2: {
       fontFamily: ["Mulish", "san-serif"].join(","),
       fontSize: 14,
       fontWeight: 200,
       lineHeight: "15px",
       color: "#8A9394",
+    },
+    caption: {
+      fontFamily: ["Abel", "san-serif"].join(","),
+      fontSize: 18,
+      fontWeight: 400,
+      lineHeight: "32px",
+      color: "#FFFFFF",
     },
   },
   shape: {
@@ -110,14 +133,42 @@ const theme = createTheme({
       },
     },
     MuiButton: {
-      stylesOverrides: {
+      styleOverrides: {
         root: {
+          fontFamily: ["Abel", "san-serif"].join(","),
+          fontWeight: 400,
+          fontSize: 18,
+          lineHeight: "32px",
+          borderRadius: 4,
           paddingBottom: 15,
           paddingLeft: 40,
           paddingRight: 40,
           paddingTop: 15,
+          color: "#FFFFFF",
+          backgroundColor: "#373F41",
+          "&:hover": {
+            backgroundColor: "#373F41",
+          },
+        },
+        outlined: {
+          padding: "10px 20px",
           color: "#373F41",
           backgroundColor: "#FFFFFF",
+          border: "1px solid #373F41",
+          fontFamily: ["Abel", "san-serif"].join(","),
+          fontWeight: 400,
+          fontSize: 16,
+          "&:hover": {
+            backgroundColor: "transparent",
+          },
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          borderRadius: 0,
+          boxShadow: "none",
         },
       },
     },
@@ -138,13 +189,31 @@ const theme = createTheme({
         },
       },
     },
-    MuiPaper: {
+    MuiStepLabel: {
       styleOverrides: {
-        root: {
-          boxShadow: "none",
+        label: {
+          fontFamily: ["Mulish", "san-serif"].join(","),
+          fontSize: 14,
+          fontWeight: 400,
+          lineHeight: "24px",
+          color: "#949697",
         },
       },
     },
+    MuiInput: {
+      styleOverrides: {
+        root: {
+          color: "#8C8C8C",
+          fontFamily: "Mulish",
+          fontSize: 16,
+          lineHeight: 24,
+          fontWeight: 300,
+          padding: "15px 0 2px",
+        },
+      },
+    },
+
+    // Таких properties немає у Default Theme
     // headerHeight: {
     //   mobile: "60px",
     //   desktop: "72px",
@@ -155,6 +224,14 @@ const theme = createTheme({
     // navPanelHeight: {
     //   mobile: "83px",
     // },
+  },
+  transitions: {
+    duration: {
+      standard: "0.5s",
+    },
+    easing: {
+      easeIn: "cubic-bezier(0.4, 0, 1, 1)",
+    },
   },
 });
 
