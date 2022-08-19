@@ -1,4 +1,8 @@
-const reducer = (state = false, action) => {
+const initialState = {
+  modal: false,
+};
+
+const reducer = (state = initialState.modal, action) => {
   switch (action.type) {
     case "OPEN_MODAL": {
       return true;
