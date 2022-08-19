@@ -208,7 +208,7 @@ const theme = createTheme({
           fontSize: 16,
           lineHeight: 24,
           fontWeight: 300,
-          padding: "33px 0 5px",
+          padding: "15px 0 2px",
         },
       },
     },

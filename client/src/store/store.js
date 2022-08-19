@@ -7,10 +7,6 @@ import {
 import thunk from "redux-thunk";
 import modalReducer from "./Modal/reducer";
 
-const initialState = {
-  modal: false,
-};
-
 export const rootReducer = combineReducers({
   modal: modalReducer,
 });
@@ -21,7 +17,6 @@ const devTools = window.__REDUX_DEVTOOLS_EXTENSION__
 
 const store = createStore(
   rootReducer,
-  initialState,
   compose(applyMiddleware(thunk), devTools)
 );
 
