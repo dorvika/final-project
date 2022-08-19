@@ -96,6 +96,13 @@ const theme = createTheme({
       fontWeight: 700,
       color: "#FFFFFF",
     },
+    subtitle1: {
+      fontFamily: ["Mulish", "san-serif"].join(","),
+      fontSize: 14,
+      fontWeight: 300,
+      lineHeight: "20px",
+      color: "#373F41",
+    },
     subtitle2: {
       fontFamily: ["Mulish", "san-serif"].join(","),
       fontSize: 14,
@@ -193,6 +200,19 @@ const theme = createTheme({
         },
       },
     },
+    MuiInput: {
+      styleOverrides: {
+        root: {
+          color: "#8C8C8C",
+          fontFamily: "Mulish",
+          fontSize: 16,
+          lineHeight: 24,
+          fontWeight: 300,
+          padding: "33px 0 5px",
+        },
+      },
+    },
+
     // Таких properties немає у Default Theme
     // headerHeight: {
     //   mobile: "60px",
