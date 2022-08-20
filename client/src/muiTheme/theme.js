@@ -30,6 +30,10 @@ const theme = createTheme({
     text: {
       primary: "#373F41",
     },
+    neutral: {
+      main: "#8C8C8C",
+      light: "#DADADA",
+    },
   },
   spacing: 2,
   typography: {
