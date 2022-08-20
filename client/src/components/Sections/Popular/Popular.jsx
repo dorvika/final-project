@@ -67,7 +67,7 @@ const Popular = () => {
           .filter((e, count) => count < 4)
           .map(({ id, urlImage, title, xs }) => (
                 <CustomGridItem item key={id} xs={ matches ? 12 : xs }>
-                  <Link to={`/categories/${id}`}>
+                  <Link to={`/categories`}>
                     <Card sx={{ maxWidth: "100%" }}>
                       <CardMedia component="img" height="340" image={urlImage} alt="popular-img"/>
                       <CustomCardContent sx={{ paddingRight: "20px" }}>
