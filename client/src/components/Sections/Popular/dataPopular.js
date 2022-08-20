@@ -19,5 +19,5 @@
      title: "LOUNGEWEAR",
      urlImage: "https://res.cloudinary.com/dyvsyavmb/image/upload/v1660656991/qfxj6ehjdmrlzwyk28et.png",
      xs: 8
-   },
+   }
  ]
