@@ -57,7 +57,12 @@ const TermsOfService = () => {
                 return (
                   <Fragment key={term.id}>
                     <CustomListItem>
-                      <Link href={`#${term.chapter}`} underline="hover">
+                      <Link
+                        href={`#${term.chapter}`}
+                        variant="h6"
+                        underline="hover"
+                        sx={{ letterSpacing: "0.04em" }}
+                      >
                         {term.chapter}
                       </Link>
                     </CustomListItem>
