@@ -1,23 +1,6 @@
 import { createTheme } from "@mui/material/styles";
 
-//breakpoint-s min for mobile
-//breakpoint-md max for mobile
-//breakpoint-xl max container for desktop (starting from 769px)
-//xs, lg - optional, extra
-
 const theme = createTheme({
-  // Такої property немає у Default Theme
-  // container: {
-  //   maxWidth: "1200px",
-  // },
-  // Пропоную залишити стандартні розміри, які вже є у Material UI, і не писати свої
-  // breakpoint: {
-  //   s: "320px",
-  //   xs: "580px",
-  //   md: "768px",
-  //   lg: "992px",
-  //   xl: "1200px",
-  // },
   palette: {
     primary: {
       main: "#373F41",
@@ -212,18 +195,13 @@ const theme = createTheme({
         },
       },
     },
-
-    // Таких properties немає у Default Theme
-    // headerHeight: {
-    //   mobile: "60px",
-    //   desktop: "72px",
-    // },
-    // footerHeight: {
-    //   desktop: "386px",
-    // },
-    // navPanelHeight: {
-    //   mobile: "83px",
-    // },
+    MuiRadio: {
+      styleOverrides: {
+        root: {
+          color: "#8C8C8C",
+        },
+      },
+    },
   },
   transitions: {
     duration: {
