@@ -85,7 +85,7 @@ const listOfTerms = [
   },
   {
     id: 4,
-    chapter: "paymment",
+    chapter: "payment",
     content: [
       {
         panelId: 1,
