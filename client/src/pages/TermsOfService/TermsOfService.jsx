@@ -7,8 +7,8 @@ import {
   Link,
   List,
   Typography,
+  Stack,
 } from "@mui/material";
-import { Stack } from "@mui/system";
 import { Fragment, useState } from "react";
 import listOfTerms from "./ListOfTerms";
 import {

@@ -1,6 +1,5 @@
 import { Facebook, Google } from "@mui/icons-material";
-import { Box, Button, DialogActions, Input } from "@mui/material";
-import { Stack } from "@mui/system";
+import { Box, Button, DialogActions, Input, Stack } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { closeModal } from "../../store/Modal/actions";
 import ConfirmationPromo from "./ConfirmationPromo.jsx";
