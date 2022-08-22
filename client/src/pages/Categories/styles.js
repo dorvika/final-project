@@ -32,6 +32,7 @@ export const CustomTextField = styled(TextField)({
   "& .MuiInputBase-input": {
     padding: "0 ",
     textAlign: "center",
+    fontSize: "14px",
   },
   "& .MuiOutlinedInput-notchedOutline": {
     padding: "0 ",

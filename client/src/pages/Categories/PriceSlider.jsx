@@ -3,8 +3,8 @@ import { useState } from "react";
 import { CustomPriceSlider, CustomTextField } from "./styles";
 
 const PriceSlider = () => {
-  const [price, setPrice] = useState({ minPrice: 50, maxPrice: 350 });
-  const [sliderValues, setSliderValues] = useState([50, 350]);
+  const [price, setPrice] = useState({ minPrice: 0, maxPrice: 500 });
+  const [sliderValues, setSliderValues] = useState([0, 500]);
 
   const handleSliderChange = (event, newValue) => {
     setPrice({
@@ -46,8 +46,10 @@ const PriceSlider = () => {
         max={500}
         disableSwap
       />
-      <Stack direction="row" spacing={8} sx={{ mt: "15px" }}>
-        <Typography component="span">FROM</Typography>
+      <Stack direction="row" spacing={8} sx={{ mt: "10px" }}>
+        <Typography component="span" variant="subtitle1">
+          FROM
+        </Typography>
         <CustomTextField
           name="minPrice"
           value={price.minPrice}
@@ -61,7 +63,9 @@ const PriceSlider = () => {
             "aria-labelledby": "input-slider",
           }}
         />
-        <Typography component="span">TO</Typography>
+        <Typography component="span" variant="subtitle1">
+          TO
+        </Typography>
         <CustomTextField
           name="maxPrice"
           value={price.maxPrice}

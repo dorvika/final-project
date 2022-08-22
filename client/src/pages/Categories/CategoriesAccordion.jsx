@@ -18,6 +18,10 @@ const CategoriesAccordion = ({ children, title }) => {
         "&.Mui-expanded": {
           m: "2px 0",
         },
+        "& .MuiButtonBase-root.MuiAccordionSummary-root.Mui-expanded": {
+          minHeight: "0",
+          height: "40px",
+        },
         "& .MuiAccordionSummary-root": { flexDirection: "row-reverse" },
       }}
     >
@@ -30,7 +34,7 @@ const CategoriesAccordion = ({ children, title }) => {
           )}
           <Typography
             variant="h6"
-            sx={{ mb: "0px", textTransform: "uppercase" }}
+            sx={{ mb: "0px", textTransform: "uppercase", fontSize: "15px" }}
           >
             {title}
           </Typography>

@@ -25,9 +25,17 @@ const CategoriesRadio = ({ options }) => {
             control={<Radio size="small" />}
             label={option.value}
             sx={{
-              gap: "20px",
+              gap: "10px",
+              "& .MuiTypography-root.MuiTypography-body1.MuiFormControlLabel-label":
+                {
+                  fontSize: "14px",
+                },
+
               "& .MuiButtonBase-root.MuiRadio-root.Mui-checked": {
                 color: "#8C8C8C",
+              },
+              "& .MuiButtonBase-root.MuiRadio-root": {
+                padding: "4px",
               },
             }}
           />
