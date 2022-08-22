@@ -89,12 +89,19 @@ const theme = createTheme({
       fontWeight: 400,
       lineHeight: "25px",
       color: "#373F41",
+      textTransform: "uppercase"
     },
     body2: {
       fontFamily: ["Roboto", "san-serif"].join(","),
       fontSize: 32,
       fontWeight: 700,
       color: "#FFFFFF",
+    },
+    subtitle1: {
+      fontFamily: ["Mulish", "san-serif"].join(","),
+      fontSize: 18,
+      fontWeight: 400,
+      lineHeight: "15px",
     },
     subtitle2: {
       fontFamily: ["Mulish", "san-serif"].join(","),
@@ -190,6 +197,26 @@ const theme = createTheme({
           fontWeight: 400,
           lineHeight: "24px",
           color: "#949697",
+        },
+      },
+    },
+    MuiFormControlLabel: {
+      styleOverrides: {
+        root: {
+          margin: 0,
+         border:"1px solid #373F41",
+         padding:"20px",
+        },
+      },
+    },
+    MuiRadio: {
+      styleOverrides: {
+        root: {
+          padding: 0,
+          marginRight: "40px",
+          "&.Mui-checked":{
+            color: "#ffffff",
+          }
         },
       },
     },
