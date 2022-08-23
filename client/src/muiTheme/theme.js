@@ -1,23 +1,6 @@
 import { createTheme } from "@mui/material/styles";
 
-//breakpoint-s min for mobile
-//breakpoint-md max for mobile
-//breakpoint-xl max container for desktop (starting from 769px)
-//xs, lg - optional, extra
-
 const theme = createTheme({
-  // Такої property немає у Default Theme
-  // container: {
-  //   maxWidth: "1200px",
-  // },
-  // Пропоную залишити стандартні розміри, які вже є у Material UI, і не писати свої
-  // breakpoint: {
-  //   s: "320px",
-  //   xs: "580px",
-  //   md: "768px",
-  //   lg: "992px",
-  //   xl: "1200px",
-  // },
   palette: {
     primary: {
       main: "#373F41",
@@ -29,6 +12,10 @@ const theme = createTheme({
     },
     text: {
       primary: "#373F41",
+    },
+    neutral: {
+      main: "#8C8C8C",
+      light: "#DADADA",
     },
   },
   spacing: 2,
@@ -89,7 +76,7 @@ const theme = createTheme({
       fontWeight: 400,
       lineHeight: "25px",
       color: "#373F41",
-      textTransform: "uppercase"
+      textTransform: "uppercase",
     },
     body2: {
       fontFamily: ["Roboto", "san-serif"].join(","),
@@ -99,9 +86,10 @@ const theme = createTheme({
     },
     subtitle1: {
       fontFamily: ["Mulish", "san-serif"].join(","),
-      fontSize: 18,
-      fontWeight: 400,
-      lineHeight: "15px",
+      fontSize: 14,
+      fontWeight: 300,
+      lineHeight: "20px",
+      color: "#373F41",
     },
     subtitle2: {
       fontFamily: ["Mulish", "san-serif"].join(","),
@@ -197,26 +185,6 @@ const theme = createTheme({
           fontWeight: 400,
           lineHeight: "24px",
           color: "#949697",
-        },
-      },
-    },
-    MuiFormControlLabel: {
-      styleOverrides: {
-        root: {
-          margin: 0,
-         border:"1px solid #373F41",
-         padding:"20px",
-        },
-      },
-    },
-    MuiRadio: {
-      styleOverrides: {
-        root: {
-          padding: 0,
-          marginRight: "40px",
-          "&.Mui-checked":{
-            color: "#ffffff",
-          }
         },
       },
     },
