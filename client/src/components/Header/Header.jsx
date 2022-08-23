@@ -1,19 +1,32 @@
-import { Button } from "@mui/material";
+// import { Button } from "@mui/material";
 import Authorization from "../Authorization/Authorization.jsx";
 import { openModal } from "../../store/Modal/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
 // eslint-disable-next-line import/no-duplicates
-import { Input, Typography } from "@mui/material";
+import {
+  Input,
+  Typography,
+  Container,
+  Box,
+  InputAdornment,
+  IconButton,
+  Divider,
+} from "@mui/material";
 import Logo from "./headerComponents/logoSvg";
 import Catalog from "./headerComponents/catalogButton";
-import Icons from "./headerComponents/iconsButton";
+// import Icons from "./headerComponents/iconsButton";
 // eslint-disable-next-line import/no-duplicates
-import { Container } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
-import { Box } from "@mui/system";
-import InputAdornment from "@mui/material/InputAdornment";
+// import { Container } from "@mui/material";
+import {
+  FavoriteBorderOutlined,
+  PersonOutlined,
+  Search,
+  ShoppingBagOutlined,
+} from "@mui/icons-material";
+// import { Box } from "@mui/system";
+// import InputAdornment from "@mui/material/InputAdornment";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -49,7 +62,7 @@ const Header = () => {
           <Input
             endAdornment={
               <InputAdornment position="start">
-                <SearchIcon></SearchIcon>
+                <Search></Search>
               </InputAdornment>
             }
             sx={{ width: "379px", padding: "0 0 0 0", color: "primary.main" }}
@@ -58,9 +71,33 @@ const Header = () => {
             variant="standard"
           />
         </Box>
-        <Icons></Icons>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            width: "10%",
+          }}
+        >
+          <IconButton sx={{ p: "0" }} onClick={handleOpen}>
+            <PersonOutlined sx={{ color: "primary.main" }} />
+          </IconButton>
+          <Link
+            style={{ textDecoration: "none", color: "#373F41" }}
+            to={"/favorite"}
+          >
+            <FavoriteBorderOutlined />
+          </Link>
+          <Link
+            style={{ textDecoration: "none", color: "#373F41" }}
+            to={"/cart"}
+          >
+            <ShoppingBagOutlined />
+          </Link>
+        </Box>
         {modal && <Authorization />}
       </Container>
+      <Divider sx={{ borderColor: "primary.main", mb: "20px" }} />
     </header>
   );
 };
