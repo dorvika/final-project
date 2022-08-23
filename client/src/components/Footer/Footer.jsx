@@ -127,7 +127,7 @@ const Footer = () => {
               <Button
                 sx={{
                   color: "secondary.main",
-                  p: "8px 40px",
+                  p: "6px 40px",
                   "&:hover": { color: "primary.main" },
                 }}
               >

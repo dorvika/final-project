@@ -104,7 +104,7 @@ const NewIn = () => {
   return (
     <Box
       sx={{
-        pb: 80,
+        pb: 40,
       }}
     >
       <Typography

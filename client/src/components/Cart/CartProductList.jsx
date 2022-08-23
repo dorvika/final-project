@@ -1,13 +1,27 @@
 import { CartProductCard, CustomHr } from "./index";
-import { Box, Container, Typography, Button } from "@mui/material";
+import {
+  Box,
+  Container,
+  Typography,
+  Button,
+  Breadcrumbs,
+  Link,
+} from "@mui/material";
 import products from "./ProductsExamples.jsx";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const CartProductList = () => {
   return (
     <>
       <Container>
-        <div>breadcrambs</div>
+        <Breadcrumbs sx={{ pb: "30px" }}>
+          <Link underline="hover" color="inherit" href="/">
+            Home
+          </Link>
+          <Link underline="hover" color="inherit" href="/cart">
+            Shopping Bag
+          </Link>
+        </Breadcrumbs>
         <Box
           sx={{
             display: "flex",
@@ -63,7 +77,7 @@ const CartProductList = () => {
             alignItems: "center",
           }}
         >
-          <Link to="/cart/checkout" style={{ textDecoration: "none" }}>
+          <Link href="/cart/checkout" sx={{ textDecoration: "none" }}>
             <Button
               sx={{
                 color: "secondary.main",
