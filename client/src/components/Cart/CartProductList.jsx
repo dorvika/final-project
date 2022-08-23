@@ -77,7 +77,7 @@ const CartProductList = () => {
             alignItems: "center",
           }}
         >
-          <Link to="/cart/checkout" style={{ textDecoration: "none" }}>
+          <Link href="/cart/checkout" sx={{ textDecoration: "none" }}>
             <Button
               sx={{
                 color: "secondary.main",
