@@ -76,6 +76,7 @@ const theme = createTheme({
       fontWeight: 400,
       lineHeight: "25px",
       color: "#373F41",
+      textTransform: "uppercase",
     },
     body2: {
       fontFamily: ["Roboto", "san-serif"].join(","),
@@ -187,25 +188,17 @@ const theme = createTheme({
         },
       },
     },
-    MuiInput: {
-      styleOverrides: {
-        root: {
-          color: "#8C8C8C",
-          fontFamily: "Mulish",
-          fontSize: 16,
-          lineHeight: 24,
-          fontWeight: 300,
-          padding: "15px 0 2px",
-        },
-      },
-    },
-    MuiRadio: {
-      styleOverrides: {
-        root: {
-          color: "#8C8C8C",
-        },
-      },
-    },
+    // Таких properties немає у Default Theme
+    // headerHeight: {
+    //   mobile: "60px",
+    //   desktop: "72px",
+    // },
+    // footerHeight: {
+    //   desktop: "386px",
+    // },
+    // navPanelHeight: {
+    //   mobile: "83px",
+    // },
   },
   transitions: {
     duration: {
