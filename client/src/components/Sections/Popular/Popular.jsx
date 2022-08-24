@@ -44,8 +44,15 @@ const CustomButton = styled(Button)(({ theme }) => ({
   color: theme.palette.text.primary,
   padding: "4px 48px",
   margin: "0 10px 20px 0",
+  transition: "0.3s ease-in",
+  "& a": {
+    transition: "0.3s ease-in",
+  },
   "&:hover": {
-    color: "#fff",
+    color: theme.palette.primary.contrastText,
+    "& > a": {
+      color: theme.palette.primary.contrastText,
+    },
   },
 }));
 
@@ -97,14 +104,11 @@ const Popular = () => {
             </CustomGridItem>
           ))}
       </Grid>
-      <Link href="/categories" sx={{ textDecoration: "none" }}>
-        <CustomButton
-          sx={{ margin: "0" }}
-          endIcon={<ArrowForwardIosIcon sx={{ width: "14px" }} />}
-        >
-          see all
+        <CustomButton sx={{ margin: "0" }} endIcon={<ArrowForwardIosIcon sx={{ width: "14px" }} />}>
+          <Link href="/categories" sx={{ textDecoration: "none" }}>
+            see all
+          </Link>
         </CustomButton>
-      </Link>
     </Box>
   );
 };
