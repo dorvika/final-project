@@ -134,7 +134,8 @@ const theme = createTheme({
           color: "#FFFFFF",
           backgroundColor: "#373F41",
           "&:hover": {
-            backgroundColor: "#373F41",
+            backgroundColor: "transparent",
+            color: "#373F41",
           },
         },
         outlined: {
@@ -146,7 +147,24 @@ const theme = createTheme({
           fontWeight: 400,
           fontSize: 16,
           "&:hover": {
+            backgroundColor: "#373F41",
+            color: "#FFFFFF",
+          },
+        },
+        text: {
+          backgroundColor: "transparent",
+          color: "#373F41",
+          padding: "0",
+          fontFamily: "Mulish",
+          fontSize: "16px",
+          letterSpacing: "0.04em",
+
+          textTransform: "capitalize",
+
+          "&:hover": {
             backgroundColor: "transparent",
+            fontWeight: "700",
+            transition: "0.4s",
           },
         },
       },
