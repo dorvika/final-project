@@ -42,8 +42,8 @@ const CustomButton = styled(Button)(({ theme }) => ({
   fontSize: "16px",
   border: "1px solid #000",
   color: theme.palette.text.primary,
-  padding: "4px 48px",
   margin: "0 10px 20px 0",
+  padding: "4px 48px",
   transition: "0.3s ease-in",
   "& a": {
     transition: "0.3s ease-in",
@@ -55,6 +55,14 @@ const CustomButton = styled(Button)(({ theme }) => ({
     },
   },
 }));
+
+const CustomIcon = styled(ArrowForwardIosIcon)(() => ({
+  position: "absolute",
+  right: "34px",
+  top: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "15px",
+}))
 
 const Popular = () => {
   const matches = useMediaQuery("(max-width: 899px)");
@@ -96,7 +104,9 @@ const Popular = () => {
                       <CustomTypography variant="p" component="p">
                         {title}
                       </CustomTypography>
-                      <CustomButton>Shop</CustomButton>
+                      <CustomButton>
+                        Shop
+                      </CustomButton>
                     </CardContent>
                   </CustomCardContent>
                 </Card>
@@ -104,9 +114,10 @@ const Popular = () => {
             </CustomGridItem>
           ))}
       </Grid>
-        <CustomButton sx={{ margin: "0" }} endIcon={<ArrowForwardIosIcon sx={{ width: "14px" }} />}>
-          <Link href="/categories" sx={{ textDecoration: "none" }}>
+        <CustomButton sx={{ margin: "0", padding: "0" }}>
+          <Link href="/categories" sx={{ textDecoration: "none", padding: "4px 65px 4px 48px", position: "relative" }}>
             see all
+            <CustomIcon />
           </Link>
         </CustomButton>
     </Box>
