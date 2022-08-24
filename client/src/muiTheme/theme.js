@@ -121,10 +121,10 @@ const theme = createTheme({
     },
     MuiButton: {
       styleOverrides: {
-        root: {
+        contained: {
           fontFamily: ["Abel", "san-serif"].join(","),
           fontWeight: 400,
-          fontSize: 18,
+          fontSize: 16,
           lineHeight: "32px",
           borderRadius: 4,
           paddingBottom: 15,

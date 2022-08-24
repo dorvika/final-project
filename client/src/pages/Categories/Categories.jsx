@@ -1,5 +1,11 @@
 import { Breadcrumbs, Link, Stack, Box } from "@mui/material";
-import { CategoriesFilter, TopFilter, ShowQuantity, SortBy } from "./index.js";
+import {
+  CategoriesFilter,
+  TopFilter,
+  ShowQuantity,
+  SortBy,
+  CatalogProductList,
+} from "./index.js";
 import { CategoriesMainContainer } from "./styles";
 
 const Categories = () => {
@@ -25,8 +31,7 @@ const Categories = () => {
             <ShowQuantity />
             <SortBy />
           </Stack>
-          {/*вставити всередину компонент із списком товарів */}
-          Список товарів
+          <CatalogProductList />
         </Box>
       </Stack>
     </CategoriesMainContainer>
