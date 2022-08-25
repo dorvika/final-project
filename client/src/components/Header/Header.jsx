@@ -45,7 +45,7 @@ const Header = () => {
           alignItems: "center",
         }}
       >
-        <Link to={"/"}>
+        <Link style={{marginLeft: "-2.6041666666666665vw"}} to={"/"}>
           <Logo></Logo>
         </Link>
         <Catalog></Catalog>
