@@ -79,6 +79,7 @@ const CartProductList = () => {
         >
           <Link href="/cart/checkout" sx={{ textDecoration: "none" }}>
             <Button
+              variant="contained"
               sx={{
                 color: "secondary.main",
                 justifySelf: "center",

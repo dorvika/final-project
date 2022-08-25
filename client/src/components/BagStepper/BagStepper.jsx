@@ -204,6 +204,7 @@ export default function HorizontalNonLinearStepper() {
                   )}
                   <Summary />
                   <Button
+                    variant="contained"
                     sx={{ p: "15px 85px", alignSelf: "flex-end" }}
                     onClick={handleComplete}
                   >

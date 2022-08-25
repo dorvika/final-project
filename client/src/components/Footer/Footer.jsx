@@ -125,6 +125,7 @@ const Footer = () => {
                 variant="outlined"
               />
               <Button
+                variant="contained"
                 sx={{
                   color: "secondary.main",
                   p: "6px 40px",
