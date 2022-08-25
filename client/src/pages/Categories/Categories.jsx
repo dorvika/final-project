@@ -54,12 +54,14 @@ const Categories = () => {
           <Stack
             direction="row"
             justifyContent="space-between"
-            margin="23px 0px"
+            marginTop="23px"
           >
             <ShowQuantity />
             <SortBy />
           </Stack>
-          <CatalogProductList />
+          <Box marginTop="40px">
+            <CatalogProductList />
+          </Box>
           <Stack alignItems="center" justifyContent="center">
             <Pagination
               count={3}
