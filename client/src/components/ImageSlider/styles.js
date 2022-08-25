@@ -99,6 +99,7 @@ export const SlideButton = styled(Button)(({ theme }) => ({
   "&:hover": {
     color: theme.palette.primary.contrastText,
     backgroundColor: theme.palette.primary.main,
+    fontWeight: theme.typography.fontWeightExtraLight,
   },
   [theme.breakpoints.down("md")]: {
     marginTop: "15px",
