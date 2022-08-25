@@ -12,7 +12,7 @@ const CatalogProductList = () => {
             return (
               <ProductCard
                 key={product.id}
-                link={product.id}
+                id={product.id}
                 image={product.img}
                 title={product.title}
                 price={product.price}
