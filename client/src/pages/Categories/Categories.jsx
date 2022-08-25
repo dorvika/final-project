@@ -1,4 +1,5 @@
-import { Breadcrumbs, Link, Stack, Box } from "@mui/material";
+import { Breadcrumbs, Link, Stack, Box, Pagination } from "@mui/material";
+import { CustomPaginationItem } from "./Catalog Product List/styles.js";
 import {
   CategoriesFilter,
   TopFilter,
@@ -32,6 +33,13 @@ const Categories = () => {
             <SortBy />
           </Stack>
           <CatalogProductList />
+          <Stack alignItems="center" justifyContent="center">
+            <Pagination
+              count={3}
+              sx={{ mt: "50px" }}
+              renderItem={(item) => <CustomPaginationItem {...item} />}
+            />
+          </Stack>
         </Box>
       </Stack>
     </CategoriesMainContainer>

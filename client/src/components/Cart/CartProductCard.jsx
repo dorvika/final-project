@@ -74,7 +74,7 @@ const CartProductCard = ({
           </Link>
           <CardContent>
             <Box>
-              <Link to={`/${id}`} style={{ textDecoration: "none" }}>
+              <Link to={`/categories/${id}`} style={{ textDecoration: "none" }}>
                 <Typography
                   variant="h4"
                   fontFamily="Abel"

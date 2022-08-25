@@ -24,6 +24,7 @@ const products = [
     id: 4,
     category: "BED LINEN",
     title: "Grey Cotton Bed Linen",
+    price: 329,
     img: "https://res.cloudinary.com/dolprgiip/image/upload/v1661350089/Final%20project%20images/Catalog%20page/Background_4_fc1iyf.png",
   },
   {

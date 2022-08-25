@@ -1,4 +1,4 @@
-import { Menu } from "@mui/material";
+import { Menu, CardContent, PaginationItem } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 
 export const StyledMenu = styled((props) => (
@@ -45,6 +45,48 @@ export const StyledMenu = styled((props) => (
           theme.palette.action.selectedOpacity
         ),
       },
+    },
+  },
+}));
+
+export const CustomCardContent = styled(CardContent)(() => ({
+  position: "absolute",
+  top: "85%",
+  left: "50%",
+  width: "max-content",
+  transform: "translate(-50%, -50%)",
+  //   [theme.breakpoints.down("450")]: {
+  //     left: 10,
+  //   },
+}));
+
+export const HoverCardContent = styled(CardContent)(() => ({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  background: "rgba(0,0,0,0.5)",
+  position: "absolute",
+  right: 0,
+  bottom: 0,
+  width: "283px",
+  height: "283px",
+  //   transform: "translate(-50%, -50%)",
+  // [theme.breakpoints.down("450")]: {
+  //   left: 10,
+  // },
+}));
+
+export const CustomPaginationItem = styled(PaginationItem)(() => ({
+  margin: "0px 15px",
+  "&.MuiButtonBase-root, MuiPaginationItem-root": {
+    fontSize: "20px",
+    fontWeight: "300",
+    lineHeight: "30px",
+    fontFamily: "Mulish",
+    "&.Mui-selected": {
+      fontWeight: "700",
+      backgroundColor: "rgba(0,0,0,0)",
     },
   },
 }));
