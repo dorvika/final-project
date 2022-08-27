@@ -2,7 +2,7 @@ import { Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import { CustomPriceSlider, CustomTextField } from "./styles";
 
-const PriceSlider = () => {
+const PriceSlider = ({ setFilterObj, filterObj }) => {
   const [price, setPrice] = useState({ minPrice: 0, maxPrice: 500 });
   const [sliderValues, setSliderValues] = useState([0, 500]);
 
@@ -13,6 +13,7 @@ const PriceSlider = () => {
       maxPrice: Math.max(...newValue),
     });
     setSliderValues(newValue);
+    setFilterObj({ ...filterObj, price: `${newValue[0]}, ${newValue[1]}` });
   };
 
   const handleInputChange = (event) => {
@@ -26,6 +27,8 @@ const PriceSlider = () => {
     }
     setPrice(newPrice);
     setSliderValues(Object.values(newPrice));
+    const newValue = Object.values(newPrice);
+    setFilterObj({ ...filterObj, price: `${newValue[0]}, ${newValue[1]}` });
   };
 
   const handleBlur = () => {
@@ -35,6 +38,8 @@ const PriceSlider = () => {
       setPrice({ ...price, maxPrice: 500 });
     }
     setSliderValues(Object.values(price));
+    const newValue = Object.values(price);
+    setFilterObj({ ...filterObj, price: `${newValue[0]}, ${newValue[1]}` });
   };
 
   return (
