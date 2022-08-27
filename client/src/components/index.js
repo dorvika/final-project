@@ -10,3 +10,4 @@ export { default as PopularSection } from "./Sections/Popular/Popular.jsx";
 export { default as BagStepper } from "./BagStepper/BagStepper.jsx";
 export { default as CartProductList } from "./Cart/CartProductList.jsx";
 export { default as EmptyCart } from "./Cart/EmptyCart.jsx";
+export { default as MightLike } from "./Sections/MightLike/MightLike.jsx";
