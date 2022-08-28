@@ -2,6 +2,7 @@ import { Breadcrumbs, Link } from "@mui/material";
 import ProductInfo from "./ProductInfo.jsx";
 import ProductSlider from "./ProductSlider.jsx";
 import { ProductCardContainer, ProductCardMainContainer } from "./styles.js";
+import {MightLike} from "../../components";
 
 const productInfo = {
   itemNo: 10101,
@@ -63,6 +64,7 @@ const ProductCard = () => {
           info={info}
         />
       </ProductCardContainer>
+      <MightLike sectionTitle="RELATED ITEMS"/>
     </ProductCardMainContainer>
   );
 };

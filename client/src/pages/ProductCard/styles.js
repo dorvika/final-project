@@ -17,6 +17,7 @@ export const ProductCardMainContainer = styled(Container)(({ theme }) => ({
 export const ProductCardContainer = styled(Stack)(({ theme }) => ({
   flexDirection: "row",
   justifyContent: "space-between",
+  marginBottom: "90px",
   gap: "80px",
   height: "700px",
   [theme.breakpoints.down("md")]: {

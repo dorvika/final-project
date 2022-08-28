@@ -11,7 +11,7 @@ import {
   CustomTitle
 } from "./styles";
 
-const MightLike = ({SectionTitle = "Related Items"}) => {
+const MightLike = ({sectionTitle}) => {
 
   const slideLeft = () => {
     const slider = document.getElementById("slider");
@@ -24,7 +24,7 @@ const MightLike = ({SectionTitle = "Related Items"}) => {
 
   return (
     <CustomBox variant="section" component="section">
-      <CustomTitle component="h3">{SectionTitle}</CustomTitle>
+      <CustomTitle component="h3">{sectionTitle}</CustomTitle>
       <CustomSliderBox>
         <CustomLeftIcon onClick={slideLeft}/>
         <CustomSlider id="slider" variant="div" component="div">
