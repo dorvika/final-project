@@ -13,7 +13,10 @@ const PriceSlider = ({ setFilterObj, filterObj }) => {
       maxPrice: Math.max(...newValue),
     });
     setSliderValues(newValue);
-    setFilterObj({ ...filterObj, price: `${newValue[0]}, ${newValue[1]}` });
+    setFilterObj({
+      ...filterObj,
+      currentPrice: `${newValue[0]}-${newValue[1]}`,
+    });
   };
 
   const handleInputChange = (event) => {
@@ -28,7 +31,10 @@ const PriceSlider = ({ setFilterObj, filterObj }) => {
     setPrice(newPrice);
     setSliderValues(Object.values(newPrice));
     const newValue = Object.values(newPrice);
-    setFilterObj({ ...filterObj, price: `${newValue[0]}, ${newValue[1]}` });
+    setFilterObj({
+      ...filterObj,
+      currentPrice: `${newValue[0]}-${newValue[1]}`,
+    });
   };
 
   const handleBlur = () => {
@@ -39,7 +45,10 @@ const PriceSlider = ({ setFilterObj, filterObj }) => {
     }
     setSliderValues(Object.values(price));
     const newValue = Object.values(price);
-    setFilterObj({ ...filterObj, price: `${newValue[0]}, ${newValue[1]}` });
+    setFilterObj({
+      ...filterObj,
+      currentPrice: `${newValue[0]}-${newValue[1]}`,
+    });
   };
 
   return (

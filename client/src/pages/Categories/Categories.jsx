@@ -18,13 +18,15 @@ const Categories = () => {
   const dispatch = useDispatch();
   const [filterObj, setFilterObj] = useState({
     categories: "",
-    // price: "",
-    // size: "",
-    // color: "",
-    // material: "",
+    // currentPrice: 0, -
+    // size: "", +
+    // color: "", +
+    // fabric: "", +
   });
+  /* eslint-disable no-unused-vars */
   let [searchParams, setSearchParams] = useSearchParams();
-  console.log(searchParams);
+  /* eslint-enable no-unused-vars */
+
   const queryString = useLocation().search;
 
   useEffect(() => {

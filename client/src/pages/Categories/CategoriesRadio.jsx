@@ -23,7 +23,7 @@ const CategoriesRadio = ({
   return (
     <FormControl>
       <RadioGroup
-        name={materialFlag ? "material" : "size"}
+        name={materialFlag ? "fabric" : "size"}
         value={value}
         onChange={handleChange}
       >

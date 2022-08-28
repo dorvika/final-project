@@ -14,7 +14,12 @@ const TopFilter = ({ setFilterObj, filterObj }) => {
       <Stack direction="row" justifyContent="space-between">
         <Button
           variant="outlined"
-          onClick={() => setFilterObj({ ...filterObj, categories: "shop all" })}
+          onClick={() =>
+            setFilterObj({
+              ...filterObj,
+              categories: categories.map((category) => category.name).join(),
+            })
+          }
         >
           shop all
         </Button>
@@ -23,7 +28,10 @@ const TopFilter = ({ setFilterObj, filterObj }) => {
             key={category.id}
             variant="outlined"
             onClick={() =>
-              setFilterObj({ ...filterObj, categories: category.name })
+              setFilterObj({
+                ...filterObj,
+                categories: category.name,
+              })
             }
           >
             {category.name}

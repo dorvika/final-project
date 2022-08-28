@@ -42,7 +42,7 @@ const CategoriesFilter = ({ setFilterObj, filterObj }) => {
               }}
               onClick={() => {
                 setActiveColor(cssValue);
-                setFilterObj({ ...filterObj, color: name });
+                setFilterObj({ ...filterObj, color: name.toLowerCase() });
               }}
             />
           ))}
