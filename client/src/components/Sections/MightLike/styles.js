@@ -67,10 +67,10 @@ export const CustomSlider = styled(Typography)(() => ({
     height: "0",
   },
   "& > *": {
-    marginRight: "20px",
+    paddingRight: "20px",
   },
   "& > :last-child": {
-    marginRight: "0",
+    paddingRight: "0",
   }
 }))
 
