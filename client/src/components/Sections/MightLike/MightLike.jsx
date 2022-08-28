@@ -1,9 +1,17 @@
-import './style.css'
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import {CardContent, CardMedia, Link} from "@mui/material";
+import {dataElements} from "./data";
+import {
+  CustomBox,
+  CustomContent,
+  CustomItem,
+  CustomLeftIcon,
+  CustomRightIcon,
+  CustomSlider,
+  CustomSliderBox,
+  CustomTitle
+} from "./styles";
 
 const MightLike = ({SectionTitle = "Related Items"}) => {
-  const slides = [1,2,3,4,5,6]
 
   const slideLeft = () => {
     const slider = document.getElementById("slider");
@@ -15,22 +23,46 @@ const MightLike = ({SectionTitle = "Related Items"}) => {
   }
 
   return (
-    <section id="body">
-      <h1>{SectionTitle}</h1>
-      <div id="main-slider-container">
-        <KeyboardArrowLeftIcon sx={{ width: "40px", height: "40px" }} className="slider-icon left" onClick={slideLeft}/>
-        <div id="slider">
-          {slides.length > 0 ?
+    <CustomBox variant="section" component="section">
+      <CustomTitle component="h3">{SectionTitle}</CustomTitle>
+      <CustomSliderBox>
+        <CustomLeftIcon onClick={slideLeft}/>
+        <CustomSlider id="slider" variant="div" component="div">
+          { dataElements.length > 0 && (
             <>
-              {slides.map((el,index) => (
-                <div className="slider-card" key={index}>{el}</div>
+              {dataElements.map(({id, title, urlImage, price}) => (
+                <Link href="/categories" key={id}>
+                  <CustomItem component="div">
+                    <CardMedia
+                      component="img"
+                      height="380"
+                      image={urlImage}
+                      alt="might-like"
+                    />
+                    <CardContent sx={{ position: "absolute", bottom: "20px", left: "20px" }}>
+                      <CustomContent component="p" sx={{ marginBottom: "10px" }}>
+                        {title}
+                      </CustomContent>
+                      <CustomContent component="span" sx={
+                        {
+                          fontWeight: "700",
+                          fontSize: "24px",
+                          padding: "0 10px",
+                          textShadow: "0px 4px 1px rgba(0, 0, 0, 0.25)"
+                        }
+                      }>
+                        ${price}
+                      </CustomContent>
+                    </CardContent>
+                  </CustomItem>
+                </Link>
               ))}
             </>
-            : <p>Ups :(</p>}
-        </div>
-        <KeyboardArrowRightIcon sx={{ width: "40px", height: "40px" }} className="slider-icon right" onClick={slideRight}/>
-      </div>
-    </section>
+          )}
+        </CustomSlider>
+        <CustomRightIcon onClick={slideRight}/>
+      </CustomSliderBox>
+    </CustomBox>
   );
 };
 

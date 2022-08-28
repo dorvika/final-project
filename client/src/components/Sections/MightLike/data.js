@@ -2,7 +2,7 @@ export const dataElements = [
   {
     id: 1,
     title: "Boho Pink Cotton Bed Lilen",
-    urlImage: "https://res.cloudinary.com/dyvsyavmb/image/upload/v1661614471/iptzvtzf9x5onhfmr5mz.jpgg",
+    urlImage: "https://res.cloudinary.com/dyvsyavmb/image/upload/v1661614471/iptzvtzf9x5onhfmr5mz.jpg",
     price: "230"
   },{
     id: 2,
