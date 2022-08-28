@@ -5,64 +5,11 @@ import {
   CardMedia,
   Grid,
   Typography,
-  Button,
   Link,
   useMediaQuery,
 } from "@mui/material";
 import { popularArray } from "./dataPopular";
-import { styled } from "@mui/material/styles";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-
-const CustomGridItem = styled(Grid)(() => ({
-  position: "relative",
-}));
-
-const CustomCardContent = styled(CardContent)(() => ({
-  position: "absolute",
-  textAlign: "end",
-  display: "flex",
-  justifyContent: "flex-end",
-  textTransform: "uppercase",
-  width: "100%",
-  bottom: 0,
-  backgroundColor: "rgba(255, 255, 255, 0.6)",
-}));
-
-const CustomTypography = styled(Typography)(({ theme }) => ({
-  letterSpacing: "10px",
-  fontSize: "24px",
-  lineHeight: "25px",
-  fontFamily: "Abel, sans-serif",
-  margin: "15px 0 10px 0",
-  color: theme.palette.text.primary,
-}));
-
-const CustomButton = styled(Button)(({ theme }) => ({
-  background: "none",
-  fontSize: "16px",
-  border: "1px solid #000",
-  color: theme.palette.text.primary,
-  margin: "0 10px 20px 0",
-  padding: "4px 48px",
-  transition: "0.3s ease-in",
-  "& a": {
-    transition: "0.3s ease-in",
-  },
-  "&:hover": {
-    color: theme.palette.primary.contrastText,
-    "& > a": {
-      color: theme.palette.primary.contrastText,
-    },
-  },
-}));
-
-const CustomIcon = styled(ArrowForwardIosIcon)(() => ({
-  position: "absolute",
-  right: "34px",
-  top: "50%",
-  transform: "translate(-50%, -50%)",
-  width: "15px",
-}))
+import {CustomButton, CustomCardContent, CustomGridItem, CustomIcon, CustomTypography} from "./styles";
 
 const Popular = () => {
   const matches = useMediaQuery("(max-width: 899px)");
@@ -115,7 +62,7 @@ const Popular = () => {
           ))}
       </Grid>
         <CustomButton sx={{ margin: "0", padding: "0" }}>
-          <Link href="/categories" sx={{ textDecoration: "none", padding: "4px 65px 4px 48px", position: "relative" }}>
+          <Link href="/categories" sx={{ textDecoration: "none", padding: "6px 60px 6px 43px", position: "relative" }}>
             see all
             <CustomIcon />
           </Link>
