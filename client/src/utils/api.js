@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "http://localhost:5000/api" });
+const API = axios.create({
+  baseURL: "https://bedding-postil.herokuapp.com/api",
+});
 
 API.interceptors.request.use((req) => {
   req.headers.authorization =
@@ -8,8 +10,8 @@ API.interceptors.request.use((req) => {
   return req;
 });
 
-export const fetchSlides = async () => {
-  const response = await API.get("/slides");
+export const fetchData = async (endpoint) => {
+  const response = await API.get(endpoint);
   const { data } = response;
   return data;
 };
