@@ -1,0 +1,82 @@
+import { styled, FormControlLabel, Radio, TextField } from "@mui/material";
+import NumberFormat from "react-number-format";
+import React from "react";
+
+export const CustomLabel = styled(FormControlLabel)(() => ({
+  width: "100%",
+  height: "113px",
+  position: "relative",
+  "& .MuiFormControlLabel-label": {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+}));
+
+export const CustomRadio = styled(Radio)(({ theme }) => ({
+  zIndex: "1",
+  "&.Mui-checked": {
+    "&, & + .MuiFormControlLabel-label, & + .MuiTypography-root": {
+      color: "#ffffff",
+    },
+  },
+  "&.Mui-checked + .MuiFormControlLabel-label": {
+    backgroundColor: theme.palette.primary.main,
+  },
+}));
+
+export const CustomTextField = styled(TextField)(({ theme }) => ({
+  width: "100%",
+  "& .MuiInputBase-root": {
+    backgroundColor: "rgba(255,255,255, .05)",
+    color: "#FFFFFF",
+  },
+  "& .MuiInputLabel-root": {
+    color: theme.palette.primary,
+    "&.Mui-focused": {
+      color: "#ffffff",
+    },
+  },
+}));
+
+export const TextFieldShipping = styled(TextField)(() => ({
+  width: "100%",
+  "& .MuiOutlinedInput-root":{
+    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+      border:"1px solid #8C8C8C"
+    },
+  }
+}));
+
+export const NumberFormatCustom = React.forwardRef(function NumberFormatCustom(
+    props,
+    ref
+  ) {
+    const { ...other } = props;
+    const format = (fieldName) => {
+      switch (fieldName) {
+        case "cardnumber":
+          return "#### #### #### ####";
+        case "mmyy":
+          return "##/##";
+        case "cvv":
+          return "###";
+        case "phone":
+          return "+##(###)###-##-##";
+        default:
+            ""
+      }
+    };
+    return (
+      <NumberFormat
+        {...other}
+        getInputRef={ref}
+        format={format(props.name)}
+      />
+    );
+  });

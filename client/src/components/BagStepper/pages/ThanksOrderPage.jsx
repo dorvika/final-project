@@ -3,7 +3,7 @@ import { Box } from "@mui/system";
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ThanksOrder = () => {
+const ThanksOrderPage = () => {
   return (
     <React.Fragment>
       <Box
@@ -29,4 +29,4 @@ const ThanksOrder = () => {
   );
 };
 
-export default ThanksOrder;
+export default ThanksOrderPage;

@@ -1,5 +1,5 @@
 import { Stack, Typography,Box } from "@mui/material"
-import { CustomHr } from "../../Cart/index";
+import { CustomHr } from "../../../Cart/index";
 
 const Summary = () => {
   return (

@@ -197,6 +197,9 @@ const theme = createTheme({
           fontWeight: 400,
           lineHeight: "24px",
           color: "#949697",
+          [`@media screen and (max-width: 389px)`]: {
+            fontSize: 11,
+          },
         },
       },
     },
@@ -213,13 +216,45 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           padding: 0,
-          marginRight: "40px",
           "&.Mui-checked":{
             color: "#ffffff",
           }
         },
       },
     },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          fontFamily: ["Mulish", "san-serif"].join(","),
+          fontSize: 18,
+          fontWeight: 400, 
+        },
+      },
+    },
+    MuiAlert: {
+      styleOverrides: {
+        root: {
+          fontFamily: ["Mulish", "san-serif"].join(","),
+          fontSize: 18,
+          fontWeight: 400, 
+          justifyContent:"center",
+          marginTop: "20px",
+          textAlign:"center"
+        },
+      },
+    },
+    MuiFormHelperText: {
+      styleOverrides: {
+        root: {
+          fontFamily: ["Mulish", "san-serif"].join(","),
+          fontSize: 12,
+          fontWeight: 400, 
+          position:"absolute",
+          top:"30px"
+        },
+      },
+    },
+    
     // Таких properties немає у Default Theme
     // headerHeight: {
     //   mobile: "60px",

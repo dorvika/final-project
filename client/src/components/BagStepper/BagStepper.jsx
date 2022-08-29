@@ -1,23 +1,8 @@
 import { useState } from "react";
-import {
-  Container,
-  Box,
-  Stepper,
-  Step,
-  StepButton,
-  Typography,
-  Button,
-} from "@mui/material";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { Container, Box, Stepper, Step, StepButton } from "@mui/material";
 import stepperStyle from "./style";
-import ThanksOrder from "./ThanksOrder.jsx";
-import ShoppingBag from "./ShoppingBag.jsx";
-import ShippingDetails from "./ShippingDetails.jsx";
-import PaymentOptions from "./PaymentOptions.jsx";
-import { CustomHr } from "../Cart/index";
-import { Link } from "react-router-dom";
 import products from "../Cart/ProductsExamples.jsx";
-import Summary from "./Summary/Summary.jsx";
+import {ShoppingBagPage, ShippingDetailsPage, PaymentOptionsPage, ThanksOrderPage } from "./pages/index"
 
 const steps = ["Shopping Bag", "Shipping Details", "Payment Options"];
 
@@ -40,7 +25,7 @@ export default function HorizontalNonLinearStepper() {
     cvv: "",
     cardholdername: "",
   });
-
+  
   const totalSteps = () => {
     return steps.length;
   };
@@ -54,16 +39,14 @@ export default function HorizontalNonLinearStepper() {
   };
 
   const allStepsCompleted = () => {
-    console.log(data);
     return completedSteps() === totalSteps();
   };
 
-  const handleNext = (newData) => {
+  const handleNext = () => {
     const newActiveStep =
       isLastStep() && !allStepsCompleted()
         ? steps.findIndex((step, i) => !(i in completed))
         : activeStep + 1;
-    setData((prev) => ({ ...prev, ...newData }));
     setActiveStep(newActiveStep);
   };
 
@@ -74,43 +57,47 @@ export default function HorizontalNonLinearStepper() {
     newCompleted[activeStep - 1] = false;
     setCompleted(newCompleted);
   };
-  const renderStepContent = (step) => {
-    switch (step) {
-      case 0:
-        return <ShoppingBag products={products} />;
-      case 1:
-        return <ShippingDetails next={handleNext} data={data} />;
-      case 2:
-        return (
-          <PaymentOptions next={handleNext} prev={handleBack} data={data} />
-        );
-    }
-  };
-  const handleComplete = () => {
+
+  const handleComplete = (newData) => {
+    setData((prev) => ({ ...prev, ...newData }));
     const newCompleted = completed;
     newCompleted[activeStep] = true;
     setCompleted(newCompleted);
     handleNext();
   };
-  const CustomBackButton = ({ onClick }) => {
-    return (
-      <Typography
-        variant="body"
-        component="span"
-        onClick={onClick}
-        sx={{
-          fontSize: "18px",
-          textTransform: "uppercase",
-          cursor: "pointer",
-        }}
-      >
-        <ArrowBackIosNewIcon
-          sx={{ fontSize: "16px", mr: "4px", verticalAlign: "middle" }}
-        />
-        Back
-      </Typography>
-    );
+  const renderStepContent = (step) => {
+    switch (step) {
+      case 0:
+        return (
+          <ShoppingBagPage
+            title={steps[activeStep]}
+            products={products}
+            next={handleComplete}
+          />
+        );
+      case 1:
+        return (
+          <ShippingDetailsPage
+            title={steps[activeStep]}
+            products={products}
+            next={handleComplete}
+            prev={handleBack}
+            data={data}
+          />
+        );
+      case 2:
+        return (
+          <PaymentOptionsPage
+            title={steps[activeStep]}
+            products={products}
+            next={handleComplete}
+            prev={handleBack}
+            data={data}
+          />
+        );
+    }
   };
+
   return (
     <>
       <Box backgroundColor="primary.main" pb={15}>
@@ -137,80 +124,10 @@ export default function HorizontalNonLinearStepper() {
           <div>
             {allStepsCompleted() ? (
               <>
-                <ThanksOrder />
+                <ThanksOrderPage />
               </>
             ) : (
-              <Container
-                sx={{
-                  p: "80px 0",
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  flexWrap: "wrap",
-                }}
-              >
-                <Box>
-                  <Typography
-                    variant="h4"
-                    sx={{
-                      color: "primary.main",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.04em",
-                      mb: "15px",
-                    }}
-                  >
-                    {steps[activeStep]}
-                  </Typography>
-                  <CustomHr sx={{ mb: "20px" }} />
-                  <Box>{renderStepContent(activeStep)}</Box>
-                  <CustomHr sx={{ mb: "20px", mt: "30px" }} />
-                  {activeStep === 0 ? (
-                    <Link
-                      to="/cart"
-                      style={{
-                        textDecoration: "none",
-                      }}
-                    >
-                      <CustomBackButton />
-                    </Link>
-                  ) : (
-                    <CustomBackButton onClick={handleBack} />
-                  )}
-                </Box>
-                <Box
-                  sx={{
-                    width: "370px",
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                >
-                  <Typography
-                    variant="h4"
-                    sx={{
-                      color: "primary.main",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.04em",
-                      mb: "15px",
-                    }}
-                  >
-                    Summary
-                  </Typography>
-                  <CustomHr />
-                  {activeStep !== 0 && (
-                    <>
-                      <ShoppingBag products={products} small={true} />
-                      <CustomHr />
-                    </>
-                  )}
-                  <Summary />
-                  <Button
-                    sx={{ p: "15px 85px", alignSelf: "flex-end" }}
-                    onClick={handleComplete}
-                  >
-                    Buy
-                  </Button>
-                </Box>
-              </Container>
+              <Box>{renderStepContent(activeStep)}</Box>
             )}
           </div>
         </Container>
