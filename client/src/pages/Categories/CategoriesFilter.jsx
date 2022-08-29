@@ -1,11 +1,20 @@
 import { Stack, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CategoriesAccordion, PriceSlider, CategoriesRadio } from "./index.js";
-import { colors, fabrics, sizes } from "./mockData.js";
 import { ColorBox } from "./styles.js";
+import { fetchData } from "../../utils/api.js";
 
-const CategoriesFilter = () => {
-  const [activeColor, setActiveColor] = useState(0);
+const CategoriesFilter = ({ setFilterObj, filterObj }) => {
+  const [sizes, setSizes] = useState([]);
+  const [colors, setColors] = useState([]);
+  const [materials, setMaterials] = useState([]);
+  const [activeColor, setActiveColor] = useState("#C96456");
+
+  useEffect(() => {
+    fetchData("/colors").then((result) => setColors(result));
+    fetchData("/sizes").then((result) => setSizes(result));
+    fetchData("/filters").then((result) => setMaterials(result));
+  }, []);
 
   return (
     <Stack sx={{ width: "25%" }}>
@@ -13,29 +22,39 @@ const CategoriesFilter = () => {
         CATALOG
       </Typography>
       <CategoriesAccordion title="Price">
-        <PriceSlider />
+        <PriceSlider setFilterObj={setFilterObj} filterObj={filterObj} />
       </CategoriesAccordion>
       <CategoriesAccordion title="Size">
-        <CategoriesRadio options={sizes} />
+        <CategoriesRadio
+          options={sizes}
+          setFilterObj={setFilterObj}
+          filterObj={filterObj}
+        />
       </CategoriesAccordion>
       <CategoriesAccordion title="Color">
         <Stack direction="row" flexWrap="wrap" gap="10px" width="70%">
-          {colors.map((color, index) => (
+          {colors.map(({ _id, cssValue, name }) => (
             <ColorBox
-              key={color.id}
+              key={_id}
               sx={{
-                backgroundColor: color.color,
-                borderColor: activeColor === index ? "primary.main" : null,
+                backgroundColor: cssValue,
+                borderColor: activeColor === cssValue ? "primary.main" : null,
               }}
               onClick={() => {
-                setActiveColor(index);
+                setActiveColor(cssValue);
+                setFilterObj({ ...filterObj, color: name.toLowerCase() });
               }}
             />
           ))}
         </Stack>
       </CategoriesAccordion>
-      <CategoriesAccordion title="Fabric">
-        <CategoriesRadio options={fabrics} />
+      <CategoriesAccordion title="Material">
+        <CategoriesRadio
+          options={materials}
+          materialFlag
+          setFilterObj={setFilterObj}
+          filterObj={filterObj}
+        />
       </CategoriesAccordion>
     </Stack>
   );

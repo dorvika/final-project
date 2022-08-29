@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { fetchSlides } from "../../utils/api";
+import { fetchData } from "../../utils/api";
 import {
   SliderContainer,
   Slider,
@@ -20,7 +20,7 @@ const ImageSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    fetchSlides().then((result) => setSlides(result));
+    fetchData("/slides").then((result) => setSlides(result));
   }, []);
 
   useEffect(() => {

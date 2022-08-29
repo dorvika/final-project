@@ -10,8 +10,8 @@ API.interceptors.request.use((req) => {
   return req;
 });
 
-export const fetchSlides = async () => {
-  const response = await API.get("/slides");
+export const fetchData = async (endpoint) => {
+  const response = await API.get(endpoint);
   const { data } = response;
   return data;
 };

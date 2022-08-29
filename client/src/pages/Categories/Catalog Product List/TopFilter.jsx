@@ -1,16 +1,42 @@
 import { Button, Stack } from "@mui/material";
+import { useEffect, useState } from "react";
+import { fetchData } from "../../../utils/api";
 
-const TopFilter = () => {
+const TopFilter = ({ setFilterObj, filterObj }) => {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    fetchData("/catalog").then((result) => setCategories(result));
+  }, []);
+
   return (
     <>
       <Stack direction="row" justifyContent="space-between">
-        <Button variant="outlined">shop all</Button>
-        <Button variant="outlined">bedroom</Button>
-        <Button variant="outlined">bed linen</Button>
-        <Button variant="outlined">kitchen</Button>
-        <Button variant="outlined">bathroom</Button>
-        <Button variant="outlined">loungwear</Button>
-        <Button variant="outlined">sale</Button>
+        <Button
+          variant="outlined"
+          onClick={() =>
+            setFilterObj({
+              ...filterObj,
+              categories: categories.map((category) => category.name).join(),
+            })
+          }
+        >
+          shop all
+        </Button>
+        {categories.map((category) => (
+          <Button
+            key={category.id}
+            variant="outlined"
+            onClick={() =>
+              setFilterObj({
+                ...filterObj,
+                categories: category.name,
+              })
+            }
+          >
+            {category.name}
+          </Button>
+        ))}
       </Stack>
     </>
   );

@@ -6,9 +6,11 @@ import {
 } from "redux";
 import thunk from "redux-thunk";
 import modalReducer from "./Modal/reducer";
+import filterReducer from "./Filters/reducer";
 
 export const rootReducer = combineReducers({
   modal: modalReducer,
+  filters: filterReducer,
 });
 
 const devTools = window.__REDUX_DEVTOOLS_EXTENSION__
