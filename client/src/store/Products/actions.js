@@ -1,12 +1,5 @@
 import { fetchData } from "../../utils/api";
 
-export const setProducts = (products) => {
-  return {
-    type: "SET_PRODUCTS",
-    payload: products,
-  };
-};
-
 export const fetchProducts = () => (dispatch) => {
   dispatch({
     type: "START_FETCH_PRODUCTS",

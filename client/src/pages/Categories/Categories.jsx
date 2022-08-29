@@ -55,11 +55,12 @@ const Categories = () => {
             direction="row"
             justifyContent="space-between"
             marginTop="23px"
+            marginBottom="23px"
           >
             <ShowQuantity />
             <SortBy />
           </Stack>
-          <Box marginTop="40px">
+          <Box>
             <CatalogProductList />
           </Box>
           <Stack alignItems="center" justifyContent="center">

@@ -1,5 +1,4 @@
 import { Grid } from "@mui/material";
-// import productsList from "./ProductsData";
 import ProductCard from "./ProductCard.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -10,18 +9,22 @@ const CatalogProductList = () => {
   const { products, isLoading, hasError } = useSelector(
     (state) => state.products
   );
-  const productState = useSelector((state) => state.products);
-
-  console.log("products", products);
-  console.log("loading", isLoading);
-  console.log("error", hasError);
-  console.log("state", productState);
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, []);
   return (
     <>
+      {isLoading && (
+        <div>
+          <h4>Products are loading </h4>
+        </div>
+      )}
+      {hasError && (
+        <div>
+          <p>Ooops, something went wrong</p>
+        </div>
+      )}
       <Grid container rowSpacing={20} columnSpacing={5}>
         {products
           .filter((e, count) => count < 18)

@@ -2,7 +2,7 @@ import { Grid, Card, CardMedia, Typography, Button } from "@mui/material";
 import { useState } from "react";
 import { CustomCardContent, HoverCardContent } from "./styles";
 
-const ProductCard = ({ id, image, title, price }) => {
+const ProductCard = ({ id, image, title, price, size }) => {
   const [isHover, setIsHover] = useState(false);
 
   const handleMouseEnter = () => {
@@ -13,7 +13,7 @@ const ProductCard = ({ id, image, title, price }) => {
     setIsHover(false);
   };
   return (
-    <Grid item xs={4} position="relative">
+    <Grid item xs={4} position="relative" marginTop="10px">
       <Card onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <CardMedia
           component="img"
@@ -22,8 +22,19 @@ const ProductCard = ({ id, image, title, price }) => {
         ></CardMedia>
         {isHover ? (
           <HoverCardContent>
-            <Typography variant="h5" color="secondary" sx={{ pb: "20px" }}>
+            <Typography
+              variant="h5"
+              color="secondary"
+              sx={{ pb: "5px", textTransform: "capitalize" }}
+            >
               {title}
+            </Typography>
+            <Typography
+              variant="h6"
+              color="secondary"
+              sx={{ pb: "15px", textTransform: "capitalize" }}
+            >
+              size: {size}
             </Typography>
             <Typography
               variant="h2"
@@ -33,7 +44,7 @@ const ProductCard = ({ id, image, title, price }) => {
               lineHeight="25px"
               paddingBottom="20px"
             >
-              ${price}
+              $ {price}
             </Typography>
             <Button
               href={`/categories/${id}`}
@@ -46,7 +57,7 @@ const ProductCard = ({ id, image, title, price }) => {
         ) : (
           <CustomCardContent sx={{ backgroundColor: "primary.main" }}>
             <Typography
-              sx={{ padding: "4px 8px" }}
+              sx={{ padding: "4px 8px", textTransform: "capitalize" }}
               variant="h5"
               color="secondary"
             >
