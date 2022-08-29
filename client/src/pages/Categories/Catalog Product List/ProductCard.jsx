@@ -1,12 +1,4 @@
-import {
-  Grid,
-  Card,
-  CardMedia,
-  //   CardContent,
-  Typography,
-  Button,
-} from "@mui/material";
-//   import products from "./ProductsData";
+import { Grid, Card, CardMedia, Typography, Button } from "@mui/material";
 import { useState } from "react";
 import { CustomCardContent, HoverCardContent } from "./styles";
 
