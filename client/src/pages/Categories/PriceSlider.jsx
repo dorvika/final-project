@@ -3,7 +3,10 @@ import { useState } from "react";
 import { CustomPriceSlider, CustomTextField } from "./styles";
 
 const PriceSlider = ({ setFilterObj, filterObj }) => {
-  const [price, setPrice] = useState({ minPrice: 0, maxPrice: 500 });
+  const [price, setPrice] = useState({
+    minPrice: 0,
+    maxPrice: 500,
+  });
   const [sliderValues, setSliderValues] = useState([0, 500]);
 
   const handleSliderChange = (event, newValue) => {
@@ -15,7 +18,8 @@ const PriceSlider = ({ setFilterObj, filterObj }) => {
     setSliderValues(newValue);
     setFilterObj({
       ...filterObj,
-      currentPrice: `${newValue[0]}-${newValue[1]}`,
+      minPrice: newValue[0],
+      maxPrice: newValue[1],
     });
   };
 
@@ -33,7 +37,8 @@ const PriceSlider = ({ setFilterObj, filterObj }) => {
     const newValue = Object.values(newPrice);
     setFilterObj({
       ...filterObj,
-      currentPrice: `${newValue[0]}-${newValue[1]}`,
+      minPrice: newValue[0],
+      maxPrice: newValue[1],
     });
   };
 
@@ -47,7 +52,8 @@ const PriceSlider = ({ setFilterObj, filterObj }) => {
     const newValue = Object.values(price);
     setFilterObj({
       ...filterObj,
-      currentPrice: `${newValue[0]}-${newValue[1]}`,
+      minPrice: newValue[0],
+      maxPrice: newValue[1],
     });
   };
 
