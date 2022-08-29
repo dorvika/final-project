@@ -9,7 +9,7 @@ const Cart = () => {
         <CartProductList />
         {/* коли буде стейт - додати умову відображення корзини */}
         {/* <EmptyCart /> */}
-        <MightLike />
+        <MightLike sectionTitle="YOU MIGHT LIKE IT TOO"/>
       </Container>
     </>
   );
