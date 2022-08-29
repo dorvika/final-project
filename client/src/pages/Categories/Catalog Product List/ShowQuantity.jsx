@@ -24,6 +24,7 @@ const SortPanel = () => {
           aria-expanded={open ? "true" : undefined}
           onClick={handleClick}
           endIcon={open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
+          sx={{ p: "10px 0" }}
         >
           Show
         </Button>
