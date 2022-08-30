@@ -68,7 +68,7 @@ const PaymentForm = ({ data, next, prev }) => {
                             flexDirection: "column",
                           }}
                         >
-                          <Typography variant="subtitle1" sx={{ mb: "10px" }}>
+                          <Typography variant="h3" sx={{ mb: "10px" }}>
                             Credit Card
                           </Typography>
                           <Typography variant="subtitle2">
@@ -208,7 +208,7 @@ const PaymentForm = ({ data, next, prev }) => {
                           flexDirection: "column",
                         }}
                       >
-                        <Typography variant="subtitle1" sx={{ mb: "10px" }}>
+                        <Typography variant="h3" sx={{ mb: "10px" }}>
                           Payment to the courier
                         </Typography>
                         <Typography variant="subtitle2">

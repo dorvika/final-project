@@ -2,7 +2,12 @@ import { useState } from "react";
 import { Container, Box, Stepper, Step, StepButton } from "@mui/material";
 import stepperStyle from "./style";
 import products from "../Cart/ProductsExamples.jsx";
-import {ShoppingBagPage, ShippingDetailsPage, PaymentOptionsPage, ThanksOrderPage } from "./pages/index"
+import {
+  ShoppingBagPage,
+  ShippingDetailsPage,
+  PaymentOptionsPage,
+  ThanksOrderPage,
+} from "./pages/index";
 
 const steps = ["Shopping Bag", "Shipping Details", "Payment Options"];
 
@@ -25,7 +30,7 @@ export default function HorizontalNonLinearStepper() {
     cvv: "",
     cardholdername: "",
   });
-  
+
   const totalSteps = () => {
     return steps.length;
   };

@@ -20,6 +20,8 @@ export const CustomLabel = styled(FormControlLabel)(() => ({
 
 export const CustomRadio = styled(Radio)(({ theme }) => ({
   zIndex: "1",
+  padding: 0,
+  color: theme.palette.primary,
   "&.Mui-checked": {
     "&, & + .MuiFormControlLabel-label, & + .MuiTypography-root": {
       color: "#ffffff",

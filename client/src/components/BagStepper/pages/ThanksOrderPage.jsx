@@ -22,7 +22,9 @@ const ThanksOrderPage = () => {
           Thank you for your order!
         </Typography>
         <Link to="/categories" style={{ textDecoration: "none" }}>
-          <Button sx={{ p: "15px 85px" }}>Continue Shopping</Button>
+          <Button variant="contained" sx={{ p: "15px 85px" }}>
+            Continue Shopping
+          </Button>
         </Link>
       </Box>
     </React.Fragment>

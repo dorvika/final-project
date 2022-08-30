@@ -8,20 +8,20 @@ const Summary = () => {
                     <Box
                       sx={{ display: "flex", justifyContent: "space-between" }}
                     >
-                      <Typography variant="body">SUBTOTAL</Typography>
-                      <Typography variant="body">$490</Typography>
+                      <Typography variant="body" sx={{textTransform: "uppercase"}}>SUBTOTAL</Typography>
+                      <Typography variant="body" sx={{textTransform: "uppercase"}}>$490</Typography>
                     </Box>
                     <Box
                       sx={{ display: "flex", justifyContent: "space-between" }}
                     >
-                      <Typography variant="body">Shipping</Typography>
-                      <Typography variant="body">FREE</Typography>
+                      <Typography variant="body" sx={{textTransform: "uppercase"}}>Shipping</Typography>
+                      <Typography variant="body" sx={{textTransform: "uppercase"}}>FREE</Typography>
                     </Box>
                     <Box
                       sx={{ display: "flex", justifyContent: "space-between" }}
                     >
-                      <Typography variant="body">TAXES</Typography>
-                      <Typography variant="body">$5</Typography>
+                      <Typography variant="body" sx={{textTransform: "uppercase"}}>TAXES</Typography>
+                      <Typography variant="body" sx={{textTransform: "uppercase"}}>$5</Typography>
                     </Box>
                   </Stack>
                   <CustomHr />
@@ -33,10 +33,10 @@ const Summary = () => {
                       mb: "50px",
                     }}
                   >
-                    <Typography variant="body" sx={{ fontSize: "24px" }}>
+                    <Typography variant="body" sx={{ fontSize: "24px", textTransform: "uppercase" }}>
                       TOTAL
                     </Typography>
-                    <Typography variant="body" sx={{ fontSize: "24px" }}>
+                    <Typography variant="body" sx={{ fontSize: "24px", textTransform: "uppercase" }}>
                       $495
                     </Typography>
                   </Box>

@@ -189,7 +189,7 @@ const ShippingForm = ({ data, next, prev }) => {
                             flexDirection: "column",
                           }}
                         >
-                          <Typography variant="subtitle1" sx={{ mb: "10px" }}>
+                          <Typography variant="h3" sx={{ mb: "10px" }}>
                             Free Shipping
                           </Typography>
                           <Typography variant="subtitle2">
@@ -210,7 +210,7 @@ const ShippingForm = ({ data, next, prev }) => {
                             paddingLeft:"30px"
                           }}
                         >
-                          <Typography variant="subtitle1" sx={{ mb: "10px" }}>
+                          <Typography variant="h3" sx={{ mb: "10px" }}>
                             Next Day Delivery - 10$
                           </Typography>
                           <Typography variant="subtitle2">

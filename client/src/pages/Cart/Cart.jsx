@@ -1,4 +1,4 @@
-import { CartProductList } from "../../components";
+import {CartProductList, MightLike} from "../../components";
 // import { EmptyCart } from "../../components";
 import { Container } from "@mui/system";
 
@@ -9,6 +9,7 @@ const Cart = () => {
         <CartProductList />
         {/* коли буде стейт - додати умову відображення корзини */}
         {/* <EmptyCart /> */}
+        <MightLike sectionTitle="YOU MIGHT LIKE IT TOO"/>
       </Container>
     </>
   );
