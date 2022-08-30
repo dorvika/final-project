@@ -10,7 +10,6 @@ const CatalogProductList = () => {
     (state) => state.products
   );
     const { showQuantity } = useSelector((state) => state.showQuantity);
-    console.log(typeof showQuantity, showQuantity);
 
     useEffect(() => {
       dispatch(fetchProducts());
