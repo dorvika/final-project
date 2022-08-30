@@ -2,21 +2,25 @@ import { object, string, number } from "yup";
 
 export const validationSchemaShipping = object({
     firstname: string().required("Name is required").matches(
-        /^[a-zA-Z]+$/,
+        /^[a-zA-ZА-ЩЬЮЯҐЄІЇа-щьюяґєії]+$/,
         'Not a valid. Only characters'
       ),
     lastname: string().required("Last name is required").matches(
-        /^[a-zA-Z]+$/,
+        /^[a-zA-ZА-ЩЬЮЯҐЄІЇа-щьюяґєії]+$/,
         'Not a valid. Only characters'
       ),
     address1: string().required("Address is required"),
     address2: string().min(10),
     country: string().required("Country is required"),
     city: string().required("City is required").matches(
-        /^[a-zA-Z]+$/,
+        /^[a-zA-ZА-ЩЬЮЯҐЄІЇа-щьюяґєії]+$/,
         'Not a valid. Only characters'
       ),
-    zip: number().test('zip', 'Must be exactly 5 characters', (val) => { if(val) return val.toString().length === 5; }),
+    zip: string()
+    .required()
+    .matches(/^[0-9]+$/, "Must be only digits")
+    .min(5, 'Must be exactly 5 digits')
+    .max(5, 'Must be exactly 5 digits'),
     phone: string().matches(/((\+38)?\(?\d{3}\)?[\s/.-]?(\d{7}|\d{3}[\s/.-]\d{2}[\s/.-]\d{2}|\d{3}-\d{4}))/, "Phone is not valid")
                     .required("Phone is required"),
                    

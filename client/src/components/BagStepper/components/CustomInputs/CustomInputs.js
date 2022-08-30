@@ -52,6 +52,7 @@ export const CustomTextField = styled(TextField)(({ theme }) => ({
 export const TextFieldShipping = styled(TextField)(() => ({
   width: "100%",
   "& .MuiOutlinedInput-root": {
+    fontFamily: "Mulish",
     "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
       border: "1px solid #8C8C8C",
     },
