@@ -7,11 +7,35 @@ import {
     IconButton,
     TextField,
     Stack,
+    styled
   } from "@mui/material";
   import { ExpandMore, ExpandLess } from "@mui/icons-material/";
   import { useState } from "react";
   import { Link } from "react-router-dom";
   
+  const CustomCard = styled(Card)(({ theme }) => ({
+    [theme.breakpoints.down("670")]: {
+     "& .stack":{
+        flexDirection: "column",
+        width:"100%"
+      },
+      "& .cardmedia":{
+        width: "100%",
+        height: "200px",
+        marginBottom: "15px"
+      },
+      "& .count-price":{
+        flexDirection:"row",
+        alignItems:"center",
+        padding: "0 10px",
+        justifyContent: "space-between",
+        "& .MuiTypography-root":{
+          paddingBottom: "0"
+        }
+      }
+    },
+  }));
+
   const BagCartModel = ({ image, price, title, subtitle, id }) => {
     let [quantityValue, setQuantityValue] = useState(1);
   
@@ -30,17 +54,17 @@ import {
     };
     return (
       <>
-        <Card
+        <CustomCard
           sx={{
             display: "flex",
             justifyContent: "space-between",
             mb: "20px",
-            mt: "20px",
           }}
         >
-          <Stack direction="row">
+          <Stack direction="row" className="stack">
             <Link to={`/categories/${id}`} style={{ textDecoration: "none" }}>
               <CardMedia
+              className="cardmedia"
                 component="img"
                 height="200px"
                 sx={{ width: "200px", mr: "80px" }}
@@ -74,10 +98,11 @@ import {
                 >
                   {subtitle}
                 </Typography>
+                
+                <Box className="count-price" sx={{ display: "flex", flexDirection:"column"}}>
                 <Typography variant="h5" sx={{ pb: "10px" }}>
                   ${price}
                 </Typography>
-                <Box sx={{ display: "flex", alignItems: "center" }}>
                   <Stack direction="row" alignItems="center">
                     <TextField
                       value={quantityValue}
@@ -103,7 +128,7 @@ import {
               </Box>
             </CardContent>
           </Stack>
-        </Card>
+        </CustomCard>
       </>
     );
   };
