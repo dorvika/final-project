@@ -1,12 +1,23 @@
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import { Box, Button, Fade, MenuItem } from "@mui/material";
 import { useState } from "react";
-// import { styled, alpha } from "@mui/material/styles";
+import { useDispatch, useSelector } from "react-redux";
+import { newQuantity } from "../../../store/Filters/actions";
 import { StyledMenu } from "./styles";
 
 const SortPanel = () => {
+  const options = [9, 18, 27];
+  const dispatch = useDispatch();
+  const { showQuantity } = useSelector((state) => state.filters);
+
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+
+  const handleMenuItemClick = (event, index) => {
+    dispatch(newQuantity(options[index]));
+    setAnchorEl(null);
+  };
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -38,13 +49,21 @@ const SortPanel = () => {
           onClose={handleClose}
           TransitionComponent={Fade}
         >
-          <MenuItem onClick={handleClose}>18</MenuItem>
-          <MenuItem onClick={handleClose}>36</MenuItem>
-          <MenuItem onClick={handleClose}>All</MenuItem>
+          {options.map((option, index) => {
+            return (
+              <MenuItem
+                key={option}
+                selected={option === showQuantity}
+                onClick={(event) => handleMenuItemClick(event, index)}
+              >
+                {option}
+              </MenuItem>
+            );
+          })}
         </StyledMenu>
       </Box>
     </>
   );
-};
+};;;;
 
 export default SortPanel;
