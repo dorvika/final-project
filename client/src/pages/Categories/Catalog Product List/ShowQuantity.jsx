@@ -2,13 +2,13 @@ import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import { Box, Button, Fade, MenuItem } from "@mui/material";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { newQuantity } from "../../../store/Quantity/actions";
+import { newQuantity } from "../../../store/Filters/actions";
 import { StyledMenu } from "./styles";
 
 const SortPanel = () => {
   const options = [9, 18, 27];
   const dispatch = useDispatch();
-  const { showQuantity } = useSelector((state) => state.showQuantity);
+  const { showQuantity } = useSelector((state) => state.filters);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);

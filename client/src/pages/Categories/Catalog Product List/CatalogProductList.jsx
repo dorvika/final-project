@@ -9,7 +9,7 @@ const CatalogProductList = () => {
   const { products, isLoading, hasError } = useSelector(
     (state) => state.products
   );
-    const { showQuantity } = useSelector((state) => state.showQuantity);
+    const showQuantity = useSelector((state) => state.filters.showQuantity);
 
     useEffect(() => {
       dispatch(fetchProducts());
