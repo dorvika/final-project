@@ -5,6 +5,8 @@ import { useState } from "react";
 import { StyledMenu } from "./styles";
 
 const SortPanel = () => {
+  const options = [9, 18, 27];
+
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -38,9 +40,15 @@ const SortPanel = () => {
           onClose={handleClose}
           TransitionComponent={Fade}
         >
-          <MenuItem onClick={handleClose}>18</MenuItem>
-          <MenuItem onClick={handleClose}>36</MenuItem>
-          <MenuItem onClick={handleClose}>All</MenuItem>
+          {options.map((option) => {
+            return (
+              <MenuItem key={option} onClick={handleClose}>
+                {option}
+              </MenuItem>
+            );
+          })}
+          {/* <MenuItem onClick={handleClose}>36</MenuItem>
+          <MenuItem onClick={handleClose}>All</MenuItem> */}
         </StyledMenu>
       </Box>
     </>
