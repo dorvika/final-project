@@ -12,7 +12,11 @@ const CategoriesRadio = ({
   setFilterObj,
   filterObj,
 }) => {
-  const [value, setValue] = useState(materialFlag ? "COTTON" : "single");
+  const primarySize = filterObj.size || "single";
+  const primaryFabric = filterObj.fabric || "cotton";
+  const [value, setValue] = useState(
+    materialFlag ? primaryFabric : primarySize
+  );
 
   const handleChange = (e) => {
     setValue(e.target.value);

@@ -51,7 +51,12 @@ const Categories = () => {
         </Link>
       </Breadcrumbs>
       <Stack direction="row" gap="20px" alignItems="flex-start">
-        <CategoriesFilter setFilterObj={setFilterObj} filterObj={filterObj} />
+        <CategoriesFilter
+          setFilterObj={setFilterObj}
+          filterObj={filterObj}
+          selectedFilters={selectedFilters}
+          setSearchParams={setSearchParams}
+        />
         <Box sx={{ width: "75%" }}>
           <TopFilter setFilterObj={setFilterObj} filterObj={filterObj} />
           <Stack

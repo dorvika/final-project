@@ -1,20 +1,30 @@
-import { Stack, Typography } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { CategoriesAccordion, PriceSlider, CategoriesRadio } from "./index.js";
 import { ColorBox } from "./styles.js";
 import { fetchData } from "../../utils/api.js";
 
-const CategoriesFilter = ({ setFilterObj, filterObj }) => {
+const CategoriesFilter = ({
+  setFilterObj,
+  filterObj,
+  selectedFilters,
+  setSearchParams,
+}) => {
   const [sizes, setSizes] = useState([]);
   const [colors, setColors] = useState([]);
   const [materials, setMaterials] = useState([]);
-  const [activeColor, setActiveColor] = useState("#C96456");
+  const [activeColor, setActiveColor] = useState(filterObj.color || "#C96456");
 
   useEffect(() => {
     fetchData("/colors").then((result) => setColors(result));
     fetchData("/sizes").then((result) => setSizes(result));
     fetchData("/filters").then((result) => setMaterials(result));
   }, []);
+
+  const resetFilters = () => {
+    setSearchParams({});
+    setFilterObj({});
+  };
 
   return (
     <Stack sx={{ width: "25%" }}>
@@ -38,7 +48,10 @@ const CategoriesFilter = ({ setFilterObj, filterObj }) => {
               key={_id}
               sx={{
                 backgroundColor: cssValue,
-                borderColor: activeColor === cssValue ? "primary.main" : null,
+                borderColor:
+                  activeColor === cssValue || activeColor === name.toLowerCase()
+                    ? "primary.main"
+                    : null,
               }}
               onClick={() => {
                 setActiveColor(cssValue);
@@ -56,6 +69,11 @@ const CategoriesFilter = ({ setFilterObj, filterObj }) => {
           filterObj={filterObj}
         />
       </CategoriesAccordion>
+      {Object.values(selectedFilters).length > 0 && (
+        <Button variant="outlined" sx={{ mt: "10px" }} onClick={resetFilters}>
+          Reset Filters
+        </Button>
+      )}
     </Stack>
   );
 };
