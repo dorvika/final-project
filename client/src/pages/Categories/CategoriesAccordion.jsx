@@ -9,7 +9,7 @@ import {
 import { useState } from "react";
 
 const CategoriesAccordion = ({ children, title }) => {
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(false);
   return (
     <Accordion
       expanded={expanded}

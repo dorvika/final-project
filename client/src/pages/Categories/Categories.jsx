@@ -25,6 +25,7 @@ const Categories = () => {
     minPrice: searchParams.get("minPrice") || "",
     maxPrice: searchParams.get("maxPrice") || "",
   });
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   const selectedFilters = Object.keys(filterObj)
     .filter((key) => filterObj[key] != "")
@@ -36,7 +37,7 @@ const Categories = () => {
     dispatch(setFilterParams(filterObj));
     setSearchParams(selectedFilters);
     fetchData(`/products/filter/${queryString}`).then((data) =>
-      console.log(data)
+      setFilteredProducts(data)
     );
   }, [filterObj, dispatch, queryString, setSearchParams]);
 
@@ -69,7 +70,7 @@ const Categories = () => {
             <SortBy />
           </Stack>
           <Box>
-            <CatalogProductList />
+            <CatalogProductList filteredProducts={filteredProducts} />
           </Box>
           <Stack alignItems="center" justifyContent="center">
             <Pagination
