@@ -5,8 +5,8 @@ import { ColorBox } from "./styles.js";
 import { fetchData } from "../../utils/api.js";
 
 const CategoriesFilter = ({
-  setFilterObj,
   filterObj,
+  setFilterObj,
   selectedFilters,
   setSearchParams,
 }) => {

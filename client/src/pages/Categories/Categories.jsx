@@ -24,6 +24,7 @@ const Categories = () => {
     fabric: searchParams.get("fabric") || "",
     minPrice: searchParams.get("minPrice") || "",
     maxPrice: searchParams.get("maxPrice") || "",
+    sort: searchParams.get("sort") || "",
   });
   const [filteredProducts, setFilteredProducts] = useState([]);
 
@@ -34,10 +35,10 @@ const Categories = () => {
   const queryString = useLocation().search;
 
   useEffect(() => {
-    dispatch(setFilterParams(filterObj));
+    dispatch(setFilterParams(selectedFilters));
     setSearchParams(selectedFilters);
     fetchData(`/products/filter/${queryString}`).then((data) =>
-      setFilteredProducts(data)
+      setFilteredProducts(data.products)
     );
   }, [filterObj, dispatch, queryString, setSearchParams]);
 
@@ -53,8 +54,8 @@ const Categories = () => {
       </Breadcrumbs>
       <Stack direction="row" gap="20px" alignItems="flex-start">
         <CategoriesFilter
-          setFilterObj={setFilterObj}
           filterObj={filterObj}
+          setFilterObj={setFilterObj}
           selectedFilters={selectedFilters}
           setSearchParams={setSearchParams}
         />
@@ -67,7 +68,7 @@ const Categories = () => {
             marginBottom="23px"
           >
             <ShowQuantity />
-            <SortBy />
+            <SortBy filterObj={filterObj} setFilterObj={setFilterObj} />
           </Stack>
           <Box>
             <CatalogProductList filteredProducts={filteredProducts} />
