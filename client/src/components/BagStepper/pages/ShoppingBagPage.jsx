@@ -60,7 +60,8 @@ const ShoppingBagPage = ({ title, products, next }) => {
             </Typography>
             <CustomHr sx={{ mb: "10px" }} />
             <Summary />
-            <Button
+            <Button 
+              variant="contained"
               sx={theme => ({ p: "15px 85px", alignSelf: "flex-end", [theme.breakpoints.down("670")]:{alignSelf: "center"} })}
               onClick={()=>next()}
             >

@@ -13,6 +13,10 @@ const theme = createTheme({
     text: {
       primary: "#373F41",
     },
+    neutral: {
+      main: "#8C8C8C",
+      light: "#DADADA",
+    },
   },
   spacing: 2,
   typography: {
@@ -85,6 +89,13 @@ const theme = createTheme({
       fontWeight: 700,
       color: "#FFFFFF",
     },
+    subtitle1: {
+      fontFamily: ["Mulish", "san-serif"].join(","),
+      fontSize: 14,
+      fontWeight: 300,
+      lineHeight: "20px",
+      color: "#373F41",
+    },
     subtitle2: {
       fontFamily: ["Mulish", "san-serif"].join(","),
       fontSize: 14,
@@ -116,10 +127,10 @@ const theme = createTheme({
     },
     MuiButton: {
       styleOverrides: {
-        root: {
+        contained: {
           fontFamily: ["Abel", "san-serif"].join(","),
           fontWeight: 400,
-          fontSize: 18,
+          fontSize: 16,
           lineHeight: "32px",
           borderRadius: 4,
           paddingBottom: 15,
@@ -129,7 +140,8 @@ const theme = createTheme({
           color: "#FFFFFF",
           backgroundColor: "#373F41",
           "&:hover": {
-            backgroundColor: "#373F41",
+            backgroundColor: "transparent",
+            color: "#373F41",
           },
         },
         outlined: {
@@ -141,7 +153,24 @@ const theme = createTheme({
           fontWeight: 400,
           fontSize: 16,
           "&:hover": {
+            backgroundColor: "#373F41",
+            color: "#FFFFFF",
+          },
+        },
+        text: {
+          backgroundColor: "transparent",
+          color: "#373F41",
+          padding: "0",
+          fontFamily: "Mulish",
+          fontSize: "16px",
+          letterSpacing: "0.04em",
+
+          textTransform: "capitalize",
+
+          "&:hover": {
             backgroundColor: "transparent",
+            fontWeight: "700",
+            transition: "0.4s",
           },
         },
       },
@@ -185,16 +214,25 @@ const theme = createTheme({
         },
       },
     },
-    MuiFormControlLabel: {
+    MuiInput: {
       styleOverrides: {
         root: {
-          margin: 0,
-         border:"1px solid #373F41",
-         padding:"20px",
+          color: "#8C8C8C",
+          fontFamily: "Mulish",
+          fontSize: 16,
+          lineHeight: 24,
+          fontWeight: 300,
+          padding: "15px 0 2px",
         },
       },
     },
-    
+    MuiRadio: {
+      styleOverrides: {
+        root: {
+          color: "#8C8C8C",
+        },
+      },
+    },
     MuiInputLabel: {
       styleOverrides: {
         root: {

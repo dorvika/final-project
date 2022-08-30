@@ -6,6 +6,9 @@ export const CustomLabel = styled(FormControlLabel)(() => ({
   width: "100%",
   height: "113px",
   position: "relative",
+  margin: 0,
+  border: "1px solid #373F41",
+  padding: "20px",
   "& .MuiFormControlLabel-label": {
     position: "absolute",
     top: 0,
@@ -48,37 +51,33 @@ export const CustomTextField = styled(TextField)(({ theme }) => ({
 
 export const TextFieldShipping = styled(TextField)(() => ({
   width: "100%",
-  "& .MuiOutlinedInput-root":{
+  "& .MuiOutlinedInput-root": {
     "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-      border:"1px solid #8C8C8C"
+      border: "1px solid #8C8C8C",
     },
-  }
+  },
 }));
 
 export const NumberFormatCustom = React.forwardRef(function NumberFormatCustom(
-    props,
-    ref
-  ) {
-    const { ...other } = props;
-    const format = (fieldName) => {
-      switch (fieldName) {
-        case "cardnumber":
-          return "#### #### #### ####";
-        case "mmyy":
-          return "##/##";
-        case "cvv":
-          return "###";
-        case "phone":
-          return "+##(###)###-##-##";
-        default:
-            ""
-      }
-    };
-    return (
-      <NumberFormat
-        {...other}
-        getInputRef={ref}
-        format={format(props.name)}
-      />
-    );
-  });
+  props,
+  ref
+) {
+  const { ...other } = props;
+  const format = (fieldName) => {
+    switch (fieldName) {
+      case "cardnumber":
+        return "#### #### #### ####";
+      case "mmyy":
+        return "##/##";
+      case "cvv":
+        return "###";
+      case "phone":
+        return "+##(###)###-##-##";
+      default:
+        "";
+    }
+  };
+  return (
+    <NumberFormat {...other} getInputRef={ref} format={format(props.name)} />
+  );
+});

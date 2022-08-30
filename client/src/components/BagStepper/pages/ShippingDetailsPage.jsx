@@ -64,6 +64,7 @@ const ShippingDetailsPage = ({ data, next, prev, title, products }) => {
             <CustomHr sx={{ mt: "10px" }} />
             <Summary />
             <Button
+              variant="contained"
               form="shipping"
               type="submit"
               sx={theme => ({ p: "15px 85px", alignSelf: "flex-end", [theme.breakpoints.down("670")]:{alignSelf: "center"} })}
