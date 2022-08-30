@@ -1,5 +1,5 @@
-import BagCartModel from "./ProductsModels/BagCartModel.jsx";
-import BagCartModelSmall from "./ProductsModels/BagCartModelSmall.jsx";
+import BagCartModel from "../ProductsModels/BagCartModel.jsx";
+import BagCartModelSmall from "../ProductsModels/BagCartModelSmall.jsx";
 const ShoppingBag = ({ products, small = false }) => {
   return products.map((product) => {
     return small ? (

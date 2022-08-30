@@ -1,107 +1,103 @@
 import {
   Box,
   FormControl,
-  FormControlLabel,
   Grid,
   InputLabel,
   MenuItem,
-  Radio,
   RadioGroup,
   Select,
-  TextField,
   Typography,
+  Alert
 } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import { CustomHr } from "../Cart/index";
-import { Formik, Form } from "formik";
+import { Formik, Form, } from "formik";
+import { CustomHr } from "../../../Cart/index";
+import CustomBackButton from "../CustomBackButton/CustomBackButton.jsx";
+import {
+  CustomRadio,
+  CustomLabel,
+  TextFieldShipping,
+  NumberFormatCustom
+} from "../CustomInputs/CustomInputs";
+import {validationSchemaShipping} from "../validationSchema/formsSchema.js"
 
-const CustomLabel = styled(FormControlLabel)(() => ({
-  width: "100%",
-  height: "113px",
-  position: "relative",
-  "& .MuiFormControlLabel-label": {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-}));
-
-const CustomRadio = styled(Radio)(() => ({
-  zIndex: "1",
-  "&.Mui-checked": {
-    "&, & + .MuiFormControlLabel-label, & + .MuiTypography-root": {
-      color: "#ffffff",
-    },
-  },
-  "&.Mui-checked + .MuiFormControlLabel-label": {
-    backgroundColor: "#373F41",
-  },
-}));
-
-const ShippingDetails = ({ data, next }) => {
-  const handleSubmit = (values) => {
-    next(values);
+const ShippingForm = ({ data, next, prev }) => {
+ 
+  const handleSubmit = (value) => {
+    next(value);
+    
   };
-
+  const handleBack = (values) => {
+    prev(values);
+  };
+  
   return (
     <Formik
       initialValues={data}
+      validationSchema={validationSchemaShipping}
       validateOnChange
       validateOnBlur
       onSubmit={(values) => {
         handleSubmit(values);
       }}
+      
     >
       {(props) => (
-        <Form>
-          <Grid container sx={{ maxWidth: "726px" }} spacing={10}>
+        <Form id="shipping">
+          <Grid container sx={{ maxWidth: {md: "726px", xs: "100%"} }} spacing={{md:10, xs:0}} rowGap={{md:0, xs:10}}>
             <Grid item xs={12} md={6}>
-              <TextField
+              <TextFieldShipping
                 id="firstname"
                 name="firstname"
                 label="First Name"
                 placeholder="First Name"
+                size="small"
                 value={props.values.firstname}
                 onChange={props.handleChange}
                 fullWidth
+                error={props.touched.firstname && Boolean(props.errors.firstname)}
+                helperText={props.touched.firstname && props.errors.firstname}
               />
             </Grid>
             <Grid item xs={12} md={6}>
-              <TextField
+              <TextFieldShipping
                 id="lastname"
                 name="lastname"
                 label="Last Name"
                 placeholder="Last Name"
+                size="small"
                 value={props.values.lastname}
                 onChange={props.handleChange}
                 fullWidth
+                error={props.touched.lastname && Boolean(props.errors.lastname)}
+                helperText={props.touched.lastname && props.errors.lastname}
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              <TextFieldShipping
                 id="address1"
                 name="address1"
                 label="Address"
                 placeholder="Address"
                 value={props.values.address1}
+                size="small"
                 onChange={props.handleChange}
                 fullWidth
+                error={props.touched.address1 && Boolean(props.errors.address1)}
+                helperText={props.touched.address1 && props.errors.address1}
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              <TextFieldShipping
                 id="address2"
                 name="address2"
                 label="Address 2"
                 placeholder="Address 2"
+                size="small"
                 value={props.values.address2}
                 onChange={props.handleChange}
                 fullWidth
+                error={props.touched.address2 && Boolean(props.errors.address2)}
+                helperText={props.touched.address2 && props.errors.address2}
               />
             </Grid>
             <Grid item xs={12} md={6}>
@@ -113,7 +109,10 @@ const ShippingDetails = ({ data, next }) => {
                   id="country"
                   value={props.values.country}
                   label="Country"
+                  size="small"
                   onChange={props.handleChange}
+                  error={props.touched.country && Boolean(props.errors.country)}
+                  helpertext={props.touched.country && props.errors.country}
                 >
                   <MenuItem value={"UA"}>Ukraine</MenuItem>
                   <MenuItem value={"USA"}>United States of America</MenuItem>
@@ -121,36 +120,48 @@ const ShippingDetails = ({ data, next }) => {
               </FormControl>
             </Grid>
             <Grid item xs={12} md={6}>
-              <TextField
+              <TextFieldShipping
                 id="city"
                 name="city"
                 label="City"
                 placeholder="City"
+                size="small"
                 value={props.values.city}
                 onChange={props.handleChange}
                 fullWidth
+                error={props.touched.city && Boolean(props.errors.city)}
+                helperText={props.touched.city && props.errors.city}
               />
             </Grid>
             <Grid item xs={12} md={6}>
-              <TextField
+              <TextFieldShipping
                 id="zip"
                 name="zip"
                 label="Zip/Postal Code"
                 placeholder="Zip/Postal Code"
+                size="small"
                 value={props.values.zip}
                 onChange={props.handleChange}
                 fullWidth
+                error={props.touched.zip && Boolean(props.errors.zip)}
+                helperText={props.touched.zip && props.errors.zip}
               />
             </Grid>
             <Grid item xs={12} md={6}>
-              <TextField
+              <TextFieldShipping
                 id="phone"
                 name="phone"
                 label="Phone Number"
                 placeholder="Phone Number"
+                size="small"
                 value={props.values.phone}
                 onChange={props.handleChange}
                 fullWidth
+                InputProps={{
+                  inputComponent: NumberFormatCustom,
+                }}
+                error={props.touched.phone && Boolean(props.errors.phone)}
+                helperText={props.touched.phone && props.errors.phone}
               />
             </Grid>
             <Grid item xs={12}>
@@ -159,22 +170,26 @@ const ShippingDetails = ({ data, next }) => {
             <Grid item xs={12}>
               <FormControl fullWidth>
                 <RadioGroup
-                  aria-labelledby="demo-controlled-radio-buttons-group"
+
                   id="delivery"
                   name="delivery"
                   value={props.values.delivery}
                   onChange={props.handleChange}
                   row
+                  helpertext={props.touched.delivery && props.errors.delivery}
                 >
-                  <Grid item xs={12} md={6} sx={{ paddingRight: "10px" }}>
+                  <Grid item xs={12} md={6} sx={{ paddingRight: {md: "10px", xs: "0"}, paddingBottom:{md:"0", xs:"15px"}}}>
                     <CustomLabel
                       value="free"
                       control={<CustomRadio />}
                       label={
                         <Box
-                          style={{ display: "flex", flexDirection: "column" }}
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                          }}
                         >
-                          <Typography variant="subtitle1" sx={{ mb: "10px" }}>
+                          <Typography variant="h3" sx={{ mb: "10px" }}>
                             Free Shipping
                           </Typography>
                           <Typography variant="subtitle2">
@@ -184,14 +199,18 @@ const ShippingDetails = ({ data, next }) => {
                       }
                     />
                   </Grid>
-                  <Grid item xs={12} md={6} sx={{ paddingLeft: "10px" }}>
+                  <Grid item xs={12} md={6} sx={{ paddingLeft: {md: "10px", xs: "0"}}}>
                     <CustomLabel
                       value="nextday"
                       label={
                         <Box
-                          style={{ display: "flex", flexDirection: "column" }}
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            paddingLeft:"30px"
+                          }}
                         >
-                          <Typography variant="subtitle1" sx={{ mb: "10px" }}>
+                          <Typography variant="h3" sx={{ mb: "10px" }}>
                             Next Day Delivery - 10$
                           </Typography>
                           <Typography variant="subtitle2">
@@ -199,17 +218,25 @@ const ShippingDetails = ({ data, next }) => {
                           </Typography>
                         </Box>
                       }
-                      control={<CustomRadio />}
+                      control={<CustomRadio/>}
                     />
                   </Grid>
                 </RadioGroup>
               </FormControl>
+              {(props.touched.delivery && Boolean(props.errors.delivery))?
+                    <Alert severity="error">Please choose delivery method</Alert>
+                    :
+                    ''
+                    }
             </Grid>
+           
           </Grid>
+          <CustomHr sx={{ mb: "20px", mt: "30px" }} />
+          <CustomBackButton onClick={() => handleBack(props.values)} />
         </Form>
       )}
     </Formik>
   );
 };
 
-export default ShippingDetails;
+export default ShippingForm;
