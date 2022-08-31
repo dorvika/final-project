@@ -1,34 +1,40 @@
-// import { Button } from "@mui/material";
 import Authorization from "../Authorization/Authorization.jsx";
 import { openModal } from "../../store/Modal/actions";
 import { useDispatch, useSelector } from "react-redux";
-
+import * as React from "react";
 import { Link } from "react-router-dom";
-// eslint-disable-next-line import/no-duplicates
 import {
-  Input,
-  Typography,
-  Container,
-  Box,
-  InputAdornment,
-  IconButton,
-  Divider,
+    Typography,
+    Container,
+    Box,
+    InputAdornment,
+    IconButton,
+    Divider, Fade, Popper, Button,
 } from "@mui/material";
-import Logo from "./headerComponents/logoSvg";
-import Catalog from "./headerComponents/catalogButton";
-// import Icons from "./headerComponents/iconsButton";
-// eslint-disable-next-line import/no-duplicates
-// import { Container } from "@mui/material";
+import {HeaderInput} from "./components/styles";
+import Catalog from "./components/catalogButton";
+import Logo from "./components/logoSvg";
 import {
   FavoriteBorderOutlined,
   PersonOutlined,
   Search,
   ShoppingBagOutlined,
 } from "@mui/icons-material";
-// import { Box } from "@mui/system";
-// import InputAdornment from "@mui/material/InputAdornment";
+
 
 const Header = () => {
+
+    const [open, setOpen] = React.useState(false);
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const canBeOpen = open && Boolean(anchorEl);
+    const id = canBeOpen ? 'transition-popper' : undefined;
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+        setOpen((previousOpen) => !previousOpen);
+    };
+
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.modal);
 
@@ -42,7 +48,7 @@ const Header = () => {
           fontSize: "16px",
           display: "flex",
           justifyContent: "space-between",
-          alignItems: "center",
+          alignItems: "center"
         }}
       >
         <Link style={{marginLeft: "-2.6041666666666665vw"}} to={"/"}>
@@ -59,9 +65,9 @@ const Header = () => {
           <Typography variant="body">Blog</Typography>
         </Link>
         <Box>
-          <Input
+          <HeaderInput
             endAdornment={
-              <InputAdornment position="start">
+              <InputAdornment style={{}} position={"start"}>
                 <Search></Search>
               </InputAdornment>
             }
@@ -88,14 +94,39 @@ const Header = () => {
           >
             <FavoriteBorderOutlined />
           </Link>
-          <Link
-            style={{ textDecoration: "none", color: "#373F41" }}
-            to={"/cart"}
-          >
-            <ShoppingBagOutlined />
-          </Link>
+          <IconButton
+            style={{ textDecoration: "none", color: "#373F41" }} aria-describedby={id} onClick={handleClick}>
+
+              <Popper sx={{zIndex: "10000"}} id={id} open={open} anchorEl={anchorEl} transition>
+                  {({ TransitionProps }) => (
+                      <Fade {...TransitionProps} timeout={350}>
+                          <Box sx={
+                              {
+
+                                  width: "340px",
+                                  padding: "14px",
+                                  background: "white",
+                                  display: "flex",
+                                  flexDirection: "column",
+
+                              }}>
+                              <Typography>Bag(2)</Typography>
+                              <Typography>TOTAL: USD $490</Typography>
+                              <Link style={{textDecoration: "none"}} to={"/cart"}>
+                              <Button sx={{width: "320px", height: "40px"}} variant="outlined">VIEW BAG</Button>
+                              </Link>
+                              <Link style={{textDecoration: "none", marginTop: "10px"}} to={"/cart/checkout"}>
+                              <Button sx={{width: "320px", height: "40px"}} variant="contained">CHECKOUT</Button>
+                              </Link>
+                          </Box>
+                      </Fade>
+                  )}
+              </Popper>
+
+            <ShoppingBagOutlined/>
+          </IconButton>
         </Box>
-        {modal && <Authorization />}
+        { modal && <Authorization/>}
       </Container>
       <Divider sx={{ borderColor: "primary.main", mb: "20px" }} />
     </header>

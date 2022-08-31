@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 
 const Catalog = () => {
 
+
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
 
@@ -102,17 +103,6 @@ const Catalog = () => {
                                     aria-labelledby="composition-button"
                                     onKeyDown={handleListKeyDown}
                                 >
-                                    <Link to="*" style={{textDecoration: "none"}}><Typography sx={{
-                                        fontFamily: "Mulish",
-                                        fontSize: "16px",
-                                        fontWeight: "600",
-                                        lineHeight: "18px",
-                                        letterSpacing: "0.20000000298023224px",
-                                        textAlign: "left",
-                                        ":hover": {
-                                            textDecoration: "underline",
-                                        }
-                                    }} variant="body">Bedroom</Typography></Link>
 
                                     <Link to="*" style={{textDecoration: "none", marginTop: "16px"}}><Typography sx={{
                                         fontFamily: "Mulish",
@@ -124,7 +114,19 @@ const Catalog = () => {
                                         ":hover": {
                                             textDecoration: "underline",
                                         }
-                                    }} variant="body">Bed linen</Typography></Link>
+
+                                    }} variant="body">Bedding</Typography></Link>
+                                <Link to="*" style={{textDecoration: "none", marginTop: "16px"}}><Typography sx={{
+                                        fontFamily: "Mulish",
+                                        fontSize: "16px",
+                                        fontWeight: "600",
+                                        lineHeight: "18px",
+                                        letterSpacing: "0.20000000298023224px",
+                                        textAlign: "left",
+                                    ":hover": {
+                                            textDecoration: "underline",
+                                        }
+                                    }} variant="body">Bath</Typography></Link>
                                 <Link to="*" style={{textDecoration: "none", marginTop: "16px"}}><Typography sx={{
                                         fontFamily: "Mulish",
                                         fontSize: "16px",
@@ -146,40 +148,7 @@ const Catalog = () => {
                                     ":hover": {
                                             textDecoration: "underline",
                                         }
-                                    }} variant="body">Bathroom</Typography></Link>
-                                <Link to="*" style={{textDecoration: "none", marginTop: "16px"}}><Typography sx={{
-                                        fontFamily: "Mulish",
-                                        fontSize: "16px",
-                                        fontWeight: "600",
-                                        lineHeight: "18px",
-                                        letterSpacing: "0.20000000298023224px",
-                                        textAlign: "left",
-                                    ":hover": {
-                                            textDecoration: "underline",
-                                        }
-                                    }} variant="body">Loungewear</Typography></Link>
-                                <Link to="*" style={{textDecoration: "none", marginTop: "16px"}}><Typography sx={{
-                                        fontFamily: "Mulish",
-                                        fontSize: "16px",
-                                        fontWeight: "600",
-                                        lineHeight: "18px",
-                                        letterSpacing: "0.20000000298023224px",
-                                        textAlign: "left",
-                                    ":hover": {
-                                            textDecoration: "underline",
-                                        }
-                                    }} variant="body">Sale</Typography></Link>
-                                <Link to="*" style={{textDecoration: "none", marginTop: "16px"}}><Typography sx={{
-                                        fontFamily: "Mulish",
-                                        fontSize: "16px",
-                                        fontWeight: "600",
-                                        lineHeight: "18px",
-                                        letterSpacing: "0.20000000298023224px",
-                                        textAlign: "left",
-                                    ":hover": {
-                                            textDecoration: "underline",
-                                        }
-                                    }} variant="body">Shop All</Typography></Link>
+                                    }} variant="body">Windows</Typography></Link>
                                 </MenuList>
                             </ClickAwayListener>
                         </Paper>

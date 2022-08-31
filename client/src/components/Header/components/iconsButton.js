@@ -1,4 +1,3 @@
-
 import {Box} from "@mui/system";
 import PersonIcon from '@mui/icons-material/Person';
 import FavoriteIcon from '@mui/icons-material/Favorite';
