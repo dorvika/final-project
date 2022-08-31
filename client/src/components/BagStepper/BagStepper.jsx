@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Container, Box, Stepper, Step, StepButton } from "@mui/material";
 import stepperStyle from "./style";
-import products from "../Cart/ProductsExamples.jsx";
+// import products from "../Cart/ProductsExamples.jsx";
 import {
   ShoppingBagPage,
   ShippingDetailsPage,
@@ -11,7 +11,8 @@ import {
 
 const steps = ["Shopping Bag", "Shipping Details", "Payment Options"];
 
-export default function HorizontalNonLinearStepper() {
+export default function HorizontalNonLinearStepper({products}) {
+  
   const [activeStep, setActiveStep] = useState(0);
   const [completed, setCompleted] = useState({});
   const [data, setData] = useState({
