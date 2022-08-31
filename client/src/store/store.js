@@ -4,6 +4,7 @@ import {
   compose,
   applyMiddleware,
 } from "redux";
+import { syncLS } from "../utils/api";
 import thunk from "redux-thunk";
 import modalReducer from "./Modal/reducer";
 import filterReducer from "./Filters/reducer";
@@ -25,7 +26,7 @@ const devTools = window.__REDUX_DEVTOOLS_EXTENSION__
 
 const store = createStore(
   rootReducer,
-  compose(applyMiddleware(thunk), devTools)
+  compose(applyMiddleware(thunk, syncLS), devTools)
 );
 
 export default store;

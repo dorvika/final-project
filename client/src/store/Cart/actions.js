@@ -12,8 +12,9 @@ export const removeFromCart = id => {
     }
 }
 
-export const removeAllFromCart = () => {
+export const getCartLS = data => {
     return {
-        type: 'REMOVE_ALL_FROM_CART',
+        type: 'GET_CART_LOCALSTORAGE',
+        payload: { data }
     }
 }
