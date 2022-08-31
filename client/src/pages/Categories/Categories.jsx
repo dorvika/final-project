@@ -35,12 +35,12 @@ const Categories = () => {
   const queryString = useLocation().search;
 
   useEffect(() => {
-    dispatch(setFilterParams(selectedFilters));
-    setSearchParams(selectedFilters);
     fetchData(`/products/filter/${queryString}`).then((data) =>
       setFilteredProducts(data.products)
     );
-  }, [filterObj, dispatch, queryString, setSearchParams]);
+    dispatch(setFilterParams(selectedFilters));
+    setSearchParams(selectedFilters);
+  }, [filterObj, queryString, dispatch, setSearchParams]);
 
   return (
     <CategoriesMainContainer>

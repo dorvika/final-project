@@ -3,14 +3,14 @@ import { useState } from "react";
 import { CustomPriceSlider, CustomTextField } from "./styles";
 
 const PriceSlider = ({ setFilterObj, filterObj }) => {
-  const primaryMinPrice = filterObj.minPrice || 10;
+  const primaryMinPrice = filterObj.minPrice || 0;
   const primaryMaxPrice = filterObj.maxPrice || 500;
   const [price, setPrice] = useState({
     minPrice: primaryMinPrice,
     maxPrice: primaryMaxPrice,
   });
   const [sliderValues, setSliderValues] = useState([
-    +primaryMinPrice,
+    primaryMinPrice === 0 ? 1 : +primaryMinPrice,
     +primaryMaxPrice,
   ]);
 
@@ -23,7 +23,7 @@ const PriceSlider = ({ setFilterObj, filterObj }) => {
     setSliderValues(newValue);
     setFilterObj({
       ...filterObj,
-      minPrice: newValue[0],
+      minPrice: newValue[0] === 0 ? 1 : newValue[0],
       maxPrice: newValue[1],
     });
   };
@@ -42,7 +42,7 @@ const PriceSlider = ({ setFilterObj, filterObj }) => {
     const newValue = Object.values(newPrice);
     setFilterObj({
       ...filterObj,
-      minPrice: newValue[0],
+      minPrice: newValue[0] === 0 ? 1 : newValue[0],
       maxPrice: newValue[1],
     });
   };
@@ -57,7 +57,7 @@ const PriceSlider = ({ setFilterObj, filterObj }) => {
     const newValue = Object.values(price);
     setFilterObj({
       ...filterObj,
-      minPrice: newValue[0],
+      minPrice: newValue[0] === 0 ? 1 : newValue[0],
       maxPrice: newValue[1],
     });
   };

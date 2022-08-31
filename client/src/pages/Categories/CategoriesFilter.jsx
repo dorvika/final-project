@@ -13,7 +13,9 @@ const CategoriesFilter = ({
   const [sizes, setSizes] = useState([]);
   const [colors, setColors] = useState([]);
   const [materials, setMaterials] = useState([]);
-  const [activeColor, setActiveColor] = useState(filterObj.color || "#C96456");
+  const [activeColor, setActiveColor] = useState(filterObj.color || "");
+
+  const allColors = colors.map((color) => color.name.toLowerCase()).join();
 
   useEffect(() => {
     fetchData("/colors").then((result) => setColors(result));
@@ -22,8 +24,12 @@ const CategoriesFilter = ({
   }, []);
 
   const resetFilters = () => {
-    setSearchParams({});
-    setFilterObj({});
+    setSearchParams({
+      categories: filterObj.categories ? filterObj.categories : "",
+    });
+    setFilterObj({
+      categories: filterObj.categories ? filterObj.categories : "",
+    });
   };
 
   return (
@@ -59,6 +65,22 @@ const CategoriesFilter = ({
               }}
             />
           ))}
+          <ColorBox
+            onClick={() => {
+              setActiveColor(allColors);
+              setFilterObj({ ...filterObj, color: allColors });
+            }}
+            sx={{
+              borderRadius: "0",
+              width: "auto",
+              height: "auto",
+              p: "0 3px",
+              fontFamily: "",
+              borderColor: activeColor === allColors ? "primary.main" : null,
+            }}
+          >
+            All
+          </ColorBox>
         </Stack>
       </CategoriesAccordion>
       <CategoriesAccordion title="Material">
