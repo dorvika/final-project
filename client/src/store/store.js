@@ -8,11 +8,15 @@ import thunk from "redux-thunk";
 import modalReducer from "./Modal/reducer";
 import filterReducer from "./Filters/reducer";
 import productsReducer from "./Products/reducer";
+import cartReducer from "./Cart/reducer"
+import favoritesReducer from "./Favorites/reducer"
 
 export const rootReducer = combineReducers({
   modal: modalReducer,
   filters: filterReducer,
   products: productsReducer,
+  cart: cartReducer,
+  favorites: favoritesReducer
 });
 
 const devTools = window.__REDUX_DEVTOOLS_EXTENSION__
