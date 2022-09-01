@@ -4,7 +4,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import {useEffect, useState} from "react";
 import {fetchData} from "../../../utils/api";
 
-const Catalog = () => {
+const Catalog = ( { setFilterObj, filterObj } ) => {
 
     const [categories, setCategories] = useState([]);
     const [activeCategory, setActiveCategory] = useState(
@@ -118,9 +118,9 @@ const Catalog = () => {
                                 >
 
                                     <>
-                                        <Stack direction="row" justifyContent="space-between">
+                                        <Stack style={{textDecoration: "none", marginTop: "16px"}}>
                                             <Button
-                                                variant="outlined"
+                                                variant="body"
                                                 sx={{
                                                     backgroundColor:
                                                         activeCategory === allCategories
@@ -144,7 +144,7 @@ const Catalog = () => {
                                             {categories.map((category) => (
                                                 <Button
                                                     key={category.id}
-                                                    variant="outlined"
+                                                    variant="body"
                                                     sx={{
                                                         backgroundColor:
                                                             activeCategory === category.name
