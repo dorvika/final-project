@@ -1,7 +1,6 @@
 import * as React from 'react'
-import {Button, ClickAwayListener, Grow, MenuList, Paper, Popper, Typography} from "@mui/material";
+import {Button, ClickAwayListener, Grow, MenuList, Paper, Popper, Stack} from "@mui/material";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import {Link, useLocation, useSearchParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {fetchData} from "../../../utils/api";
 
@@ -118,51 +117,103 @@ const Catalog = () => {
                                     onKeyDown={handleListKeyDown}
                                 >
 
-                                    <Link to="*" style={{textDecoration: "none", marginTop: "16px"}}><Typography sx={{
-                                        fontFamily: "Mulish",
-                                        fontSize: "16px",
-                                        fontWeight: "600",
-                                        lineHeight: "18px",
-                                        letterSpacing: "0.20000000298023224px",
-                                        textAlign: "left",
-                                        ":hover": {
-                                            textDecoration: "underline",
-                                        }
+                                    <>
+                                        <Stack direction="row" justifyContent="space-between">
+                                            <Button
+                                                variant="outlined"
+                                                sx={{
+                                                    backgroundColor:
+                                                        activeCategory === allCategories
+                                                            ? "primary.main"
+                                                            : "primary.contrastText",
+                                                    color:
+                                                        activeCategory === allCategories
+                                                            ? "primary.contrastText"
+                                                            : "primary.main",
+                                                }}
+                                                onClick={() => {
+                                                    setFilterObj({
+                                                        ...filterObj,
+                                                        categories: allCategories,
+                                                    });
+                                                    setActiveCategory(allCategories);
+                                                }}
+                                            >
+                                                shop all
+                                            </Button>
+                                            {categories.map((category) => (
+                                                <Button
+                                                    key={category.id}
+                                                    variant="outlined"
+                                                    sx={{
+                                                        backgroundColor:
+                                                            activeCategory === category.name
+                                                                ? "primary.main"
+                                                                : "primary.contrastText",
+                                                        color:
+                                                            activeCategory === category.name
+                                                                ? "primary.contrastText"
+                                                                : "primary.main",
+                                                    }}
+                                                    onClick={() => {
+                                                        setFilterObj({
+                                                            ...filterObj,
+                                                            categories: category.name,
+                                                        });
+                                                        setActiveCategory(category.name);
+                                                    }}
+                                                >
+                                                    {category.name}
+                                                </Button>
+                                            ))}
+                                        </Stack>
+                                    </>
 
-                                    }} variant="body">Bedding</Typography></Link>
-                                <Link to="*" style={{textDecoration: "none", marginTop: "16px"}}><Typography sx={{
-                                        fontFamily: "Mulish",
-                                        fontSize: "16px",
-                                        fontWeight: "600",
-                                        lineHeight: "18px",
-                                        letterSpacing: "0.20000000298023224px",
-                                        textAlign: "left",
-                                    ":hover": {
-                                            textDecoration: "underline",
-                                        }
-                                    }} variant="body">Bath</Typography></Link>
-                                <Link to="*" style={{textDecoration: "none", marginTop: "16px"}}><Typography sx={{
-                                        fontFamily: "Mulish",
-                                        fontSize: "16px",
-                                        fontWeight: "600",
-                                        lineHeight: "18px",
-                                        letterSpacing: "0.20000000298023224px",
-                                        textAlign: "left",
-                                    ":hover": {
-                                            textDecoration: "underline",
-                                        }
-                                    }} variant="body">Kitchen</Typography></Link>
-                                <Link to="*" style={{textDecoration: "none", marginTop: "16px"}}><Typography sx={{
-                                        fontFamily: "Mulish",
-                                        fontSize: "16px",
-                                        fontWeight: "600",
-                                        lineHeight: "18px",
-                                        letterSpacing: "0.20000000298023224px",
-                                        textAlign: "left",
-                                    ":hover": {
-                                            textDecoration: "underline",
-                                        }
-                                    }} variant="body">Windows</Typography></Link>
+                                {/*    <Link to="*" style={{textDecoration: "none", marginTop: "16px"}}><Typography sx={{*/}
+                                {/*        fontFamily: "Mulish",*/}
+                                {/*        fontSize: "16px",*/}
+                                {/*        fontWeight: "600",*/}
+                                {/*        lineHeight: "18px",*/}
+                                {/*        letterSpacing: "0.20000000298023224px",*/}
+                                {/*        textAlign: "left",*/}
+                                {/*        ":hover": {*/}
+                                {/*            textDecoration: "underline",*/}
+                                {/*        }*/}
+
+                                {/*    }} variant="body">Bedding</Typography></Link>*/}
+                                {/*<Link to="*" style={{textDecoration: "none", marginTop: "16px"}}><Typography sx={{*/}
+                                {/*        fontFamily: "Mulish",*/}
+                                {/*        fontSize: "16px",*/}
+                                {/*        fontWeight: "600",*/}
+                                {/*        lineHeight: "18px",*/}
+                                {/*        letterSpacing: "0.20000000298023224px",*/}
+                                {/*        textAlign: "left",*/}
+                                {/*    ":hover": {*/}
+                                {/*            textDecoration: "underline",*/}
+                                {/*        }*/}
+                                {/*    }} variant="body">Bath</Typography></Link>*/}
+                                {/*<Link to="*" style={{textDecoration: "none", marginTop: "16px"}}><Typography sx={{*/}
+                                {/*        fontFamily: "Mulish",*/}
+                                {/*        fontSize: "16px",*/}
+                                {/*        fontWeight: "600",*/}
+                                {/*        lineHeight: "18px",*/}
+                                {/*        letterSpacing: "0.20000000298023224px",*/}
+                                {/*        textAlign: "left",*/}
+                                {/*    ":hover": {*/}
+                                {/*            textDecoration: "underline",*/}
+                                {/*        }*/}
+                                {/*    }} variant="body">Kitchen</Typography></Link>*/}
+                                {/*<Link to="*" style={{textDecoration: "none", marginTop: "16px"}}><Typography sx={{*/}
+                                {/*        fontFamily: "Mulish",*/}
+                                {/*        fontSize: "16px",*/}
+                                {/*        fontWeight: "600",*/}
+                                {/*        lineHeight: "18px",*/}
+                                {/*        letterSpacing: "0.20000000298023224px",*/}
+                                {/*        textAlign: "left",*/}
+                                {/*    ":hover": {*/}
+                                {/*            textDecoration: "underline",*/}
+                                {/*        }*/}
+                                {/*    }} variant="body">Windows</Typography></Link>*/}
                                 </MenuList>
                             </ClickAwayListener>
                         </Paper>
