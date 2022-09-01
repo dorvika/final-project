@@ -2,42 +2,21 @@ import * as React from 'react'
 import {Button, ClickAwayListener, Grow, MenuList, Paper, Popper, Typography} from "@mui/material";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import {Link, useLocation, useSearchParams} from "react-router-dom";
-import {useDispatch} from "react-redux";
 import {useEffect, useState} from "react";
-import {setFilterParams} from "../../../store/Filters/actions";
 import {fetchData} from "../../../utils/api";
 
 const Catalog = () => {
 
-    import {useEffect, useState} from "react";
-    import {setFilterParams} from "/store/Filters/actions";
-    import {fetchData} from "../../utils/api";
+    const [categories, setCategories] = useState([]);
+    const [activeCategory, setActiveCategory] = useState(
+        filterObj.categories || ""
+    );
 
-    const dispatch = useDispatch();
-    let [searchParams, setSearchParams] = useSearchParams();
-    const [filterObj, setFilterObj] = useState({
-        categories: searchParams.get("bedding") || "",
-        size: searchParams.get("bath") || "",
-        color: searchParams.get("c") || "",
-        fabric: searchParams.get("fabric") || "",
-    });
-    const [filteredProducts, setFilteredProducts] = useState([]);
-
-    const selectedFilters = Object.keys(filterObj)
-        .filter((key) => filterObj[key] !== "")
-        .reduce((acc, key) => ({ ...acc, [key]: filterObj[key] }), {});
-
-    const queryString = useLocation().search;
+    const allCategories = categories.map((category) => category.name).join();
 
     useEffect(() => {
-        dispatch(setFilterParams(selectedFilters));
-        setSearchParams(selectedFilters);
-        if (queryString) {
-            fetchData(`/products/filter/${queryString}`).then((data) =>
-                setFilteredProducts(data.products)
-            );
-        }
-    }, [filterObj, queryString, dispatch, setSearchParams]);
+        fetchData("/catalog").then((result) => setCategories(result));
+    }, []);
 
 
 
