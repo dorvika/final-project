@@ -3,8 +3,16 @@ import { useState } from "react";
 import { CustomPriceSlider, CustomTextField } from "./styles";
 
 const PriceSlider = ({ setFilterObj, filterObj }) => {
-  const [price, setPrice] = useState({ minPrice: 0, maxPrice: 500 });
-  const [sliderValues, setSliderValues] = useState([0, 500]);
+  const primaryMinPrice = filterObj.minPrice || 0;
+  const primaryMaxPrice = filterObj.maxPrice || 500;
+  const [price, setPrice] = useState({
+    minPrice: primaryMinPrice,
+    maxPrice: primaryMaxPrice,
+  });
+  const [sliderValues, setSliderValues] = useState([
+    primaryMinPrice === 0 ? 1 : +primaryMinPrice,
+    +primaryMaxPrice,
+  ]);
 
   const handleSliderChange = (event, newValue) => {
     setPrice({
@@ -15,7 +23,8 @@ const PriceSlider = ({ setFilterObj, filterObj }) => {
     setSliderValues(newValue);
     setFilterObj({
       ...filterObj,
-      currentPrice: `${newValue[0]}-${newValue[1]}`,
+      minPrice: newValue[0] === 0 ? 1 : newValue[0],
+      maxPrice: newValue[1],
     });
   };
 
@@ -33,13 +42,14 @@ const PriceSlider = ({ setFilterObj, filterObj }) => {
     const newValue = Object.values(newPrice);
     setFilterObj({
       ...filterObj,
-      currentPrice: `${newValue[0]}-${newValue[1]}`,
+      minPrice: newValue[0] === 0 ? 1 : newValue[0],
+      maxPrice: newValue[1],
     });
   };
 
   const handleBlur = () => {
     if (price.minPrice < 0) {
-      setPrice({ ...price, minPrice: 0 });
+      setPrice({ ...price, minPrice: 10 });
     } else if (price.maxPrice > 500) {
       setPrice({ ...price, maxPrice: 500 });
     }
@@ -47,7 +57,8 @@ const PriceSlider = ({ setFilterObj, filterObj }) => {
     const newValue = Object.values(price);
     setFilterObj({
       ...filterObj,
-      currentPrice: `${newValue[0]}-${newValue[1]}`,
+      minPrice: newValue[0] === 0 ? 1 : newValue[0],
+      maxPrice: newValue[1],
     });
   };
 
@@ -71,7 +82,7 @@ const PriceSlider = ({ setFilterObj, filterObj }) => {
           onBlur={handleBlur}
           inputProps={{
             step: 10,
-            min: 0,
+            min: 10,
             max: 500,
             type: "number",
             "aria-labelledby": "input-slider",
@@ -87,7 +98,7 @@ const PriceSlider = ({ setFilterObj, filterObj }) => {
           onBlur={handleBlur}
           inputProps={{
             step: 10,
-            min: 0,
+            min: 10,
             max: 500,
             type: "number",
             "aria-labelledby": "input-slider",

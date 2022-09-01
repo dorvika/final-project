@@ -16,26 +16,33 @@ import { fetchData } from "../../utils/api.js";
 
 const Categories = () => {
   const dispatch = useDispatch();
-  const [filterObj, setFilterObj] = useState({
-    categories: "",
-    // currentPrice: 0, -
-    // size: "", +
-    // color: "", +
-    // fabric: "", +
-  });
-  /* eslint-disable no-unused-vars */
   let [searchParams, setSearchParams] = useSearchParams();
-  /* eslint-enable no-unused-vars */
+  const [filterObj, setFilterObj] = useState({
+    categories: searchParams.get("categories") || "",
+    size: searchParams.get("size") || "",
+    color: searchParams.get("color") || "",
+    fabric: searchParams.get("fabric") || "",
+    minPrice: searchParams.get("minPrice") || "",
+    maxPrice: searchParams.get("maxPrice") || "",
+    sort: searchParams.get("sort") || "",
+  });
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  const selectedFilters = Object.keys(filterObj)
+    .filter((key) => filterObj[key] != "")
+    .reduce((acc, key) => ({ ...acc, [key]: filterObj[key] }), {});
 
   const queryString = useLocation().search;
 
   useEffect(() => {
-    dispatch(setFilterParams(filterObj));
-    setSearchParams(filterObj);
-    fetchData(`/products/filter/${queryString}`).then((data) =>
-      console.log(data)
-    );
-  }, [filterObj, dispatch, queryString, setSearchParams]);
+    dispatch(setFilterParams(selectedFilters));
+    setSearchParams(selectedFilters);
+    if (queryString) {
+      fetchData(`/products/filter/${queryString}`).then((data) =>
+        setFilteredProducts(data.products)
+      );
+    }
+  }, [filterObj, queryString, dispatch, setSearchParams]);
 
   return (
     <CategoriesMainContainer>
@@ -48,7 +55,12 @@ const Categories = () => {
         </Link>
       </Breadcrumbs>
       <Stack direction="row" gap="20px" alignItems="flex-start">
-        <CategoriesFilter setFilterObj={setFilterObj} filterObj={filterObj} />
+        <CategoriesFilter
+          filterObj={filterObj}
+          setFilterObj={setFilterObj}
+          selectedFilters={selectedFilters}
+          setSearchParams={setSearchParams}
+        />
         <Box sx={{ width: "75%" }}>
           <TopFilter setFilterObj={setFilterObj} filterObj={filterObj} />
           <Stack
@@ -58,10 +70,10 @@ const Categories = () => {
             marginBottom="23px"
           >
             <ShowQuantity />
-            <SortBy />
+            <SortBy filterObj={filterObj} setFilterObj={setFilterObj} />
           </Stack>
           <Box>
-            <CatalogProductList />
+            <CatalogProductList filteredProducts={filteredProducts} />
           </Box>
           <Stack alignItems="center" justifyContent="center">
             <Pagination
