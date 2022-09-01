@@ -1,10 +1,6 @@
-import {
-  FormControl,
-  FormControlLabel,
-  Radio,
-  RadioGroup,
-} from "@mui/material";
+import { FormControl, Radio, RadioGroup } from "@mui/material";
 import { useState } from "react";
+import { CustomFormControlLabel } from "./styles";
 
 const CategoriesRadio = ({
   options,
@@ -12,7 +8,13 @@ const CategoriesRadio = ({
   setFilterObj,
   filterObj,
 }) => {
-  const [value, setValue] = useState(materialFlag ? "COTTON" : "single");
+  const primarySize = filterObj.size || "";
+  const primaryFabric = filterObj.fabric || "";
+  const [value, setValue] = useState(
+    materialFlag ? primaryFabric : primarySize
+  );
+
+  const allOptions = options.map((option) => option.name).join();
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -28,28 +30,18 @@ const CategoriesRadio = ({
         onChange={handleChange}
       >
         {options.map((option) => (
-          <FormControlLabel
+          <CustomFormControlLabel
             key={option?._id}
             value={option?.name}
             control={<Radio size="small" />}
             label={option?.name}
-            sx={{
-              gap: "10px",
-              "& .MuiTypography-root.MuiTypography-body1.MuiFormControlLabel-label":
-                {
-                  fontSize: "14px",
-                  textTransform: "uppercase",
-                },
-
-              "& .MuiButtonBase-root.MuiRadio-root.Mui-checked": {
-                color: "#8C8C8C",
-              },
-              "& .MuiButtonBase-root.MuiRadio-root": {
-                padding: "4px",
-              },
-            }}
           />
         ))}
+        <CustomFormControlLabel
+          value={allOptions}
+          control={<Radio size="small" />}
+          label="all"
+        />
       </RadioGroup>
     </FormControl>
   );

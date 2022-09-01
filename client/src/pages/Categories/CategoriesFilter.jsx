@@ -1,20 +1,36 @@
-import { Stack, Typography } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { CategoriesAccordion, PriceSlider, CategoriesRadio } from "./index.js";
 import { ColorBox } from "./styles.js";
 import { fetchData } from "../../utils/api.js";
 
-const CategoriesFilter = ({ setFilterObj, filterObj }) => {
+const CategoriesFilter = ({
+  filterObj,
+  setFilterObj,
+  selectedFilters,
+  setSearchParams,
+}) => {
   const [sizes, setSizes] = useState([]);
   const [colors, setColors] = useState([]);
   const [materials, setMaterials] = useState([]);
-  const [activeColor, setActiveColor] = useState("#C96456");
+  const [activeColor, setActiveColor] = useState(filterObj.color || "");
+
+  const allColors = colors.map((color) => color.name.toLowerCase()).join();
 
   useEffect(() => {
     fetchData("/colors").then((result) => setColors(result));
     fetchData("/sizes").then((result) => setSizes(result));
     fetchData("/filters").then((result) => setMaterials(result));
   }, []);
+
+  const resetFilters = () => {
+    setSearchParams({
+      categories: filterObj.categories ? filterObj.categories : "",
+    });
+    setFilterObj({
+      categories: filterObj.categories ? filterObj.categories : "",
+    });
+  };
 
   return (
     <Stack sx={{ width: "25%" }}>
@@ -38,7 +54,10 @@ const CategoriesFilter = ({ setFilterObj, filterObj }) => {
               key={_id}
               sx={{
                 backgroundColor: cssValue,
-                borderColor: activeColor === cssValue ? "primary.main" : null,
+                borderColor:
+                  activeColor === cssValue || activeColor === name.toLowerCase()
+                    ? "primary.main"
+                    : null,
               }}
               onClick={() => {
                 setActiveColor(cssValue);
@@ -46,6 +65,22 @@ const CategoriesFilter = ({ setFilterObj, filterObj }) => {
               }}
             />
           ))}
+          <ColorBox
+            onClick={() => {
+              setActiveColor(allColors);
+              setFilterObj({ ...filterObj, color: allColors });
+            }}
+            sx={{
+              borderRadius: "0",
+              width: "auto",
+              height: "auto",
+              p: "0 3px",
+              fontFamily: "",
+              borderColor: activeColor === allColors ? "primary.main" : null,
+            }}
+          >
+            All
+          </ColorBox>
         </Stack>
       </CategoriesAccordion>
       <CategoriesAccordion title="Material">
@@ -56,6 +91,11 @@ const CategoriesFilter = ({ setFilterObj, filterObj }) => {
           filterObj={filterObj}
         />
       </CategoriesAccordion>
+      {Object.values(selectedFilters).length > 0 && (
+        <Button variant="outlined" sx={{ mt: "10px" }} onClick={resetFilters}>
+          Reset Filters
+        </Button>
+      )}
     </Stack>
   );
 };
