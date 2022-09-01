@@ -2,7 +2,7 @@ import Authorization from "../Authorization/Authorization.jsx";
 import { openModal } from "../../store/Modal/actions";
 import { useDispatch, useSelector } from "react-redux";
 import * as React from "react";
-import { Link } from "react-router-dom";
+import {Link, useLocation, useSearchParams} from "react-router-dom";
 import {
     Typography,
     Container,
@@ -67,11 +67,10 @@ const Header = () => {
         <Box>
           <HeaderInput
             endAdornment={
-              <InputAdornment style={{}} position={"start"}>
+              <InputAdornment position={"start"}>
                 <Search></Search>
               </InputAdornment>
             }
-            sx={{ width: "379px", padding: "0 0 0 0", color: "primary.main" }}
             id="standard-basic"
             placeholder="Search"
             variant="standard"
