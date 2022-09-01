@@ -35,11 +35,13 @@ const Categories = () => {
   const queryString = useLocation().search;
 
   useEffect(() => {
-    fetchData(`/products/filter/${queryString}`).then((data) =>
-      setFilteredProducts(data.products)
-    );
     dispatch(setFilterParams(selectedFilters));
     setSearchParams(selectedFilters);
+    if (queryString) {
+      fetchData(`/products/filter/${queryString}`).then((data) =>
+        setFilteredProducts(data.products)
+      );
+    }
   }, [filterObj, queryString, dispatch, setSearchParams]);
 
   return (
