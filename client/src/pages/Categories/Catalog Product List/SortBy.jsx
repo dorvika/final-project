@@ -3,7 +3,7 @@ import { useState } from "react";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import { StyledMenu } from "./styles";
 
-const SortPanel = () => {
+const SortPanel = ({ filterObj, setFilterObj }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -11,6 +11,11 @@ const SortPanel = () => {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const setSortBy = (sortBy) => {
+    setFilterObj({ ...filterObj, sort: sortBy });
+    handleClose();
   };
 
   return (
@@ -38,10 +43,14 @@ const SortPanel = () => {
           onClose={handleClose}
           TransitionComponent={Fade}
         >
-          <MenuItem onClick={handleClose}>Best Match</MenuItem>
-          <MenuItem onClick={handleClose}>Featured</MenuItem>
-          <MenuItem onClick={handleClose}>Lowest Price</MenuItem>
-          <MenuItem onClick={handleClose}>Highest Price</MenuItem>
+          {/* <MenuItem onClick={handleClose}>Best Match</MenuItem>
+          <MenuItem onClick={handleClose}>Featured</MenuItem> */}
+          <MenuItem onClick={() => setSortBy("currentPrice")}>
+            Lowest Price
+          </MenuItem>
+          <MenuItem onClick={() => setSortBy("-currentPrice")}>
+            Highest Price
+          </MenuItem>
         </StyledMenu>
       </Box>
     </>

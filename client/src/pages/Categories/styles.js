@@ -1,4 +1,10 @@
-import { Box, Container, Slider, TextField } from "@mui/material";
+import {
+  Box,
+  Container,
+  FormControlLabel,
+  Slider,
+  TextField,
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 export const CategoriesMainContainer = styled(Container)(({ theme }) => ({
@@ -47,4 +53,19 @@ export const ColorBox = styled(Box)({
   cursor: "pointer",
   border: "2px solid transparent",
   transition: "border 0.3s ease-in",
+});
+
+export const CustomFormControlLabel = styled(FormControlLabel)({
+  gap: "10px",
+  "& .MuiTypography-root.MuiTypography-body1.MuiFormControlLabel-label": {
+    fontSize: "14px",
+    textTransform: "uppercase",
+  },
+
+  "& .MuiButtonBase-root.MuiRadio-root.Mui-checked": {
+    color: "#8C8C8C",
+  },
+  "& .MuiButtonBase-root.MuiRadio-root": {
+    padding: "4px",
+  },
 });
