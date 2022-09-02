@@ -3,6 +3,8 @@ import ProductCard from "./ProductCard.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchProducts } from "../../../store/Products/actions";
+import "./style.scss";
+import Preloader from "./Preloader.jsx";
 
 const CatalogProductList = ({ filteredProducts, currentProductData }) => {
   const dispatch = useDispatch();
@@ -16,11 +18,7 @@ const CatalogProductList = ({ filteredProducts, currentProductData }) => {
   }, []);
   return (
     <>
-      {isLoading && (
-        <div>
-          <h4>Products are loading </h4>
-        </div>
-      )}
+      {isLoading && <Preloader />}
       {hasError && (
         <div>
           <p>Ooops, something went wrong</p>
