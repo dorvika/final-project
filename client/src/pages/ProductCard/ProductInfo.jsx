@@ -23,18 +23,21 @@ import {
   SizesContainer,
   SocialMediaContainer,
 } from "./styles";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../store/Cart/actions";
 
-const ProductInfo = ({ name, id, colors, sizes, currentPrice, info }) => {
+const ProductInfo = ({ name, id, colors, sizes, currentPrice, info, product }) => {
   const [activeColor, setActiveColor] = useState(0);
   const [activeSize, setActiveSize] = useState("single");
   const [expanded, setExpanded] = useState("panel1");
+  const dispatch = useDispatch();
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
 
   const addToBag = () => {
-    console.log("Product was added to bag");
+    dispatch(addToCart(product))
   };
 
   return (
@@ -108,7 +111,8 @@ const ProductInfo = ({ name, id, colors, sizes, currentPrice, info }) => {
         sx={{ my: "25px" }}
       >
         <Typography variant="h4" color="primary" fontWeight="fontWeightMedium">
-          USD ${currentPrice.toFixed(2)}
+          {/* USD ${currentPrice.toFixed(2)} */}
+          USD ${currentPrice}
         </Typography>
         <Button
           variant="contained"

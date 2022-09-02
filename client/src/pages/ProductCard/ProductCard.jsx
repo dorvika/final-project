@@ -3,6 +3,8 @@ import ProductInfo from "./ProductInfo.jsx";
 import ProductSlider from "./ProductSlider.jsx";
 import { ProductCardContainer, ProductCardMainContainer } from "./styles.js";
 import {MightLike} from "../../components";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const productInfo = {
   itemNo: 10101,
@@ -32,9 +34,16 @@ const productInfo = {
 };
 
 const ProductCard = () => {
+  const {id} = useParams();
+  const { products } = useSelector(
+    (state) => state.products
+  );
+  
+  const filterProduct = products.filter(product => {return product._id === id})
+  
   const { itemNo, imageUrls, name, currentPrice, colors, sizes, info } =
     productInfo;
-
+ 
   return (
     <ProductCardMainContainer>
       <Breadcrumbs sx={{ mb: "30px" }}>
@@ -62,6 +71,7 @@ const ProductCard = () => {
           colors={colors}
           sizes={sizes}
           info={info}
+          product={filterProduct[0]}
         />
       </ProductCardContainer>
       <MightLike sectionTitle="RELATED ITEMS"/>
