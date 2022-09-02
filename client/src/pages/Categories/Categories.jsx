@@ -29,7 +29,7 @@ const Categories = () => {
     sort: searchParams.get("sort") || "",
   });
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const totalPages = filteredProducts.length / showQuantity;
+  const totalPages = Math.ceil(filteredProducts.length / showQuantity);
 
   const selectedFilters = Object.keys(filterObj)
     .filter((key) => filterObj[key] != "")
@@ -94,7 +94,7 @@ const Categories = () => {
           <Stack alignItems="center" justifyContent="center">
             {totalPages >= 2 && (
               <Pagination
-                count={Math.ceil(filteredProducts.length / showQuantity)}
+                count={totalPages}
                 page={currentPage}
                 onChange={handleChange}
                 sx={{ mt: "50px" }}
