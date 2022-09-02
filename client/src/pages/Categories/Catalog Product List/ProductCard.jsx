@@ -2,7 +2,7 @@ import { Grid, Card, CardMedia, Typography, Button } from "@mui/material";
 import { useState } from "react";
 import { CustomCardContent, HoverCardContent } from "./styles";
 
-const ProductCard = ({ id, image, title, price, size }) => {
+const ProductCard = ({ image, title, price, size, itemNo }) => {
   const [isHover, setIsHover] = useState(false);
 
   const handleMouseEnter = () => {
@@ -47,7 +47,7 @@ const ProductCard = ({ id, image, title, price, size }) => {
               $ {price}
             </Typography>
             <Button
-              href={`/categories/${id}`}
+              href={`/categories/${itemNo}`}
               variant="outlined"
               sx={{ p: "10px 35px", lineHeight: "16px" }}
             >

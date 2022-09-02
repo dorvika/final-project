@@ -50,6 +50,7 @@ const CatalogProductList = ({ filteredProducts }) => {
                     image={product.imageUrls[0]}
                     title={product.name}
                     price={product.currentPrice}
+                    itemNo={product.itemNo}
                   />
                 );
               })
@@ -70,6 +71,7 @@ const CatalogProductList = ({ filteredProducts }) => {
                   image={product.imageUrls[0]}
                   title={product.name}
                   price={product.currentPrice}
+                  itemNo={product.itemNo}
                 />
               );
             })
