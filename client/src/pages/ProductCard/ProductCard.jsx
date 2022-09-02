@@ -12,41 +12,58 @@ const ProductCard = () => {
 
   const [productData, setProductData] = useState({});
 
-  const { itemNo, imageUrls, name, currentPrice, color, size, description } =
-    productData;
+  const {
+    itemNo,
+    imageUrls,
+    name,
+    currentPrice,
+    color,
+    size,
+    description,
+    categories,
+  } = productData;
 
   useEffect(() => {
     fetchData(`products/${id}`).then((data) => setProductData(data));
   }, []);
 
-  // const { products } = useSelector(
-  //   (state) => state.products
-  // );
-
-  // const filterProduct = products.filter(product => {return product._id === id})
+  const images = imageUrls?.filter((imageUrl, index) => index < 4);
 
   return (
     <ProductCardMainContainer>
       {Object.values(productData).length > 0 && (
         <>
-          <Breadcrumbs sx={{ mb: "30px" }}>
+          <Breadcrumbs
+            sx={(theme) => ({
+              mb: "30px",
+              [theme.breakpoints.down("sm")]: { mb: "15px", fontSize: "16px" },
+            })}
+          >
             <Link underline="hover" color="inherit" href="/">
               Shop
             </Link>
             <Link underline="hover" color="inherit" href="/categories">
               Catalog
             </Link>
-            {/* Переписати потім на актуальний шлях! */}
-            <Link underline="hover" color="inherit" href="/categories">
-              Bed Linen
+            <Link
+              sx={{ textTransform: "capitalize" }}
+              underline="hover"
+              color="inherit"
+              href={`/categories?categories=${categories}`}
+            >
+              {categories}
             </Link>
-            {/* Переписати потім на актуальний шлях! */}
-            <Link underline="hover" color="inherit" href="/categories">
-              Sweetness Collection
+            <Link
+              sx={{ textTransform: "capitalize" }}
+              underline="hover"
+              color="inherit"
+              href={`/categories/${itemNo}`}
+            >
+              {name}
             </Link>
           </Breadcrumbs>
           <ProductCardContainer>
-            <ProductSlider imageUrls={imageUrls} />
+            <ProductSlider imageUrls={images} />
             <ProductInfo
               id={itemNo}
               name={name}

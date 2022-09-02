@@ -79,11 +79,3 @@ export const SocialMediaContainer = styled(Stack)(({ theme }) => ({
     display: "none",
   },
 }));
-
-export const SizesContainer = styled(Stack)(({ theme }) => ({
-  flexDirection: "row",
-  gap: "40px",
-  [theme.breakpoints.down("md")]: {
-    gap: "20px",
-  },
-}));
