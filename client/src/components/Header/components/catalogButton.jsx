@@ -3,9 +3,9 @@ import {Button, ClickAwayListener, Grow, MenuList, Paper, Popper, Stack} from "@
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import {useEffect, useState} from "react";
 import {fetchData} from "../../../utils/api";
+import {Box} from "@mui/system";
 
-const Catalog = ( { setFilterObj, filterObj } ) => {
-
+const Catalog = ({ setFilterObj, filterObj }) => {
     const [categories, setCategories] = useState([]);
     const [activeCategory, setActiveCategory] = useState(
         filterObj.categories || ""
@@ -13,11 +13,11 @@ const Catalog = ( { setFilterObj, filterObj } ) => {
 
     const allCategories = categories.map((category) => category.name).join();
 
+    console.log(categories);
+
     useEffect(() => {
         fetchData("/catalog").then((result) => setCategories(result));
     }, []);
-
-
 
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
@@ -117,9 +117,10 @@ const Catalog = ( { setFilterObj, filterObj } ) => {
                                     onKeyDown={handleListKeyDown}
                                 >
 
-                                    <>
+                                    <Box>
                                         <Stack style={{textDecoration: "none", marginTop: "16px"}}>
                                             <Button
+                                                href={`/categories?categories=${allCategories}`}
                                                 variant="body"
                                                 sx={{
                                                     backgroundColor:
@@ -143,6 +144,7 @@ const Catalog = ( { setFilterObj, filterObj } ) => {
                                             </Button>
                                             {categories.map((category) => (
                                                 <Button
+                                                    href={`/categories?categories=${category.name}`}
                                                     key={category.id}
                                                     variant="body"
                                                     sx={{
@@ -167,7 +169,7 @@ const Catalog = ( { setFilterObj, filterObj } ) => {
                                                 </Button>
                                             ))}
                                         </Stack>
-                                    </>
+                                    </Box>
 
                                 {/*    <Link to="*" style={{textDecoration: "none", marginTop: "16px"}}><Typography sx={{*/}
                                 {/*        fontFamily: "Mulish",*/}

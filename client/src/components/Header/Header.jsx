@@ -12,6 +12,7 @@ import {
     Divider, Fade, Popper, Button,
 } from "@mui/material";
 import {HeaderInput} from "./components/styles";
+// eslint-disable-next-line import/no-unresolved
 import Catalog from "./components/catalogButton";
 import Logo from "./components/logoSvg";
 import {
@@ -20,9 +21,37 @@ import {
   Search,
   ShoppingBagOutlined,
 } from "@mui/icons-material";
+import {useEffect, useState} from "react";
+import {setFilterParams} from "../../store/Filters/actions";
+// import {fetchData} from "../../utils/api";
 
 
 const Header = () => {
+
+    const dispatch = useDispatch();
+
+    let [searchParams, setSearchParams] = useSearchParams();
+    const [filterObj, setFilterObj] = useState({
+        categories: searchParams.get("categories") || "",
+    });
+
+    // const [setFilteredProducts] = useState([]);
+
+    const selectedFilters = Object.keys(filterObj)
+        .filter((key) => filterObj[key] !== "")
+        .reduce((acc, key) => ({ ...acc, [key]: filterObj[key] }), {});
+
+    const queryString = useLocation().search;
+
+    useEffect(() => {
+        dispatch(setFilterParams(selectedFilters));
+        setSearchParams(selectedFilters);
+        // if (queryString) {
+        //     fetchData(`/products/filter/${queryString}`).then((data) =>
+        //         setFilteredProducts(data.products)
+        //     );
+        // }
+    }, [filterObj, queryString, dispatch, setSearchParams]);
 
     const [open, setOpen] = React.useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -35,7 +64,7 @@ const Header = () => {
         setOpen((previousOpen) => !previousOpen);
     };
 
-  const dispatch = useDispatch();
+
   const modal = useSelector((state) => state.modal);
 
   const handleOpen = () => {
@@ -54,7 +83,7 @@ const Header = () => {
         <Link style={{marginLeft: "-2.6041666666666665vw"}} to={"/"}>
           <Logo></Logo>
         </Link>
-        <Catalog></Catalog>
+        <Catalog setFilterObj={setFilterObj} filterObj={filterObj} />
         <Link to="/aboutus" style={{ textDecoration: "none" }}>
           <Typography variant="body">About</Typography>
         </Link>
