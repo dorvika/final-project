@@ -8,7 +8,7 @@ import {
   SortBy,
   CatalogProductList,
 } from "./index.js";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams, useLocation } from "react-router-dom";
 import { setFilterParams } from "../../store/Filters/actions.js";
 import { CategoriesMainContainer } from "./styles";
@@ -16,6 +16,8 @@ import { fetchData } from "../../utils/api.js";
 
 const Categories = () => {
   const dispatch = useDispatch();
+  const { showQuantity } = useSelector((state) => state.filters);
+  const [currentPage, setCurrentPage] = useState(1);
   let [searchParams, setSearchParams] = useSearchParams();
   const [filterObj, setFilterObj] = useState({
     categories: searchParams.get("categories") || "",
@@ -27,6 +29,7 @@ const Categories = () => {
     sort: searchParams.get("sort") || "",
   });
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const totalPages = filteredProducts.length / showQuantity;
 
   const selectedFilters = Object.keys(filterObj)
     .filter((key) => filterObj[key] != "")
@@ -43,6 +46,16 @@ const Categories = () => {
       );
     }
   }, [filterObj, queryString, dispatch, setSearchParams]);
+
+  const handleChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
+  const currentProductsData = (listProducts) => {
+    const firstPageIndex = (currentPage - 1) * showQuantity;
+    const lastPageIndex = firstPageIndex + showQuantity;
+    return listProducts.slice(firstPageIndex, lastPageIndex);
+  };
 
   return (
     <CategoriesMainContainer>
@@ -73,19 +86,26 @@ const Categories = () => {
             <SortBy filterObj={filterObj} setFilterObj={setFilterObj} />
           </Stack>
           <Box>
-            <CatalogProductList filteredProducts={filteredProducts} />
+            <CatalogProductList
+              filteredProducts={filteredProducts}
+              currentProductData={currentProductsData}
+            />
           </Box>
           <Stack alignItems="center" justifyContent="center">
-            <Pagination
-              count={3}
-              sx={{ mt: "50px" }}
-              renderItem={(item) => <CustomPaginationItem {...item} />}
-            />
+            {totalPages >= 2 && (
+              <Pagination
+                count={Math.ceil(filteredProducts.length / showQuantity)}
+                page={currentPage}
+                onChange={handleChange}
+                sx={{ mt: "50px" }}
+                renderItem={(item) => <CustomPaginationItem {...item} />}
+              />
+            )}
           </Stack>
         </Box>
       </Stack>
     </CategoriesMainContainer>
   );
-};
+};;
 
 export default Categories;

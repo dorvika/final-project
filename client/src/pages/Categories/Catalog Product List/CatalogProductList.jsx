@@ -4,9 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchProducts } from "../../../store/Products/actions";
 
-const CatalogProductList = ({ filteredProducts }) => {
-  console.log(filteredProducts);
-
+const CatalogProductList = ({ filteredProducts, currentProductData }) => {
   const dispatch = useDispatch();
   const { products, isLoading, hasError } = useSelector(
     (state) => state.products
@@ -35,7 +33,7 @@ const CatalogProductList = ({ filteredProducts }) => {
               Sorry, there are no matching products :(
             </Typography>
           ) : (
-            filteredProducts
+            currentProductData(filteredProducts)
               .filter((e, count) => count < showQuantity)
               .map((product) => {
                 return (
@@ -55,7 +53,7 @@ const CatalogProductList = ({ filteredProducts }) => {
               })
           )
         ) : (
-          products
+          currentProductData(products)
             .filter((e, count) => count < showQuantity)
             .map((product) => {
               return (
