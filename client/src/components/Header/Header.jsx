@@ -13,6 +13,7 @@ import {
   InputAdornment,
   IconButton,
   Divider,
+  Badge,
 } from "@mui/material";
 import Logo from "./headerComponents/logoSvg";
 import Catalog from "./headerComponents/catalogButton";
@@ -31,6 +32,8 @@ import {
 const Header = () => {
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.modal);
+  const cart  = useSelector((state) => state.cart.cart);
+  const favorites  = useSelector((state) => state.favorites.favorites);
 
   const handleOpen = () => {
     dispatch(openModal());
@@ -86,13 +89,18 @@ const Header = () => {
             style={{ textDecoration: "none", color: "#373F41" }}
             to={"/favorite"}
           >
-            <FavoriteBorderOutlined />
+            <Badge badgeContent={favorites.length} color="error">
+              <FavoriteBorderOutlined />
+            </Badge>
           </Link>
           <Link
             style={{ textDecoration: "none", color: "#373F41" }}
             to={"/cart"}
           >
-            <ShoppingBagOutlined />
+            <Badge badgeContent={cart.length} color="error">
+              <ShoppingBagOutlined />
+            </Badge>
+            
           </Link>
         </Box>
         {modal && <Authorization />}

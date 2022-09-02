@@ -1,4 +1,6 @@
-import { CartProductCard, CustomHr } from "./index";
+import { 
+  CartProductCard, 
+  CustomHr } from "./index";
 import {
   Box,
   Container,
@@ -7,10 +9,10 @@ import {
   Breadcrumbs,
   Link,
 } from "@mui/material";
-import products from "./ProductsExamples.jsx";
+
 // import { Link } from "react-router-dom";
 
-const CartProductList = () => {
+const CartProductList = ({ products }) => {
   return (
     <>
       <Container>
@@ -55,19 +57,30 @@ const CartProductList = () => {
         </Box>
         <CustomHr />
         <Box>
-          {products.map((product) => {
-            return (
-              <CartProductCard
-                key={product.id}
-                id={product.id}
-                image={product.image}
-                title={product.name}
-                subtitle={product.subtitle}
-                price={product.price}
-                color={product.color}
-                size={product.size}
-              />
-            );
+          {products.map((cart) => {
+            const {
+              _id,
+              imageUrls,
+              name,
+              description,
+              currentPrice,
+              color,
+              size,
+              qty
+            } = cart;
+              return (
+                <CartProductCard
+                  key={_id}
+                  id={_id}
+                  image={imageUrls[0]}
+                  title={name}
+                  subtitle={description}
+                  price={currentPrice}
+                  color={color}
+                  size={size}
+                  qty={qty}
+                />
+              );
           })}
         </Box>
         <Box
