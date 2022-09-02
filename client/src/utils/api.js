@@ -15,3 +15,40 @@ export const fetchData = async (endpoint) => {
   const { data } = response;
   return data;
 };
+
+export const getDataLS = (category) => {
+  const lScategory = localStorage.getItem(category);
+  if (!lScategory) return [];
+  try {
+    const value = JSON.parse(lScategory);
+    return value;
+  } catch (e) {
+    return [];
+  }
+};
+
+export const syncLS = function (store) {
+  return function (next) {
+    return function (action) {
+      if (action.type === "ADD_FAVORITE") {
+        store.getState();
+        const result = next(action);
+        localStorage.setItem(
+          "favorite",
+          JSON.stringify(store.getState().favorites.favorites)
+        );
+        return result;
+      }
+      if (
+        action.type === "ADD_TO_CART" ||
+        action.type === "REMOVE_FROM_CART"
+      ) {
+        store.getState();
+        const result = next(action);
+        localStorage.setItem("cart", JSON.stringify(store.getState().cart.cart));
+        return result;
+      }
+      return next(action);
+    };
+  };
+};

@@ -17,6 +17,9 @@ import {
 import { CustomHr } from "./index";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { removeFromCart } from "../../store/Cart/actions"
+import { addFavorite } from "../../store/Favorites/actions"
 
 const CartProductCard = ({
   image,
@@ -26,10 +29,13 @@ const CartProductCard = ({
   color,
   size,
   id,
+  qty
 }) => {
-  let [quantityValue, setQuantityValue] = useState(1);
+  console.log();
+  let [quantityValue, setQuantityValue] = useState(qty);
   const [expand, setExpand] = useState("less");
   const isExpandLess = expand === "less";
+  const dispatch = useDispatch();
 
   const toogleExpand = () => {
     if (expand === "less") {
@@ -39,7 +45,19 @@ const CartProductCard = ({
       setExpand("less");
     }
   };
-
+  const handleRemoveProduct = () => {
+    dispatch(removeFromCart(id))
+  }
+  const handleAddToFavorites = () => {
+    dispatch(addFavorite({image,
+      price,
+      title,
+      subtitle,
+      color,
+      size,
+      id,
+      qty}))
+  }
   const handleQuantityChange = (event) => {
     setQuantityValue(event.target.value);
     console.log(quantityValue);
@@ -119,7 +137,7 @@ const CartProductCard = ({
                       variant="h5"
                       sx={{ textTransform: "uppercase", fontWeight: "200" }}
                     >
-                      {color[0]}
+                      {color}
                     </Typography>
                     <IconButton onClick={toogleExpand} sx={{ padding: 0 }}>
                       {isExpandLess ? (
@@ -144,7 +162,7 @@ const CartProductCard = ({
                       variant="h5"
                       sx={{ textTransform: "uppercase", fontWeight: "200" }}
                     >
-                      {size[0]}
+                      {size}
                     </Typography>
                     <IconButton onClick={toogleExpand} sx={{ padding: 0 }}>
                       {isExpandLess ? (
@@ -186,8 +204,8 @@ const CartProductCard = ({
           alignItems="flex-end"
           justifyContent="space-between"
         >
-          <IconButton>
-            <Close />
+          <IconButton onClick={handleRemoveProduct}>
+            <Close/>
           </IconButton>
           <Stack direction="row" alignItems="center">
             <Typography
@@ -196,7 +214,7 @@ const CartProductCard = ({
             >
               add to favorites
             </Typography>
-            <IconButton>
+            <IconButton onClick={handleAddToFavorites}>
               <FavoriteBorder />
             </IconButton>
           </Stack>

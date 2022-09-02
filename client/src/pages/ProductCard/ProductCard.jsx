@@ -19,6 +19,12 @@ const ProductCard = () => {
     fetchData(`products/${id}`).then((data) => setProductData(data));
   }, []);
 
+  // const { products } = useSelector(
+  //   (state) => state.products
+  // );
+
+  // const filterProduct = products.filter(product => {return product._id === id})
+
   return (
     <ProductCardMainContainer>
       {Object.values(productData).length > 0 && (
@@ -48,6 +54,7 @@ const ProductCard = () => {
               color={color}
               size={size}
               description={description}
+              product={productData}
             />
           </ProductCardContainer>
           <MightLike sectionTitle="RELATED ITEMS" />

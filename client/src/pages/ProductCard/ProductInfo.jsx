@@ -22,16 +22,27 @@ import {
   // SizesContainer,
   SocialMediaContainer,
 } from "./styles";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../store/Cart/actions";
 
-const ProductInfo = ({ name, id, color, size, currentPrice, description }) => {
+const ProductInfo = ({
+  name,
+  id,
+  color,
+  size,
+  currentPrice,
+  description,
+  product,
+}) => {
   const [expanded, setExpanded] = useState("panel1");
+  const dispatch = useDispatch();
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
 
   const addToBag = () => {
-    console.log("Product was added to bag");
+    dispatch(addToCart(product));
   };
 
   return (
@@ -101,7 +112,7 @@ const ProductInfo = ({ name, id, color, size, currentPrice, description }) => {
         sx={{ my: "25px" }}
       >
         <Typography variant="h4" color="primary" fontWeight="fontWeightMedium">
-          USD ${currentPrice.toFixed(2)}
+          USD ${currentPrice}
         </Typography>
         <Button
           variant="contained"
@@ -112,9 +123,7 @@ const ProductInfo = ({ name, id, color, size, currentPrice, description }) => {
         </Button>
       </Stack>
       <Divider />
-      {/* {info.map((item, index) => ( */}
       <Accordion
-        // key={item.title}
         expanded={expanded === `panel1`}
         onChange={handleChange(`panel1`)}
         sx={{
@@ -150,7 +159,6 @@ const ProductInfo = ({ name, id, color, size, currentPrice, description }) => {
           </Typography>
         </AccordionDetails>
       </Accordion>
-      {/* ))} */}
     </ProductInfoContainer>
   );
 };

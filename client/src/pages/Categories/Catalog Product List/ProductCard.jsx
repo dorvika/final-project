@@ -1,6 +1,7 @@
 import { Grid, Card, CardMedia, Typography, Button } from "@mui/material";
 import { useState } from "react";
 import { CustomCardContent, HoverCardContent } from "./styles";
+import { Link } from "react-router-dom";
 
 const ProductCard = ({ image, title, price, size, itemNo }) => {
   const [isHover, setIsHover] = useState(false);
@@ -46,13 +47,17 @@ const ProductCard = ({ image, title, price, size, itemNo }) => {
             >
               $ {price}
             </Typography>
-            <Button
-              href={`/categories/${itemNo}`}
-              variant="outlined"
-              sx={{ p: "10px 35px", lineHeight: "16px" }}
+            <Link
+              to={`/categories/${itemNo}`}
+              style={{ textDecoration: "none" }}
             >
-              buy now
-            </Button>
+              <Button
+                variant="outlined"
+                sx={{ p: "10px 35px", lineHeight: "16px" }}
+              >
+                buy now
+              </Button>
+            </Link>
           </HoverCardContent>
         ) : (
           <CustomCardContent sx={{ backgroundColor: "primary.main" }}>
