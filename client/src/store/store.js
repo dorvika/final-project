@@ -4,15 +4,20 @@ import {
   compose,
   applyMiddleware,
 } from "redux";
+import { syncLS } from "../utils/api";
 import thunk from "redux-thunk";
 import modalReducer from "./Modal/reducer";
 import filterReducer from "./Filters/reducer";
 import productsReducer from "./Products/reducer";
+import cartReducer from "./Cart/reducer"
+import favoritesReducer from "./Favorites/reducer"
 
 export const rootReducer = combineReducers({
   modal: modalReducer,
   filters: filterReducer,
   products: productsReducer,
+  cart: cartReducer,
+  favorites: favoritesReducer
 });
 
 const devTools = window.__REDUX_DEVTOOLS_EXTENSION__
@@ -21,7 +26,7 @@ const devTools = window.__REDUX_DEVTOOLS_EXTENSION__
 
 const store = createStore(
   rootReducer,
-  compose(applyMiddleware(thunk), devTools)
+  compose(applyMiddleware(thunk, syncLS), devTools)
 );
 
 export default store;

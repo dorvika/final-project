@@ -4,15 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import * as React from "react";
 import {Link, useLocation, useSearchParams} from "react-router-dom";
 import {
-    Typography,
-    Container,
-    Box,
-    InputAdornment,
-    IconButton,
-    Divider, Fade, Popper, Button,
+  Input,
+  Typography,
+  Container,
+  Box,
+  InputAdornment,
+  IconButton,
+  Divider,
+  Badge,
 } from "@mui/material";
 import {HeaderInput} from "./components/styles";
-// eslint-disable-next-line import/no-unresolved
 import Catalog from "./components/catalogButton";
 import Logo from "./components/logoSvg";
 import {
@@ -23,8 +24,6 @@ import {
 } from "@mui/icons-material";
 import {useEffect, useState} from "react";
 import {setFilterParams} from "../../store/Filters/actions";
-// import {fetchData} from "../../utils/api";
-
 
 const Header = () => {
 
@@ -35,8 +34,6 @@ const Header = () => {
         categories: searchParams.get("categories") || "",
     });
 
-    // const [setFilteredProducts] = useState([]);
-
     const selectedFilters = Object.keys(filterObj)
         .filter((key) => filterObj[key] !== "")
         .reduce((acc, key) => ({ ...acc, [key]: filterObj[key] }), {});
@@ -46,11 +43,6 @@ const Header = () => {
     useEffect(() => {
         dispatch(setFilterParams(selectedFilters));
         setSearchParams(selectedFilters);
-        // if (queryString) {
-        //     fetchData(`/products/filter/${queryString}`).then((data) =>
-        //         setFilteredProducts(data.products)
-        //     );
-        // }
     }, [filterObj, queryString, dispatch, setSearchParams]);
 
     const [open, setOpen] = React.useState(false);
@@ -66,6 +58,8 @@ const Header = () => {
 
 
   const modal = useSelector((state) => state.modal);
+  const cart  = useSelector((state) => state.cart.cart);
+  const favorites  = useSelector((state) => state.favorites.favorites);
 
   const handleOpen = () => {
     dispatch(openModal());
@@ -120,7 +114,9 @@ const Header = () => {
             style={{ textDecoration: "none", color: "#373F41" }}
             to={"/favorite"}
           >
-            <FavoriteBorderOutlined />
+            <Badge badgeContent={favorites.length} color="error">
+              <FavoriteBorderOutlined />
+            </Badge>
           </Link>
           <IconButton
             style={{ textDecoration: "none", color: "#373F41" }} aria-describedby={id} onClick={handleClick}>
@@ -150,8 +146,9 @@ const Header = () => {
                       </Fade>
                   )}
               </Popper>
-
+    <Badge badgeContent={cart.length} color="error">
             <ShoppingBagOutlined/>
+                       </Badge>
           </IconButton>
         </Box>
         { modal && <Authorization/>}
