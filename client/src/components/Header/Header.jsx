@@ -4,17 +4,20 @@ import { useDispatch, useSelector } from "react-redux";
 import * as React from "react";
 import {Link, useLocation, useSearchParams} from "react-router-dom";
 import {
-  Input,
+  // Input,
   Typography,
   Container,
   Box,
   InputAdornment,
   IconButton,
   Divider,
+  Popper,
   Badge,
+  Fade,
+  Button,
 } from "@mui/material";
-import {HeaderInput} from "./components/styles";
-import Catalog from "./components/catalogButton";
+import { HeaderInput } from "./components/styles";
+import Catalog from "./components/catalogButton.jsx";
 import Logo from "./components/logoSvg";
 import {
   FavoriteBorderOutlined,
