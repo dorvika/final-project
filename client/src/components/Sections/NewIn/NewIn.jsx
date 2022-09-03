@@ -50,7 +50,7 @@ const GridItem = ({ link, image, title, price }) => {
           <CardMedia component="img" height="545" image={`${image}`} alt="" />
           <CustomCardContent>
             <CustomTypography
-              sx={{ padding: "10px 15px", textTransform:"capitalize" }}
+              sx={{ padding: "10px 15px", textTransform: "capitalize" }}
               gutterBottom
               variant="h4"
               component="p"
@@ -78,9 +78,12 @@ const NewIn = () => {
   useEffect(() => {
     dispatch(fetchProducts());
   }, []);
-  const { products } = useSelector(
-    (state) => state.products
-  );
+  const { products } = useSelector((state) => state.products);
+  // Shuffle array
+  const shuffledProducts = products.sort(() => 0.5 - Math.random());
+  // Get sub-array of first n elements after shuffled
+  let newInProducts = shuffledProducts.slice(0, 4);
+
   return (
     <Box
       sx={{
@@ -100,19 +103,17 @@ const NewIn = () => {
         New In
       </Typography>
       <Grid container sx={{ rowGap: 10 }}>
-        {products
-          .filter((e, count) => count > products.length - 1 - 4)
-          .map((product) => {
-            return (
-              <GridItem
-                key={product._id}
-                link={product._id}
-                image={product.imageUrls[0]}
-                title={product.name}
-                price={product.currentPrice}
-              />
-            );
-          })}
+        {newInProducts.map((product) => {
+          return (
+            <GridItem
+              key={product._id}
+              link={product.itemNo}
+              image={product.imageUrls[0]}
+              title={product.name}
+              price={product.currentPrice}
+            />
+          );
+        })}
       </Grid>
     </Box>
   );
