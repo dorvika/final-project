@@ -1,39 +1,47 @@
-// import { Button } from "@mui/material";
 import Authorization from "../Authorization/Authorization.jsx";
 import { openModal } from "../../store/Modal/actions";
 import { useDispatch, useSelector } from "react-redux";
-
 import { Link } from "react-router-dom";
-// eslint-disable-next-line import/no-duplicates
 import {
-  Input,
   Typography,
   Container,
   Box,
   InputAdornment,
   IconButton,
   Divider,
+  Popper,
   Badge,
+  Fade,
+  Button,
 } from "@mui/material";
-import Logo from "./headerComponents/logoSvg";
-import Catalog from "./headerComponents/catalogButton";
-// import Icons from "./headerComponents/iconsButton";
-// eslint-disable-next-line import/no-duplicates
-// import { Container } from "@mui/material";
+import { HeaderInput } from "./components/styles";
+import Catalog from "./components/catalogButton.jsx";
+import Logo from "./components/logoSvg";
 import {
   FavoriteBorderOutlined,
   PersonOutlined,
   Search,
   ShoppingBagOutlined,
 } from "@mui/icons-material";
-// import { Box } from "@mui/system";
-// import InputAdornment from "@mui/material/InputAdornment";
+import { useState } from "react";
 
 const Header = () => {
   const dispatch = useDispatch();
+
+  const [open, setOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const canBeOpen = open && Boolean(anchorEl);
+  const id = canBeOpen ? "transition-popper" : undefined;
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+    setOpen((previousOpen) => !previousOpen);
+  };
+
   const modal = useSelector((state) => state.modal);
-  const cart  = useSelector((state) => state.cart.cart);
-  const favorites  = useSelector((state) => state.favorites.favorites);
+  const cart = useSelector((state) => state.cart.cart);
+  const favorites = useSelector((state) => state.favorites.favorites);
 
   const handleOpen = () => {
     dispatch(openModal());
@@ -48,10 +56,10 @@ const Header = () => {
           alignItems: "center",
         }}
       >
-        <Link style={{marginLeft: "-2.6041666666666665vw"}} to={"/"}>
+        <Link style={{ marginLeft: "-2.6041666666666665vw" }} to={"/"}>
           <Logo></Logo>
         </Link>
-        <Catalog></Catalog>
+        <Catalog />
         <Link to="/aboutus" style={{ textDecoration: "none" }}>
           <Typography variant="body">About</Typography>
         </Link>
@@ -62,13 +70,12 @@ const Header = () => {
           <Typography variant="body">Blog</Typography>
         </Link>
         <Box>
-          <Input
+          <HeaderInput
             endAdornment={
-              <InputAdornment position="start">
+              <InputAdornment position={"start"}>
                 <Search></Search>
               </InputAdornment>
             }
-            sx={{ width: "379px", padding: "0 0 0 0", color: "primary.main" }}
             id="standard-basic"
             placeholder="Search"
             variant="standard"
@@ -93,15 +100,58 @@ const Header = () => {
               <FavoriteBorderOutlined />
             </Badge>
           </Link>
-          <Link
+          <IconButton
             style={{ textDecoration: "none", color: "#373F41" }}
-            to={"/cart"}
+            aria-describedby={id}
+            onClick={handleClick}
           >
+            <Popper
+              sx={{ zIndex: "10000" }}
+              id={id}
+              open={open}
+              anchorEl={anchorEl}
+              transition
+            >
+              {({ TransitionProps }) => (
+                <Fade {...TransitionProps} timeout={350}>
+                  <Box
+                    sx={{
+                      width: "340px",
+                      padding: "14px",
+                      background: "white",
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <Typography>Bag(2)</Typography>
+                    <Typography>TOTAL: USD $490</Typography>
+                    <Link style={{ textDecoration: "none" }} to={"/cart"}>
+                      <Button
+                        sx={{ width: "320px", height: "40px" }}
+                        variant="outlined"
+                      >
+                        VIEW BAG
+                      </Button>
+                    </Link>
+                    <Link
+                      style={{ textDecoration: "none", marginTop: "10px" }}
+                      to={"/cart/checkout"}
+                    >
+                      <Button
+                        sx={{ width: "320px", height: "40px" }}
+                        variant="contained"
+                      >
+                        CHECKOUT
+                      </Button>
+                    </Link>
+                  </Box>
+                </Fade>
+              )}
+            </Popper>
             <Badge badgeContent={cart.length} color="error">
               <ShoppingBagOutlined />
             </Badge>
-            
-          </Link>
+          </IconButton>
         </Box>
         {modal && <Authorization />}
       </Container>
