@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { fetchProducts } from "../../../store/Products/actions";
 
 const CatalogProductList = ({ filteredProducts }) => {
-  console.log(filteredProducts);
+  // console.log(filteredProducts);
 
   const dispatch = useDispatch();
   const { products, isLoading, hasError } = useSelector(
@@ -50,6 +50,7 @@ const CatalogProductList = ({ filteredProducts }) => {
                     image={product.imageUrls[0]}
                     title={product.name}
                     price={product.currentPrice}
+                    itemNo={product.itemNo}
                   />
                 );
               })
@@ -70,6 +71,7 @@ const CatalogProductList = ({ filteredProducts }) => {
                   image={product.imageUrls[0]}
                   title={product.name}
                   price={product.currentPrice}
+                  itemNo={product.itemNo}
                 />
               );
             })

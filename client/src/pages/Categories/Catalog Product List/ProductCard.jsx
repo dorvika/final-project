@@ -2,7 +2,8 @@ import { Grid, Card, CardMedia, Typography, Button } from "@mui/material";
 import { useState } from "react";
 import { CustomCardContent, HoverCardContent } from "./styles";
 import { Link } from "react-router-dom";
-const ProductCard = ({ id, image, title, price, size }) => {
+
+const ProductCard = ({ image, title, price, size, itemNo }) => {
   const [isHover, setIsHover] = useState(false);
 
   const handleMouseEnter = () => {
@@ -46,7 +47,10 @@ const ProductCard = ({ id, image, title, price, size }) => {
             >
               $ {price}
             </Typography>
-            <Link to={`/categories/${id}`}>
+            <Link
+              to={`/categories/${itemNo}`}
+              style={{ textDecoration: "none" }}
+            >
               <Button
                 variant="outlined"
                 sx={{ p: "10px 35px", lineHeight: "16px" }}
