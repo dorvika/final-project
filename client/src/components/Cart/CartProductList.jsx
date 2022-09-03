@@ -1,6 +1,4 @@
-import { 
-  CartProductCard, 
-  CustomHr } from "./index";
+import { CartProductCard, CustomHr } from "./index";
 import {
   Box,
   Container,
@@ -66,21 +64,23 @@ const CartProductList = ({ products }) => {
               currentPrice,
               color,
               size,
-              qty
+              qty,
+              itemNo,
             } = cart;
-              return (
-                <CartProductCard
-                  key={_id}
-                  id={_id}
-                  image={imageUrls[0]}
-                  title={name}
-                  subtitle={description}
-                  price={currentPrice}
-                  color={color}
-                  size={size}
-                  qty={qty}
-                />
-              );
+            return (
+              <CartProductCard
+                key={_id}
+                id={_id}
+                image={imageUrls[0]}
+                title={name}
+                subtitle={description}
+                price={currentPrice}
+                color={color}
+                size={size}
+                qty={qty}
+                itemNo={itemNo}
+              />
+            );
           })}
         </Box>
         <Box

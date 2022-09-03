@@ -6,18 +6,20 @@ const ShoppingBag = ({ products, small = false }) => {
       <BagCartModelSmall
         key={product._id}
         id={product._id}
+        itemNo={product.itemNo}
         image={product.imageUrls[0]}
         title={product.name}
         price={product.currentPrice}
       />
     ) : (
       <BagCartModel
-      key={product._id}
-      id={product._id}
-      image={product.imageUrls[0]}
-      title={product.name}
-      subtitle={product.description}
-      price={product.currentPrice}
+        key={product._id}
+        id={product._id}
+        itemNo={product.itemNo}
+        image={product.imageUrls[0]}
+        title={product.name}
+        subtitle={product.description}
+        price={product.currentPrice}
       />
     );
   });
