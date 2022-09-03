@@ -1,8 +1,7 @@
 import Authorization from "../Authorization/Authorization.jsx";
 import { openModal } from "../../store/Modal/actions";
 import { useDispatch, useSelector } from "react-redux";
-// import * as React from "react";
-import {Link, useLocation, useSearchParams} from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   Typography,
   Container,
@@ -24,27 +23,10 @@ import {
   Search,
   ShoppingBagOutlined,
 } from "@mui/icons-material";
-import { useEffect, useState } from "react";
-import { setFilterParams } from "../../store/Filters/actions";
+import { useState } from "react";
 
 const Header = () => {
   const dispatch = useDispatch();
-
-  let [searchParams, setSearchParams] = useSearchParams();
-  const [filterObj, setFilterObj] = useState({
-    categories: searchParams.get("categories") || "",
-  });
-
-  const selectedFilters = Object.keys(filterObj)
-    .filter((key) => filterObj[key] !== "")
-    .reduce((acc, key) => ({ ...acc, [key]: filterObj[key] }), {});
-
-  const queryString = useLocation().search;
-
-  useEffect(() => {
-    dispatch(setFilterParams(selectedFilters));
-    setSearchParams(selectedFilters);
-  }, [filterObj, queryString, dispatch, setSearchParams]);
 
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -77,7 +59,7 @@ const Header = () => {
         <Link style={{ marginLeft: "-2.6041666666666665vw" }} to={"/"}>
           <Logo></Logo>
         </Link>
-        <Catalog setFilterObj={setFilterObj} filterObj={filterObj} />
+        <Catalog />
         <Link to="/aboutus" style={{ textDecoration: "none" }}>
           <Typography variant="body">About</Typography>
         </Link>
