@@ -17,6 +17,7 @@ import { fetchData } from "../../utils/api.js";
 const Categories = () => {
   const dispatch = useDispatch();
   const { showQuantity } = useSelector((state) => state.filters);
+  const { products } = useSelector((state) => state.products);
   const [currentPage, setCurrentPage] = useState(1);
   let [searchParams, setSearchParams] = useSearchParams();
   const [filterObj, setFilterObj] = useState({
@@ -29,7 +30,11 @@ const Categories = () => {
     sort: searchParams.get("sort") || "",
   });
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const totalPages = Math.ceil(filteredProducts.length / showQuantity);
+  const totalPages = Math.ceil(
+    filteredProducts.length > 0
+      ? filteredProducts.length / showQuantity
+      : products.length / showQuantity
+  );
 
   const selectedFilters = Object.keys(filterObj)
     .filter((key) => filterObj[key] != "")
@@ -45,6 +50,7 @@ const Categories = () => {
         setFilteredProducts(data.products)
       );
     }
+    setCurrentPage(1);
   }, [filterObj, queryString, dispatch, setSearchParams]);
 
   const handleChange = (event, value) => {
@@ -52,6 +58,9 @@ const Categories = () => {
   };
 
   const currentProductsData = (listProducts) => {
+    if (currentPage > totalPages) {
+      setCurrentPage(1);
+    }
     const firstPageIndex = (currentPage - 1) * showQuantity;
     const lastPageIndex = firstPageIndex + showQuantity;
     return listProducts.slice(firstPageIndex, lastPageIndex);

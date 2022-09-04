@@ -11,7 +11,7 @@ const CatalogProductList = ({ filteredProducts, currentProductData }) => {
   const { products, isLoading, hasError } = useSelector(
     (state) => state.products
   );
-  const { showQuantity, filters } = useSelector((state) => state.filters);
+  const { filters } = useSelector((state) => state.filters);
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -31,29 +31,7 @@ const CatalogProductList = ({ filteredProducts, currentProductData }) => {
               Sorry, there are no matching products :(
             </Typography>
           ) : (
-            currentProductData(filteredProducts)
-              .filter((e, count) => count < showQuantity)
-              .map((product) => {
-                return (
-                  <ProductCard
-                    category={product.categories}
-                    color={product.color}
-                    fabric={product.fabric}
-                    description={product.description}
-                    size={product.size}
-                    key={product._id}
-                    id={product._id}
-                    image={product.imageUrls[0]}
-                    title={product.name}
-                    price={product.currentPrice}
-                  />
-                );
-              })
-          )
-        ) : (
-          currentProductData(products)
-            .filter((e, count) => count < showQuantity)
-            .map((product) => {
+            currentProductData(filteredProducts).map((product) => {
               return (
                 <ProductCard
                   category={product.categories}
@@ -69,6 +47,24 @@ const CatalogProductList = ({ filteredProducts, currentProductData }) => {
                 />
               );
             })
+          )
+        ) : (
+          currentProductData(products).map((product) => {
+            return (
+              <ProductCard
+                category={product.categories}
+                color={product.color}
+                fabric={product.fabric}
+                description={product.description}
+                size={product.size}
+                key={product._id}
+                id={product._id}
+                image={product.imageUrls[0]}
+                title={product.name}
+                price={product.currentPrice}
+              />
+            );
+          })
         )}
       </Grid>
     </>
