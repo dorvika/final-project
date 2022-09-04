@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { CategoriesAccordion, PriceSlider, CategoriesRadio } from "./index.js";
 import { ColorBox } from "./styles.js";
 import { fetchData } from "../../utils/api.js";
+import { useSelector } from "react-redux";
 
 const CategoriesFilter = ({
   filterObj,
@@ -10,6 +11,7 @@ const CategoriesFilter = ({
   selectedFilters,
   setSearchParams,
 }) => {
+  const { filters } = useSelector((state) => state.filters);
   const [sizes, setSizes] = useState([]);
   const [colors, setColors] = useState([]);
   const [materials, setMaterials] = useState([]);
@@ -54,10 +56,12 @@ const CategoriesFilter = ({
               key={_id}
               sx={{
                 backgroundColor: cssValue,
-                borderColor:
-                  activeColor === cssValue || activeColor === name.toLowerCase()
-                    ? "primary.main"
-                    : null,
+                borderColor: !filters.color
+                  ? null
+                  : activeColor === cssValue ||
+                    activeColor === name.toLowerCase()
+                  ? "primary.main"
+                  : null,
               }}
               onClick={() => {
                 setActiveColor(cssValue);
@@ -76,7 +80,11 @@ const CategoriesFilter = ({
               height: "auto",
               p: "0 3px",
               fontFamily: "",
-              borderColor: activeColor === allColors ? "primary.main" : null,
+              borderColor: !filters.color
+                ? null
+                : activeColor === allColors
+                ? "primary.main"
+                : null,
             }}
           >
             All

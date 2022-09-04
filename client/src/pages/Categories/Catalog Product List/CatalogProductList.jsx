@@ -30,7 +30,7 @@ const CatalogProductList = ({ filteredProducts }) => {
       )}
       <Grid container rowSpacing={20} columnSpacing={5}>
         {Object.values(filters).length > 0 ? (
-          filteredProducts.length === 0 ? (
+          filteredProducts.length === 0 && !isLoading ? (
             <Typography variant="h2" sx={{ m: "50px auto" }}>
               Sorry, there are no matching products :(
             </Typography>

@@ -1,5 +1,6 @@
 import { FormControl, Radio, RadioGroup } from "@mui/material";
 import { useState } from "react";
+// import { useSelector } from "react-redux";
 import { CustomFormControlLabel } from "./styles";
 
 const CategoriesRadio = ({
@@ -8,6 +9,9 @@ const CategoriesRadio = ({
   setFilterObj,
   filterObj,
 }) => {
+  // const { filters } = useSelector((state) => state.filters);
+  // console.log(filters.size);
+  // console.log(filterObj.size);
   const primarySize = filterObj.size || "";
   const primaryFabric = filterObj.fabric || "";
   const [value, setValue] = useState(

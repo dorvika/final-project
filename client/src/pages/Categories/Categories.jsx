@@ -16,6 +16,7 @@ import { fetchData } from "../../utils/api.js";
 
 const Categories = () => {
   const dispatch = useDispatch();
+  // const { products } = useSelector((state) => state.products);
   let [searchParams, setSearchParams] = useSearchParams();
   const [filterObj, setFilterObj] = useState({
     categories: searchParams.get("categories") || "",
@@ -26,6 +27,7 @@ const Categories = () => {
     maxPrice: searchParams.get("maxPrice") || "",
     sort: searchParams.get("sort") || "",
   });
+
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   const selectedFilters = Object.keys(filterObj)
@@ -42,7 +44,9 @@ const Categories = () => {
         setFilteredProducts(data.products)
       );
     }
-  }, [filterObj, queryString, dispatch, setSearchParams]);
+  }, [queryString, filterObj]);
+
+  console.log(filteredProducts);
 
   return (
     <CategoriesMainContainer>

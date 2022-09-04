@@ -1,8 +1,11 @@
 import { Stack, Typography } from "@mui/material";
 import { useState } from "react";
+// import { useSelector } from "react-redux";
 import { CustomPriceSlider, CustomTextField } from "./styles";
 
 const PriceSlider = ({ setFilterObj, filterObj }) => {
+  // const { filters } = useSelector((state) => state.filters);
+  // console.log(filters.minPrice);
   const primaryMinPrice = filterObj.minPrice || 0;
   const primaryMaxPrice = filterObj.maxPrice || 500;
   const [price, setPrice] = useState({
@@ -38,8 +41,8 @@ const PriceSlider = ({ setFilterObj, filterObj }) => {
       newPrice.minPrice = newPrice.maxPrice;
     }
     setPrice(newPrice);
-    setSliderValues(Object.values(newPrice));
     const newValue = Object.values(newPrice);
+    setSliderValues(newValue);
     setFilterObj({
       ...filterObj,
       minPrice: newValue[0] === 0 ? 1 : newValue[0],
@@ -49,12 +52,12 @@ const PriceSlider = ({ setFilterObj, filterObj }) => {
 
   const handleBlur = () => {
     if (price.minPrice < 0) {
-      setPrice({ ...price, minPrice: 10 });
+      setPrice({ ...price, minPrice: 1 });
     } else if (price.maxPrice > 500) {
       setPrice({ ...price, maxPrice: 500 });
     }
-    setSliderValues(Object.values(price));
     const newValue = Object.values(price);
+    setSliderValues(newValue);
     setFilterObj({
       ...filterObj,
       minPrice: newValue[0] === 0 ? 1 : newValue[0],
