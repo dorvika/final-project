@@ -2,79 +2,81 @@ import { Breadcrumbs, Link } from "@mui/material";
 import ProductInfo from "./ProductInfo.jsx";
 import ProductSlider from "./ProductSlider.jsx";
 import { ProductCardContainer, ProductCardMainContainer } from "./styles.js";
-import {MightLike} from "../../components";
+import { MightLike } from "../../components";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-
-const productInfo = {
-  itemNo: 10101,
-  imageUrls: [
-    "https://res.cloudinary.com/dhk15xaeq/image/upload/v1660320784/Postil/ProductImg/Background_l7xkdy.png",
-    "https://res.cloudinary.com/dhk15xaeq/image/upload/v1660476839/Postil/ProductImg/zyro-image_a9ql0h.png",
-    "https://res.cloudinary.com/dhk15xaeq/image/upload/v1660477029/Postil/ProductImg/zyro-image_1_wyhurr.png",
-    "https://res.cloudinary.com/dhk15xaeq/image/upload/v1660477030/Postil/ProductImg/zyro-image_2_fa0wbn.png",
-  ],
-  name: "SWEETNESS BED LINEN",
-  currentPrice: 150,
-  categories: "linen",
-  quantity: 10,
-  colors: ["#6FB7AC", "#6E7181", "#CDB6B4", "#F1D9CF", "#D6D6D6"],
-  sizes: ["single", "double", "QUEEN", "KING"],
-  info: [
-    {
-      title: "PRODUCT DESCRIPTION",
-      content:
-        "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts",
-    },
-    {
-      title: "REVIEWS",
-      content: "Sorry, review list is empty :(",
-    },
-  ],
-};
+import { useEffect, useState } from "react";
+import { fetchData } from "../../utils/api.js";
 
 const ProductCard = () => {
-  const {id} = useParams();
-  const { products } = useSelector(
-    (state) => state.products
-  );
-  
-  const filterProduct = products.filter(product => {return product._id === id})
-  
-  const { itemNo, imageUrls, name, currentPrice, colors, sizes, info } =
-    productInfo;
- 
+  const { id } = useParams();
+
+  const [productData, setProductData] = useState({});
+
+  const {
+    itemNo,
+    imageUrls,
+    name,
+    currentPrice,
+    color,
+    size,
+    description,
+    categories,
+  } = productData;
+
+  useEffect(() => {
+    fetchData(`products/${id}`).then((data) => setProductData(data));
+  }, []);
+
+  const images = imageUrls?.filter((imageUrl, index) => index < 4);
+
   return (
     <ProductCardMainContainer>
-      <Breadcrumbs sx={{ mb: "30px" }}>
-        <Link underline="hover" color="inherit" href="/">
-          Shop
-        </Link>
-        <Link underline="hover" color="inherit" href="/categories">
-          Catalog
-        </Link>
-        {/* Переписати потім на актуальний шлях! */}
-        <Link underline="hover" color="inherit" href="/categories">
-          Bed Linen
-        </Link>
-        {/* Переписати потім на актуальний шлях! */}
-        <Link underline="hover" color="inherit" href="/categories">
-          Sweetness Collection
-        </Link>
-      </Breadcrumbs>
-      <ProductCardContainer>
-        <ProductSlider imageUrls={imageUrls} />
-        <ProductInfo
-          id={itemNo}
-          name={name}
-          currentPrice={currentPrice}
-          colors={colors}
-          sizes={sizes}
-          info={info}
-          product={filterProduct[0]}
-        />
-      </ProductCardContainer>
-      <MightLike sectionTitle="RELATED ITEMS"/>
+      {Object.values(productData).length > 0 && (
+        <>
+          <Breadcrumbs
+            sx={(theme) => ({
+              mb: "30px",
+              [theme.breakpoints.down("sm")]: { mb: "15px", fontSize: "16px" },
+            })}
+          >
+            <Link underline="hover" color="inherit" href="/">
+              Shop
+            </Link>
+            <Link underline="hover" color="inherit" href="/categories">
+              Catalog
+            </Link>
+            <Link
+              sx={{ textTransform: "capitalize" }}
+              underline="hover"
+              color="inherit"
+              href={`/categories?categories=${categories}`}
+            >
+              {categories}
+            </Link>
+            <Link
+              sx={{ textTransform: "capitalize" }}
+              underline="hover"
+              color="inherit"
+              href={`/categories/${itemNo}`}
+            >
+              {name}
+            </Link>
+          </Breadcrumbs>
+          <ProductCardContainer>
+            <ProductSlider imageUrls={images} />
+            <ProductInfo
+              id={itemNo}
+              name={name}
+              currentPrice={currentPrice}
+              color={color}
+              size={size}
+              description={description}
+              product={productData}
+            />
+          </ProductCardContainer>
+          <MightLike sectionTitle="RELATED ITEMS" />
+        </>
+      )}
     </ProductCardMainContainer>
   );
 };

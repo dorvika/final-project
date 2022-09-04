@@ -30,6 +30,7 @@ const MightLike = ({ sectionTitle }) => {
           {dataElements.length > 0 && (
             <>
               {dataElements.map(({ id, title, urlImage, price }) => (
+                /* коли товари будуть приходити з БД - замінити лінку на href={`/categories/${itemNo}`} */
                 <Link href={`/categories/${id}`} key={id}>
                   <CustomItem component="div">
                     <CardMedia

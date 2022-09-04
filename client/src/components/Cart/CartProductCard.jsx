@@ -18,8 +18,8 @@ import { CustomHr } from "./index";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { removeFromCart } from "../../store/Cart/actions"
-import { addFavorite } from "../../store/Favorites/actions"
+import { removeFromCart } from "../../store/Cart/actions";
+import { addFavorite } from "../../store/Favorites/actions";
 
 const CartProductCard = ({
   image,
@@ -29,7 +29,8 @@ const CartProductCard = ({
   color,
   size,
   id,
-  qty
+  qty,
+  itemNo,
 }) => {
   console.log();
   let [quantityValue, setQuantityValue] = useState(qty);
@@ -46,18 +47,13 @@ const CartProductCard = ({
     }
   };
   const handleRemoveProduct = () => {
-    dispatch(removeFromCart(id))
-  }
+    dispatch(removeFromCart(id));
+  };
   const handleAddToFavorites = () => {
-    dispatch(addFavorite({image,
-      price,
-      title,
-      subtitle,
-      color,
-      size,
-      id,
-      qty}))
-  }
+    dispatch(
+      addFavorite({ image, price, title, subtitle, color, size, id, qty })
+    );
+  };
   const handleQuantityChange = (event) => {
     setQuantityValue(event.target.value);
     console.log(quantityValue);
@@ -82,7 +78,7 @@ const CartProductCard = ({
         }}
       >
         <Stack direction="row">
-          <Link to={`/categories/${id}`} style={{ textDecoration: "none" }}>
+          <Link to={`/categories/${itemNo}`} style={{ textDecoration: "none" }}>
             <CardMedia
               component="img"
               height="200px"
@@ -92,7 +88,10 @@ const CartProductCard = ({
           </Link>
           <CardContent>
             <Box>
-              <Link to={`/categories/${id}`} style={{ textDecoration: "none" }}>
+              <Link
+                to={`/categories/${itemNo}`}
+                style={{ textDecoration: "none" }}
+              >
                 <Typography
                   variant="h4"
                   fontFamily="Abel"
@@ -205,7 +204,7 @@ const CartProductCard = ({
           justifyContent="space-between"
         >
           <IconButton onClick={handleRemoveProduct}>
-            <Close/>
+            <Close />
           </IconButton>
           <Stack direction="row" alignItems="center">
             <Typography
