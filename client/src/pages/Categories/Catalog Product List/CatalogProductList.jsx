@@ -3,26 +3,22 @@ import ProductCard from "./ProductCard.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchProducts } from "../../../store/Products/actions";
+import "./style.scss";
+import Preloader from "./Preloader.jsx";
 
-const CatalogProductList = ({ filteredProducts }) => {
-  // console.log(filteredProducts);
-
+const CatalogProductList = ({ filteredProducts, currentProductData }) => {
   const dispatch = useDispatch();
   const { products, isLoading, hasError } = useSelector(
     (state) => state.products
   );
-  const { showQuantity, filters } = useSelector((state) => state.filters);
+  const { filters } = useSelector((state) => state.filters);
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, []);
   return (
     <>
-      {isLoading && (
-        <div>
-          <h4>Products are loading </h4>
-        </div>
-      )}
+      {isLoading && <Preloader />}
       {hasError && (
         <div>
           <p>Ooops, something went wrong</p>
@@ -35,31 +31,8 @@ const CatalogProductList = ({ filteredProducts }) => {
               Sorry, there are no matching products :(
             </Typography>
           ) : (
-            filteredProducts
-              .filter((e, count) => count < showQuantity)
-              .map((product) => {
-                return (
-                  <ProductCard
-                    category={product.categories}
-                    color={product.color}
-                    fabric={product.fabric}
-                    description={product.description}
-                    size={product.size}
-                    key={product._id}
-                    id={product._id}
-                    image={product.imageUrls[0]}
-                    title={product.name}
-                    price={product.currentPrice}
-                    itemNo={product.itemNo}
-                  />
-                );
-              })
-          )
-        ) : (
-          products
-            .filter((e, count) => count < showQuantity)
-            .map((product) => {
-              return (
+            currentProductData(filteredProducts).map((product) => {
+            return (
                 <ProductCard
                   category={product.categories}
                   color={product.color}
@@ -75,6 +48,24 @@ const CatalogProductList = ({ filteredProducts }) => {
                 />
               );
             })
+          )
+        ) : (
+          currentProductData(products).map((product) => {
+            return (
+              <ProductCard
+                category={product.categories}
+                color={product.color}
+                fabric={product.fabric}
+                description={product.description}
+                size={product.size}
+                key={product._id}
+                id={product._id}
+                image={product.imageUrls[0]}
+                title={product.name}
+                price={product.currentPrice}
+              />
+            );
+          })
         )}
       </Grid>
     </>
