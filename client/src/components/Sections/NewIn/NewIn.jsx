@@ -8,6 +8,9 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { fetchProducts } from "../../../store/Products/actions";
 
 const CustomTypography = styled(Typography)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
@@ -38,36 +41,6 @@ const CustomGridItem = styled(Grid)(({ theme }) => ({
     },
   },
 }));
-const products = [
-  {
-    id: 1,
-    name: "Cotton Dark Blue Bed Linen",
-    price: 250,
-    image:
-      "https://res.cloudinary.com/dipjt24ep/image/upload/v1660075542/Background_lf2ony.png",
-  },
-  {
-    id: 2,
-    name: "Phistachio French Linen",
-    price: 220,
-    image:
-      "https://res.cloudinary.com/dipjt24ep/image/upload/v1660075552/Background-2_t7oehp.png",
-  },
-  {
-    id: 3,
-    name: "Light Pink Bed Linen",
-    price: 250,
-    image:
-      "https://res.cloudinary.com/dipjt24ep/image/upload/v1660075559/Background-3_y3ignd.png",
-  },
-  {
-    id: 4,
-    name: "French Dark Green Linen",
-    price: 270,
-    image:
-      "https://res.cloudinary.com/dipjt24ep/image/upload/v1660075565/Background-4_ycse32.png",
-  },
-];
 
 const GridItem = ({ link, image, title, price }) => {
   return (
@@ -78,7 +51,7 @@ const GridItem = ({ link, image, title, price }) => {
           <CardMedia component="img" height="545" image={`${image}`} alt="" />
           <CustomCardContent>
             <CustomTypography
-              sx={{ padding: "10px 15px" }}
+              sx={{ padding: "10px 15px", textTransform: "capitalize" }}
               gutterBottom
               variant="h4"
               component="p"
@@ -102,6 +75,16 @@ const GridItem = ({ link, image, title, price }) => {
 };
 
 const NewIn = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
+  const { products } = useSelector((state) => state.products);
+  // Shuffle array
+  const shuffledProducts = products.sort(() => 0.5 - Math.random());
+  // Get sub-array of first n elements after shuffled
+  let newInProducts = shuffledProducts.slice(0, 4);
+
   return (
     <Box
       sx={{
@@ -121,19 +104,17 @@ const NewIn = () => {
         New In
       </Typography>
       <Grid container sx={{ rowGap: 10 }}>
-        {products
-          .filter((e, count) => count < 4)
-          .map((product) => {
-            return (
-              <GridItem
-                key={product.id}
-                link={product.id}
-                image={product.image}
-                title={product.name}
-                price={product.price}
-              />
-            );
-          })}
+        {newInProducts.map((product) => {
+          return (
+            <GridItem
+              key={product._id}
+              link={product.itemNo}
+              image={product.imageUrls[0]}
+              title={product.name}
+              price={product.currentPrice}
+            />
+          );
+        })}
       </Grid>
     </Box>
   );
