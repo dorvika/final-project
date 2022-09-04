@@ -9,7 +9,7 @@ import {
   CatalogProductList,
 } from "./index.js";
 import { useDispatch, useSelector } from "react-redux";
-import { useSearchParams, useLocation } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import { setFilterParams } from "../../store/Filters/actions.js";
 import { CategoriesMainContainer } from "./styles";
 import { fetchData } from "../../utils/api.js";
@@ -29,6 +29,7 @@ const Categories = () => {
     maxPrice: searchParams.get("maxPrice") || "",
     sort: searchParams.get("sort") || "",
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const [filteredProducts, setFilteredProducts] = useState([]);
   const totalPages = Math.ceil(
@@ -44,15 +45,17 @@ const Categories = () => {
   const queryString = useLocation().search;
 
   useEffect(() => {
+    setIsLoading(true);
     dispatch(setFilterParams(selectedFilters));
     setSearchParams(selectedFilters);
     if (queryString) {
-      fetchData(`/products/filter/${queryString}`).then((data) =>
-        setFilteredProducts(data.products)
-      );
+      fetchData(`/products/filter/${queryString}`).then((data) => {
+        setFilteredProducts(data.products);
+        setIsLoading(false);
+      });
     }
     setCurrentPage(1);
-  }, [queryString, filterObj]);
+  }, [filterObj, queryString]);
 
   const handleChange = (event, value) => {
     setCurrentPage(value);
@@ -99,6 +102,7 @@ const Categories = () => {
             <CatalogProductList
               filteredProducts={filteredProducts}
               currentProductData={currentProductsData}
+              isLoadingFilter={isLoading}
             />
           </Box>
           <Stack alignItems="center" justifyContent="center">

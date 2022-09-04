@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { CategoriesAccordion, PriceSlider, CategoriesRadio } from "./index.js";
 import { ColorBox } from "./styles.js";
 import { fetchData } from "../../utils/api.js";
-import { useSelector } from "react-redux";
 
 const CategoriesFilter = ({
   filterObj,
@@ -11,7 +10,6 @@ const CategoriesFilter = ({
   selectedFilters,
   setSearchParams,
 }) => {
-  const { filters } = useSelector((state) => state.filters);
   const [sizes, setSizes] = useState([]);
   const [colors, setColors] = useState([]);
   const [materials, setMaterials] = useState([]);
@@ -32,6 +30,7 @@ const CategoriesFilter = ({
     setFilterObj({
       categories: filterObj.categories ? filterObj.categories : "",
     });
+    window.location.reload();
   };
 
   return (
@@ -56,12 +55,10 @@ const CategoriesFilter = ({
               key={_id}
               sx={{
                 backgroundColor: cssValue,
-                borderColor: !filters.color
-                  ? null
-                  : activeColor === cssValue ||
-                    activeColor === name.toLowerCase()
-                  ? "primary.main"
-                  : null,
+                borderColor:
+                  activeColor === cssValue || activeColor === name.toLowerCase()
+                    ? "primary.main"
+                    : null,
               }}
               onClick={() => {
                 setActiveColor(cssValue);
@@ -80,11 +77,7 @@ const CategoriesFilter = ({
               height: "auto",
               p: "0 3px",
               fontFamily: "",
-              borderColor: !filters.color
-                ? null
-                : activeColor === allColors
-                ? "primary.main"
-                : null,
+              borderColor: activeColor === allColors ? "primary.main" : null,
             }}
           >
             All
@@ -99,11 +92,12 @@ const CategoriesFilter = ({
           filterObj={filterObj}
         />
       </CategoriesAccordion>
-      {Object.values(selectedFilters).length > 0 && (
-        <Button variant="outlined" sx={{ mt: "10px" }} onClick={resetFilters}>
-          Reset Filters
-        </Button>
-      )}
+      {Object.keys(selectedFilters).includes("categories") &&
+        Object.values(selectedFilters).length > 1 && (
+          <Button variant="outlined" sx={{ mt: "10px" }} onClick={resetFilters}>
+            Reset Filters
+          </Button>
+        )}
     </Stack>
   );
 };

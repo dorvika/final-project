@@ -1,11 +1,8 @@
 import { Stack, Typography } from "@mui/material";
 import { useState } from "react";
-// import { useSelector } from "react-redux";
 import { CustomPriceSlider, CustomTextField } from "./styles";
 
 const PriceSlider = ({ setFilterObj, filterObj }) => {
-  // const { filters } = useSelector((state) => state.filters);
-  // console.log(filters.minPrice);
   const primaryMinPrice = filterObj.minPrice || 0;
   const primaryMaxPrice = filterObj.maxPrice || 500;
   const [price, setPrice] = useState({
