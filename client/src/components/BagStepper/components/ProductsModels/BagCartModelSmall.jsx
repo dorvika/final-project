@@ -9,7 +9,7 @@ import {
 
 import { Link } from "react-router-dom";
 
-const BagCartModelSmall = ({ image, price, title, id }) => {
+const BagCartModelSmall = ({ image, price, title, itemNo }) => {
   return (
     <>
       <Card
@@ -21,7 +21,7 @@ const BagCartModelSmall = ({ image, price, title, id }) => {
         }}
       >
         <Stack direction="row">
-          <Link to={`/categories/${id}`} style={{ textDecoration: "none" }}>
+          <Link to={`/categories/${itemNo}`} style={{ textDecoration: "none" }}>
             <CardMedia
               component="img"
               height="100px"
@@ -31,7 +31,10 @@ const BagCartModelSmall = ({ image, price, title, id }) => {
           </Link>
           <CardContent>
             <Box>
-              <Link to={`/categories/${id}`} style={{ textDecoration: "none" }}>
+              <Link
+                to={`/categories/${itemNo}`}
+                style={{ textDecoration: "none" }}
+              >
                 <Typography
                   variant="h4"
                   fontFamily="Abel"

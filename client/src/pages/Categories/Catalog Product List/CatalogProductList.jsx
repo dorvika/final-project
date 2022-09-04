@@ -32,7 +32,7 @@ const CatalogProductList = ({ filteredProducts, currentProductData }) => {
             </Typography>
           ) : (
             currentProductData(filteredProducts).map((product) => {
-              return (
+            return (
                 <ProductCard
                   category={product.categories}
                   color={product.color}
@@ -44,6 +44,7 @@ const CatalogProductList = ({ filteredProducts, currentProductData }) => {
                   image={product.imageUrls[0]}
                   title={product.name}
                   price={product.currentPrice}
+                  itemNo={product.itemNo}
                 />
               );
             })

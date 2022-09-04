@@ -4,20 +4,22 @@ const ShoppingBag = ({ products, small = false }) => {
   return products.map((product) => {
     return small ? (
       <BagCartModelSmall
-        key={product.id}
-        id={product.id}
-        image={product.image}
+        key={product._id}
+        id={product._id}
+        itemNo={product.itemNo}
+        image={product.imageUrls[0]}
         title={product.name}
-        price={product.price}
+        price={product.currentPrice}
       />
     ) : (
       <BagCartModel
-        key={product.id}
-        id={product.id}
-        image={product.image}
+        key={product._id}
+        id={product._id}
+        itemNo={product.itemNo}
+        image={product.imageUrls[0]}
         title={product.name}
-        subtitle={product.subtitle}
-        price={product.price}
+        subtitle={product.description}
+        price={product.currentPrice}
       />
     );
   });
