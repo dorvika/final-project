@@ -9,7 +9,7 @@ import {
 
 import { Link } from "react-router-dom";
 
-const BagCartModelSmall = ({ image, price, title, itemNo }) => {
+const BagCartModelSmall = ({ image, price, title, itemNo, cartQuantity }) => {
   return (
     <>
       <Card
@@ -49,7 +49,7 @@ const BagCartModelSmall = ({ image, price, title, itemNo }) => {
                 </Typography>
               </Link>
               <Typography variant="h5" sx={{ pb: "10px" }}>
-                ${price}
+                ${price * cartQuantity}
               </Typography>
             </Box>
           </CardContent>
