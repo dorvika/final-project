@@ -21,13 +21,13 @@ const Categories = () => {
   const [currentPage, setCurrentPage] = useState(1);
   let [searchParams, setSearchParams] = useSearchParams();
   const [filterObj, setFilterObj] = useState({
-    categories: searchParams.get("categories") || "",
-    size: searchParams.get("size") || "",
-    color: searchParams.get("color") || "",
-    fabric: searchParams.get("fabric") || "",
-    minPrice: searchParams.get("minPrice") || "",
-    maxPrice: searchParams.get("maxPrice") || "",
-    sort: searchParams.get("sort") || "",
+    categories: searchParams.get("categories"),
+    size: searchParams.get("size"),
+    color: searchParams.get("color"),
+    fabric: searchParams.get("fabric"),
+    minPrice: searchParams.get("minPrice"),
+    maxPrice: searchParams.get("maxPrice"),
+    sort: searchParams.get("sort"),
   });
   const [isLoading, setIsLoading] = useState(false);
 
@@ -39,7 +39,7 @@ const Categories = () => {
   );
 
   const selectedFilters = Object.keys(filterObj)
-    .filter((key) => filterObj[key] != "")
+    .filter((key) => filterObj[key] != null)
     .reduce((acc, key) => ({ ...acc, [key]: filterObj[key] }), {});
 
   const queryString = useLocation().search;
