@@ -6,7 +6,7 @@ import { CustomHr } from "../../Cart/index";
 import Summary from "../components/Summary/Summary.jsx";
 import ShippingForm from "../components/FormikForms/ShippingForm.jsx";
 
-const ShippingDetailsPage = ({ data, next, prev, title, products }) => {
+const ShippingDetailsPage = ({ data, next, prev, title, products, subtotal }) => {
   const handleSubmit = (values) => {
     next(values);
   };
@@ -62,7 +62,7 @@ const ShippingDetailsPage = ({ data, next, prev, title, products }) => {
             <CustomHr sx={{ mb: "10px" }} />
             <ShoppingBag products={products} small={true} />
             <CustomHr sx={{ mt: "10px" }} />
-            <Summary />
+            <Summary subtotal={subtotal} />
             <Button
               variant="contained"
               form="shipping"

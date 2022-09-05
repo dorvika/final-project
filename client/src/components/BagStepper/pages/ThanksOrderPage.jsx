@@ -1,11 +1,15 @@
 import { Button, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React from "react";
+import { useEffect} from "react";
 import { Link } from "react-router-dom";
 
-const ThanksOrderPage = () => {
+const ThanksOrderPage = ({makeOrder}) => {
+ 
+  useEffect(() => {
+    console.log(makeOrder());
+  }, []);
   return (
-    <React.Fragment>
+    <>
       <Box
         sx={{
           display: "flex",
@@ -27,7 +31,7 @@ const ThanksOrderPage = () => {
           </Button>
         </Link>
       </Box>
-    </React.Fragment>
+    </>
   );
 };
 

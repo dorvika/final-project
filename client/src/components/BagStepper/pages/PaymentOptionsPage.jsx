@@ -5,7 +5,7 @@ import Summary from "../components/Summary/Summary.jsx";
 import ShoppingBag from "../components/ShoppingBagProducts/ShoppingBag.jsx";
 import PaymentForm from "../components/FormikForms/PaymentForm.jsx";
 
-const PaymentOptionsPage = ({ data, next, prev, title, products }) => {
+const PaymentOptionsPage = ({ data, next, prev, title, products, subtotal }) => {
   const handleSubmit = (values) => {
     next(values);
   };
@@ -61,7 +61,7 @@ const PaymentOptionsPage = ({ data, next, prev, title, products }) => {
             <CustomHr sx={{ mb: "10px" }} />
             <ShoppingBag products={products} small={true} />
             <CustomHr sx={{ mt: "10px" }} />
-            <Summary />
+            <Summary subtotal={subtotal}/>
             <Button
               variant="contained"
               form="payment"
