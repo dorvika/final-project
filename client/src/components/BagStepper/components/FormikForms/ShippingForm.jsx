@@ -114,8 +114,7 @@ const ShippingForm = ({ data, next, prev }) => {
                   error={props.touched.country && Boolean(props.errors.country)}
                   helpertext={props.touched.country && props.errors.country}
                 >
-                  <MenuItem value={"UA"}>Ukraine</MenuItem>
-                  <MenuItem value={"USA"}>United States of America</MenuItem>
+                  <MenuItem value={"Ukraine"}>Ukraine</MenuItem>
                 </Select>
               </FormControl>
             </Grid>

@@ -18,7 +18,7 @@ import { CustomHr } from "./index";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { removeFromCart } from "../../store/Cart/actions";
+import { removeFromCart, addToCart } from "../../store/Cart/actions";
 import { addFavorite } from "../../store/Favorites/actions";
 
 const CartProductCard = ({
@@ -29,11 +29,10 @@ const CartProductCard = ({
   color,
   size,
   id,
-  qty,
+  cartQuantity,
   itemNo,
 }) => {
-  console.log();
-  let [quantityValue, setQuantityValue] = useState(qty);
+  let [quantityValue, setQuantityValue] = useState(cartQuantity);
   const [expand, setExpand] = useState("less");
   const isExpandLess = expand === "less";
   const dispatch = useDispatch();
@@ -51,16 +50,18 @@ const CartProductCard = ({
   };
   const handleAddToFavorites = () => {
     dispatch(
-      addFavorite({ image, price, title, subtitle, color, size, id, qty })
+      addFavorite({ image, price, title, subtitle, color, size, id, cartQuantity })
     );
   };
   const handleQuantityChange = (event) => {
     setQuantityValue(event.target.value);
-    console.log(quantityValue);
   };
 
   const increaseQuantity = () => {
-    setQuantityValue((quantityValue = quantityValue + 1));
+    setQuantityValue(cartQuantity + 1);
+    dispatch(
+      addToCart({ image, price, title, subtitle, color, size, _id: id, cartQuantity })
+    )
   };
   const decreaseQuantity = () => {
     if (quantityValue > 1) {
