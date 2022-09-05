@@ -11,37 +11,29 @@ const reducer = (state = initialState.cart, action) => {
     case "GET_CART_LOCALSTORAGE": {
       return {
         ...state,
-        cart: [...action.payload.data],
-      };
-    }
-    case "ADD_TO_CART": {
-      const isExist = state.cart.some(
-        (product) => product._id === action.payload.product._id
-      );
-      if (isExist)
-        return {
-          ...state,
-          cart: state.cart.map((product) =>
-            product._id === action.payload.product._id
-              ? { ...product, qty: product.qty + 1 }
-              : product
-          ),
-        };
-      return {
-        ...state,
-        cart: [...state.cart, { ...action.payload.product, qty: 1 }],
-      };
-    }
-    case "REMOVE_FROM_CART": {
-      return {
-        ...state,
-        cart: state.cart.filter((cart) => cart._id !== action.payload.id),
-      };
-    }
-    default: {
-      return state;
-    }
-  }
-};
+        cart: [...action.payload.data]
+      }
+		}
+		case 'ADD_TO_CART': { 
+			const isExist = state.cart.some((products)=> products.product._id === action.payload.product._id);
+        if (isExist) return {
+                ...state,
+                cart: state.cart.map((products) => products.product._id === action.payload.product._id ? {product: products.product, cartQuantity: products.cartQuantity + 1} : products)}
+            return {
+                ...state, 
+                cart: [...state.cart, {product: action.payload.product, cartQuantity: 1}] 
+            }
+		}
 
-export default reducer;
+		case 'REMOVE_FROM_CART': {
+			return {
+                ...state,
+                cart: state.cart.filter((products)=> products.product._id !== action.payload.id)}
+		}
+		default: {
+			return state
+		}
+	}
+  };
+  
+  export default reducer;

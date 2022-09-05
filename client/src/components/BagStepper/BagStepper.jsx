@@ -8,7 +8,6 @@ import {
   PaymentOptionsPage,
   ThanksOrderPage,
 } from "./pages/index";
-
 const steps = ["Shopping Bag", "Shipping Details", "Payment Options"];
 
 export default function HorizontalNonLinearStepper({products}) {
@@ -32,6 +31,11 @@ export default function HorizontalNonLinearStepper({products}) {
     cardholdername: "",
   });
 
+  const cartTotalSum = () => {
+    return products.reduce((sum, cartItem) => {
+      return sum + cartItem.product.currentPrice * cartItem.cartQuantity;
+    }, 0);
+  }
   const totalSteps = () => {
     return steps.length;
   };
@@ -71,6 +75,26 @@ export default function HorizontalNonLinearStepper({products}) {
     setCompleted(newCompleted);
     handleNext();
   };
+
+  const makeOrder = () => {
+    const newOrder = {
+      products: products,
+      email: "test@gmail.com",
+      mobile: data.phone,
+      letterSubject: "Thank you for order! You are welcome!",
+      letterHtml: "<h1>Your order is placed. OrderNo is 023689452.</h1><p>{Other details about order in your HTML}</p>",
+      deliveryAddress: {
+        country: data.country,
+        city: data.city,
+        address: data.address1,
+        postal: data.zip
+      },
+      shipping: data.delivery,
+      paymentInfo: data.paymentmethod,
+    }
+    return newOrder
+  }
+  
   const renderStepContent = (step) => {
     switch (step) {
       case 0:
@@ -79,6 +103,7 @@ export default function HorizontalNonLinearStepper({products}) {
             title={steps[activeStep]}
             products={products}
             next={handleComplete}
+            subtotal={cartTotalSum()}
           />
         );
       case 1:
@@ -86,6 +111,7 @@ export default function HorizontalNonLinearStepper({products}) {
           <ShippingDetailsPage
             title={steps[activeStep]}
             products={products}
+            subtotal={cartTotalSum()}
             next={handleComplete}
             prev={handleBack}
             data={data}
@@ -96,6 +122,7 @@ export default function HorizontalNonLinearStepper({products}) {
           <PaymentOptionsPage
             title={steps[activeStep]}
             products={products}
+            subtotal={cartTotalSum()}
             next={handleComplete}
             prev={handleBack}
             data={data}
@@ -130,7 +157,7 @@ export default function HorizontalNonLinearStepper({products}) {
           <div>
             {allStepsCompleted() ? (
               <>
-                <ThanksOrderPage />
+                <ThanksOrderPage makeOrder={makeOrder}/>
               </>
             ) : (
               <Box>{renderStepContent(activeStep)}</Box>

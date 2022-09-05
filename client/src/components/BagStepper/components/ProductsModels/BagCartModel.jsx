@@ -12,7 +12,8 @@ import {
 import { ExpandMore, ExpandLess } from "@mui/icons-material/";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../../../store/Cart/actions"
 const CustomCard = styled(Card)(({ theme }) => ({
   [theme.breakpoints.down("670")]: {
     "& .stack": {
@@ -36,8 +37,9 @@ const CustomCard = styled(Card)(({ theme }) => ({
   },
 }));
 
-const BagCartModel = ({ image, price, title, subtitle, itemNo }) => {
-  let [quantityValue, setQuantityValue] = useState(1);
+const BagCartModel = ({ image, price, title, subtitle, itemNo, cartQuantity, id }) => {
+  const dispatch = useDispatch()
+  let [quantityValue, setQuantityValue] = useState(cartQuantity);
 
   const handleQuantityChange = (event) => {
     setQuantityValue(event.target.value);
@@ -45,7 +47,10 @@ const BagCartModel = ({ image, price, title, subtitle, itemNo }) => {
   };
 
   const increaseQuantity = () => {
-    setQuantityValue((quantityValue = quantityValue + 1));
+    setQuantityValue(cartQuantity + 1);
+    dispatch(
+      addToCart({ image, price, title, subtitle, _id: id, cartQuantity })
+    )
   };
   const decreaseQuantity = () => {
     if (quantityValue > 1) {

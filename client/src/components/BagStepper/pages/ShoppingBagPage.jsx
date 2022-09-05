@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Summary from "../components/Summary/Summary.jsx";
 import CustomBackButton from "../components/CustomBackButton/CustomBackButton.jsx";
 
-const ShoppingBagPage = ({ title, products, next }) => {
+const ShoppingBagPage = ({ title, products, next, subtotal }) => {
   return (
     <Container
       sx={{
@@ -59,7 +59,7 @@ const ShoppingBagPage = ({ title, products, next }) => {
               Summary
             </Typography>
             <CustomHr sx={{ mb: "10px" }} />
-            <Summary />
+            <Summary subtotal={subtotal} />
             <Button 
               variant="contained"
               sx={theme => ({ p: "15px 85px", alignSelf: "flex-end", [theme.breakpoints.down("670")]:{alignSelf: "center"} })}

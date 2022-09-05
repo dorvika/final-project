@@ -8,6 +8,12 @@ import {
 } from "@mui/material";
 
 const CartProductList = ({ products }) => {
+  const cartTotalSum = () => {
+    return products.reduce((sum, cartItem) => {
+      return sum + cartItem.product.currentPrice * cartItem.cartQuantity;
+    }, 0);
+  }
+  
   return (
     <>
       <Container>
@@ -39,12 +45,12 @@ const CartProductList = ({ products }) => {
               fontWeight: "600",
             }}
           >
-            total usd 490.00
+            total usd {cartTotalSum()}
           </Typography>
         </Box>
         <CustomHr />
         <Box>
-          {products.map((cart) => {
+          {products.map((cartItem) => {
             const {
               _id,
               imageUrls,
@@ -53,9 +59,8 @@ const CartProductList = ({ products }) => {
               currentPrice,
               color,
               size,
-              qty,
               itemNo,
-            } = cart;
+            } = cartItem.product;
             return (
               <CartProductCard
                 key={_id}
@@ -66,7 +71,7 @@ const CartProductList = ({ products }) => {
                 price={currentPrice}
                 color={color}
                 size={size}
-                qty={qty}
+                cartQuantity={cartItem.cartQuantity}
                 itemNo={itemNo}
               />
             );
