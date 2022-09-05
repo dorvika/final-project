@@ -32,7 +32,7 @@ const CartProductCard = ({
   qty,
   itemNo,
 }) => {
-  console.log();
+  // console.log();
   let [quantityValue, setQuantityValue] = useState(qty);
   const [expand, setExpand] = useState("less");
   const isExpandLess = expand === "less";

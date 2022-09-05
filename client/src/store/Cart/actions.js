@@ -6,15 +6,8 @@ export const addToCart = product => {
 }
 
 export const removeFromCart = id => {
-    return {
-        type: 'REMOVE_FROM_CART',
-        payload: { id }
-    }
-}
-
-export const getCartLS = data => {
-    return {
-        type: 'GET_CART_LOCALSTORAGE',
-        payload: { data }
-    }
+  return {
+    type: "REMOVE_FROM_CART",
+    payload: { id },
+  };
 }
