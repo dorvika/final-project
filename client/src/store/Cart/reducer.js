@@ -1,11 +1,15 @@
+import { getDataLS } from "../../utils/api";
+
+const cartData = getDataLS("cart");
+
 const initialState = {
-    cart: { cart: [], isLoading: false, hasError: false },
-  };
-  
-  const reducer = (state = initialState.cart, action) => {
-    switch (action.type) {
-		case 'GET_CART_LOCALSTORAGE': {
-			return {
+  cart: { cart: cartData, isLoading: false, hasError: false },
+};
+
+const reducer = (state = initialState.cart, action) => {
+  switch (action.type) {
+    case "GET_CART_LOCALSTORAGE": {
+      return {
         ...state,
         cart: [...action.payload.data]
       }

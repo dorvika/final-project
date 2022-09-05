@@ -32,19 +32,17 @@ const CartProductCard = ({
   cartQuantity,
   itemNo,
 }) => {
-  let [quantityValue, setQuantityValue] = useState(cartQuantity);
-  const [expand, setExpand] = useState("less");
-  const isExpandLess = expand === "less";
-  const dispatch = useDispatch();
 
-  const toogleExpand = () => {
-    if (expand === "less") {
-      setExpand("more");
-    }
-    if (expand === "more") {
-      setExpand("less");
-    }
-  };
+  let [quantityValue, setQuantityValue] = useState(cartQuantity);
+  const dispatch = useDispatch();
+  // const toogleExpand = () => {
+  //   if (expand === "less") {
+  //     setExpand("more");
+  //   }
+  //   if (expand === "more") {
+  //     setExpand("less");
+  //   }
+  // };
   const handleRemoveProduct = () => {
     dispatch(removeFromCart(id));
   };
@@ -139,13 +137,13 @@ const CartProductCard = ({
                     >
                       {color}
                     </Typography>
-                    <IconButton onClick={toogleExpand} sx={{ padding: 0 }}>
+                    {/* <IconButton onClick={toogleExpand} sx={{ padding: 0 }}>
                       {isExpandLess ? (
                         <ExpandLess size="small" />
                       ) : (
                         <ExpandMore />
                       )}
-                    </IconButton>
+                    </IconButton> */}
                   </Box>
                   <Box sx={{ display: "flex", alignItems: "center" }}>
                     <Typography
@@ -164,13 +162,13 @@ const CartProductCard = ({
                     >
                       {size}
                     </Typography>
-                    <IconButton onClick={toogleExpand} sx={{ padding: 0 }}>
+                    {/* <IconButton onClick={toogleExpand} sx={{ padding: 0 }}>
                       {isExpandLess ? (
                         <ExpandLess size="small" />
                       ) : (
                         <ExpandMore />
                       )}
-                    </IconButton>
+                    </IconButton> */}
                   </Box>
                 </Box>
                 <Stack direction="row" alignItems="center">

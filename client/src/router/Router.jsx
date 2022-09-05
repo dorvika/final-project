@@ -14,21 +14,8 @@ import {
   Blog,
   CheckOut,
 } from "../pages";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { getDataLS } from "../utils/api";
-import { getFavoriteLS } from "../store/Favorites/actions";
-import { getCartLS } from "../store/Cart/actions"
 
 export default function Router() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    const favoriteData = getDataLS("favorite");
-    dispatch(getFavoriteLS(favoriteData));
-    const cartData = getDataLS("cart")
-    dispatch(getCartLS(cartData))
-  }, []);
-
   return (
     <main>
       <Routes>
