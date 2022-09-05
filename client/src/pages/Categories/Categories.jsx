@@ -53,6 +53,8 @@ const Categories = () => {
         setFilteredProducts(data.products);
         setIsLoading(false);
       });
+    } else {
+      setIsLoading(false);
     }
     setCurrentPage(1);
   }, [filterObj, queryString]);
