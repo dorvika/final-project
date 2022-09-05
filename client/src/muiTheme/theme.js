@@ -142,6 +142,7 @@ const theme = createTheme({
           "&:hover": {
             backgroundColor: "transparent",
             color: "#373F41",
+            border: "1px solid #373F41",
           },
         },
         outlined: {
@@ -238,7 +239,7 @@ const theme = createTheme({
         root: {
           fontFamily: ["Mulish", "san-serif"].join(","),
           fontSize: 18,
-          fontWeight: 400, 
+          fontWeight: 400,
         },
       },
     },
@@ -247,10 +248,10 @@ const theme = createTheme({
         root: {
           fontFamily: ["Mulish", "san-serif"].join(","),
           fontSize: 18,
-          fontWeight: 400, 
-          justifyContent:"center",
+          fontWeight: 400,
+          justifyContent: "center",
           marginTop: "20px",
-          textAlign:"center"
+          textAlign: "center",
         },
       },
     },
@@ -259,9 +260,9 @@ const theme = createTheme({
         root: {
           fontFamily: ["Mulish", "san-serif"].join(","),
           fontSize: 12,
-          fontWeight: 400, 
-          position:"absolute",
-          top:"30px"
+          fontWeight: 400,
+          position: "absolute",
+          top: "30px",
         },
       },
     },

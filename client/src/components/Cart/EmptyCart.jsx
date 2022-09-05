@@ -8,7 +8,6 @@ const EmptyCart = () => {
   return (
     <>
       <Container>
-        <div>breadcrambs</div>
         <Stack justifyContent="center">
           <Typography
             variant="h2"
@@ -35,14 +34,11 @@ const EmptyCart = () => {
         <Box display="flex" justifyContent="center">
           <Link to="/categories" style={{ textDecoration: "none" }}>
             <Button
+              variant="contained"
               sx={{
-                color: "secondary.main",
                 mt: "100px",
                 mb: "82px",
                 p: "15px 48px",
-                "&:hover": {
-                  color: "primary.main",
-                },
               }}
             >
               continue shopping

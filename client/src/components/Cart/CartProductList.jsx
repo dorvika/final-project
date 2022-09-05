@@ -4,24 +4,13 @@ import {
   Container,
   Typography,
   Button,
-  Breadcrumbs,
   Link,
 } from "@mui/material";
-
-// import { Link } from "react-router-dom";
 
 const CartProductList = ({ products }) => {
   return (
     <>
       <Container>
-        <Breadcrumbs sx={{ pb: "30px" }}>
-          <Link underline="hover" color="inherit" href="/">
-            Home
-          </Link>
-          <Link underline="hover" color="inherit" href="/cart">
-            Shopping Bag
-          </Link>
-        </Breadcrumbs>
         <Box
           sx={{
             display: "flex",
@@ -97,6 +86,7 @@ const CartProductList = ({ products }) => {
                 color: "secondary.main",
                 justifySelf: "center",
                 mt: "50px",
+                mb: "80px",
                 p: "15px 35px",
                 "&:hover": {
                   color: "primary.main",

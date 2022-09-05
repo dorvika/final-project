@@ -17,7 +17,7 @@ import {
 import { CustomHr } from "./index";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { removeFromCart } from "../../store/Cart/actions";
 import { addFavorite } from "../../store/Favorites/actions";
 
@@ -34,18 +34,19 @@ const CartProductCard = ({
 }) => {
   // console.log();
   let [quantityValue, setQuantityValue] = useState(qty);
-  const [expand, setExpand] = useState("less");
-  const isExpandLess = expand === "less";
+  // const [expand, setExpand] = useState("less");
+  // const isExpandLess = expand === "less";
   const dispatch = useDispatch();
-
-  const toogleExpand = () => {
-    if (expand === "less") {
-      setExpand("more");
-    }
-    if (expand === "more") {
-      setExpand("less");
-    }
-  };
+  const cart = useSelector((state) => state.cart);
+  console.log("cart", cart);
+  // const toogleExpand = () => {
+  //   if (expand === "less") {
+  //     setExpand("more");
+  //   }
+  //   if (expand === "more") {
+  //     setExpand("less");
+  //   }
+  // };
   const handleRemoveProduct = () => {
     dispatch(removeFromCart(id));
   };
@@ -56,6 +57,7 @@ const CartProductCard = ({
   };
   const handleQuantityChange = (event) => {
     setQuantityValue(event.target.value);
+    dispatch((cart.cart.qty = quantityValue));
     console.log(quantityValue);
   };
 
@@ -138,13 +140,13 @@ const CartProductCard = ({
                     >
                       {color}
                     </Typography>
-                    <IconButton onClick={toogleExpand} sx={{ padding: 0 }}>
+                    {/* <IconButton onClick={toogleExpand} sx={{ padding: 0 }}>
                       {isExpandLess ? (
                         <ExpandLess size="small" />
                       ) : (
                         <ExpandMore />
                       )}
-                    </IconButton>
+                    </IconButton> */}
                   </Box>
                   <Box sx={{ display: "flex", alignItems: "center" }}>
                     <Typography
@@ -163,13 +165,13 @@ const CartProductCard = ({
                     >
                       {size}
                     </Typography>
-                    <IconButton onClick={toogleExpand} sx={{ padding: 0 }}>
+                    {/* <IconButton onClick={toogleExpand} sx={{ padding: 0 }}>
                       {isExpandLess ? (
                         <ExpandLess size="small" />
                       ) : (
                         <ExpandMore />
                       )}
-                    </IconButton>
+                    </IconButton> */}
                   </Box>
                 </Box>
                 <Stack direction="row" alignItems="center">
