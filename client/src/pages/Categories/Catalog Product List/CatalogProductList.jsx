@@ -5,8 +5,20 @@ import { useEffect } from "react";
 import { fetchProducts } from "../../../store/Products/actions";
 import "./style.scss";
 import Preloader from "./Preloader.jsx";
+import { useLocation } from "react-router-dom";
 
-const CatalogProductList = ({ filteredProducts, currentProductData }) => {
+const CatalogProductList = ({
+  filteredProducts,
+  currentProductData,
+  isLoadingFilter,
+}) => {
+  const queryString = useLocation().search;
+  if (
+    filteredProducts.length === 166 &&
+    queryString !==
+      "?categories=bedding%2Cbath%2Ckitchen%2Cwindows%2Chome+decor"
+  )
+    window.location.reload();
   const dispatch = useDispatch();
   const { products, isLoading, hasError } = useSelector(
     (state) => state.products
@@ -18,20 +30,41 @@ const CatalogProductList = ({ filteredProducts, currentProductData }) => {
   }, []);
   return (
     <>
-      {isLoading && <Preloader />}
       {hasError && (
         <div>
           <p>Ooops, something went wrong</p>
         </div>
       )}
-      <Grid container rowSpacing={20} columnSpacing={5}>
-        {Object.values(filters).length > 0 ? (
-          filteredProducts.length === 0 ? (
-            <Typography variant="h2" sx={{ m: "50px auto" }}>
-              Sorry, there are no matching products :(
-            </Typography>
+      {isLoading || isLoadingFilter ? (
+        <Preloader />
+      ) : (
+        <Grid container rowSpacing={20} columnSpacing={5}>
+          {Object.values(filters).length > 0 ? (
+            filteredProducts.length === 0 && (!isLoading || isLoadingFilter) ? (
+              <Typography variant="h2" sx={{ m: "50px auto" }}>
+                Sorry, there are no matching products :(
+              </Typography>
+            ) : (
+              currentProductData(filteredProducts).map((product) => {
+                return (
+                  <ProductCard
+                    category={product.categories}
+                    color={product.color}
+                    fabric={product.fabric}
+                    description={product.description}
+                    size={product.size}
+                    key={product._id}
+                    id={product._id}
+                    image={product.imageUrls[0]}
+                    title={product.name}
+                    price={product.currentPrice}
+                    itemNo={product.itemNo}
+                  />
+                );
+              })
+            )
           ) : (
-            currentProductData(filteredProducts).map((product) => {
+            currentProductData(products).map((product) => {
               return (
                 <ProductCard
                   category={product.categories}
@@ -48,27 +81,9 @@ const CatalogProductList = ({ filteredProducts, currentProductData }) => {
                 />
               );
             })
-          )
-        ) : (
-          currentProductData(products).map((product) => {
-            return (
-              <ProductCard
-                category={product.categories}
-                color={product.color}
-                fabric={product.fabric}
-                description={product.description}
-                size={product.size}
-                key={product._id}
-                id={product._id}
-                image={product.imageUrls[0]}
-                title={product.name}
-                price={product.currentPrice}
-                itemNo={product.itemNo}
-              />
-            );
-          })
-        )}
-      </Grid>
+          )}
+        </Grid>
+      )}
     </>
   );
 };

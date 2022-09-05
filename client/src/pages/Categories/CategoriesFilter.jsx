@@ -30,6 +30,7 @@ const CategoriesFilter = ({
     setFilterObj({
       categories: filterObj.categories ? filterObj.categories : "",
     });
+    window.location.reload();
   };
 
   return (
@@ -91,11 +92,12 @@ const CategoriesFilter = ({
           filterObj={filterObj}
         />
       </CategoriesAccordion>
-      {Object.values(selectedFilters).length > 0 && (
-        <Button variant="outlined" sx={{ mt: "10px" }} onClick={resetFilters}>
-          Reset Filters
-        </Button>
-      )}
+      {Object.keys(selectedFilters).includes("categories") &&
+        Object.values(selectedFilters).length > 1 && (
+          <Button variant="outlined" sx={{ mt: "10px" }} onClick={resetFilters}>
+            Reset Filters
+          </Button>
+        )}
     </Stack>
   );
 };

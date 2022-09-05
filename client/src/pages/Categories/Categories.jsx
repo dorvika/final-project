@@ -9,7 +9,7 @@ import {
   CatalogProductList,
 } from "./index.js";
 import { useDispatch, useSelector } from "react-redux";
-import { useSearchParams, useLocation } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import { setFilterParams } from "../../store/Filters/actions.js";
 import { CategoriesMainContainer } from "./styles";
 import { fetchData } from "../../utils/api.js";
@@ -21,14 +21,16 @@ const Categories = () => {
   const [currentPage, setCurrentPage] = useState(1);
   let [searchParams, setSearchParams] = useSearchParams();
   const [filterObj, setFilterObj] = useState({
-    categories: searchParams.get("categories") || "",
-    size: searchParams.get("size") || "",
-    color: searchParams.get("color") || "",
-    fabric: searchParams.get("fabric") || "",
-    minPrice: searchParams.get("minPrice") || "",
-    maxPrice: searchParams.get("maxPrice") || "",
-    sort: searchParams.get("sort") || "",
+    categories: searchParams.get("categories"),
+    size: searchParams.get("size"),
+    color: searchParams.get("color"),
+    fabric: searchParams.get("fabric"),
+    minPrice: searchParams.get("minPrice"),
+    maxPrice: searchParams.get("maxPrice"),
+    sort: searchParams.get("sort"),
   });
+  const [isLoading, setIsLoading] = useState(false);
+
   const [filteredProducts, setFilteredProducts] = useState([]);
   const totalPages = Math.ceil(
     filteredProducts.length > 0
@@ -37,21 +39,25 @@ const Categories = () => {
   );
 
   const selectedFilters = Object.keys(filterObj)
-    .filter((key) => filterObj[key] != "")
+    .filter((key) => filterObj[key] != null)
     .reduce((acc, key) => ({ ...acc, [key]: filterObj[key] }), {});
 
   const queryString = useLocation().search;
 
   useEffect(() => {
+    setIsLoading(true);
     dispatch(setFilterParams(selectedFilters));
     setSearchParams(selectedFilters);
     if (queryString) {
-      fetchData(`/products/filter/${queryString}`).then((data) =>
-        setFilteredProducts(data.products)
-      );
+      fetchData(`/products/filter/${queryString}`).then((data) => {
+        setFilteredProducts(data.products);
+        setIsLoading(false);
+      });
+    } else {
+      setIsLoading(false);
     }
     setCurrentPage(1);
-  }, [filterObj, queryString, dispatch, setSearchParams]);
+  }, [filterObj, queryString]);
 
   const handleChange = (event, value) => {
     setCurrentPage(value);
@@ -98,6 +104,7 @@ const Categories = () => {
             <CatalogProductList
               filteredProducts={filteredProducts}
               currentProductData={currentProductsData}
+              isLoadingFilter={isLoading}
             />
           </Box>
           <Stack alignItems="center" justifyContent="center">
@@ -115,6 +122,6 @@ const Categories = () => {
       </Stack>
     </CategoriesMainContainer>
   );
-};;
+};
 
 export default Categories;
