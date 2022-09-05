@@ -5,41 +5,37 @@ import {
   CardMedia,
   CardContent,
   IconButton,
-  TextField,
+  // TextField,
   Stack,
+  Button,
 } from "@mui/material";
 import {
-  ExpandMore,
-  ExpandLess,
+  // ExpandMore,
+  // ExpandLess,
   Close,
-  FavoriteBorder,
-  Favorite,
+  // FavoriteBorder,
 } from "@mui/icons-material/";
 import { CustomHr } from "./index";
-import { useState } from "react";
+// import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { removeFromCart } from "../../store/Cart/actions";
-import { addFavorite, removeFavorite } from "../../store/Favorites/actions";
+// import { removeFromCart } from "../../store/Cart/actions";
+import { removeFavorite } from "../../store/Favorites/actions";
+import { addToCart } from "../../store/Cart/actions";
+// import { addFavorite } from "../../store/Favorites/actions";
 
-const CartProductCard = ({
-  image,
-  price,
-  title,
-  subtitle,
-  color,
-  size,
-  id,
-  cartQuantity,
-  itemNo,
-  product,
-}) => {
-  let [quantityValue, setQuantityValue] = useState(cartQuantity);
+const FavoritesProductCard = (product) => {
+  // console.log("product card product", product);
+  // let [quantityValue, setQuantityValue] = useState(qty);
+  // const [expand, setExpand] = useState("less");
+  // const isExpandLess = expand === "less";
   const dispatch = useDispatch();
-  const favorites = useSelector((state) => state.favorites.favorites);
-  const isFavorite = favorites.some((product) => product.id === product.id);
-  console.log(isFavorite);
-
+  const basket = useSelector((state) => state.cart.cart);
+  const isInBasket = basket.some(
+    (basketProduct) => basketProduct.id === product.id
+  );
+  console.log(isInBasket);
+  // console.log("cart", favorites);
   // const toogleExpand = () => {
   //   if (expand === "less") {
   //     setExpand("more");
@@ -49,37 +45,30 @@ const CartProductCard = ({
   //   }
   // };
   const handleRemoveProduct = () => {
-    dispatch(removeFromCart(id));
-  };
-  const handleAFavorites = () => {
-    isFavorite
-      ? dispatch(removeFavorite(product))
-      : dispatch(addFavorite(product));
-  };
-  const handleQuantityChange = (event) => {
-    setQuantityValue(event.target.value);
+    // console.log("remove product", product.id);
+    dispatch(removeFavorite(product));
   };
 
-  const increaseQuantity = () => {
-    setQuantityValue(cartQuantity + 1);
-    dispatch(
-      addToCart({
-        image,
-        price,
-        title,
-        subtitle,
-        color,
-        size,
-        _id: id,
-        cartQuantity,
-      })
-    );
+  const handleBasket = () => {
+    console.log("product from favorittess tto bag", product);
+    dispatch(addToCart(product));
   };
-  const decreaseQuantity = () => {
-    if (quantityValue > 1) {
-      setQuantityValue((quantityValue = quantityValue - 1));
-    }
-  };
+  // const handleAddToFavorites = () => {
+  //   dispatch(addFavorite(product));
+  // };
+  // const handleQuantityChange = (event) => {
+  //   setQuantityValue(event.target.value);
+  //   console.log(quantityValue);
+  // };
+
+  // const increaseQuantity = () => {
+  //   setQuantityValue((quantityValue = quantityValue + 1));
+  // };
+  // const decreaseQuantity = () => {
+  //   if (quantityValue > 1) {
+  //     setQuantityValue((quantityValue = quantityValue - 1));
+  //   }
+  // };
   return (
     <>
       <Card
@@ -91,18 +80,21 @@ const CartProductCard = ({
         }}
       >
         <Stack direction="row">
-          <Link to={`/categories/${itemNo}`} style={{ textDecoration: "none" }}>
+          <Link
+            to={`/categories/${product.itemNo}`}
+            style={{ textDecoration: "none" }}
+          >
             <CardMedia
               component="img"
               height="200px"
               sx={{ width: "200px", mr: "80px" }}
-              image={`${image}`}
+              image={`${product.imageUrls[0]}`}
             ></CardMedia>
           </Link>
           <CardContent>
             <Box>
               <Link
-                to={`/categories/${itemNo}`}
+                to={`/categories/${product.itemNo}`}
                 style={{ textDecoration: "none" }}
               >
                 <Typography
@@ -115,7 +107,7 @@ const CartProductCard = ({
                     pb: "8px",
                   }}
                 >
-                  {title}
+                  {product.name}
                 </Typography>
               </Link>
               <Typography
@@ -127,10 +119,10 @@ const CartProductCard = ({
                   lineHeight: "19px",
                 }}
               >
-                {subtitle}
+                {product.description}
               </Typography>
               <Typography variant="h5" sx={{ pb: "10px" }}>
-                ${price}
+                {product.currentPrice}
               </Typography>
               <Box sx={{ display: "flex", alignItems: "center" }}>
                 <Box sx={{ mr: "80px" }}>
@@ -149,7 +141,7 @@ const CartProductCard = ({
                       variant="h5"
                       sx={{ textTransform: "uppercase", fontWeight: "200" }}
                     >
-                      {color}
+                      {product.color}
                     </Typography>
                     {/* <IconButton onClick={toogleExpand} sx={{ padding: 0 }}>
                       {isExpandLess ? (
@@ -174,7 +166,7 @@ const CartProductCard = ({
                       variant="h5"
                       sx={{ textTransform: "uppercase", fontWeight: "200" }}
                     >
-                      {size}
+                      {product.size}
                     </Typography>
                     {/* <IconButton onClick={toogleExpand} sx={{ padding: 0 }}>
                       {isExpandLess ? (
@@ -185,7 +177,7 @@ const CartProductCard = ({
                     </IconButton> */}
                   </Box>
                 </Box>
-                <Stack direction="row" alignItems="center">
+                {/* <Stack direction="row" alignItems="center">
                   <TextField
                     value={quantityValue}
                     onChange={handleQuantityChange}
@@ -205,7 +197,7 @@ const CartProductCard = ({
                       <ExpandMore sx={{ border: "1px" }} fontSize="small" />
                     </IconButton>
                   </Stack>
-                </Stack>
+                </Stack> */}
               </Box>
             </Box>
           </CardContent>
@@ -220,15 +212,23 @@ const CartProductCard = ({
             <Close />
           </IconButton>
           <Stack direction="row" alignItems="center">
-            <Typography
+            <Button
+              onClick={handleBasket}
+              variant={isInBasket ? "outlined" : "contained"}
+              disabled={isInBasket ? true : false}
+              sx={{ padding: "10px 30px" }}
+            >
+              {isInBasket ? "in bag" : "add to bag"}
+            </Button>
+            {/* <Typography
               variant="h5"
               sx={{ textTransform: "uppercase", fontWeight: 400 }}
             >
               add to favorites
-            </Typography>
-            <IconButton onClick={handleAFavorites}>
-              {isFavorite ? <Favorite /> : <FavoriteBorder />}
-            </IconButton>
+            </Typography> */}
+            {/* <IconButton onClick={handleAddToFavorites}>
+              <FavoriteBorder />
+            </IconButton> */}
           </Stack>
         </Box>
       </Card>
@@ -238,4 +238,4 @@ const CartProductCard = ({
   );
 };
 
-export default CartProductCard;
+export default FavoritesProductCard;

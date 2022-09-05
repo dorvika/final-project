@@ -11,3 +11,5 @@ export { default as BagStepper } from "./BagStepper/BagStepper.jsx";
 export { default as CartProductList } from "./Cart/CartProductList.jsx";
 export { default as EmptyCart } from "./Cart/EmptyCart.jsx";
 export { default as MightLike } from "./Sections/MightLike/MightLike.jsx";
+export { default as EmptyFavorites } from "./Favorites/EmptyFavorites.jsx";
+export { default as FavoritesProductList } from "./Favorites/FavoritesProductList.jsx";

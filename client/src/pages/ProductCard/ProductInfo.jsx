@@ -5,6 +5,7 @@ import {
   Twitter,
   Instagram,
   FavoriteBorder,
+  Favorite,
 } from "@mui/icons-material";
 import {
   Accordion,
@@ -13,15 +14,17 @@ import {
   Box,
   Button,
   Divider,
+  IconButton,
   Link,
   Stack,
   Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { ProductInfoContainer, SocialMediaContainer } from "./styles";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../store/Cart/actions";
 import { fetchData } from "../../utils/api";
+import { addFavorite, removeFavorite } from "../../store/Favorites/actions";
 
 const ProductInfo = ({
   name,
@@ -35,6 +38,11 @@ const ProductInfo = ({
   const [expanded, setExpanded] = useState("panel1");
   const [colors, setColors] = useState([]);
   const dispatch = useDispatch();
+  const favorites = useSelector((state) => state.favorites.favorites);
+  const isFavorite = favorites.some((elem) => elem._id === product._id);
+  console.log("product details", isFavorite);
+  console.log("product details", favorites);
+  console.log(product);
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
@@ -45,7 +53,11 @@ const ProductInfo = ({
   };
 
   const addToFavorite = () => {
-    console.log("Product was added to fav");
+    dispatch(addFavorite(product));
+  };
+
+  const removeFromFavorite = () => {
+    dispatch(removeFavorite(product));
   };
 
   useEffect(() => {
@@ -145,13 +157,13 @@ const ProductInfo = ({
         >
           ADD TO BAG
         </Button>
-        <Button
-          variant="contained"
-          onClick={addToFavorite}
-          sx={(theme) => ({ [theme.breakpoints.down("sm")]: { width: "5%" } })}
+        <IconButton
+          // variant="outlined"
+          onClick={isFavorite ? addToFavorite : removeFromFavorite}
+          // sx={(theme) => ({ [theme.breakpoints.down("sm")]: { width: "5%" } })}
         >
-          <FavoriteBorder />
-        </Button>
+          {isFavorite ? <Favorite /> : <FavoriteBorder />}
+        </IconButton>
       </Stack>
       <Divider />
       <Accordion

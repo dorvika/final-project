@@ -1,6 +1,5 @@
 import Authorization from "../Authorization/Authorization.jsx";
 import { openModal } from "../../store/Modal/actions";
-// import { getCartLS } from "../../store/Cart/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -15,7 +14,7 @@ import {
   Fade,
   Button,
 } from "@mui/material";
-import {HeaderInput, HeaderLinks, IconsButtonContainer} from "./components/styles";
+import { HeaderInput } from "./components/styles";
 import Catalog from "./components/catalogButton.jsx";
 import Logo from "./components/logoSvg";
 import {
@@ -25,9 +24,6 @@ import {
   ShoppingBagOutlined,
 } from "@mui/icons-material";
 import { useState } from "react";
-// import { removeFromCart } from "../../store/Cart/actions";
-
-
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -50,11 +46,6 @@ const Header = () => {
   const handleOpen = () => {
     dispatch(openModal());
   };
-
-  // const GetCartProducts = () => {
-  //   dispatch(getCartLS);
-  // };
-
   return (
     <header>
       <Container
@@ -69,8 +60,6 @@ const Header = () => {
           <Logo></Logo>
         </Link>
         <Catalog />
-
-        <HeaderLinks>
         <Link to="/aboutus" style={{ textDecoration: "none" }}>
           <Typography variant="body">About</Typography>
         </Link>
@@ -80,8 +69,6 @@ const Header = () => {
         <Link to="/blog" style={{ textDecoration: "none" }}>
           <Typography variant="body">Blog</Typography>
         </Link>
-      </HeaderLinks>
-
         <Box>
           <HeaderInput
             endAdornment={
@@ -105,16 +92,19 @@ const Header = () => {
           <IconButton sx={{ p: "0" }} onClick={handleOpen}>
             <PersonOutlined sx={{ color: "primary.main" }} />
           </IconButton>
-          <Link style={{ textDecoration: "none", color: "#373F41" }} to={"/favorite"}>
+          <Link
+            style={{ textDecoration: "none", color: "#373F41" }}
+            to={"/favorites"}
+          >
             <Badge badgeContent={favorites.length} color="error">
               <FavoriteBorderOutlined />
             </Badge>
           </Link>
 
           <IconButton
-              style={{ textDecoration: "none", color: "#373F41" }}
-              aria-describedby={id}
-              onClick={handleClick}
+            style={{ textDecoration: "none", color: "#373F41" }}
+            aria-describedby={id}
+            onClick={handleClick}
           >
             <Popper
               sx={{ zIndex: "10000" }}
@@ -169,7 +159,6 @@ const Header = () => {
       <Divider sx={{ borderColor: "primary.main", mb: "20px" }} />
     </header>
   );
-
 };
 
 export default Header;
