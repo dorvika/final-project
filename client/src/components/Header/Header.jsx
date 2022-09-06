@@ -14,7 +14,7 @@ import {
   Fade,
   Button,
 } from "@mui/material";
-import { HeaderInput } from "./components/styles";
+import { HeaderInput, IconsButtonContainer } from "./components/styles";
 import Catalog from "./components/catalogButton.jsx";
 import Logo from "./components/logoSvg";
 import {

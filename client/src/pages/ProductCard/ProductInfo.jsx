@@ -14,7 +14,7 @@ import {
   Box,
   Button,
   Divider,
-  IconButton,
+  // IconButton,
   Link,
   Stack,
   Typography,
@@ -39,10 +39,7 @@ const ProductInfo = ({
   const [colors, setColors] = useState([]);
   const dispatch = useDispatch();
   const favorites = useSelector((state) => state.favorites.favorites);
-  const isFavorite = favorites.some((elem) => elem._id === product._id);
-  console.log("product details", isFavorite);
-  console.log("product details", favorites);
-  console.log(product);
+  const isFavorite = favorites.some((elem) => elem.itemNo === product.itemNo);
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
@@ -54,6 +51,7 @@ const ProductInfo = ({
 
   const addToFavorite = () => {
     dispatch(addFavorite(product));
+    console.log("add to favorite", product);
   };
 
   const removeFromFavorite = () => {
@@ -157,13 +155,18 @@ const ProductInfo = ({
         >
           ADD TO BAG
         </Button>
-        <IconButton
-          // variant="outlined"
-          onClick={isFavorite ? addToFavorite : removeFromFavorite}
-          // sx={(theme) => ({ [theme.breakpoints.down("sm")]: { width: "5%" } })}
+        <Button
+          variant={isFavorite ? "outlined" : "contained"}
+          onClick={isFavorite ? removeFromFavorite : addToFavorite}
+          sx={(theme) => ({
+            fontWeight: "200",
+            p: "13px",
+            width: "10%",
+            [theme.breakpoints.down("sm")]: { width: "5%" },
+          })}
         >
           {isFavorite ? <Favorite /> : <FavoriteBorder />}
-        </IconButton>
+        </Button>
       </Stack>
       <Divider />
       <Accordion
@@ -240,6 +243,6 @@ const ProductInfo = ({
       </Accordion>
     </ProductInfoContainer>
   );
-};
+};;;;;;;;;;;
 
 export default ProductInfo;

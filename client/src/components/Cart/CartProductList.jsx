@@ -67,7 +67,7 @@ const CartProductList = ({ products }) => {
                 size={size}
                 cartQuantity={cartItem.cartQuantity}
                 itemNo={itemNo}
-                product={product}
+                product={cartItem.product}
               />
             );
           })}
