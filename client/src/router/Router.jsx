@@ -13,6 +13,7 @@ import {
   Reviews,
   Blog,
   CheckOut,
+  Favorites,
 } from "../pages";
 
 export default function Router() {
@@ -31,7 +32,7 @@ export default function Router() {
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/blog" element={<Blog />} />
-        <Route path="/favorite" element={<Blog />} />
+        <Route path="/favorites" element={<Favorites />} />
         <Route path="/profile" element={<Blog />} />
         <Route path="*" element={<Error />} />
       </Routes>

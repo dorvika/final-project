@@ -1,10 +1,26 @@
-import { Grid, Card, CardMedia, Typography, Button } from "@mui/material";
+import {
+  Grid,
+  Card,
+  CardMedia,
+  Typography,
+  Button,
+  IconButton,
+  Stack,
+} from "@mui/material";
 import { useState } from "react";
 import { CustomCardContent, HoverCardContent } from "./styles";
 import { Link } from "react-router-dom";
+import { Favorite, FavoriteBorder } from "@mui/icons-material";
+import { addFavorite, removeFavorite } from "../../../store/Favorites/actions";
+import { useDispatch, useSelector } from "react-redux";
 
-const ProductCard = ({ image, title, price, size, itemNo }) => {
+const ProductCard = ({ image, title, price, size, itemNo, product }) => {
   const [isHover, setIsHover] = useState(false);
+  const dispatch = useDispatch();
+  const favorites = useSelector((state) => state.favorites.favorites);
+  const isInFavorites = favorites.some(
+    (elem) => elem.itemNo === product.itemNo
+  );
 
   const handleMouseEnter = () => {
     setIsHover(true);
@@ -12,6 +28,14 @@ const ProductCard = ({ image, title, price, size, itemNo }) => {
 
   const handleMouseLeave = () => {
     setIsHover(false);
+  };
+
+  const addToFavorite = () => {
+    dispatch(addFavorite(product));
+  };
+
+  const removeFromFavorite = () => {
+    dispatch(removeFavorite(product));
   };
   return (
     <Grid item xs={4} position="relative" marginTop="10px">
@@ -23,6 +47,16 @@ const ProductCard = ({ image, title, price, size, itemNo }) => {
         ></CardMedia>
         {isHover ? (
           <HoverCardContent>
+            <IconButton
+              sx={{ position: "absolute", top: "10px", right: "10px" }}
+              onClick={isInFavorites ? removeFromFavorite : addToFavorite}
+            >
+              {isInFavorites ? (
+                <Favorite sx={{ color: "secondary.main" }} />
+              ) : (
+                <FavoriteBorder sx={{ color: "secondary.main" }} />
+              )}
+            </IconButton>
             <Typography
               variant="h5"
               color="secondary"
@@ -47,17 +81,19 @@ const ProductCard = ({ image, title, price, size, itemNo }) => {
             >
               $ {price}
             </Typography>
-            <Link
-              to={`/categories/${itemNo}`}
-              style={{ textDecoration: "none" }}
-            >
-              <Button
-                variant="outlined"
-                sx={{ p: "10px 35px", lineHeight: "16px" }}
+            <Stack direction="row" alignItems="center" justifyContent="center">
+              <Link
+                to={`/categories/${itemNo}`}
+                style={{ textDecoration: "none" }}
               >
-                buy now
-              </Button>
-            </Link>
+                <Button
+                  variant="outlined"
+                  sx={{ p: "10px 35px", lineHeight: "16px" }}
+                >
+                  buy now
+                </Button>
+              </Link>
+            </Stack>
           </HoverCardContent>
         ) : (
           <CustomCardContent sx={{ backgroundColor: "primary.main" }}>

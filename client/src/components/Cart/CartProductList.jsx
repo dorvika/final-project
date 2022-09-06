@@ -1,19 +1,13 @@
 import { CartProductCard, CustomHr } from "./index";
-import {
-  Box,
-  Container,
-  Typography,
-  Button,
-  Link,
-} from "@mui/material";
+import { Box, Container, Typography, Button, Link } from "@mui/material";
 
 const CartProductList = ({ products }) => {
   const cartTotalSum = () => {
     return products.reduce((sum, cartItem) => {
       return sum + cartItem.product.currentPrice * cartItem.cartQuantity;
     }, 0);
-  }
-  
+  };
+
   return (
     <>
       <Container>
@@ -73,6 +67,7 @@ const CartProductList = ({ products }) => {
                 size={size}
                 cartQuantity={cartItem.cartQuantity}
                 itemNo={itemNo}
+                product={cartItem.product}
               />
             );
           })}

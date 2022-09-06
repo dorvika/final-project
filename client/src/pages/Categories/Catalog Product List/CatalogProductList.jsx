@@ -59,6 +59,7 @@ const CatalogProductList = ({
                     title={product.name}
                     price={product.currentPrice}
                     itemNo={product.itemNo}
+                    product={product}
                   />
                 );
               })
@@ -78,6 +79,7 @@ const CatalogProductList = ({
                   title={product.name}
                   price={product.currentPrice}
                   itemNo={product.itemNo}
+                  product={product}
                 />
               );
             })

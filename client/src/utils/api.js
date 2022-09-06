@@ -30,7 +30,7 @@ export const getDataLS = (category) => {
 export const syncLS = function (store) {
   return function (next) {
     return function (action) {
-      if (action.type === "ADD_FAVORITE") {
+      if (action.type === "ADD_FAVORITE" || action.type === "REMOVE_FAVORITE") {
         store.getState();
         const result = next(action);
         localStorage.setItem(
@@ -39,13 +39,13 @@ export const syncLS = function (store) {
         );
         return result;
       }
-      if (
-        action.type === "ADD_TO_CART" ||
-        action.type === "REMOVE_FROM_CART"
-      ) {
+      if (action.type === "ADD_TO_CART" || action.type === "REMOVE_FROM_CART") {
         store.getState();
         const result = next(action);
-        localStorage.setItem("cart", JSON.stringify(store.getState().cart.cart));
+        localStorage.setItem(
+          "cart",
+          JSON.stringify(store.getState().cart.cart)
+        );
         return result;
       }
       return next(action);
