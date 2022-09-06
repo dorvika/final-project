@@ -22,7 +22,7 @@ import {
 import { useEffect, useState } from "react";
 import { ProductInfoContainer, SocialMediaContainer } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../store/Cart/actions";
+import { addToCart, removeFromCart } from "../../store/Cart/actions";
 import { fetchData } from "../../utils/api";
 import { addFavorite, removeFavorite } from "../../store/Favorites/actions";
 
@@ -39,7 +39,10 @@ const ProductInfo = ({
   const [colors, setColors] = useState([]);
   const dispatch = useDispatch();
   const favorites = useSelector((state) => state.favorites.favorites);
+  const cart = useSelector((state) => state.cart.cart);
   const isFavorite = favorites.some((elem) => elem.itemNo === product.itemNo);
+  const isCart= cart.some((elem) => elem.product._id === product._id);
+  
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
@@ -48,7 +51,9 @@ const ProductInfo = ({
   const addToBag = () => {
     dispatch(addToCart(product));
   };
-
+  const removeFromBag = () => {
+    dispatch(removeFromCart(product._id));
+  };
   const addToFavorite = () => {
     dispatch(addFavorite(product));
   };
@@ -150,9 +155,9 @@ const ProductInfo = ({
             width: "35%",
             [theme.breakpoints.down("sm")]: { width: "30%", p: "13px 0" },
           })}
-          onClick={addToBag}
+          onClick={isCart ? removeFromBag : addToBag}
         >
-          ADD TO BAG
+          {isCart ? "DELETE FROM BAG" : "ADD TO BAG"}
         </Button>
         <Button
           variant={isFavorite ? "outlined" : "contained"}

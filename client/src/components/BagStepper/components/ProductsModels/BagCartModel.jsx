@@ -13,7 +13,7 @@ import { ExpandMore, ExpandLess } from "@mui/icons-material/";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../../../store/Cart/actions"
+import { addToCart, decreaseCartItem } from "../../../../store/Cart/actions"
 const CustomCard = styled(Card)(({ theme }) => ({
   [theme.breakpoints.down("670")]: {
     "& .stack": {
@@ -37,7 +37,7 @@ const CustomCard = styled(Card)(({ theme }) => ({
   },
 }));
 
-const BagCartModel = ({ image, price, title, subtitle, itemNo, cartQuantity, id }) => {
+const BagCartModel = ({ imageUrls, currentPrice, name, description, itemNo, cartQuantity, _id, product }) => {
   const dispatch = useDispatch()
   let [quantityValue, setQuantityValue] = useState(cartQuantity);
 
@@ -49,12 +49,13 @@ const BagCartModel = ({ image, price, title, subtitle, itemNo, cartQuantity, id 
   const increaseQuantity = () => {
     setQuantityValue(cartQuantity + 1);
     dispatch(
-      addToCart({ image, price, title, subtitle, _id: id, cartQuantity })
+      addToCart({ imageUrls, currentPrice, name, description, _id, cartQuantity })
     )
   };
   const decreaseQuantity = () => {
     if (quantityValue > 1) {
       setQuantityValue((quantityValue = quantityValue - 1));
+      dispatch(decreaseCartItem(product))
     }
   };
   return (
@@ -73,7 +74,7 @@ const BagCartModel = ({ image, price, title, subtitle, itemNo, cartQuantity, id 
               component="img"
               height="200px"
               sx={{ width: "200px", mr: "80px" }}
-              image={`${image}`}
+              image={`${imageUrls[0]}`}
             ></CardMedia>
           </Link>
           <CardContent>
@@ -92,7 +93,7 @@ const BagCartModel = ({ image, price, title, subtitle, itemNo, cartQuantity, id 
                     pb: "8px",
                   }}
                 >
-                  {title}
+                  {name}
                 </Typography>
               </Link>
               <Typography
@@ -104,7 +105,7 @@ const BagCartModel = ({ image, price, title, subtitle, itemNo, cartQuantity, id 
                   lineHeight: "19px",
                 }}
               >
-                {subtitle}
+                {description}
               </Typography>
 
               <Box
@@ -112,7 +113,7 @@ const BagCartModel = ({ image, price, title, subtitle, itemNo, cartQuantity, id 
                 sx={{ display: "flex", flexDirection: "column" }}
               >
                 <Typography variant="h5" sx={{ pb: "10px" }}>
-                  ${price}
+                  ${currentPrice}
                 </Typography>
                 <Stack direction="row" alignItems="center">
                   <TextField

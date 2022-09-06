@@ -19,28 +19,29 @@ import { CustomHr } from "./index";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { removeFromCart, addToCart } from "../../store/Cart/actions";
+import { removeFromCart, addToCart, decreaseCartItem } from "../../store/Cart/actions";
 import { addFavorite, removeFavorite } from "../../store/Favorites/actions";
 
 const CartProductCard = ({
-  image,
-  price,
-  title,
-  subtitle,
-  color,
-  size,
-  id,
   cartQuantity,
-  itemNo,
   product,
 }) => {
+  const {
+    imageUrls,
+    currentPrice,
+    name,
+    description,
+    color,
+    size,
+    _id,
+    itemNo} = product
   let [quantityValue, setQuantityValue] = useState(cartQuantity);
   const dispatch = useDispatch();
   const favorites = useSelector((state) => state.favorites.favorites);
   const isFavorite = favorites.some((elem) => elem.itemNo === product.itemNo);
 
   const handleRemoveProduct = () => {
-    dispatch(removeFromCart(id));
+    dispatch(removeFromCart(_id));
   };
   const addToFavorites = () => {
     dispatch(addFavorite(product));
@@ -56,21 +57,13 @@ const CartProductCard = ({
   const increaseQuantity = () => {
     setQuantityValue(cartQuantity + 1);
     dispatch(
-      addToCart({
-        image,
-        price,
-        title,
-        subtitle,
-        color,
-        size,
-        _id: id,
-        cartQuantity,
-      })
+      addToCart(product)
     );
   };
   const decreaseQuantity = () => {
     if (quantityValue > 1) {
       setQuantityValue((quantityValue = quantityValue - 1));
+      dispatch(decreaseCartItem(product))
     }
   };
   return (
@@ -89,7 +82,7 @@ const CartProductCard = ({
               component="img"
               height="200px"
               sx={{ width: "200px", mr: "80px" }}
-              image={`${image}`}
+              image={`${imageUrls[0]}`}
             ></CardMedia>
           </Link>
           <CardContent>
@@ -108,7 +101,7 @@ const CartProductCard = ({
                     pb: "8px",
                   }}
                 >
-                  {title}
+                  {name}
                 </Typography>
               </Link>
               <Typography
@@ -120,10 +113,10 @@ const CartProductCard = ({
                   lineHeight: "19px",
                 }}
               >
-                {subtitle}
+                {description}
               </Typography>
               <Typography variant="h5" sx={{ pb: "10px" }}>
-                ${price}
+                ${currentPrice}
               </Typography>
               <Box sx={{ display: "flex", alignItems: "center" }}>
                 <Box sx={{ mr: "80px" }}>
