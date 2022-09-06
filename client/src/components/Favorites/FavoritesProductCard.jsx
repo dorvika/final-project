@@ -5,70 +5,29 @@ import {
   CardMedia,
   CardContent,
   IconButton,
-  // TextField,
   Stack,
   Button,
 } from "@mui/material";
-import {
-  // ExpandMore,
-  // ExpandLess,
-  Close,
-  // FavoriteBorder,
-} from "@mui/icons-material/";
+import { Close } from "@mui/icons-material/";
 import { CustomHr } from "./index";
-// import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-// import { removeFromCart } from "../../store/Cart/actions";
 import { removeFavorite } from "../../store/Favorites/actions";
 import { addToCart } from "../../store/Cart/actions";
-// import { addFavorite } from "../../store/Favorites/actions";
 
 const FavoritesProductCard = (product) => {
-  // console.log("product card product", product);
-  // let [quantityValue, setQuantityValue] = useState(qty);
-  // const [expand, setExpand] = useState("less");
-  // const isExpandLess = expand === "less";
   const dispatch = useDispatch();
   const basket = useSelector((state) => state.cart.cart);
   const isInBasket = basket.some(
     (basketProduct) => basketProduct.id === product.id
   );
-  console.log(isInBasket);
-  // console.log("cart", favorites);
-  // const toogleExpand = () => {
-  //   if (expand === "less") {
-  //     setExpand("more");
-  //   }
-  //   if (expand === "more") {
-  //     setExpand("less");
-  //   }
-  // };
   const handleRemoveProduct = () => {
-    // console.log("remove product", product.id);
     dispatch(removeFavorite(product));
   };
 
   const handleBasket = () => {
-    console.log("product from favorittess tto bag", product);
     dispatch(addToCart(product));
   };
-  // const handleAddToFavorites = () => {
-  //   dispatch(addFavorite(product));
-  // };
-  // const handleQuantityChange = (event) => {
-  //   setQuantityValue(event.target.value);
-  //   console.log(quantityValue);
-  // };
-
-  // const increaseQuantity = () => {
-  //   setQuantityValue((quantityValue = quantityValue + 1));
-  // };
-  // const decreaseQuantity = () => {
-  //   if (quantityValue > 1) {
-  //     setQuantityValue((quantityValue = quantityValue - 1));
-  //   }
-  // };
   return (
     <>
       <Card
@@ -143,13 +102,6 @@ const FavoritesProductCard = (product) => {
                     >
                       {product.color}
                     </Typography>
-                    {/* <IconButton onClick={toogleExpand} sx={{ padding: 0 }}>
-                      {isExpandLess ? (
-                        <ExpandLess size="small" />
-                      ) : (
-                        <ExpandMore />
-                      )}
-                    </IconButton> */}
                   </Box>
                   <Box sx={{ display: "flex", alignItems: "center" }}>
                     <Typography
@@ -168,36 +120,8 @@ const FavoritesProductCard = (product) => {
                     >
                       {product.size}
                     </Typography>
-                    {/* <IconButton onClick={toogleExpand} sx={{ padding: 0 }}>
-                      {isExpandLess ? (
-                        <ExpandLess size="small" />
-                      ) : (
-                        <ExpandMore />
-                      )}
-                    </IconButton> */}
                   </Box>
                 </Box>
-                {/* <Stack direction="row" alignItems="center">
-                  <TextField
-                    value={quantityValue}
-                    onChange={handleQuantityChange}
-                    style={{ width: "50px" }}
-                    size="small"
-                  ></TextField>
-                  <Stack>
-                    <IconButton
-                      variant="outlined"
-                      onClick={increaseQuantity}
-                      sx={{ padding: 0 }}
-                    >
-                      <ExpandLess fontSize="small" />
-                    </IconButton>
-
-                    <IconButton onClick={decreaseQuantity} sx={{ padding: 0 }}>
-                      <ExpandMore sx={{ border: "1px" }} fontSize="small" />
-                    </IconButton>
-                  </Stack>
-                </Stack> */}
               </Box>
             </Box>
           </CardContent>
@@ -220,15 +144,6 @@ const FavoritesProductCard = (product) => {
             >
               {isInBasket ? "in bag" : "add to bag"}
             </Button>
-            {/* <Typography
-              variant="h5"
-              sx={{ textTransform: "uppercase", fontWeight: 400 }}
-            >
-              add to favorites
-            </Typography> */}
-            {/* <IconButton onClick={handleAddToFavorites}>
-              <FavoriteBorder />
-            </IconButton> */}
           </Stack>
         </Box>
       </Card>

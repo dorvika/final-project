@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 
 const FavoritesProductList = () => {
   const favorites = useSelector((state) => state.favorites.favorites);
-  console.log(favorites);
 
   return (
     <>
@@ -28,17 +27,6 @@ const FavoritesProductList = () => {
           >
             Favorites
           </Typography>
-          {/* <Typography
-            variant="h4"
-            sx={{
-              color: "primary.main",
-              textTransform: "uppercase",
-              letterSpacing: "0.04em",
-              fontWeight: "600",
-            }}
-          >
-            total usd 490.00
-          </Typography> */}
         </Box>
         <CustomHr />
         <Box>
@@ -53,7 +41,6 @@ const FavoritesProductList = () => {
                 price={product.currentPrice}
                 color={product.color}
                 size={product.size}
-                // // qty={qty}
                 itemNo={product.itemNo}
                 product={product}
               />
@@ -75,9 +62,6 @@ const FavoritesProductList = () => {
                 mt: "50px",
                 mb: "80px",
                 p: "15px 35px",
-                // "&:hover": {
-                //   color: "primary.main",
-                // },
               }}
             >
               continue shopping

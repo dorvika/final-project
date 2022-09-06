@@ -37,19 +37,8 @@ const CartProductCard = ({
   let [quantityValue, setQuantityValue] = useState(cartQuantity);
   const dispatch = useDispatch();
   const favorites = useSelector((state) => state.favorites.favorites);
-  console.log(favorites);
-  console.log(product);
   const isFavorite = favorites.some((elem) => elem.itemNo === product.itemNo);
-  console.log(isFavorite);
 
-  // const toogleExpand = () => {
-  //   if (expand === "less") {
-  //     setExpand("more");
-  //   }
-  //   if (expand === "more") {
-  //     setExpand("less");
-  //   }
-  // };
   const handleRemoveProduct = () => {
     dispatch(removeFromCart(id));
   };
@@ -155,13 +144,6 @@ const CartProductCard = ({
                     >
                       {color}
                     </Typography>
-                    {/* <IconButton onClick={toogleExpand} sx={{ padding: 0 }}>
-                      {isExpandLess ? (
-                        <ExpandLess size="small" />
-                      ) : (
-                        <ExpandMore />
-                      )}
-                    </IconButton> */}
                   </Box>
                   <Box sx={{ display: "flex", alignItems: "center" }}>
                     <Typography
@@ -180,13 +162,6 @@ const CartProductCard = ({
                     >
                       {size}
                     </Typography>
-                    {/* <IconButton onClick={toogleExpand} sx={{ padding: 0 }}>
-                      {isExpandLess ? (
-                        <ExpandLess size="small" />
-                      ) : (
-                        <ExpandMore />
-                      )}
-                    </IconButton> */}
                   </Box>
                 </Box>
                 <Stack direction="row" alignItems="center">
@@ -239,7 +214,6 @@ const CartProductCard = ({
         </Box>
       </Card>
       <CustomHr />
-      {/* </Link> */}
     </>
   );
 };

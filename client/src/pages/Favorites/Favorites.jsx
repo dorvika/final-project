@@ -1,7 +1,5 @@
 import { MightLike } from "../../components";
 import { EmptyFavorites, FavoritesProductList } from "../../components";
-// import { Container } from "@mui/system";
-
 import { useSelector } from "react-redux";
 import { Breadcrumbs, Link, Container } from "@mui/material";
 
@@ -9,7 +7,6 @@ const Favorites = () => {
   const favorites = useSelector((state) => state.favorites.favorites);
 
   const isFavoritesEmpty = favorites.length !== 0;
-  // console.log("isfavorite", isFavoritesEmpty);
 
   return (
     <>

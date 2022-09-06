@@ -51,7 +51,6 @@ const ProductInfo = ({
 
   const addToFavorite = () => {
     dispatch(addFavorite(product));
-    console.log("add to favorite", product);
   };
 
   const removeFromFavorite = () => {
