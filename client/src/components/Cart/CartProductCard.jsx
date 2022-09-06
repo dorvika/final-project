@@ -37,7 +37,9 @@ const CartProductCard = ({
   let [quantityValue, setQuantityValue] = useState(cartQuantity);
   const dispatch = useDispatch();
   const favorites = useSelector((state) => state.favorites.favorites);
-  const isFavorite = favorites.some((product) => product.id === product.id);
+  console.log(favorites);
+  console.log(product);
+  const isFavorite = favorites.some((elem) => elem.itemNo === product.itemNo);
   console.log(isFavorite);
 
   // const toogleExpand = () => {
@@ -51,10 +53,12 @@ const CartProductCard = ({
   const handleRemoveProduct = () => {
     dispatch(removeFromCart(id));
   };
-  const handleAFavorites = () => {
-    isFavorite
-      ? dispatch(removeFavorite(product))
-      : dispatch(addFavorite(product));
+  const addToFavorites = () => {
+    dispatch(addFavorite(product));
+  };
+
+  const removeFromFavorite = () => {
+    dispatch(removeFavorite(product));
   };
   const handleQuantityChange = (event) => {
     setQuantityValue(event.target.value);
@@ -224,9 +228,11 @@ const CartProductCard = ({
               variant="h5"
               sx={{ textTransform: "uppercase", fontWeight: 400 }}
             >
-              add to favorites
+              {isFavorite ? "remove from favorites" : "add to favorites"}
             </Typography>
-            <IconButton onClick={handleAFavorites}>
+            <IconButton
+              onClick={isFavorite ? removeFromFavorite : addToFavorites}
+            >
               {isFavorite ? <Favorite /> : <FavoriteBorder />}
             </IconButton>
           </Stack>
