@@ -1,4 +1,33 @@
-import { object, string } from "yup";
+import { object, string, ref, addMethod } from "yup";
+
+addMethod(string, "strongPassword", strongPasswordMethod);
+
+function strongPasswordMethod() {
+  return this.test("strongPasswordTest", function (value) {
+    const { path, createError } = this;
+    switch (Boolean(value)) {
+      case !/^(?=.*[a-z])/.test(value):
+        return createError({
+          path,
+          message: "password must include lowercase letter",
+        });
+      case !/^(?=.*[A-Z])/.test(value):
+        return createError({
+          path,
+          message: "password must include uppercase letter",
+        });
+      case !/^(?=.*[0-9])/.test(value):
+        return createError({ path, message: "password must include digit" });
+      case !/^(?=.*[!@#$%^&*])/.test(value):
+        return createError({
+          path,
+          message: "password must include special character",
+        });
+      default:
+        return true;
+    }
+  });
+}
 
 export const validationForm = object({
   firstName: string()
@@ -17,4 +46,11 @@ export const validationForm = object({
     .required("Login is Required")
     .matches(/^[a-zA-ZА-ЩЬЮЯҐЄІЇа-щьюяґєії]+$/, "Not a valid. Only characters"),
   email: string().email("Invalid Email").required("Email is required"),
+  password: string()
+    .required("Password is required")
+    .min(8, "Password must contain 8 or more characters")
+    .strongPassword(),
+  confirmPassword: string()
+    .required("Password confirmation is required")
+    .oneOf([ref("password"), null], "Passwords must match"),
 });

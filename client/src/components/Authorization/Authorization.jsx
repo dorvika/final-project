@@ -22,7 +22,7 @@ const Transition = forwardRef(function Transition(props, ref) {
 const Authorization = () => {
   const modal = useSelector((state) => state.modal);
   const dispatch = useDispatch();
-  const [value, setValue] = useState("1");
+  const [value, setValue] = useState(1);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -58,11 +58,11 @@ const Authorization = () => {
                   TabIndicatorProps={{ hidden: true }}
                   width="100%"
                 >
-                  <CustomTab label="Sign Up" value="1" />
-                  <CustomTab label="Log in" value="2" />
+                  <CustomTab label="Sign Up" value={1} />
+                  <CustomTab label="Log in" value={2} />
                 </TabList>
               </Box>
-              <TabPanel value="1">
+              <TabPanel value={1}>
                 <SignUp />
                 <TabList onChange={handleChange}>
                   <Tab
@@ -79,7 +79,7 @@ const Authorization = () => {
                   />
                 </TabList>
               </TabPanel>
-              <TabPanel value="2">
+              <TabPanel value={2}>
                 <Login />
               </TabPanel>
             </TabContext>

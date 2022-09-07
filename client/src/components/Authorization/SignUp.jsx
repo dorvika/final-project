@@ -7,13 +7,16 @@ import {
 import {
   Button,
   DialogActions,
+  // FormControl,
+  // FormHelperText,
   IconButton,
-  Input,
+  // Input,
   InputAdornment,
   Stack,
   TextField,
 } from "@mui/material";
 import { Form, Formik } from "formik";
+// import { forwardRef } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { closeModal } from "../../store/Modal/actions";
@@ -50,6 +53,13 @@ const SignUp = () => {
     setSignUp(values);
     handleClose();
     console.log("handleSubmit", signUp);
+    console.log({
+      firstName: signUp.firstName,
+      lastName: signUp.lastName,
+      login: signUp.login,
+      email: signUp.email,
+      password: signUp.password,
+    });
   };
 
   return (
@@ -123,9 +133,9 @@ const SignUp = () => {
                 error={props.touched.email && Boolean(props.errors.email)}
                 helperText={props.touched.email && props.errors.email}
               />
-              <Input
+              <TextField
                 hiddenLabel
-                type={showPassword ? "text" : "password"}
+                // type={showPassword ? "text" : "password"}
                 size="small"
                 variant="standard"
                 id="password"
@@ -144,8 +154,11 @@ const SignUp = () => {
                     </IconButton>
                   </InputAdornment>
                 }
+                error={props.touched.password && Boolean(props.errors.password)}
+                helperText={props.touched.password && props.errors.password}
               />
-              <Input
+              <TextField
+                sx={{ position: "relative" }}
                 hiddenLabel
                 type={showPassword ? "text" : "password"}
                 size="small"
@@ -155,6 +168,7 @@ const SignUp = () => {
                 placeholder="Confirm Password"
                 value={props.values.confirmPassword}
                 onChange={props.handleChange}
+                aria-describedby="confirmPassword"
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
@@ -165,6 +179,13 @@ const SignUp = () => {
                       {showPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
+                }
+                error={
+                  props.touched.confirmPassword &&
+                  Boolean(props.errors.confirmPassword)
+                }
+                helperText={
+                  props.touched.confirmPassword && props.errors.confirmPassword
                 }
               />
             </Stack>
@@ -186,116 +207,26 @@ const SignUp = () => {
                 Sign Up
               </Button>
               <Stack direction="row">
-                <a
+                <IconButton
+                  sx={{ marginRight: "30px" }}
                   target="_blank"
                   rel="noopener noreferrer"
                   href="https://google.com"
                 >
-                  <Google color="primary" sx={{ marginRight: "30px" }} />
-                </a>
-                <a
+                  <Google color="primary" />
+                </IconButton>
+                <IconButton
                   target="_blank"
                   rel="noopener noreferrer"
                   href="https://facebook.com"
                 >
                   <Facebook color="primary" />
-                </a>
+                </IconButton>
               </Stack>
             </DialogActions>
-            {/* <ConfirmationPromo />
-            <DialogActions
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              <Button
-                type="submit"
-                // onClick={() => {}}
-                sx={{ p: "15px 94px", mb: "30px" }}
-              >
-                Sign Up
-              </Button>
-              <Stack direction="row">
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://google.com"
-                >
-                  <Google color="primary" sx={{ marginRight: "30px" }} />
-                </a>
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://facebook.com"
-                >
-                  <Facebook color="primary" />
-                </a>
-              </Stack>
-            </DialogActions> */}
           </Form>
         )}
       </Formik>
-      {/* <Box
-        component="form"
-        sx={{
-          "& > :not(style)": { m: 1 },
-        }}
-        noValidate
-        autoComplete="off"
-        display="flex"
-        flexDirection="column"
-      >
-        <Input
-          onChange={handleChange}
-          id="name"
-          value={signUp.firstName}
-          placeholder="Name"
-        />
-        <Input
-          onChange={handleChange}
-          id="email"
-          value={signUp.email}
-          placeholder="Email"
-        />
-        <Input id="password" value={signUp.password} placeholder="Password" />
-        <Input id="confirm" value="" placeholder="Confirm Password" />
-      </Box> */}
-      {/* <ConfirmationPromo />
-      <DialogActions
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Button
-          type="submit"
-          onClick={handleSubmit}
-          sx={{ p: "15px 94px", mb: "30px" }}
-        >
-          Sign Up
-        </Button>
-        <Stack direction="row">
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://google.com"
-          >
-            <Google color="primary" sx={{ marginRight: "30px" }} />
-          </a>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://facebook.com"
-          >
-            <Facebook color="primary" />
-          </a>
-        </Stack>
-      </DialogActions> */}
     </>
   );
 };

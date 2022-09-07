@@ -263,7 +263,7 @@ const theme = createTheme({
           fontSize: 12,
           fontWeight: 400,
           position: "absolute",
-          top: "30px",
+          top: "34px",
         },
       },
     },
