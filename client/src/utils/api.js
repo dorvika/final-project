@@ -16,6 +16,12 @@ export const fetchData = async (endpoint) => {
   return data;
 };
 
+export const postData = async (endpoint, obj) => {
+  const response = await API.post(endpoint, obj);
+  const { data } = response;
+  return data;
+};
+
 export const getDataLS = (category) => {
   const lScategory = localStorage.getItem(category);
   if (!lScategory) return [];

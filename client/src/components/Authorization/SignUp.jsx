@@ -20,20 +20,14 @@ import { Form, Formik } from "formik";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { closeModal } from "../../store/Modal/actions";
+import { postData } from "../../utils/api";
 import ConfirmationPromo from "./ConfirmationPromo.jsx";
 import { validationForm } from "./ValidationForm.jsx";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
 
-  const [signUp, setSignUp] = useState({
-    firstName: "",
-    lastName: "",
-    login: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
+  const [signUp, setSignUp] = useState({});
 
   const dispatch = useDispatch();
 
@@ -50,18 +44,31 @@ const SignUp = () => {
   };
 
   const handleSubmit = (values) => {
-    setSignUp(values);
+    // setSignUp({
+    //   firstName: values.firstName,
+    //   lastName: values.lastName,
+    //   login: values.login,
+    //   email: values.email,
+    //   password: values.password,
+    // });
     handleClose();
-    console.log("handleSubmit", signUp);
-    console.log({
-      firstName: signUp.firstName,
-      lastName: signUp.lastName,
-      login: signUp.login,
-      email: signUp.email,
-      password: signUp.password,
-    });
+    // console.log("handleSubmit", signUp);
+    // console.log(signUp);
+    postData("/customers", {
+      firstName: values.firstName,
+      lastName: values.lastName,
+      login: values.login,
+      email: values.email,
+      password: values.password,
+    })
+      .then((savedcustomer) => {
+        setSignUp({ savedcustomer });
+      })
+      .catch((error) => {
+        setSignUp(error.response.data);
+      });
+    console.log("signUp after return", signUp);
   };
-
   return (
     <>
       <Formik
@@ -160,7 +167,7 @@ const SignUp = () => {
               <TextField
                 sx={{ position: "relative" }}
                 hiddenLabel
-                type={showPassword ? "text" : "password"}
+                // type={showPassword ? "text" : "password"}
                 size="small"
                 variant="standard"
                 id="confirmPassword"
@@ -200,8 +207,8 @@ const SignUp = () => {
             >
               <Button
                 variant="contained"
-                type="submit"
-                // onClick={handleSubmit}
+                // type="submit"
+                onClick={handleSubmit}
                 sx={{ p: "15px 94px", mb: "30px" }}
               >
                 Sign Up

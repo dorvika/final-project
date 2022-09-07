@@ -18,11 +18,11 @@ function strongPasswordMethod() {
         });
       case !/^(?=.*[0-9])/.test(value):
         return createError({ path, message: "password must include digit" });
-      case !/^(?=.*[!@#$%^&*])/.test(value):
-        return createError({
-          path,
-          message: "password must include special character",
-        });
+      //   case !/^(?=.*[!@#$%^&*])/.test(value):
+      //     return createError({
+      //       path,
+      //       message: "password must include special character",
+      //     });
       default:
         return true;
     }
