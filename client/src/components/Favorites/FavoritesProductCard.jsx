@@ -5,66 +5,28 @@ import {
   CardMedia,
   CardContent,
   IconButton,
-  TextField,
   Stack,
+  Button,
 } from "@mui/material";
-import {
-  ExpandMore,
-  ExpandLess,
-  Close,
-  FavoriteBorder,
-  Favorite,
-} from "@mui/icons-material/";
+import { Close } from "@mui/icons-material/";
 import { CustomHr } from "./index";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  removeFromCart,
-  addToCart,
-  decreaseCartItem,
-} from "../../store/Cart/actions";
-import { addFavorite, removeFavorite } from "../../store/Favorites/actions";
+import { removeFavorite } from "../../store/Favorites/actions";
+import { addToCart } from "../../store/Cart/actions";
 
-const CartProductCard = ({ cartQuantity, product }) => {
-  const {
-    imageUrls,
-    currentPrice,
-    name,
-    description,
-    color,
-    size,
-    _id,
-    itemNo,
-  } = product;
-  let [quantityValue, setQuantityValue] = useState(cartQuantity);
+const FavoritesProductCard = (product) => {
   const dispatch = useDispatch();
-  const favorites = useSelector((state) => state.favorites.favorites);
-  const isFavorite = favorites.some((elem) => elem.itemNo === product.itemNo);
-
+  const basket = useSelector((state) => state.cart.cart);
+  const isInBasket = basket.some(
+    (basketProducts) => basketProducts.product._id === product.id
+  );
   const handleRemoveProduct = () => {
-    dispatch(removeFromCart(_id));
-  };
-  const addToFavorites = () => {
-    dispatch(addFavorite(product));
-  };
-
-  const removeFromFavorite = () => {
     dispatch(removeFavorite(product));
   };
-  const handleQuantityChange = (event) => {
-    setQuantityValue(event.target.value);
-  };
 
-  const increaseQuantity = () => {
-    setQuantityValue(cartQuantity + 1);
+  const handleBasket = () => {
     dispatch(addToCart(product));
-  };
-  const decreaseQuantity = () => {
-    if (quantityValue > 1) {
-      setQuantityValue((quantityValue = quantityValue - 1));
-      dispatch(decreaseCartItem(product));
-    }
   };
   return (
     <>
@@ -77,18 +39,21 @@ const CartProductCard = ({ cartQuantity, product }) => {
         }}
       >
         <Stack direction="row">
-          <Link to={`/catalog/${itemNo}`} style={{ textDecoration: "none" }}>
+          <Link
+            to={`/catalog/${product.itemNo}`}
+            style={{ textDecoration: "none" }}
+          >
             <CardMedia
               component="img"
               height="200px"
               sx={{ width: "200px", mr: "80px" }}
-              image={`${imageUrls[0]}`}
+              image={`${product.imageUrls[0]}`}
             ></CardMedia>
           </Link>
           <CardContent>
             <Box>
               <Link
-                to={`/catalog/${itemNo}`}
+                to={`/catalog/${product.itemNo}`}
                 style={{ textDecoration: "none" }}
               >
                 <Typography
@@ -101,7 +66,7 @@ const CartProductCard = ({ cartQuantity, product }) => {
                     pb: "8px",
                   }}
                 >
-                  {name}
+                  {product.name}
                 </Typography>
               </Link>
               <Typography
@@ -113,10 +78,10 @@ const CartProductCard = ({ cartQuantity, product }) => {
                   lineHeight: "19px",
                 }}
               >
-                {description}
+                {product.description}
               </Typography>
               <Typography variant="h5" sx={{ pb: "10px" }}>
-                ${currentPrice}
+                {product.currentPrice}
               </Typography>
               <Box sx={{ display: "flex", alignItems: "center" }}>
                 <Box sx={{ mr: "80px" }}>
@@ -135,7 +100,7 @@ const CartProductCard = ({ cartQuantity, product }) => {
                       variant="h5"
                       sx={{ textTransform: "uppercase", fontWeight: "200" }}
                     >
-                      {color}
+                      {product.color}
                     </Typography>
                   </Box>
                   <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -153,31 +118,10 @@ const CartProductCard = ({ cartQuantity, product }) => {
                       variant="h5"
                       sx={{ textTransform: "uppercase", fontWeight: "200" }}
                     >
-                      {size}
+                      {product.size}
                     </Typography>
                   </Box>
                 </Box>
-                <Stack direction="row" alignItems="center">
-                  <TextField
-                    value={quantityValue}
-                    onChange={handleQuantityChange}
-                    style={{ width: "50px" }}
-                    size="small"
-                  ></TextField>
-                  <Stack>
-                    <IconButton
-                      variant="outlined"
-                      onClick={increaseQuantity}
-                      sx={{ padding: 0 }}
-                    >
-                      <ExpandLess fontSize="small" />
-                    </IconButton>
-
-                    <IconButton onClick={decreaseQuantity} sx={{ padding: 0 }}>
-                      <ExpandMore sx={{ border: "1px" }} fontSize="small" />
-                    </IconButton>
-                  </Stack>
-                </Stack>
               </Box>
             </Box>
           </CardContent>
@@ -192,23 +136,21 @@ const CartProductCard = ({ cartQuantity, product }) => {
             <Close />
           </IconButton>
           <Stack direction="row" alignItems="center">
-            <Typography
-              variant="h5"
-              sx={{ textTransform: "uppercase", fontWeight: 400 }}
+            <Button
+              onClick={handleBasket}
+              variant={isInBasket ? "outlined" : "contained"}
+              disabled={isInBasket ? true : false}
+              sx={{ padding: "10px 30px" }}
             >
-              {isFavorite ? "remove from favorites" : "add to favorites"}
-            </Typography>
-            <IconButton
-              onClick={isFavorite ? removeFromFavorite : addToFavorites}
-            >
-              {isFavorite ? <Favorite /> : <FavoriteBorder />}
-            </IconButton>
+              {isInBasket ? "in bag" : "add to bag"}
+            </Button>
           </Stack>
         </Box>
       </Card>
       <CustomHr />
+      {/* </Link> */}
     </>
   );
 };
 
-export default CartProductCard;
+export default FavoritesProductCard;

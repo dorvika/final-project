@@ -61,7 +61,7 @@ const PaymentOptionsPage = ({ data, next, prev, title, products, subtotal }) => 
             <CustomHr sx={{ mb: "10px" }} />
             <ShoppingBag products={products} small={true} />
             <CustomHr sx={{ mt: "10px" }} />
-            <Summary subtotal={subtotal}/>
+            <Summary subtotal={subtotal} shipping={data.delivery}/>
             <Button
               variant="contained"
               form="payment"

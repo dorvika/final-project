@@ -5,6 +5,7 @@ import {
   Twitter,
   Instagram,
   FavoriteBorder,
+  Favorite,
 } from "@mui/icons-material";
 import {
   Accordion,
@@ -13,15 +14,17 @@ import {
   Box,
   Button,
   Divider,
+  // IconButton,
   Link,
   Stack,
   Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { ProductInfoContainer, SocialMediaContainer } from "./styles";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../../store/Cart/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, removeFromCart } from "../../store/Cart/actions";
 import { fetchData } from "../../utils/api";
+import { addFavorite, removeFavorite } from "../../store/Favorites/actions";
 
 const ProductInfo = ({
   name,
@@ -35,6 +38,11 @@ const ProductInfo = ({
   const [expanded, setExpanded] = useState("panel1");
   const [colors, setColors] = useState([]);
   const dispatch = useDispatch();
+  const favorites = useSelector((state) => state.favorites.favorites);
+  const cart = useSelector((state) => state.cart.cart);
+  const isFavorite = favorites.some((elem) => elem.itemNo === product.itemNo);
+  const isCart= cart.some((elem) => elem.product._id === product._id);
+  
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
@@ -43,9 +51,15 @@ const ProductInfo = ({
   const addToBag = () => {
     dispatch(addToCart(product));
   };
-
+  const removeFromBag = () => {
+    dispatch(removeFromCart(product._id));
+  };
   const addToFavorite = () => {
-    console.log("Product was added to fav");
+    dispatch(addFavorite(product));
+  };
+
+  const removeFromFavorite = () => {
+    dispatch(removeFavorite(product));
   };
 
   useEffect(() => {
@@ -141,16 +155,21 @@ const ProductInfo = ({
             width: "35%",
             [theme.breakpoints.down("sm")]: { width: "30%", p: "13px 0" },
           })}
-          onClick={addToBag}
+          onClick={isCart ? removeFromBag : addToBag}
         >
-          ADD TO BAG
+          {isCart ? "DELETE FROM BAG" : "ADD TO BAG"}
         </Button>
         <Button
-          variant="contained"
-          onClick={addToFavorite}
-          sx={(theme) => ({ [theme.breakpoints.down("sm")]: { width: "5%" } })}
+          variant={isFavorite ? "outlined" : "contained"}
+          onClick={isFavorite ? removeFromFavorite : addToFavorite}
+          sx={(theme) => ({
+            fontWeight: "200",
+            p: "13px",
+            width: "10%",
+            [theme.breakpoints.down("sm")]: { width: "5%" },
+          })}
         >
-          <FavoriteBorder />
+          {isFavorite ? <Favorite /> : <FavoriteBorder />}
         </Button>
       </Stack>
       <Divider />
@@ -228,6 +247,6 @@ const ProductInfo = ({
       </Accordion>
     </ProductInfoContainer>
   );
-};
+};;;;;;;;;;;
 
 export default ProductInfo;

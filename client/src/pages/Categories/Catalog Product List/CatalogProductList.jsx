@@ -50,6 +50,7 @@ const CatalogProductList = ({ isLoadingFilter }) => {
                     title={product.name}
                     price={product.currentPrice}
                     itemNo={product.itemNo}
+                    product={product}
                   />
                 );
               })
@@ -69,6 +70,7 @@ const CatalogProductList = ({ isLoadingFilter }) => {
                   title={product.name}
                   price={product.currentPrice}
                   itemNo={product.itemNo}
+                  product={product}
                 />
               );
             })

@@ -24,11 +24,19 @@ const reducer = (state = initialState.cart, action) => {
                 cart: [...state.cart, {product: action.payload.product, cartQuantity: 1}] 
             }
 		}
-
+    case 'DECREASE_CART_ITEM': {
+      return {
+        ...state,
+        cart: state.cart.map((products) => products.product._id === action.payload.product._id ? {product: products.product, cartQuantity: products.cartQuantity - 1} : products)}
+    }
 		case 'REMOVE_FROM_CART': {
 			return {
                 ...state,
                 cart: state.cart.filter((products)=> products.product._id !== action.payload.id)}
+		}
+    case 'REMOVE_ALL_FROM_CART': {
+			return {...state, 
+        cart: state.cart.filter((products) => !products.product._id)}
 		}
 		default: {
 			return state

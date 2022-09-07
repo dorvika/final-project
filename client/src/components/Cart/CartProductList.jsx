@@ -1,19 +1,13 @@
 import { CartProductCard, CustomHr } from "./index";
-import {
-  Box,
-  Container,
-  Typography,
-  Button,
-  Link,
-} from "@mui/material";
-
+import { Box, Container, Typography, Button } from "@mui/material";
+import { Link } from "react-router-dom";
 const CartProductList = ({ products }) => {
   const cartTotalSum = () => {
     return products.reduce((sum, cartItem) => {
       return sum + cartItem.product.currentPrice * cartItem.cartQuantity;
     }, 0);
-  }
-  
+  };
+
   return (
     <>
       <Container>
@@ -51,28 +45,11 @@ const CartProductList = ({ products }) => {
         <CustomHr />
         <Box>
           {products.map((cartItem) => {
-            const {
-              _id,
-              imageUrls,
-              name,
-              description,
-              currentPrice,
-              color,
-              size,
-              itemNo,
-            } = cartItem.product;
             return (
               <CartProductCard
-                key={_id}
-                id={_id}
-                image={imageUrls[0]}
-                title={name}
-                subtitle={description}
-                price={currentPrice}
-                color={color}
-                size={size}
+                key={cartItem.product._id}
                 cartQuantity={cartItem.cartQuantity}
-                itemNo={itemNo}
+                product={cartItem.product}
               />
             );
           })}
@@ -84,7 +61,7 @@ const CartProductList = ({ products }) => {
             alignItems: "center",
           }}
         >
-          <Link href="/cart/checkout" sx={{ textDecoration: "none" }}>
+          <Link to="/cart/checkout" sx={{ textDecoration: "none" }}>
             <Button
               variant="contained"
               sx={{
