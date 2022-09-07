@@ -47,10 +47,7 @@ const ProductCard = ({ image, title, price, size, itemNo }) => {
             >
               $ {price}
             </Typography>
-            <Link
-              to={`/categories/${itemNo}`}
-              style={{ textDecoration: "none" }}
-            >
+            <Link to={`/catalog/${itemNo}`} style={{ textDecoration: "none" }}>
               <Button
                 variant="outlined"
                 sx={{ p: "10px 35px", lineHeight: "16px" }}

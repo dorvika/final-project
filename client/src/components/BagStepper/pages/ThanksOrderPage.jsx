@@ -1,10 +1,9 @@
 import { Button, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { useEffect} from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const ThanksOrderPage = ({makeOrder}) => {
- 
+const ThanksOrderPage = ({ makeOrder }) => {
   useEffect(() => {
     console.log(makeOrder());
   }, []);
@@ -25,7 +24,7 @@ const ThanksOrderPage = ({makeOrder}) => {
         >
           Thank you for your order!
         </Typography>
-        <Link to="/categories" style={{ textDecoration: "none" }}>
+        <Link to="/catalog" style={{ textDecoration: "none" }}>
           <Button variant="contained" sx={{ p: "15px 85px" }}>
             Continue Shopping
           </Button>

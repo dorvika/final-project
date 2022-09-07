@@ -21,7 +21,7 @@ const BagCartModelSmall = ({ image, price, title, itemNo, cartQuantity }) => {
         }}
       >
         <Stack direction="row">
-          <Link to={`/categories/${itemNo}`} style={{ textDecoration: "none" }}>
+          <Link to={`/catalog/${itemNo}`} style={{ textDecoration: "none" }}>
             <CardMedia
               component="img"
               height="100px"
@@ -32,7 +32,7 @@ const BagCartModelSmall = ({ image, price, title, itemNo, cartQuantity }) => {
           <CardContent>
             <Box>
               <Link
-                to={`/categories/${itemNo}`}
+                to={`/catalog/${itemNo}`}
                 style={{ textDecoration: "none" }}
               >
                 <Typography

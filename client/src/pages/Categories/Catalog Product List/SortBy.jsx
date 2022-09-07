@@ -2,8 +2,10 @@ import { Box, Button, Fade, MenuItem } from "@mui/material";
 import { useState } from "react";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import { StyledMenu } from "./styles";
+import { useSearchParams } from "react-router-dom";
 
-const SortPanel = ({ filterObj, setFilterObj }) => {
+const SortPanel = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -14,7 +16,8 @@ const SortPanel = ({ filterObj, setFilterObj }) => {
   };
 
   const setSortBy = (sortBy) => {
-    setFilterObj({ ...filterObj, sort: sortBy });
+    searchParams.set("sort", sortBy);
+    setSearchParams(searchParams);
     handleClose();
   };
 
@@ -43,8 +46,6 @@ const SortPanel = ({ filterObj, setFilterObj }) => {
           onClose={handleClose}
           TransitionComponent={Fade}
         >
-          {/* <MenuItem onClick={handleClose}>Best Match</MenuItem>
-          <MenuItem onClick={handleClose}>Featured</MenuItem> */}
           <MenuItem onClick={() => setSortBy("currentPrice")}>
             Lowest Price
           </MenuItem>

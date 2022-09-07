@@ -7,23 +7,13 @@ import "./style.scss";
 import Preloader from "./Preloader.jsx";
 import { useLocation } from "react-router-dom";
 
-const CatalogProductList = ({
-  filteredProducts,
-  currentProductData,
-  isLoadingFilter,
-}) => {
-  const queryString = useLocation().search;
-  if (
-    filteredProducts.length === 166 &&
-    queryString !==
-      "?categories=bedding%2Cbath%2Ckitchen%2Cwindows%2Chome+decor"
-  )
-    window.location.reload();
+const CatalogProductList = ({ isLoadingFilter }) => {
   const dispatch = useDispatch();
   const { products, isLoading, hasError } = useSelector(
     (state) => state.products
   );
-  const { filters } = useSelector((state) => state.filters);
+  const { filteredProducts } = useSelector((state) => state.filters);
+  const queryString = useLocation().search;
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -39,13 +29,14 @@ const CatalogProductList = ({
         <Preloader />
       ) : (
         <Grid container rowSpacing={20} columnSpacing={5}>
-          {Object.values(filters).length > 0 ? (
-            filteredProducts.length === 0 && (!isLoading || isLoadingFilter) ? (
+          {queryString ? (
+            filteredProducts.length === 0 &&
+            (!isLoading || !isLoadingFilter) ? (
               <Typography variant="h2" sx={{ m: "50px auto" }}>
                 Sorry, there are no matching products :(
               </Typography>
             ) : (
-              currentProductData(filteredProducts).map((product) => {
+              filteredProducts.map((product) => {
                 return (
                   <ProductCard
                     category={product.categories}
@@ -64,7 +55,7 @@ const CatalogProductList = ({
               })
             )
           ) : (
-            currentProductData(products).map((product) => {
+            products.map((product) => {
               return (
                 <ProductCard
                   category={product.categories}

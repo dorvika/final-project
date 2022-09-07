@@ -2,10 +2,12 @@ import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import { Box, Button, Fade, MenuItem } from "@mui/material";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 import { newQuantity } from "../../../store/Filters/actions";
 import { StyledMenu } from "./styles";
 
 const SortPanel = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const options = [9, 18, 27];
   const dispatch = useDispatch();
   const { showQuantity } = useSelector((state) => state.filters);
@@ -15,6 +17,9 @@ const SortPanel = () => {
 
   const handleMenuItemClick = (event, index) => {
     dispatch(newQuantity(options[index]));
+    searchParams.set("perPage", options[index]);
+    searchParams.set("startPage", 1);
+    setSearchParams(searchParams);
     setAnchorEl(null);
   };
 
@@ -64,6 +69,6 @@ const SortPanel = () => {
       </Box>
     </>
   );
-};;;;
+};
 
 export default SortPanel;

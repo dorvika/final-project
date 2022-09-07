@@ -10,67 +10,65 @@ import {
 } from "./index.js";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useSearchParams } from "react-router-dom";
-import { setFilterParams } from "../../store/Filters/actions.js";
+import {
+  setFilteredProducts,
+  setFilteredProductsQty,
+} from "../../store/Filters/actions.js";
 import { CategoriesMainContainer } from "./styles";
 import { fetchData } from "../../utils/api.js";
 
 const Categories = () => {
   const dispatch = useDispatch();
-  const { showQuantity } = useSelector((state) => state.filters);
+  const { showQuantity, filteredProducts, filteredProductsQty } = useSelector(
+    (state) => state.filters
+  );
   const { products } = useSelector((state) => state.products);
-  const [currentPage, setCurrentPage] = useState(1);
-  let [searchParams, setSearchParams] = useSearchParams();
-  const [filterObj, setFilterObj] = useState({
-    categories: searchParams.get("categories"),
-    size: searchParams.get("size"),
-    color: searchParams.get("color"),
-    fabric: searchParams.get("fabric"),
-    minPrice: searchParams.get("minPrice"),
-    maxPrice: searchParams.get("maxPrice"),
-    sort: searchParams.get("sort"),
-  });
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [currentPage, setCurrentPage] = useState(
+    Number(searchParams.get("startPage")) || 1
+  );
   const [isLoading, setIsLoading] = useState(false);
 
-  const [filteredProducts, setFilteredProducts] = useState([]);
+  console.log(showQuantity);
+
   const totalPages = Math.ceil(
     filteredProducts.length > 0
-      ? filteredProducts.length / showQuantity
+      ? filteredProductsQty / showQuantity
       : products.length / showQuantity
   );
-
-  const selectedFilters = Object.keys(filterObj)
-    .filter((key) => filterObj[key] != null)
-    .reduce((acc, key) => ({ ...acc, [key]: filterObj[key] }), {});
 
   const queryString = useLocation().search;
 
   useEffect(() => {
     setIsLoading(true);
-    dispatch(setFilterParams(selectedFilters));
-    setSearchParams(selectedFilters);
     if (queryString) {
       fetchData(`/products/filter/${queryString}`).then((data) => {
-        setFilteredProducts(data.products);
+        console.log(data);
+        dispatch(setFilteredProducts(data.products));
+        dispatch(setFilteredProductsQty(data.productsQuantity));
         setIsLoading(false);
       });
     } else {
       setIsLoading(false);
     }
     setCurrentPage(1);
-  }, [filterObj, queryString]);
+  }, [queryString, dispatch]);
 
   const handleChange = (event, value) => {
     setCurrentPage(value);
+    searchParams.set("startPage", value);
+    searchParams.set("perPage", showQuantity);
+    setSearchParams(searchParams);
   };
 
-  const currentProductsData = (listProducts) => {
-    if (currentPage > totalPages) {
-      setCurrentPage(1);
-    }
-    const firstPageIndex = (currentPage - 1) * showQuantity;
-    const lastPageIndex = firstPageIndex + showQuantity;
-    return listProducts.slice(firstPageIndex, lastPageIndex);
-  };
+  // const currentProductsData = (listProducts) => {
+  //   if (currentPage > totalPages) {
+  //     setCurrentPage(1);
+  //   }
+  //   const firstPageIndex = (currentPage - 1) * showQuantity;
+  //   const lastPageIndex = firstPageIndex + showQuantity;
+  //   return listProducts.slice(firstPageIndex, lastPageIndex);
+  // };
 
   return (
     <CategoriesMainContainer>
@@ -78,19 +76,14 @@ const Categories = () => {
         <Link underline="hover" color="inherit" href="/">
           Shop
         </Link>
-        <Link underline="hover" color="inherit" href="/categories">
+        <Link underline="hover" color="inherit" href="/catalog">
           Catalog
         </Link>
       </Breadcrumbs>
       <Stack direction="row" gap="20px" alignItems="flex-start">
-        <CategoriesFilter
-          filterObj={filterObj}
-          setFilterObj={setFilterObj}
-          selectedFilters={selectedFilters}
-          setSearchParams={setSearchParams}
-        />
+        <CategoriesFilter />
         <Box sx={{ width: "75%" }}>
-          <TopFilter setFilterObj={setFilterObj} filterObj={filterObj} />
+          <TopFilter />
           <Stack
             direction="row"
             justifyContent="space-between"
@@ -98,12 +91,11 @@ const Categories = () => {
             marginBottom="23px"
           >
             <ShowQuantity />
-            <SortBy filterObj={filterObj} setFilterObj={setFilterObj} />
+            <SortBy />
           </Stack>
           <Box>
             <CatalogProductList
-              filteredProducts={filteredProducts}
-              currentProductData={currentProductsData}
+              // currentProductData={currentProductsData}
               isLoadingFilter={isLoading}
             />
           </Box>

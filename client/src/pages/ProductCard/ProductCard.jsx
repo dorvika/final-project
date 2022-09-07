@@ -42,14 +42,14 @@ const ProductCard = () => {
             <Link underline="hover" color="inherit" href="/">
               Shop
             </Link>
-            <Link underline="hover" color="inherit" href="/categories">
+            <Link underline="hover" color="inherit" href="/catalog">
               Catalog
             </Link>
             <Link
               sx={{ textTransform: "capitalize" }}
               underline="hover"
               color="inherit"
-              href={`/categories?categories=${categories}`}
+              href={`/catalog?categories=${categories}`}
             >
               {categories}
             </Link>
@@ -57,7 +57,7 @@ const ProductCard = () => {
               sx={{ textTransform: "capitalize" }}
               underline="hover"
               color="inherit"
-              href={`/categories/${itemNo}`}
+              href={`/catalog/${itemNo}`}
             >
               {name}
             </Link>

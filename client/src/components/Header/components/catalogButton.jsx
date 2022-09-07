@@ -95,7 +95,7 @@ const Catalog = () => {
                 >
                   <MenuItem>
                     <Link
-                      to={`/categories?categories=${allCategories}`}
+                      to={`/catalog?categories=${allCategories}`}
                       style={{ textDecoration: "none" }}
                       onClick={handleClose}
                     >
@@ -116,7 +116,7 @@ const Catalog = () => {
                   {categories.map((category) => (
                     <MenuItem key={category.id}>
                       <Link
-                        to={`/categories?categories=${category.name}`}
+                        to={`/catalog?categories=${category.name}`}
                         style={{ textDecoration: "none" }}
                         onClick={handleClose}
                       >

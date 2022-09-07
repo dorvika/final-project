@@ -9,7 +9,13 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { popularArray } from "./dataPopular";
-import {CustomButton, CustomCardContent, CustomGridItem, CustomIcon, CustomTypography} from "./styles";
+import {
+  CustomButton,
+  CustomCardContent,
+  CustomGridItem,
+  CustomIcon,
+  CustomTypography,
+} from "./styles";
 
 const Popular = () => {
   const matches = useMediaQuery("(max-width: 899px)");
@@ -38,7 +44,7 @@ const Popular = () => {
           .filter((e, count) => count < 4)
           .map(({ id, urlImage, title, xs }) => (
             <CustomGridItem item key={id} xs={matches ? 12 : xs}>
-              <Link href="/categories">
+              <Link href="/catalog">
                 <Card sx={{ maxWidth: "100%" }}>
                   <CardMedia
                     component="img"
@@ -51,9 +57,7 @@ const Popular = () => {
                       <CustomTypography variant="p" component="p">
                         {title}
                       </CustomTypography>
-                      <CustomButton>
-                        Shop
-                      </CustomButton>
+                      <CustomButton>Shop</CustomButton>
                     </CardContent>
                   </CustomCardContent>
                 </Card>
@@ -61,12 +65,19 @@ const Popular = () => {
             </CustomGridItem>
           ))}
       </Grid>
-        <CustomButton sx={{ margin: "0", padding: "0" }}>
-          <Link href="/categories" sx={{ textDecoration: "none", padding: "6px 60px 6px 43px", position: "relative" }}>
-            see all
-            <CustomIcon />
-          </Link>
-        </CustomButton>
+      <CustomButton sx={{ margin: "0", padding: "0" }}>
+        <Link
+          href="/catalog"
+          sx={{
+            textDecoration: "none",
+            padding: "6px 60px 6px 43px",
+            position: "relative",
+          }}
+        >
+          see all
+          <CustomIcon />
+        </Link>
+      </CustomButton>
     </Box>
   );
 };

@@ -32,7 +32,6 @@ const CartProductCard = ({
   cartQuantity,
   itemNo,
 }) => {
-
   let [quantityValue, setQuantityValue] = useState(cartQuantity);
   const dispatch = useDispatch();
   // const toogleExpand = () => {
@@ -48,7 +47,16 @@ const CartProductCard = ({
   };
   const handleAddToFavorites = () => {
     dispatch(
-      addFavorite({ image, price, title, subtitle, color, size, id, cartQuantity })
+      addFavorite({
+        image,
+        price,
+        title,
+        subtitle,
+        color,
+        size,
+        id,
+        cartQuantity,
+      })
     );
   };
   const handleQuantityChange = (event) => {
@@ -58,8 +66,17 @@ const CartProductCard = ({
   const increaseQuantity = () => {
     setQuantityValue(cartQuantity + 1);
     dispatch(
-      addToCart({ image, price, title, subtitle, color, size, _id: id, cartQuantity })
-    )
+      addToCart({
+        image,
+        price,
+        title,
+        subtitle,
+        color,
+        size,
+        _id: id,
+        cartQuantity,
+      })
+    );
   };
   const decreaseQuantity = () => {
     if (quantityValue > 1) {
@@ -77,7 +94,7 @@ const CartProductCard = ({
         }}
       >
         <Stack direction="row">
-          <Link to={`/categories/${itemNo}`} style={{ textDecoration: "none" }}>
+          <Link to={`/catalog/${itemNo}`} style={{ textDecoration: "none" }}>
             <CardMedia
               component="img"
               height="200px"
@@ -88,7 +105,7 @@ const CartProductCard = ({
           <CardContent>
             <Box>
               <Link
-                to={`/categories/${itemNo}`}
+                to={`/catalog/${itemNo}`}
                 style={{ textDecoration: "none" }}
               >
                 <Typography
