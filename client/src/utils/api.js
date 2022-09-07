@@ -39,7 +39,7 @@ export const syncLS = function (store) {
         );
         return result;
       }
-      if (action.type === "ADD_TO_CART" || action.type === "REMOVE_FROM_CART") {
+      if (action.type === "ADD_TO_CART" || action.type === "REMOVE_FROM_CART" || action.type === "REMOVE_ALL_FROM_CART" || action.type === "DECREASE_CART_ITEM") {
         store.getState();
         const result = next(action);
         localStorage.setItem(

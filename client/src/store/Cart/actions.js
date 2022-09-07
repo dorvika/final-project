@@ -19,10 +19,16 @@ export const increaseCartItem = id => {
     }
 }
 
-export const decreaseCartItem = id => {
+export const decreaseCartItem = product => {
     return {
         type: 'DECREASE_CART_ITEM',
-        payload: { id }
+        payload: { product }
+    }
+}
+
+export const removeAllFromCart = () => {
+    return {
+        type: 'REMOVE_ALL_FROM_CART',
     }
 }
 

@@ -19,7 +19,7 @@ const FavoritesProductCard = (product) => {
   const dispatch = useDispatch();
   const basket = useSelector((state) => state.cart.cart);
   const isInBasket = basket.some(
-    (basketProduct) => basketProduct.id === product.id
+    (basketProducts) => basketProducts.product._id === product.id
   );
   const handleRemoveProduct = () => {
     dispatch(removeFavorite(product));
