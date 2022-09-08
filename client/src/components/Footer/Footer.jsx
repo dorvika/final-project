@@ -37,7 +37,10 @@ const Footer = () => {
             </Typography>
             <List>
               <ListItem>
-                <Link to="/categories" style={{ textDecoration: "none" }}>
+                <Link
+                  to="/catalog?perPage=9&startPage=1"
+                  style={{ textDecoration: "none" }}
+                >
                   <Typography variant="body">Catalog</Typography>
                 </Link>
               </ListItem>

@@ -13,7 +13,7 @@ import { ExpandMore, ExpandLess } from "@mui/icons-material/";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addToCart, decreaseCartItem } from "../../../../store/Cart/actions"
+import { addToCart, decreaseCartItem } from "../../../../store/Cart/actions";
 const CustomCard = styled(Card)(({ theme }) => ({
   [theme.breakpoints.down("670")]: {
     "& .stack": {
@@ -37,8 +37,17 @@ const CustomCard = styled(Card)(({ theme }) => ({
   },
 }));
 
-const BagCartModel = ({ imageUrls, currentPrice, name, description, itemNo, cartQuantity, _id, product }) => {
-  const dispatch = useDispatch()
+const BagCartModel = ({
+  imageUrls,
+  currentPrice,
+  name,
+  description,
+  itemNo,
+  cartQuantity,
+  _id,
+  product,
+}) => {
+  const dispatch = useDispatch();
   let [quantityValue, setQuantityValue] = useState(cartQuantity);
 
   const handleQuantityChange = (event) => {
@@ -49,13 +58,20 @@ const BagCartModel = ({ imageUrls, currentPrice, name, description, itemNo, cart
   const increaseQuantity = () => {
     setQuantityValue(cartQuantity + 1);
     dispatch(
-      addToCart({ imageUrls, currentPrice, name, description, _id, cartQuantity })
-    )
+      addToCart({
+        imageUrls,
+        currentPrice,
+        name,
+        description,
+        _id,
+        cartQuantity,
+      })
+    );
   };
   const decreaseQuantity = () => {
     if (quantityValue > 1) {
       setQuantityValue((quantityValue = quantityValue - 1));
-      dispatch(decreaseCartItem(product))
+      dispatch(decreaseCartItem(product));
     }
   };
   return (
@@ -68,7 +84,7 @@ const BagCartModel = ({ imageUrls, currentPrice, name, description, itemNo, cart
         }}
       >
         <Stack direction="row" className="stack">
-          <Link to={`/categories/${itemNo}`} style={{ textDecoration: "none" }}>
+          <Link to={`/catalog/${itemNo}`} style={{ textDecoration: "none" }}>
             <CardMedia
               className="cardmedia"
               component="img"
@@ -80,7 +96,7 @@ const BagCartModel = ({ imageUrls, currentPrice, name, description, itemNo, cart
           <CardContent>
             <Box>
               <Link
-                to={`/categories/${itemNo}`}
+                to={`/catalog/${itemNo}`}
                 style={{ textDecoration: "none" }}
               >
                 <Typography

@@ -3,17 +3,18 @@ import { useEffect, useState } from "react";
 import { CategoriesAccordion, PriceSlider, CategoriesRadio } from "./index.js";
 import { ColorBox } from "./styles.js";
 import { fetchData } from "../../utils/api.js";
+import { useSearchParams } from "react-router-dom";
 
-const CategoriesFilter = ({
-  filterObj,
-  setFilterObj,
-  selectedFilters,
-  setSearchParams,
-}) => {
+const CategoriesFilter = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [sizes, setSizes] = useState([]);
   const [colors, setColors] = useState([]);
   const [materials, setMaterials] = useState([]);
-  const [activeColor, setActiveColor] = useState(filterObj.color || "");
+  const [activeColor, setActiveColor] = useState("");
+
+  useEffect(() => {
+    setActiveColor(searchParams.get("color"));
+  }, [searchParams]);
 
   const allColors = colors.map((color) => color.name.toLowerCase()).join();
 
@@ -24,14 +25,23 @@ const CategoriesFilter = ({
   }, []);
 
   const resetFilters = () => {
-    setSearchParams({
-      categories: filterObj.categories ? filterObj.categories : "",
-    });
-    setFilterObj({
-      categories: filterObj.categories ? filterObj.categories : "",
-    });
-    window.location.reload();
+    if (searchParams.get("categories")) {
+      setSearchParams({
+        categories: searchParams.get("categories"),
+        perPage: 9,
+        startPage: 1,
+      });
+    } else {
+      setSearchParams({
+        perPage: 9,
+        startPage: 1,
+      });
+    }
   };
+
+  const filterParams = Object.keys(
+    Object.fromEntries([...searchParams])
+  ).filter((param) => param !== "categories");
 
   return (
     <Stack sx={{ width: "25%" }}>
@@ -39,14 +49,10 @@ const CategoriesFilter = ({
         CATALOG
       </Typography>
       <CategoriesAccordion title="Price">
-        <PriceSlider setFilterObj={setFilterObj} filterObj={filterObj} />
+        <PriceSlider />
       </CategoriesAccordion>
       <CategoriesAccordion title="Size">
-        <CategoriesRadio
-          options={sizes}
-          setFilterObj={setFilterObj}
-          filterObj={filterObj}
-        />
+        <CategoriesRadio options={sizes} />
       </CategoriesAccordion>
       <CategoriesAccordion title="Color">
         <Stack direction="row" flexWrap="wrap" gap="10px" width="70%">
@@ -62,14 +68,16 @@ const CategoriesFilter = ({
               }}
               onClick={() => {
                 setActiveColor(cssValue);
-                setFilterObj({ ...filterObj, color: name.toLowerCase() });
+                searchParams.set("color", name.toLowerCase());
+                setSearchParams(searchParams);
               }}
             />
           ))}
           <ColorBox
             onClick={() => {
               setActiveColor(allColors);
-              setFilterObj({ ...filterObj, color: allColors });
+              searchParams.set("color", allColors);
+              setSearchParams(searchParams);
             }}
             sx={{
               borderRadius: "0",
@@ -85,19 +93,13 @@ const CategoriesFilter = ({
         </Stack>
       </CategoriesAccordion>
       <CategoriesAccordion title="Material">
-        <CategoriesRadio
-          options={materials}
-          materialFlag
-          setFilterObj={setFilterObj}
-          filterObj={filterObj}
-        />
+        <CategoriesRadio options={materials} materialFlag />
       </CategoriesAccordion>
-      {Object.keys(selectedFilters).includes("categories") &&
-        Object.values(selectedFilters).length > 1 && (
-          <Button variant="outlined" sx={{ mt: "10px" }} onClick={resetFilters}>
-            Reset Filters
-          </Button>
-        )}
+      {filterParams.length > 0 && (
+        <Button variant="outlined" sx={{ mt: "10px" }} onClick={resetFilters}>
+          Reset Filters
+        </Button>
+      )}
     </Stack>
   );
 };

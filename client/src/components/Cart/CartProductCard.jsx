@@ -19,13 +19,14 @@ import { CustomHr } from "./index";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { removeFromCart, addToCart, decreaseCartItem } from "../../store/Cart/actions";
+import {
+  removeFromCart,
+  addToCart,
+  decreaseCartItem,
+} from "../../store/Cart/actions";
 import { addFavorite, removeFavorite } from "../../store/Favorites/actions";
 
-const CartProductCard = ({
-  cartQuantity,
-  product,
-}) => {
+const CartProductCard = ({ cartQuantity, product }) => {
   const {
     imageUrls,
     currentPrice,
@@ -34,7 +35,8 @@ const CartProductCard = ({
     color,
     size,
     _id,
-    itemNo} = product
+    itemNo,
+  } = product;
   let [quantityValue, setQuantityValue] = useState(cartQuantity);
   const dispatch = useDispatch();
   const favorites = useSelector((state) => state.favorites.favorites);
@@ -56,14 +58,12 @@ const CartProductCard = ({
 
   const increaseQuantity = () => {
     setQuantityValue(cartQuantity + 1);
-    dispatch(
-      addToCart(product)
-    );
+    dispatch(addToCart(product));
   };
   const decreaseQuantity = () => {
     if (quantityValue > 1) {
       setQuantityValue((quantityValue = quantityValue - 1));
-      dispatch(decreaseCartItem(product))
+      dispatch(decreaseCartItem(product));
     }
   };
   return (
@@ -77,7 +77,7 @@ const CartProductCard = ({
         }}
       >
         <Stack direction="row">
-          <Link to={`/categories/${itemNo}`} style={{ textDecoration: "none" }}>
+          <Link to={`/catalog/${itemNo}`} style={{ textDecoration: "none" }}>
             <CardMedia
               component="img"
               height="200px"
@@ -88,7 +88,7 @@ const CartProductCard = ({
           <CardContent>
             <Box>
               <Link
-                to={`/categories/${itemNo}`}
+                to={`/catalog/${itemNo}`}
                 style={{ textDecoration: "none" }}
               >
                 <Typography

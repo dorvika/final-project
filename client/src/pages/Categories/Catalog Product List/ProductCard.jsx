@@ -83,7 +83,7 @@ const ProductCard = ({ image, title, price, size, itemNo, product }) => {
             </Typography>
             <Stack direction="row" alignItems="center" justifyContent="center">
               <Link
-                to={`/categories/${itemNo}`}
+                to={`/catalog/${itemNo}`}
                 style={{ textDecoration: "none" }}
               >
                 <Button

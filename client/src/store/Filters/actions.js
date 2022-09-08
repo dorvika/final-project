@@ -1,7 +1,14 @@
-export const setFilterParams = (filterObj) => {
+export const setFilteredProducts = (filteredProducts) => {
   return {
-    type: "SET_FILTER_PARAMS",
-    payload: { filterParams: filterObj },
+    type: "SET_FILTERED_PRODUCTS",
+    payload: filteredProducts,
+  };
+};
+
+export const setFilteredProductsQty = (quantity) => {
+  return {
+    type: "SET_FILTERED_PRODUCTS_QTY",
+    payload: quantity,
   };
 };
 

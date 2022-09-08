@@ -1,18 +1,32 @@
 import { Stack, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { CustomPriceSlider, CustomTextField } from "./styles";
 
-const PriceSlider = ({ setFilterObj, filterObj }) => {
-  const primaryMinPrice = filterObj.minPrice || 0;
-  const primaryMaxPrice = filterObj.maxPrice || 500;
+const PriceSlider = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [price, setPrice] = useState({
-    minPrice: primaryMinPrice,
-    maxPrice: primaryMaxPrice,
+    minPrice: 0,
+    maxPrice: 500,
   });
-  const [sliderValues, setSliderValues] = useState([
-    primaryMinPrice === 0 ? 1 : +primaryMinPrice,
-    +primaryMaxPrice,
-  ]);
+  const [sliderValues, setSliderValues] = useState([0, 500]);
+
+  useEffect(() => {
+    setPrice({
+      minPrice: Number(searchParams.get("minPrice")) || 0,
+      maxPrice: Number(searchParams.get("maxPrice")) || 500,
+    });
+    setSliderValues([
+      Number(searchParams.get("minPrice")) || 0,
+      Number(searchParams.get("maxPrice")) || 500,
+    ]);
+  }, [searchParams]);
+
+  const setParams = (value1, value2) => {
+    searchParams.set("minPrice", value1);
+    searchParams.set("maxPrice", value2);
+    setSearchParams(searchParams);
+  };
 
   const handleSliderChange = (event, newValue) => {
     setPrice({
@@ -21,11 +35,7 @@ const PriceSlider = ({ setFilterObj, filterObj }) => {
       maxPrice: Math.max(...newValue),
     });
     setSliderValues(newValue);
-    setFilterObj({
-      ...filterObj,
-      minPrice: newValue[0] === 0 ? 1 : newValue[0],
-      maxPrice: newValue[1],
-    });
+    setParams(newValue[0] === 0 ? 1 : newValue[0], newValue[1]);
   };
 
   const handleInputChange = (event) => {
@@ -40,11 +50,7 @@ const PriceSlider = ({ setFilterObj, filterObj }) => {
     setPrice(newPrice);
     const newValue = Object.values(newPrice);
     setSliderValues(newValue);
-    setFilterObj({
-      ...filterObj,
-      minPrice: newValue[0] === 0 ? 1 : newValue[0],
-      maxPrice: newValue[1],
-    });
+    setParams(newValue[0] === 0 ? 1 : newValue[0], newValue[1]);
   };
 
   const handleBlur = () => {
@@ -55,11 +61,7 @@ const PriceSlider = ({ setFilterObj, filterObj }) => {
     }
     const newValue = Object.values(price);
     setSliderValues(newValue);
-    setFilterObj({
-      ...filterObj,
-      minPrice: newValue[0] === 0 ? 1 : newValue[0],
-      maxPrice: newValue[1],
-    });
+    setParams(newValue[0] === 0 ? 1 : newValue[0], newValue[1]);
   };
 
   return (

@@ -1,12 +1,16 @@
 import { Button, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { fetchData } from "../../../utils/api";
 
-const TopFilter = ({ setFilterObj, filterObj }) => {
+const TopFilter = () => {
   const [categories, setCategories] = useState([]);
-  const [activeCategory, setActiveCategory] = useState(
-    filterObj.categories || ""
-  );
+  const [activeCategory, setActiveCategory] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    setActiveCategory(searchParams.get("categories"));
+  }, [searchParams]);
 
   const allCategories = categories.map((category) => category.name).join();
 
@@ -30,10 +34,9 @@ const TopFilter = ({ setFilterObj, filterObj }) => {
                 : "primary.main",
           }}
           onClick={() => {
-            setFilterObj({
-              ...filterObj,
-              categories: allCategories,
-            });
+            searchParams.set("categories", allCategories);
+            searchParams.set("startPage", 1);
+            setSearchParams(searchParams);
             setActiveCategory(allCategories);
           }}
         >
@@ -54,10 +57,9 @@ const TopFilter = ({ setFilterObj, filterObj }) => {
                   : "primary.main",
             }}
             onClick={() => {
-              setFilterObj({
-                ...filterObj,
-                categories: category.name,
-              });
+              searchParams.set("categories", category.name);
+              searchParams.set("startPage", 1);
+              setSearchParams(searchParams);
               setActiveCategory(category.name);
             }}
           >

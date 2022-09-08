@@ -1,25 +1,25 @@
 import { FormControl, Radio, RadioGroup } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { CustomFormControlLabel } from "./styles";
 
-const CategoriesRadio = ({
-  options,
-  materialFlag,
-  setFilterObj,
-  filterObj,
-}) => {
-  const primarySize = filterObj.size || "";
-  const primaryFabric = filterObj.fabric || "";
-  const [value, setValue] = useState(
-    materialFlag ? primaryFabric : primarySize
-  );
+const CategoriesRadio = ({ options, materialFlag }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const primarySize = searchParams.get("size");
+  const primaryFabric = searchParams.get("fabric");
+  const [value, setValue] = useState("");
+
+  useEffect(() => {
+    setValue(materialFlag ? primaryFabric : primarySize);
+  }, [searchParams]);
 
   const allOptions = options.map((option) => option.name).join();
 
   const handleChange = (e) => {
     setValue(e.target.value);
     const key = e.target.name;
-    setFilterObj({ ...filterObj, [key]: e.target.value });
+    searchParams.set([key], e.target.value);
+    setSearchParams(searchParams);
   };
 
   return (

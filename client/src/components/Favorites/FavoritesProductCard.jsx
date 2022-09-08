@@ -40,7 +40,7 @@ const FavoritesProductCard = (product) => {
       >
         <Stack direction="row">
           <Link
-            to={`/categories/${product.itemNo}`}
+            to={`/catalog/${product.itemNo}`}
             style={{ textDecoration: "none" }}
           >
             <CardMedia
@@ -53,7 +53,7 @@ const FavoritesProductCard = (product) => {
           <CardContent>
             <Box>
               <Link
-                to={`/categories/${product.itemNo}`}
+                to={`/catalog/${product.itemNo}`}
                 style={{ textDecoration: "none" }}
               >
                 <Typography
