@@ -139,6 +139,7 @@ const theme = createTheme({
           paddingTop: 15,
           color: "#FFFFFF",
           backgroundColor: "#373F41",
+          border: "1px solid transparent",
           "&:hover": {
             backgroundColor: "transparent",
             color: "#373F41",

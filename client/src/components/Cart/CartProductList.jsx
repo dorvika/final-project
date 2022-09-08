@@ -61,7 +61,7 @@ const CartProductList = ({ products }) => {
             alignItems: "center",
           }}
         >
-          <Link to="/cart/checkout" sx={{ textDecoration: "none" }}>
+          <Link to="/cart/checkout" style={{textDecoration:"none"}}>
             <Button
               variant="contained"
               sx={{
