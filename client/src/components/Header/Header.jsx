@@ -42,7 +42,12 @@ const Header = () => {
   const modal = useSelector((state) => state.modal);
   const cart = useSelector((state) => state.cart.cart);
   const favorites = useSelector((state) => state.favorites.favorites);
-
+  const cartTotalSum = () => {
+    return cart.reduce((sum, cartItem) => {
+      return sum + cartItem.product.currentPrice * cartItem.cartQuantity;
+    }, 0);
+  }
+  
   const handleOpen = () => {
     dispatch(openModal());
   };
@@ -124,8 +129,8 @@ const Header = () => {
                       flexDirection: "column",
                     }}
                   >
-                    <Typography>Bag(2)</Typography>
-                    <Typography>TOTAL: USD $490</Typography>
+                    <Typography>Bag({cart.length})</Typography>
+                    <Typography>TOTAL: USD ${cartTotalSum()}</Typography>
                     <Link style={{ textDecoration: "none" }} to={"/cart"}>
                       <Button
                         sx={{ width: "320px", height: "40px" }}
