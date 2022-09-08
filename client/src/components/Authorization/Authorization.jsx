@@ -2,27 +2,63 @@ import {
   Dialog,
   Slide,
   DialogContent,
-  Tab,
+  Tabs,
   Box,
   IconButton,
+  // Typography,
 } from "@mui/material";
 import { Close } from "@mui/icons-material/";
-import { TabContext, TabList, TabPanel } from "@mui/lab";
+import { TabContext } from "@mui/lab";
 import { closeModal } from "../../store/Modal/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { forwardRef, useState } from "react";
 import SignUp from "./SignUp.jsx";
 import Login from "./Login.jsx";
 import { CustomTab } from "./styles";
+// import PropTypes from "prop-types";
+import TabPanel from "@mui/lab/TabPanel";
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
 
+// function TabPanel(props) {
+//   const { value, index, ...other } = props;
+
+//   return (
+//     <div
+//       role="tabpanel"
+//       hidden={value !== index}
+//       id={`simple-tabpanel-${index}`}
+//       aria-labelledby={`simple-tab-${index}`}
+//       {...other}
+//     >
+//       {/* {value === index && (
+//         <Box sx={{ p: 3 }}>
+//           <Typography>{children}</Typography>
+//         </Box>
+//       )} */}
+//     </div>
+//   );
+// }
+
+// TabPanel.propTypes = {
+//   children: PropTypes.node,
+//   index: PropTypes.number.isRequired,
+//   value: PropTypes.number.isRequired,
+// };
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
+  };
+}
+
 const Authorization = () => {
   const modal = useSelector((state) => state.modal);
   const dispatch = useDispatch();
-  const [value, setValue] = useState(1);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -53,33 +89,65 @@ const Authorization = () => {
           <Box sx={{ width: "100%", height: "100%", typography: "body1" }}>
             <TabContext value={value}>
               <Box>
-                <TabList
+                {/* <TabList
                   onChange={handleChange}
                   TabIndicatorProps={{ hidden: true }}
                   width="100%"
                 >
-                  <CustomTab label="Sign Up" value={1} />
-                  <CustomTab label="Log in" value={2} />
-                </TabList>
+                  <CustomTab label="Sign Up" value={"one"} />
+                  <CustomTab label="Log in" value={"two"} />
+                </TabList> */}
+                <Tabs
+                  value={value}
+                  onChange={handleChange}
+                  aria-label="basic tabs example"
+                  TabIndicatorProps={{ hidden: true }}
+                >
+                  <CustomTab label="Sign Up" {...a11yProps(0)} />
+                  <CustomTab label="Log in" {...a11yProps(1)} />
+                </Tabs>
               </Box>
-              <TabPanel value={1}>
+              <TabPanel
+                // role="tabpanel"
+                // hidden={value !== 1}
+                // id={`simple-tabpanel-${0}`}
+                // aria-labelledby={`simple-tab-${0}`}
+                // {...other}
+                value={0}
+                index={0}
+              >
                 <SignUp />
-                <TabList onChange={handleChange}>
-                  <Tab
-                    sx={{
-                      color: "primary.main",
-                      backgroundColor: "primary.contrastText",
-                      fontFamily: "Mulish",
-                      textDecoration: "underline",
-                      fontSize: 14,
-                      fontWeight: 300,
-                    }}
-                    label="I have an account"
-                    value="2"
-                  />
-                </TabList>
+                {/* <TabList onChange={handleChange}>
+                <Tab
+                  sx={{
+                    color: "primary.main",
+                    backgroundColor: "primary.contrastText",
+                    fontFamily: "Mulish",
+                    textDecoration: "underline",
+                    fontSize: 14,
+                    fontWeight: 300,
+                  }}
+                  label="I have an account"
+                  value="two"
+                />
+              </TabList> */}
+                {/* <TabPanel
+                sx={{
+                  color: "primary.main",
+                  backgroundColor: "primary.contrastText",
+                  fontFamily: "Mulish",
+                  textDecoration: "underline",
+                  fontSize: 14,
+                  fontWeight: 300,
+                }}
+                label="I have an account"
+                value="value"
+                index={1}
+              >
+                <Typography variant="subtitle1">I have an account</Typography>
+              </TabPanel> */}
               </TabPanel>
-              <TabPanel value={2}>
+              <TabPanel value={1} index={1}>
                 <Login />
               </TabPanel>
             </TabContext>

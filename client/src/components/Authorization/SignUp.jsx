@@ -1,8 +1,8 @@
 import {
   Facebook,
   Google,
-  Visibility,
-  VisibilityOff,
+  // Visibility,
+  // VisibilityOff,
 } from "@mui/icons-material";
 import {
   Button,
@@ -11,37 +11,44 @@ import {
   // FormHelperText,
   IconButton,
   // Input,
-  InputAdornment,
+  // InputAdornment,
   Stack,
   TextField,
 } from "@mui/material";
 import { Form, Formik } from "formik";
 // import { forwardRef } from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { closeModal } from "../../store/Modal/actions";
+// import { useDispatch } from "react-redux";
+// import { closeModal } from "../../store/Modal/actions";
 import { postData } from "../../utils/api";
 import ConfirmationPromo from "./ConfirmationPromo.jsx";
 import { validationForm } from "./ValidationForm.jsx";
 
 const SignUp = () => {
-  const [showPassword, setShowPassword] = useState(false);
+  // const [showPassword, setShowPassword] = useState(false);
 
-  const [signUp, setSignUp] = useState({});
+  const [signUp, setSignUp] = useState({
+    firstName: "",
+    lastName: "",
+    login: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const handleClose = () => {
-    dispatch(closeModal());
-  };
+  // const handleClose = () => {
+  //   dispatch(closeModal());
+  // };
 
-  const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
+  // const handleClickShowPassword = () => {
+  //   setShowPassword(!showPassword);
+  // };
 
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
+  // const handleMouseDownPassword = (event) => {
+  //   event.preventDefault();
+  // };
 
   const handleSubmit = (values) => {
     // setSignUp({
@@ -51,9 +58,10 @@ const SignUp = () => {
     //   email: values.email,
     //   password: values.password,
     // });
-    handleClose();
+    // handleClose();
     // console.log("handleSubmit", signUp);
     // console.log(signUp);
+    setSignUp(values);
     postData("/customers", {
       firstName: values.firstName,
       lastName: values.lastName,
@@ -62,10 +70,10 @@ const SignUp = () => {
       password: values.password,
     })
       .then((savedcustomer) => {
-        setSignUp({ savedcustomer });
+        console.log({ savedcustomer });
       })
       .catch((error) => {
-        setSignUp(error.response.data);
+        console.log(error.response.data);
       });
     console.log("signUp after return", signUp);
   };
@@ -77,7 +85,7 @@ const SignUp = () => {
         validateOnChange
         validateOnBlur
         onSubmit={(values) => {
-          // setSignUp({ values });
+          // setSignUp(values);
           // console.log(values);
           // console.log(signUp);
 
@@ -150,17 +158,17 @@ const SignUp = () => {
                 placeholder="Password"
                 value={props.values.password}
                 onChange={props.handleChange}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                }
+                // endAdornment={
+                //   <InputAdornment position="end">
+                //     <IconButton
+                //       aria-label="toggle password visibility"
+                //       onClick={handleClickShowPassword}
+                //       onMouseDown={handleMouseDownPassword}
+                //     >
+                //       {showPassword ? <VisibilityOff /> : <Visibility />}
+                //     </IconButton>
+                //   </InputAdornment>
+                // }
                 error={props.touched.password && Boolean(props.errors.password)}
                 helperText={props.touched.password && props.errors.password}
               />
@@ -176,17 +184,17 @@ const SignUp = () => {
                 value={props.values.confirmPassword}
                 onChange={props.handleChange}
                 aria-describedby="confirmPassword"
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                }
+                // endAdornment={
+                //   <InputAdornment position="end">
+                //     <IconButton
+                //       aria-label="toggle password visibility"
+                //       onClick={handleClickShowPassword}
+                //       onMouseDown={handleMouseDownPassword}
+                //     >
+                //       {showPassword ? <VisibilityOff /> : <Visibility />}
+                //     </IconButton>
+                //   </InputAdornment>
+                // }
                 error={
                   props.touched.confirmPassword &&
                   Boolean(props.errors.confirmPassword)
@@ -207,8 +215,8 @@ const SignUp = () => {
             >
               <Button
                 variant="contained"
-                // type="submit"
-                onClick={handleSubmit}
+                type="submit"
+                onClick={() => handleSubmit(props.values)}
                 sx={{ p: "15px 94px", mb: "30px" }}
               >
                 Sign Up
@@ -236,6 +244,6 @@ const SignUp = () => {
       </Formik>
     </>
   );
-};
+};;;;;;;
 
 export default SignUp;
