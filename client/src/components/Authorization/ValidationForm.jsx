@@ -18,11 +18,6 @@ function strongPasswordMethod() {
         });
       case !/^(?=.*[0-9])/.test(value):
         return createError({ path, message: "password must include digit" });
-      //   case !/^(?=.*[!@#$%^&*])/.test(value):
-      //     return createError({
-      //       path,
-      //       message: "password must include special character",
-      //     });
       default:
         return true;
     }
@@ -41,8 +36,8 @@ export const validationForm = object({
     .required("Last Name is Required")
     .matches(/^[a-zA-ZА-ЩЬЮЯҐЄІЇа-щьюяґєії]+$/, "Not a valid. Only characters"),
   login: string()
-    .min(2, "Login is too short.")
-    .max(20, "Login is too Long.")
+    .min(3, "Login is too short.")
+    .max(10, "Login is too Long.")
     .required("Login is Required")
     .matches(/^[a-zA-ZА-ЩЬЮЯҐЄІЇа-щьюяґєії]+$/, "Not a valid. Only characters"),
   email: string().email("Invalid Email").required("Email is required"),

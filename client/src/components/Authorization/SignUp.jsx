@@ -16,6 +16,7 @@ import {
   TextField,
 } from "@mui/material";
 import { Form, Formik } from "formik";
+// import { useEffect } from "react";
 // import { forwardRef } from "react";
 import { useState } from "react";
 // import { useDispatch } from "react-redux";
@@ -35,7 +36,18 @@ const SignUp = () => {
     password: "",
     confirmPassword: "",
   });
+  const newUser = {
+    firstName: signUp.firstName,
+    lastName: signUp.lastName,
+    login: signUp.login,
+    email: signUp.email,
+    password: signUp.password,
+  };
 
+  const [signUpResponse, setSignUpResponse] = useState({
+    status,
+    message: "",
+  });
   // const dispatch = useDispatch();
 
   // const handleClose = () => {
@@ -50,6 +62,14 @@ const SignUp = () => {
   //   event.preventDefault();
   // };
 
+  // useEffect(() => {
+  //   postData("/customers", newUser)
+  //     .then((savedCustomer) => {
+  //       console.log(savedCustomer);
+  //     })
+  //     .catch((error) => console.log(error));
+  // }, []);
+
   const handleSubmit = (values) => {
     // setSignUp({
     //   firstName: values.firstName,
@@ -62,21 +82,24 @@ const SignUp = () => {
     // console.log("handleSubmit", signUp);
     // console.log(signUp);
     setSignUp(values);
-    postData("/customers", {
-      firstName: values.firstName,
-      lastName: values.lastName,
-      login: values.login,
-      email: values.email,
-      password: values.password,
-    })
-      .then((savedcustomer) => {
-        console.log({ savedcustomer });
+    postData("/customers", newUser)
+      .then((savedCustomer) => {
+        setSignUpResponse({
+          status: savedCustomer.status,
+          message: savedCustomer,
+        });
+        console.log({ savedCustomer });
       })
       .catch((error) => {
-        console.log(error.response.data);
+        setSignUpResponse({
+          status: error.response.status,
+          message: error.response.data.message,
+        });
+        console.log(error);
       });
-    console.log("signUp after return", signUp);
   };
+  console.log("signUp after return", signUp);
+  console.log("signUp response", signUpResponse);
   return (
     <>
       <Formik
@@ -155,6 +178,7 @@ const SignUp = () => {
                 variant="standard"
                 id="password"
                 name="password"
+                type="password"
                 placeholder="Password"
                 value={props.values.password}
                 onChange={props.handleChange}
@@ -244,6 +268,6 @@ const SignUp = () => {
       </Formik>
     </>
   );
-};;;;;;;
+};;;;;;;;
 
 export default SignUp;
