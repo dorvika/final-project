@@ -43,7 +43,7 @@ const ProductInfo = ({
   const isFavorite = favorites.some((elem) => elem.itemNo === product.itemNo);
   const isCart= cart.some((elem) => elem.product._id === product._id);
   
-
+console.log(cart);
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
@@ -57,6 +57,7 @@ const ProductInfo = ({
   const addToFavorite = () => {
     dispatch(addFavorite(product));
   };
+  console.log(product);
 
   const removeFromFavorite = () => {
     dispatch(removeFavorite(product));

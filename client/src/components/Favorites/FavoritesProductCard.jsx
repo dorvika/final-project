@@ -13,21 +13,26 @@ import { CustomHr } from "./index";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { removeFavorite } from "../../store/Favorites/actions";
-import { addToCart } from "../../store/Cart/actions";
+import { addToCart, removeFromCart } from "../../store/Cart/actions";
 
-const FavoritesProductCard = (product) => {
+const FavoritesProductCard = ({ product }) => {
   const dispatch = useDispatch();
   const basket = useSelector((state) => state.cart.cart);
   const isInBasket = basket.some(
-    (basketProducts) => basketProducts.product._id === product.id
+    (basketProducts) => basketProducts.product._id === product._id
   );
+  console.log(basket);
   const handleRemoveProduct = () => {
     dispatch(removeFavorite(product));
   };
 
-  const handleBasket = () => {
+  const addToBasket = () => {
     dispatch(addToCart(product));
   };
+  const removeFromBasket = () => {
+    dispatch(removeFromCart(product._id));
+  };
+
   return (
     <>
       <Card
@@ -81,7 +86,7 @@ const FavoritesProductCard = (product) => {
                 {product.description}
               </Typography>
               <Typography variant="h5" sx={{ pb: "10px" }}>
-                {product.currentPrice}
+                ${product.currentPrice}
               </Typography>
               <Box sx={{ display: "flex", alignItems: "center" }}>
                 <Box sx={{ mr: "80px" }}>
@@ -137,12 +142,12 @@ const FavoritesProductCard = (product) => {
           </IconButton>
           <Stack direction="row" alignItems="center">
             <Button
-              onClick={handleBasket}
+              onClick={isInBasket ? removeFromBasket : addToBasket}
               variant={isInBasket ? "outlined" : "contained"}
-              disabled={isInBasket ? true : false}
+              // disabled={isInBasket ? true : false}
               sx={{ padding: "10px 30px" }}
             >
-              {isInBasket ? "in bag" : "add to bag"}
+              {isInBasket ? "remove from bag" : "add to bag"}
             </Button>
           </Stack>
         </Box>
