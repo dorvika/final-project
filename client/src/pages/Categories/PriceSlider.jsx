@@ -1,20 +1,26 @@
 import { Stack, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { CustomPriceSlider, CustomTextField } from "./styles";
 
 const PriceSlider = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const primaryMinPrice = Number(searchParams.get("minPrice")) || 0;
-  const primaryMaxPrice = Number(searchParams.get("maxPrice")) || 500;
   const [price, setPrice] = useState({
-    minPrice: primaryMinPrice,
-    maxPrice: primaryMaxPrice,
+    minPrice: 0,
+    maxPrice: 500,
   });
-  const [sliderValues, setSliderValues] = useState([
-    primaryMinPrice === 0 ? 1 : +primaryMinPrice,
-    +primaryMaxPrice,
-  ]);
+  const [sliderValues, setSliderValues] = useState([0, 500]);
+
+  useEffect(() => {
+    setPrice({
+      minPrice: Number(searchParams.get("minPrice")) || 0,
+      maxPrice: Number(searchParams.get("maxPrice")) || 500,
+    });
+    setSliderValues([
+      Number(searchParams.get("minPrice")) || 0,
+      Number(searchParams.get("maxPrice")) || 500,
+    ]);
+  }, [searchParams]);
 
   const setParams = (value1, value2) => {
     searchParams.set("minPrice", value1);

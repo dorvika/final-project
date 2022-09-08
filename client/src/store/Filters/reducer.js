@@ -1,5 +1,5 @@
 const initialState = {
-  showQuantity: 9,
+  // showQuantity: 9,
   filteredProducts: [],
   filteredProductsQty: 0,
 };
@@ -12,12 +12,12 @@ const reducer = (state = initialState, action) => {
     case "SET_FILTERED_PRODUCTS_QTY": {
       return { ...state, filteredProductsQty: action.payload };
     }
-    case "SET_QUANTITY_ON_PAGE": {
-      return {
-        ...state,
-        showQuantity: action.payload,
-      };
-    }
+    // case "SET_QUANTITY_ON_PAGE": {
+    //   return {
+    //     ...state,
+    //     showQuantity: action.payload,
+    //   };
+    // }
     default: {
       return state;
     }

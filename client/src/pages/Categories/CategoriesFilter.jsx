@@ -10,7 +10,11 @@ const CategoriesFilter = () => {
   const [sizes, setSizes] = useState([]);
   const [colors, setColors] = useState([]);
   const [materials, setMaterials] = useState([]);
-  const [activeColor, setActiveColor] = useState(searchParams.get("color"));
+  const [activeColor, setActiveColor] = useState("");
+
+  useEffect(() => {
+    setActiveColor(searchParams.get("color"));
+  }, [searchParams]);
 
   const allColors = colors.map((color) => color.name.toLowerCase()).join();
 
@@ -21,9 +25,18 @@ const CategoriesFilter = () => {
   }, []);
 
   const resetFilters = () => {
-    setSearchParams({
-      categories: searchParams.get("categories"),
-    });
+    if (searchParams.get("categories")) {
+      setSearchParams({
+        categories: searchParams.get("categories"),
+        perPage: 9,
+        startPage: 1,
+      });
+    } else {
+      setSearchParams({
+        perPage: 9,
+        startPage: 1,
+      });
+    }
   };
 
   const filterParams = Object.keys(

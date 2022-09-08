@@ -32,7 +32,10 @@ const EmptyCart = () => {
         </Stack>
 
         <Box display="flex" justifyContent="center">
-          <Link to="/catalog" style={{ textDecoration: "none" }}>
+          <Link
+            to="/catalog?perPage=9&startPage=1"
+            style={{ textDecoration: "none" }}
+          >
             <Button
               variant="contained"
               sx={{

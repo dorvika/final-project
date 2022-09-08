@@ -19,31 +19,23 @@ import { fetchData } from "../../utils/api.js";
 
 const Categories = () => {
   const dispatch = useDispatch();
-  const { showQuantity, filteredProducts, filteredProductsQty } = useSelector(
-    (state) => state.filters
-  );
-  const { products } = useSelector((state) => state.products);
+  const { filteredProductsQty } = useSelector((state) => state.filters);
   const [searchParams, setSearchParams] = useSearchParams();
-  const [currentPage, setCurrentPage] = useState(
-    Number(searchParams.get("startPage")) || 1
-  );
+  const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log(showQuantity);
-
-  const totalPages = Math.ceil(
-    filteredProducts.length > 0
-      ? filteredProductsQty / showQuantity
-      : products.length / showQuantity
-  );
-
+  const showQty = Number(searchParams.get("perPage")) || 9;
+  const totalPages = Math.ceil(filteredProductsQty / showQty);
   const queryString = useLocation().search;
+
+  useEffect(() => {
+    setCurrentPage(Number(searchParams.get("startPage")));
+  }, [searchParams]);
 
   useEffect(() => {
     setIsLoading(true);
     if (queryString) {
       fetchData(`/products/filter/${queryString}`).then((data) => {
-        console.log(data);
         dispatch(setFilteredProducts(data.products));
         dispatch(setFilteredProductsQty(data.productsQuantity));
         setIsLoading(false);
@@ -51,24 +43,18 @@ const Categories = () => {
     } else {
       setIsLoading(false);
     }
-    setCurrentPage(1);
   }, [queryString, dispatch]);
 
   const handleChange = (event, value) => {
     setCurrentPage(value);
+    if (currentPage > totalPages) {
+      setCurrentPage(1);
+      searchParams.set("startPage", 1);
+    }
     searchParams.set("startPage", value);
-    searchParams.set("perPage", showQuantity);
+    searchParams.set("perPage", showQty);
     setSearchParams(searchParams);
   };
-
-  // const currentProductsData = (listProducts) => {
-  //   if (currentPage > totalPages) {
-  //     setCurrentPage(1);
-  //   }
-  //   const firstPageIndex = (currentPage - 1) * showQuantity;
-  //   const lastPageIndex = firstPageIndex + showQuantity;
-  //   return listProducts.slice(firstPageIndex, lastPageIndex);
-  // };
 
   return (
     <CategoriesMainContainer>
@@ -76,7 +62,11 @@ const Categories = () => {
         <Link underline="hover" color="inherit" href="/">
           Shop
         </Link>
-        <Link underline="hover" color="inherit" href="/catalog">
+        <Link
+          underline="hover"
+          color="inherit"
+          href="/catalog?perPage=9&startPage=1"
+        >
           Catalog
         </Link>
       </Breadcrumbs>
@@ -94,10 +84,7 @@ const Categories = () => {
             <SortBy />
           </Stack>
           <Box>
-            <CatalogProductList
-              // currentProductData={currentProductsData}
-              isLoadingFilter={isLoading}
-            />
+            <CatalogProductList isLoadingFilter={isLoading} />
           </Box>
           <Stack alignItems="center" justifyContent="center">
             {totalPages >= 2 && (

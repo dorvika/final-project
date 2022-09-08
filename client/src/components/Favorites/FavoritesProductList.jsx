@@ -54,7 +54,7 @@ const FavoritesProductList = () => {
             alignItems: "center",
           }}
         >
-          <Link href="/catalog" sx={{ textDecoration: "none" }}>
+          <Link href="/catalog?perPage=9&startPage=1" sx={{ textDecoration: "none" }}>
             <Button
               variant="contained"
               sx={{

@@ -27,7 +27,10 @@ const ThanksOrderPage = ({ makeOrder }) => {
         >
           Thank you for your order!
         </Typography>
-        <Link to="/catalog" style={{ textDecoration: "none" }}>
+        <Link
+          to="/catalog?perPage=9&startPage=1"
+          style={{ textDecoration: "none" }}
+        >
           <Button variant="contained" sx={{ p: "15px 85px" }}>
             Continue Shopping
           </Button>

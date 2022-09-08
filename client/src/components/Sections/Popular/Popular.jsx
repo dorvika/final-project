@@ -44,7 +44,7 @@ const Popular = () => {
           .filter((e, count) => count < 4)
           .map(({ id, urlImage, title, xs }) => (
             <CustomGridItem item key={id} xs={matches ? 12 : xs}>
-              <Link href="/catalog">
+              <Link href="/catalog?perPage=9&startPage=1">
                 <Card sx={{ maxWidth: "100%" }}>
                   <CardMedia
                     component="img"
@@ -67,7 +67,7 @@ const Popular = () => {
       </Grid>
       <CustomButton sx={{ margin: "0", padding: "0" }}>
         <Link
-          href="/catalog"
+          href="/catalog?perPage=9&startPage=1"
           sx={{
             textDecoration: "none",
             padding: "6px 60px 6px 43px",

@@ -35,6 +35,7 @@ const TopFilter = () => {
           }}
           onClick={() => {
             searchParams.set("categories", allCategories);
+            searchParams.set("startPage", 1);
             setSearchParams(searchParams);
             setActiveCategory(allCategories);
           }}
@@ -57,6 +58,7 @@ const TopFilter = () => {
             }}
             onClick={() => {
               searchParams.set("categories", category.name);
+              searchParams.set("startPage", 1);
               setSearchParams(searchParams);
               setActiveCategory(category.name);
             }}
