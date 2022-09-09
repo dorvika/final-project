@@ -13,42 +13,54 @@ import { postData } from "../../utils/api";
 // import { useDispatch } from "react-redux";
 // import { closeModal } from "../../store/Modal/actions";
 import ConfirmationPromo from "./ConfirmationPromo.jsx";
-import { validationForm } from "./ValidationForm.jsx";
+import { validationLogInForm } from "./ValidationForm.jsx";
 
 const Login = () => {
-  const [loginData, setLoginData] = useState({
-    email: "",
-    password: "",
-  });
+  const [loginData, setLoginData] = useState({ status: "", data: "" });
 
-  const newLogin = {
-    loginOrEmail: loginData.email,
-    password: loginData.password,
-  };
   // const dispatch = useDispatch();
 
   // const handleClose = () => {
   //   dispatch(closeModal());
   // };
 
-  const handleSubmit = (values) => {
-    setLoginData(values);
-    console.log(values);
-    postData("/customers/login", newLogin)
-      .then((loginRequest) => console.log(loginRequest))
-      .catch((error) => console.log(error));
+  const handleSubmit = (values, actions) => {
+    actions.setSubmitting(true);
+    // setLoginData(values);
+    console.log("values", values);
+    postData("/customers/login", {
+      loginOrEmail: values.email,
+      password: values.password,
+    })
+      .then((loginRequest) => {
+        setLoginData({ status: loginRequest.status, data: loginRequest.data });
+        console.log(loginRequest);
+        const token = loginRequest.data.token;
+        localStorage.setItem("userToken", token);
+      })
+      .catch((error) => {
+        setLoginData({
+          status: error.response.status,
+          data: error.response.data,
+        });
+        console.log(error);
+      })
+      .finally(() => actions.setSubmitting(false));
   };
+  console.log("loginData", loginData);
 
   return (
     <>
+      {/* {loginData} */}
       <Formik
-        initialValues={loginData}
-        validationSchema={validationForm}
+        initialValues={{
+          email: "",
+          password: "",
+        }}
+        validationSchema={validationLogInForm}
         validateOnChange
         validateOnBlur
-        onSubmit={(values) => {
-          handleSubmit(values);
-        }}
+        onSubmit={handleSubmit}
       >
         {(props) => (
           <Form id="logIn">
@@ -63,8 +75,9 @@ const Login = () => {
                 placeholder="Email"
                 value={props.values.email}
                 onChange={props.handleChange}
-                // error={props.touched.email && Boolean(props.errors.email)}
-                // helperText={props.touched.email && props.errors.email}
+                onBlur={props.handleBlur}
+                error={props.touched.email && Boolean(props.errors.email)}
+                helperText={props.touched.email && props.errors.email}
               />
               <TextField
                 hiddenLabel
@@ -73,10 +86,11 @@ const Login = () => {
                 variant="standard"
                 id="password"
                 name="password"
-                type="password"
+                // type="password"
                 placeholder="Password"
                 value={props.values.password}
                 onChange={props.handleChange}
+                onBlur={props.handleBlur}
                 // endAdornment={
                 //   <InputAdornment position="end">
                 //     <IconButton
@@ -100,10 +114,21 @@ const Login = () => {
                 flexDirection: "column",
               }}
             >
+              {loginData.status !== 200 && (
+                <Typography
+                  variant="subtitle2"
+                  sx={{ color: "error.main", mb: "20px", fontWeight: 700 }}
+                >
+                  {loginData.data !== undefined
+                    ? Object.values(loginData.data)
+                    : "Unknown error, update fields"}
+                </Typography>
+              )}
               <Button
                 variant="contained"
                 type="submit"
-                onClick={() => handleSubmit(props.values)}
+                disabled={props.isSubmitting}
+                // onClick={() => handleSubmit(props.values)}
                 sx={{ padding: "15px 94px", mb: "30px" }}
               >
                 log in

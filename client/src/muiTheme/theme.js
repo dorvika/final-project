@@ -17,6 +17,11 @@ const theme = createTheme({
       main: "#8C8C8C",
       light: "#DADADA",
     },
+    error: {
+      main: "#d32f2f",
+      light: "#ef5350",
+      dark: "#c62828",
+    },
   },
   spacing: 2,
   typography: {

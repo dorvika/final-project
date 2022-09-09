@@ -9,15 +9,15 @@ function strongPasswordMethod() {
       case !/^(?=.*[a-z])/.test(value):
         return createError({
           path,
-          message: "password must include lowercase letter",
+          message: "Password must include lowercase letter",
         });
       case !/^(?=.*[A-Z])/.test(value):
         return createError({
           path,
-          message: "password must include uppercase letter",
+          message: "Password must include uppercase letter",
         });
       case !/^(?=.*[0-9])/.test(value):
-        return createError({ path, message: "password must include digit" });
+        return createError({ path, message: "Password must include digit" });
       default:
         return true;
     }
@@ -48,4 +48,12 @@ export const validationForm = object({
   confirmPassword: string()
     .required("Password confirmation is required")
     .oneOf([ref("password"), null], "Passwords must match"),
+});
+
+export const validationLogInForm = object({
+  email: string().email("Invalid Email").required("Email is required"),
+  password: string()
+    .required("Password is required")
+    .min(8, "Password must contain 8 or more characters")
+    .strongPassword(),
 });

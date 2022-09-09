@@ -18,8 +18,8 @@ export const fetchData = async (endpoint) => {
 
 export const postData = async (endpoint, obj) => {
   const response = await API.post(endpoint, obj);
-  const { data } = response;
-  return data;
+  // const { data } = response;
+  return response;
 };
 
 export const getDataLS = (category) => {
@@ -30,6 +30,16 @@ export const getDataLS = (category) => {
     return value;
   } catch (e) {
     return [];
+  }
+};
+
+export const setAuthToken = (token) => {
+  if (token) {
+    // Apply to every request
+    axios.defaults.headers.common["Authorization"] = token;
+  } else {
+    // Delete auth header
+    delete axios.defaults.headers.common["Authorization"];
   }
 };
 
