@@ -78,7 +78,11 @@ const ProductCard = () => {
               product={productData}
             />
           </ProductCardContainer>
-          <MightLike sectionTitle="RELATED ITEMS" />
+          <MightLike
+            sectionTitle="RELATED ITEMS"
+            category={categories}
+            id={id}
+          />
         </>
       )}
     </ProductCardMainContainer>
