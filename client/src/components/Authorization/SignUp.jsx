@@ -152,7 +152,6 @@ const SignUp = () => {
                   }
                 >
                   <Input
-                    // hiddenLabel
                     aria-describedby="password"
                     type={showPassword ? "text" : "password"}
                     size="small"
@@ -191,7 +190,6 @@ const SignUp = () => {
                   }
                 >
                   <Input
-                    sx={{ borderBottomColor: "primary.main" }}
                     type={showPassword ? "text" : "password"}
                     size="small"
                     variant="standard"
