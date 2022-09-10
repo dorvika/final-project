@@ -43,7 +43,7 @@ const CartProductModal = ({ product }) => {
 
                     <Link to={`/catalog/${itemNo}`} style={{ textDecoration: "none", width: "320px", height: "400px", marginTop: "-40px"}}>
                             <Box sx={{
-                                zIndex: "3000",
+                                zIndex: "30000",
                                 position: "relative",
                                 top: "45px",
                                 left: "265px"
@@ -70,7 +70,7 @@ const CartProductModal = ({ product }) => {
 
                     <CardContent sx={{
                         position: "relative",
-                        top: "-168px",
+                        top: "-88px",
                         left: "8px"
                     }}>
                         <Box>
