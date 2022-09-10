@@ -163,20 +163,18 @@ const Header = () => {
                             >
                               CHECKOUT
                             </Button>
-
-                            <Box >
-                              {cart.map((cartItem) => {
-                                return (
-                                    <CartProductModal
-                                        key={cartItem.product._id}
-                                        cartQuantity={cartItem.cartQuantity}
-                                        product={cartItem.product}
-                                    />
-                                );
-                              })}
-                            </Box>
-
                           </Link>
+                            <Box >
+                                {cart.map((cartItem) => {
+                                    return (
+                                        <CartProductModal
+                                            key={cartItem.product._id}
+                                            cartQuantity={cartItem.cartQuantity}
+                                            product={cartItem.product}
+                                        />
+                                    );
+                                })}
+                            </Box>
                         </Box>
                       </Fade>
                   )}
