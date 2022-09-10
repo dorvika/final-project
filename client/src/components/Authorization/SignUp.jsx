@@ -13,8 +13,6 @@ import {
   Box,
 } from "@mui/material";
 import { Form, Formik } from "formik";
-// import { useEffect } from "react";
-// import { forwardRef } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { closeModal } from "../../store/Modal/actions";
@@ -250,7 +248,6 @@ const SignUp = () => {
                   variant="contained"
                   disabled={props.isSubmitting || !props.dirty}
                   type="submit"
-                  // onClick={() => handleSubmit(props.values)}
                   sx={{ p: "15px 94px", mb: "30px" }}
                 >
                   Sign Up

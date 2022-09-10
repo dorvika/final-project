@@ -1,7 +1,6 @@
 import { getDataLS } from "../../utils/api";
 
 const token = getDataLS("userToken");
-console.log("reducer token", token);
 
 const initialState = {
   loggedIn: {
@@ -13,17 +12,26 @@ const initialState = {
 const reducer = (state = initialState.loggedIn, action) => {
   switch (action.type) {
     case "LOGGED_IN": {
-      const token = getDataLS("userToken");
-      if (!token) return state;
-
       return {
-        ...state,
         isLoggedIn: true,
         userData: action.payload.data,
       };
     }
+    case "FETCH_LOGGED_IN_USER_DATA": {
+      if (!token || token.length === 0) return state;
+
+      return {
+        ...state,
+        isLoggedIn: true,
+        userData: action.payload,
+      };
+    }
+
     case "LOGGED_OUT": {
-      return;
+      return {
+        isLoggedIn: false,
+        userData: {},
+      };
     }
     default: {
       return state;

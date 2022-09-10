@@ -6,11 +6,7 @@ const API = axios.create({
 
 API.interceptors.request.use(function (req) {
   const token = getDataLS("userToken");
-
   req.headers.common["Authorization"] = token.length !== 0 ? token : "";
-
-  // req.headers.authorization =
-  // "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZjI3YjY5OTE5NGJlMGU2ODA0ZTFjYSIsImZpcnN0TmFtZSI6IlZpa2EiLCJsYXN0TmFtZSI6IkRvcm9zaGVua28iLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE2NjAwNTg2ODQsImV4cCI6MTY2MDA5NDY4NH0.mtKydPGctdr5gtEOUXBbQbAa5G0WayLMrRVb7VvShc8";
   return req;
 });
 
@@ -22,7 +18,6 @@ export const fetchData = async (endpoint) => {
 
 export const postData = async (endpoint, obj) => {
   const response = await API.post(endpoint, obj);
-  // const { data } = response;
   return response;
 };
 
@@ -34,16 +29,6 @@ export const getDataLS = (category) => {
     return value;
   } catch (e) {
     return [];
-  }
-};
-
-export const setAuthToken = (token) => {
-  if (token) {
-    // Apply to every request
-    axios.defaults.headers.common["Authorization"] = token;
-  } else {
-    // Delete auth header
-    delete axios.defaults.headers.common["Authorization"];
   }
 };
 

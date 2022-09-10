@@ -1,18 +1,19 @@
 import { PersonOutlined } from "@mui/icons-material";
 import {
-  Box,
   Button,
   ClickAwayListener,
   Fade,
   IconButton,
   Popper,
+  Stack,
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { useSelector } from "react-redux";
-// import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoggedOut } from "../../../store/IsLogged/actions";
 
 const LoginPopper = () => {
+  const dispatch = useDispatch();
   const { userData } = useSelector((state) => state.loggedIn);
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -25,9 +26,15 @@ const LoginPopper = () => {
     setOpen((previousOpen) => !previousOpen);
   };
 
+  const handleLogOut = () => {
+    localStorage.setItem("userToken", []);
+    dispatch(setLoggedOut());
+  };
+
   const handleClickAway = () => {
     setAnchorEl(null);
   };
+
   return (
     <>
       <ClickAwayListener onClickAway={handleClickAway}>
@@ -42,28 +49,35 @@ const LoginPopper = () => {
             open={open}
             anchorEl={anchorEl}
             transition
+            placement="bottom-end"
           >
             {({ TransitionProps }) => (
               <Fade {...TransitionProps} timeout={350}>
-                <Box
+                <Stack
+                  alignItems="center"
+                  justifyContent="center"
                   sx={{
-                    width: "340px",
+                    maxwidth: "340px",
                     padding: "14px",
                     background: "white",
-                    display: "flex",
-                    flexDirection: "column",
+                    border: "1px solid main",
                   }}
                 >
-                  <Typography>
-                    {userData.firstName + userData.lastName}
+                  <Typography variant="h5" sx={{ m: "25px" }}>
+                    Hello {userData.firstName + " " + userData.lastName}
+                  </Typography>
+                  <Typography variant="h5" sx={{ m: "10px" }}>
+                    This is your account profile which you will be able to
+                    review in nearest future.
                   </Typography>
                   <Button
-                    sx={{ width: "320px", height: "40px" }}
-                    variant="outlined"
+                    onClick={handleLogOut}
+                    sx={{ p: "5px 20px", m: "25px" }}
+                    variant="contained"
                   >
                     LogOut
                   </Button>
-                </Box>
+                </Stack>
               </Fade>
             )}
           </Popper>

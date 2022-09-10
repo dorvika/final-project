@@ -1,9 +1,7 @@
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import {
-  // Box,
   Button,
   DialogActions,
-  // Input,
   Stack,
   Typography,
   TextField,
@@ -17,7 +15,7 @@ import {
 import { Form, Formik } from "formik";
 import { useState } from "react";
 import Preloader from "../../pages/Categories/Catalog Product List/Preloader.jsx";
-import { fetchData, postData, setAuthToken } from "../../utils/api";
+import { fetchData, postData,} from "../../utils/api";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "../../store/Modal/actions";
 import ConfirmationPromo from "./ConfirmationPromo.jsx";
@@ -28,8 +26,7 @@ const Login = () => {
   const [loginData, setLoginData] = useState({ status: "", data: "" });
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
-  // const [userData, setUserData] = useState({});
-  const { isLoggedIn, userData } = useSelector((state) => state.loggedIn);
+  const { userData } = useSelector((state) => state.loggedIn);
 
   const handleClose = () => {
     dispatch(closeModal());
@@ -59,21 +56,18 @@ const Login = () => {
       })
       .then(() => {
         fetchData("/customers/customer").then((res) => {
-          // setUserData(res);
           dispatch(setLoggedIn(res));
         });
       })
       .catch((error) => {
-        setAuthToken(false);
-        setLoginData({
+               setLoginData({
           status: error.response.status,
           data: error.response.data,
         });
       })
       .finally(() => actions.setSubmitting(false));
   };
-  console.log("userData", userData);
-  console.log("isLoggedIn", isLoggedIn);
+
   return (
     <>
       {loginData.status !== 200 ? (
@@ -166,7 +160,6 @@ const Login = () => {
                   variant="contained"
                   type="submit"
                   disabled={props.isSubmitting}
-                  // onClick={() => handleSubmit(props.values)}
                   sx={{ padding: "15px 94px", mb: "30px" }}
                 >
                   log in

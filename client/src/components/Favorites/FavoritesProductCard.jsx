@@ -21,7 +21,7 @@ const FavoritesProductCard = ({ product }) => {
   const isInBasket = basket.some(
     (basketProducts) => basketProducts.product._id === product._id
   );
-  console.log(basket);
+
   const handleRemoveProduct = () => {
     dispatch(removeFavorite(product));
   };
