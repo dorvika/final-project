@@ -168,6 +168,7 @@ const SignUp = () => {
                     endAdornment={
                       <InputAdornment position="end">
                         <IconButton
+                          data-password-id="passwordId"
                           aria-label="toggle password visibility"
                           onClick={handleClickShowPassword}
                           onMouseDown={handleMouseDownPassword}

@@ -17,16 +17,19 @@ import {
 import { Form, Formik } from "formik";
 import { useState } from "react";
 import Preloader from "../../pages/Categories/Catalog Product List/Preloader.jsx";
-import { postData } from "../../utils/api";
-import { useDispatch } from "react-redux";
+import { fetchData, postData, setAuthToken } from "../../utils/api";
+import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "../../store/Modal/actions";
 import ConfirmationPromo from "./ConfirmationPromo.jsx";
 import { validationLogInForm } from "./ValidationForm.jsx";
+import { setLoggedIn } from "../../store/IsLogged/actions.js";
 
 const Login = () => {
   const [loginData, setLoginData] = useState({ status: "", data: "" });
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
+  // const [userData, setUserData] = useState({});
+  const { isLoggedIn, userData } = useSelector((state) => state.loggedIn);
 
   const handleClose = () => {
     dispatch(closeModal());
@@ -48,14 +51,20 @@ const Login = () => {
     })
       .then((loginRequest) => {
         setLoginData({ status: loginRequest.status, data: loginRequest.data });
-
         const token = loginRequest.data.token;
-        localStorage.setItem("userToken", token);
+        localStorage.setItem("userToken", JSON.stringify(token));
         setTimeout(() => {
           handleClose();
         }, 2000);
       })
+      .then(() => {
+        fetchData("/customers/customer").then((res) => {
+          // setUserData(res);
+          dispatch(setLoggedIn(res));
+        });
+      })
       .catch((error) => {
+        setAuthToken(false);
         setLoginData({
           status: error.response.status,
           data: error.response.data,
@@ -63,7 +72,8 @@ const Login = () => {
       })
       .finally(() => actions.setSubmitting(false));
   };
-
+  console.log("userData", userData);
+  console.log("isLoggedIn", isLoggedIn);
   return (
     <>
       {loginData.status !== 200 ? (
@@ -172,12 +182,7 @@ const Login = () => {
           sx={{ mt: "40px", mb: "40px" }}
         >
           <Typography variant="h4" sx={{ color: "primary.main", mb: "15px" }}>
-            Dear{" "}
-            {/* Dear,{" "}
-            {signUpResponse.message.data.firstName +
-              " " +
-              signUpResponse.message.data.lastName}
-            ! */}
+            {userData.firstName + " " + userData.lastName}
           </Typography>
           <Typography variant="h6" sx={{ mb: "10px" }}>
             Welcome to your cabinet.
