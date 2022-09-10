@@ -24,6 +24,7 @@ const ShippingForm = ({ data, next, prev }) => {
  
   const handleSubmit = (value) => {
     next(value);
+    console.log(data);
     
   };
   const handleBack = (values) => {
