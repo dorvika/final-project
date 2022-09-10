@@ -5,25 +5,14 @@ const ShoppingBag = ({ products, small = false }) => {
     return small ? (
       <BagCartModelSmall
         key={cartItem.product._id}
-        _id={cartItem.product._id}
-        itemNo={cartItem.product.itemNo}
-        imageUrls={cartItem.product.imageUrls}
-        name={cartItem.product.name}
-        currentPrice={cartItem.product.currentPrice}
         cartQuantity={cartItem.cartQuantity}
-        product={cartItem}
+        product={cartItem.product}
       />
     ) : (
       <BagCartModel
         key={cartItem.product._id}
-        _id={cartItem.product._id}
-        itemNo={cartItem.product.itemNo}
-        imageUrls={cartItem.product.imageUrls}
-        name={cartItem.product.name}
-        description={cartItem.product.description}
-        currentPrice={cartItem.product.currentPrice}
         cartQuantity={cartItem.cartQuantity}
-        product={cartItem}
+        product={cartItem.product}
       />
     );
   });

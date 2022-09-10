@@ -9,7 +9,8 @@ import {
 
 import { Link } from "react-router-dom";
 
-const BagCartModelSmall = ({ imageUrls, currentPrice, name, itemNo, cartQuantity }) => {
+const BagCartModelSmall = ({ cartQuantity, product }) => {
+  const { imageUrls, currentPrice, name, itemNo } = product
   return (
     <>
       <Card
