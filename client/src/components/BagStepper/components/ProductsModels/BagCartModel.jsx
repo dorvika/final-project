@@ -37,16 +37,8 @@ const CustomCard = styled(Card)(({ theme }) => ({
   },
 }));
 
-const BagCartModel = ({
-  imageUrls,
-  currentPrice,
-  name,
-  description,
-  itemNo,
-  cartQuantity,
-  _id,
-  product,
-}) => {
+const BagCartModel = ({ cartQuantity, product }) => {
+  const { imageUrls, currentPrice, name, description, itemNo } = product
   const dispatch = useDispatch();
   let [quantityValue, setQuantityValue] = useState(cartQuantity);
 
@@ -57,17 +49,9 @@ const BagCartModel = ({
 
   const increaseQuantity = () => {
     setQuantityValue(cartQuantity + 1);
-    dispatch(
-      addToCart({
-        imageUrls,
-        currentPrice,
-        name,
-        description,
-        _id,
-        cartQuantity,
-      })
-    );
+    dispatch(addToCart(product));
   };
+
   const decreaseQuantity = () => {
     if (quantityValue > 1) {
       setQuantityValue((quantityValue = quantityValue - 1));
