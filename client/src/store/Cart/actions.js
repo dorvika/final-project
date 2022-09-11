@@ -12,13 +12,6 @@ export const removeFromCart = id => {
     }
 }
 
-export const increaseCartItem = id => {
-    return {
-        type: 'INCREASE_CART_ITEM',
-        payload: { id }
-    }
-}
-
 export const decreaseCartItem = product => {
     return {
         type: 'DECREASE_CART_ITEM',

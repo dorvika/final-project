@@ -41,8 +41,7 @@ const ProductInfo = ({
   const favorites = useSelector((state) => state.favorites.favorites);
   const cart = useSelector((state) => state.cart.cart);
   const isFavorite = favorites.some((elem) => elem.itemNo === product.itemNo);
-  const isCart= cart.some((elem) => elem.product._id === product._id);
-  
+  const isCart = cart.some((elem) => elem.product._id === product._id);
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);

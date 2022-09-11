@@ -29,7 +29,7 @@ const ConfirmationPromo = () => {
       </Stack>
       <Typography
         variant="subtitle1"
-        sx={{ fontWeight: 300, color: "#8C8C8C", mb: "30px" }}
+        sx={{ fontWeight: 300, color: "#8C8C8C", mb: "10px" }}
       >
         By signing up you agree to{" "}
         <Link

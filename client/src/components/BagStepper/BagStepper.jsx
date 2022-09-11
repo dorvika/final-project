@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Container, Box, Stepper, Step, StepButton } from "@mui/material";
 import stepperStyle from "./style";
-// import products from "../Cart/ProductsExamples.jsx";
 import {
   ShoppingBagPage,
   ShippingDetailsPage,

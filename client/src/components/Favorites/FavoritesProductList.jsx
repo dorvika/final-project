@@ -31,20 +31,7 @@ const FavoritesProductList = () => {
         <CustomHr />
         <Box>
           {favorites.map((product) => {
-            return (
-              <FavoritesProductCard
-                key={product._id}
-                id={product._id}
-                imageUrls={product.imageUrls}
-                name={product.name}
-                description={product.description}
-                price={product.currentPrice}
-                color={product.color}
-                size={product.size}
-                itemNo={product.itemNo}
-                product={product}
-              />
-            );
+            return <FavoritesProductCard key={product._id} product={product} />;
           })}
         </Box>
         <Box
