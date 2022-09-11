@@ -94,10 +94,12 @@ const Footer = () => {
             <ListItem>
               <Link
                 to="javascript:void(0)"
-                onClick={() => (window.location = "mailto:hello@gmail.com")}
+                onClick={() =>
+                  (window.location = "mailto:postilmarket@gmail.com")
+                }
                 style={{ textDecoration: "none" }}
               >
-                <Typography variant="body">hello@gmail.com</Typography>
+                <Typography variant="body">postilmarket@gmail.com</Typography>
               </Link>
             </ListItem>
             <ListItem>
