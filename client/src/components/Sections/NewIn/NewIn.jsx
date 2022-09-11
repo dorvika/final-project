@@ -45,7 +45,6 @@ const CustomGridItem = styled(Grid)(({ theme }) => ({
 const GridItem = ({ link, image, title, price }) => {
   return (
     <CustomGridItem item md={6} xs={12}>
-      {/* коли товари будуть приходити з БД - замінити лінку на to={`/catalog/${itemNo}`} */}
       <Link to={`/catalog/${link}`}>
         <Card sx={{ maxWidth: "100%" }}>
           <CardMedia component="img" height="545" image={`${image}`} alt="" />

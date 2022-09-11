@@ -1,5 +1,6 @@
 import { CardContent, CardMedia, Link } from "@mui/material";
-import { dataElements } from "./data";
+import { useEffect, useState } from "react";
+import { fetchData } from "../../../utils/api";
 import {
   CustomBox,
   CustomContent,
@@ -11,7 +12,22 @@ import {
   CustomTitle,
 } from "./styles";
 
-const MightLike = ({ sectionTitle }) => {
+const MightLike = ({ sectionTitle, category, id }) => {
+  const [products, setProducts] = useState([]);
+
+  const shuffledProducts = products.sort(() => 0.5 - Math.random());
+  const productsToShow = shuffledProducts.slice(0, 6);
+
+  useEffect(() => {
+    if (category) {
+      fetchData(`/products/filter?categories=${category}`).then((data) =>
+        setProducts(data.products.filter((product) => product.itemNo !== id))
+      );
+    } else {
+      fetchData("/products").then((data) => setProducts(data));
+    }
+  }, []);
+
   const slideLeft = () => {
     const slider = document.getElementById("slider");
     slider.scrollLeft = slider.scrollLeft - 380;
@@ -27,46 +43,50 @@ const MightLike = ({ sectionTitle }) => {
       <CustomSliderBox>
         <CustomLeftIcon onClick={slideLeft} />
         <CustomSlider id="slider" variant="div" component="div">
-          {dataElements.length > 0 && (
+          {productsToShow.length > 0 && (
             <>
-              {dataElements.map(({ id, title, urlImage, price }) => (
-                /* коли товари будуть приходити з БД - замінити лінку на href={`/catalog/${itemNo}`} */
-                <Link href={`/catalog/${id}`} key={id}>
-                  <CustomItem component="div">
-                    <CardMedia
-                      component="img"
-                      height="380"
-                      image={urlImage}
-                      alt="might-like"
-                    />
-                    <CardContent
-                      sx={{
-                        position: "absolute",
-                        bottom: "20px",
-                        left: "20px",
-                      }}
-                    >
-                      <CustomContent
-                        component="p"
-                        sx={{ marginBottom: "10px" }}
-                      >
-                        {title}
-                      </CustomContent>
-                      <CustomContent
-                        component="span"
+              {productsToShow.map(
+                ({ name, imageUrls, currentPrice, itemNo }) => (
+                  <Link href={`/catalog/${itemNo}`} key={itemNo}>
+                    <CustomItem component="div">
+                      <CardMedia
+                        component="img"
+                        height="380"
+                        image={imageUrls[0]}
+                        alt="might-like"
+                      />
+                      <CardContent
                         sx={{
-                          fontWeight: "700",
-                          fontSize: "24px",
-                          padding: "0 10px",
-                          textShadow: "0px 4px 1px rgba(0, 0, 0, 0.25)",
+                          position: "absolute",
+                          bottom: "20px",
+                          left: "20px",
                         }}
                       >
-                        ${price}
-                      </CustomContent>
-                    </CardContent>
-                  </CustomItem>
-                </Link>
-              ))}
+                        <CustomContent
+                          component="p"
+                          sx={{
+                            marginBottom: "10px",
+                            textTransform: "capitalize",
+                          }}
+                        >
+                          {name}
+                        </CustomContent>
+                        <CustomContent
+                          component="span"
+                          sx={{
+                            fontWeight: "700",
+                            fontSize: "24px",
+                            padding: "0 10px",
+                            textShadow: "0px 4px 1px rgba(0, 0, 0, 0.25)",
+                          }}
+                        >
+                          ${currentPrice}
+                        </CustomContent>
+                      </CardContent>
+                    </CustomItem>
+                  </Link>
+                )
+              )}
             </>
           )}
         </CustomSlider>
