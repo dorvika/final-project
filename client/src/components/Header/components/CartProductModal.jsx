@@ -48,7 +48,7 @@ const CartProductModal = ({ product }) => {
                                 top: "45px",
                                 left: "265px"
                             }}>
-                                <IconButton
+                                <IconButton sx={{color: "red"}}
                                     onClick={handleRemoveProduct}>
                                     <Close/>
                                 </IconButton>
@@ -82,7 +82,7 @@ const CartProductModal = ({ product }) => {
                                     variant="h5"
                                     fontFamily="Abel"
                                     sx={{
-                                        width: "auto",
+                                        width: "fit-content",
                                         backgroundColor: "primary.main",
                                         color: "primary.contrastText",
                                         letterSpacing: "0.04em",
@@ -98,6 +98,7 @@ const CartProductModal = ({ product }) => {
                             <Box sx={{ display: "flex", alignItems: "center" }}>
                                 <Box>
                                     <Box sx={{ display: "flex", alignItems: "center",
+                                        width: "fit-content",
                                         backgroundColor: "primary.main",
                                         color: "primary.contrastText",}}>
                                         <Typography
@@ -120,6 +121,7 @@ const CartProductModal = ({ product }) => {
                                         </Typography>
                                     </Box>
                                     <Box sx={{ display: "flex", alignItems: "center", backgroundColor: "primary.main",
+                                        width: "fit-content",
                                         color: "primary.contrastText",}}>
                                         <Typography
                                             variant="h5"
@@ -146,6 +148,7 @@ const CartProductModal = ({ product }) => {
 
                                     <Typography variant="h5" sx={{
                                         pt: "8px",
+                                        width: "fit-content",
                                         backgroundColor: "primary.main",
                                         color: "primary.contrastText",
                                         fontWeight: "200",

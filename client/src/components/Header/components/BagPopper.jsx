@@ -2,7 +2,7 @@ import { ShoppingBagOutlined } from "@mui/icons-material";
 import {
   Badge,
   Box,
-  Button,
+  Button, ClickAwayListener,
   Fade,
   IconButton,
   Popper,
@@ -11,10 +11,11 @@ import {
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+// eslint-disable-next-line import/no-unresolved
+import CartProductModal from "./CartProductModal";
 
 const BagPopper = () => {
   const cart = useSelector((state) => state.cart.cart);
-  // const favorites = useSelector((state) => state.favorites.favorites);
   const cartTotalSum = () => {
     return cart.reduce((sum, cartItem) => {
       return sum + cartItem.product.currentPrice * cartItem.cartQuantity;
@@ -30,15 +31,27 @@ const BagPopper = () => {
     setAnchorEl(event.currentTarget);
     setOpen((previousOpen) => !previousOpen);
   };
+
+  const handleClickAway = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <>
+      <ClickAwayListener onClickAway={handleClickAway}>
       <IconButton
         style={{ textDecoration: "none", color: "#373F41" }}
         aria-describedby={id}
         onClick={handleClick}
       >
         <Popper
-          sx={{ zIndex: "10000" }}
+          sx={{
+            height: "600px",
+            zIndex: "1000",
+            overflowY: "scroll",
+            overflowX: "none"
+        }}
+          placement="bottom-end"
           id={id}
           open={open}
           anchorEl={anchorEl}
@@ -76,14 +89,27 @@ const BagPopper = () => {
                     CHECKOUT
                   </Button>
                 </Link>
+                <Box >
+                  {cart.map((cartItem) => {
+                    return (
+                        <CartProductModal
+                            key={cartItem.product._id}
+                            cartQuantity={cartItem.cartQuantity}
+                            product={cartItem.product}
+                        />
+                    );
+                  })}
+                </Box>
               </Box>
             </Fade>
           )}
         </Popper>
+
         <Badge badgeContent={cart.length} color="error">
           <ShoppingBagOutlined />
         </Badge>
       </IconButton>
+</ClickAwayListener>
     </>
   );
 };
