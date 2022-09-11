@@ -34,6 +34,7 @@ export const StyledMenu = styled((props) => (
       color: "#8A9394",
       paddingTop: "4px",
       paddingBottom: "4px",
+      minHeight: 0,
       "& .MuiSvgIcon-root": {
         fontSize: 14,
         color: theme.palette.text.secondary,
@@ -55,9 +56,6 @@ export const CustomCardContent = styled(CardContent)(() => ({
   left: "50%",
   width: "max-content",
   transform: "translate(-50%, -50%)",
-  //   [theme.breakpoints.down("450")]: {
-  //     left: 10,
-  //   },
 }));
 
 export const HoverCardContent = styled(CardContent)(() => ({
@@ -69,24 +67,29 @@ export const HoverCardContent = styled(CardContent)(() => ({
   position: "absolute",
   right: 0,
   bottom: 0,
-  width: "283px",
-  height: "283px",
-  //   transform: "translate(-50%, -50%)",
-  // [theme.breakpoints.down("450")]: {
-  //   left: 10,
-  // },
+  left: "10px",
+  top: 0,
 }));
 
-export const CustomPaginationItem = styled(PaginationItem)(() => ({
+export const CustomPaginationItem = styled(PaginationItem)(({ theme }) => ({
   margin: "0px 15px",
   "&.MuiButtonBase-root, MuiPaginationItem-root": {
     fontSize: "20px",
     fontWeight: "300",
     lineHeight: "30px",
     fontFamily: "Mulish",
+    [theme.breakpoints.down("md")]: {
+      fontSize: "16px",
+    },
     "&.Mui-selected": {
       fontWeight: "700",
       backgroundColor: "rgba(0,0,0,0)",
     },
+  },
+  [theme.breakpoints.down("md")]: {
+    margin: "0px 5px",
+  },
+  [theme.breakpoints.down("sm")]: {
+    margin: "0px",
   },
 }));

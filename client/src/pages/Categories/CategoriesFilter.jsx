@@ -41,11 +41,20 @@ const CategoriesFilter = () => {
 
   const filterParams = Object.keys(
     Object.fromEntries([...searchParams])
-  ).filter((param) => param !== "categories");
+  ).filter(
+    (param) =>
+      param !== "categories" && param !== "perPage" && param !== "startPage"
+  );
 
   return (
-    <Stack sx={{ width: "25%" }}>
-      <Typography variant="h2" sx={{ letterSpacing: "0" }}>
+    <Stack sx={{ width: { md: "25%", sm: "100%" } }}>
+      <Typography
+        variant="h2"
+        sx={(theme) => ({
+          letterSpacing: "0",
+          [theme.breakpoints.down("md")]: { display: "none" },
+        })}
+      >
         CATALOG
       </Typography>
       <CategoriesAccordion title="Price">
@@ -96,7 +105,17 @@ const CategoriesFilter = () => {
         <CategoriesRadio options={materials} materialFlag />
       </CategoriesAccordion>
       {filterParams.length > 0 && (
-        <Button variant="outlined" sx={{ mt: "10px" }} onClick={resetFilters}>
+        <Button
+          variant="outlined"
+          sx={(theme) => ({
+            mt: "10px",
+            width: { xs: "100%", sm: "50%", md: "100%" },
+            backgroundColor: theme.palette.primary.main,
+            color: theme.palette.primary.contrastText,
+            [theme.breakpoints.only("sm")]: { mx: "auto" },
+          })}
+          onClick={resetFilters}
+        >
           Reset Filters
         </Button>
       )}

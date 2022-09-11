@@ -20,10 +20,23 @@ const TopFilter = () => {
 
   return (
     <>
-      <Stack direction="row" justifyContent="space-between">
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        sx={(theme) => ({
+          flexWrap: "wrap",
+          [theme.breakpoints.down("md")]: {
+            justifyContent: "center",
+            gap: "20px",
+          },
+          [theme.breakpoints.down("sm")]: {
+            gap: "10px",
+          },
+        })}
+      >
         <Button
           variant="outlined"
-          sx={{
+          sx={(theme) => ({
             backgroundColor:
               activeCategory === allCategories
                 ? "primary.main"
@@ -32,7 +45,11 @@ const TopFilter = () => {
               activeCategory === allCategories
                 ? "primary.contrastText"
                 : "primary.main",
-          }}
+            [theme.breakpoints.down("md")]: {
+              padding: "10px",
+              fontSize: 14,
+            },
+          })}
           onClick={() => {
             searchParams.set("categories", allCategories);
             searchParams.set("startPage", 1);
@@ -46,7 +63,7 @@ const TopFilter = () => {
           <Button
             key={category.id}
             variant="outlined"
-            sx={{
+            sx={(theme) => ({
               backgroundColor:
                 activeCategory === category.name
                   ? "primary.main"
@@ -55,7 +72,11 @@ const TopFilter = () => {
                 activeCategory === category.name
                   ? "primary.contrastText"
                   : "primary.main",
-            }}
+              [theme.breakpoints.down("md")]: {
+                padding: "10px",
+                fontSize: 14,
+              },
+            })}
             onClick={() => {
               searchParams.set("categories", category.name);
               searchParams.set("startPage", 1);

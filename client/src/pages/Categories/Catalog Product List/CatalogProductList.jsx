@@ -28,7 +28,7 @@ const CatalogProductList = ({ isLoadingFilter }) => {
       {isLoading || isLoadingFilter ? (
         <Preloader />
       ) : (
-        <Grid container rowSpacing={20} columnSpacing={5}>
+        <Grid container columnSpacing={5}>
           {queryString ? (
             filteredProducts.length === 0 &&
             (!isLoading || !isLoadingFilter) ? (
