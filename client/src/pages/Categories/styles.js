@@ -11,11 +11,11 @@ export const CategoriesMainContainer = styled(Container)(({ theme }) => ({
   marginTop: "30px",
   marginBottom: "80px",
   [theme.breakpoints.down("md")]: {
-    marginBottom: "40px",
+    marginBottom: "20px",
   },
 }));
 
-export const CustomPriceSlider = styled(Slider)({
+export const CustomPriceSlider = styled(Slider)(({ theme }) => ({
   height: 2,
   margin: "0px",
   "& .MuiSlider-rail": {
@@ -27,9 +27,18 @@ export const CustomPriceSlider = styled(Slider)({
     width: 17,
     borderRadius: "0",
   },
-});
+  [theme.breakpoints.down("md")]: {
+    width: "50%",
+  },
+  [theme.breakpoints.down("sm")]: {
+    width: "80%",
+  },
+  [theme.breakpoints.only("xs")]: {
+    width: "90%",
+  },
+}));
 
-export const CustomTextField = styled(TextField)({
+export const CustomTextField = styled(TextField)(({ theme }) => ({
   width: "80px",
   height: "22px",
   "& .MuiInputBase-root": {
@@ -44,7 +53,10 @@ export const CustomTextField = styled(TextField)({
     padding: "0 ",
     textAlign: "center",
   },
-});
+  [theme.breakpoints.only("xs")]: {
+    width: "70px",
+  },
+}));
 
 export const ColorBox = styled(Box)({
   borderRadius: "50%",

@@ -28,11 +28,22 @@ const CatalogProductList = ({ isLoadingFilter }) => {
       {isLoading || isLoadingFilter ? (
         <Preloader />
       ) : (
-        <Grid container rowSpacing={20} columnSpacing={5}>
+        <Grid container columnSpacing={5}>
           {queryString ? (
             filteredProducts.length === 0 &&
             (!isLoading || !isLoadingFilter) ? (
-              <Typography variant="h2" sx={{ m: "50px auto" }}>
+              <Typography
+                variant="h2"
+                sx={(theme) => ({
+                  m: "50px auto",
+                  [theme.breakpoints.down("sm")]: {
+                    m: "20px",
+                    fontSize: 22,
+                    textAlign: "center",
+                    lineHeight: "30px",
+                  },
+                })}
+              >
                 Sorry, there are no matching products :(
               </Typography>
             ) : (

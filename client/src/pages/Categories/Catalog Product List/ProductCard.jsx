@@ -38,7 +38,7 @@ const ProductCard = ({ image, title, price, size, itemNo, product }) => {
     dispatch(removeFavorite(product));
   };
   return (
-    <Grid item xs={4} position="relative" marginTop="10px">
+    <Grid item xs={12} sm={6} md={4} position="relative" sx={{ mb: "20px" }}>
       <Card onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <CardMedia
           component="img"
