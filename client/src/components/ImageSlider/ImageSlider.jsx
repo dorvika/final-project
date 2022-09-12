@@ -50,7 +50,7 @@ const ImageSlider = () => {
     <SliderContainer>
       <Slider>
         <LeftArrow onClick={goToPreviousSlide} />
-        <Link to="/catalog?perPage=9&startPage=1">
+        <Link to={`/special-offer/${currentIndex + 1}`}>
           <Slide
             sx={{
               backgroundImage: `url(${slides[currentIndex]?.imageUrl})`,
