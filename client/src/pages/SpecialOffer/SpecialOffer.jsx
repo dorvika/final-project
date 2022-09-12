@@ -1,12 +1,4 @@
-import {
-  Box,
-  Breadcrumbs,
-  Button,
-  Container,
-  Link,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchData } from "../../utils/api";
@@ -24,19 +16,11 @@ const SpecialOffer = () => {
 
   return (
     <Container>
-      <Breadcrumbs sx={{ mb: "10px" }}>
-        <Link underline="hover" color="inherit" href="/">
-          Shop
-        </Link>
-        <Link
-          underline="hover"
-          color="inherit"
-          href="/catalog?perPage=9&startPage=1"
-        >
-          Catalog
-        </Link>
-      </Breadcrumbs>
-      <Stack direction="column" alignItems="center" sx={{ mb: "40px" }}>
+      <Stack
+        direction="column"
+        alignItems="center"
+        sx={{ mb: "40px", mt: "20px" }}
+      >
         <Typography variant="h2" sx={{ textAlign: "center", mb: "10px" }}>
           {selectedOffer?.title}
         </Typography>
@@ -70,7 +54,7 @@ const SpecialOffer = () => {
             : "Postil' Bedding it's always the best quality with the best price. To go the catalog and you'll see"}
           .
         </Typography>
-        <Button variant="outlined" href="/catalog?perPage=9&startPage=1">
+        <Button variant="contained" href="/catalog?perPage=9&startPage=1">
           Go to Shopping
         </Button>
       </Stack>
