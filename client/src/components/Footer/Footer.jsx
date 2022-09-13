@@ -1,17 +1,4 @@
-import {
-  Box,
-  // Button,
-  Container,
-  Divider,
-  // List,
-  // ListItem,
-  // Stack,
-  // TextField,
-  Typography,
-  Link,
-} from "@mui/material";
-// import { Link } from "react-router-dom";
-// import { FacebookOutlined, Twitter, Instagram } from "@mui/icons-material";
+import { Box, Container, Divider, Typography, Link } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import AccordionMenu from "./components/AccordionMenu.jsx";
 import RegularMenu from "./components/RegularMenu.jsx";
