@@ -1,5 +1,5 @@
 import { CardContent, CardMedia, Link } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { fetchData } from "../../../utils/api";
 import {
   CustomBox,
@@ -15,7 +15,10 @@ import {
 const MightLike = ({ sectionTitle, category, id }) => {
   const [products, setProducts] = useState([]);
 
-  const shuffledProducts = products.sort(() => 0.5 - Math.random());
+  const shuffledProducts = useMemo(
+    () => products.sort(() => 0.5 - Math.random()),
+    [products]
+  );
   const productsToShow = shuffledProducts.slice(0, 6);
 
   useEffect(() => {
