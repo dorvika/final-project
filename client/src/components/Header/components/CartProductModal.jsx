@@ -26,7 +26,8 @@ const CartProductModal = ({ product }) => {
     } = product;
     const dispatch = useDispatch();
 
-    const handleRemoveProduct = () => {
+    const handleRemoveProduct = (event) => {
+        event.preventDefault()
         dispatch(removeFromCart(_id));
     };
 
@@ -41,29 +42,28 @@ const CartProductModal = ({ product }) => {
             >
                 <Stack direction="column">
 
-                    <Link to={`/catalog/${itemNo}`} style={{ textDecoration: "none", width: "320px", height: "400px", marginTop: "-40px"}}>
-                            <Box sx={{
+                    <Link to={`/catalog/${itemNo}`} style={{ position: "relative", textDecoration: "none", width: "320px", height: "400px", display: "block"}}>
+                            <Box
+                                onClick={handleRemoveProduct}
+                                sx={{
                                 zIndex: "30000",
-                                position: "relative",
-                                top: "45px",
-                                left: "265px"
+                                position: "absolute",
+                                top: "15px",
+                                right: "15px",
                             }}>
-                                <IconButton sx={{color: "red"}}
-                                    onClick={handleRemoveProduct}>
+                                <IconButton sx={{color: "red"}}>
                                     <Close/>
                                 </IconButton>
                             </Box>
                             <CardMedia
                             component="img"
-
                             image={`${imageUrls[0]}`}
                             sx={{
-                                width: "320px",
+                                maxWidth: "320px",
                                 height: "400px",
-                                mr: "80px" }}
-
-                        >
-
+                                mr: "80px",
+                                mt: "10px",
+                            }}>
                         </CardMedia>
 
                     </Link>
