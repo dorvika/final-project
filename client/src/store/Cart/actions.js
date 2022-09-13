@@ -5,6 +5,13 @@ export const addToCart = product => {
     }
 }
 
+export const changesToCart = (product, qty) => {
+    return {
+        type: 'CHANGES_TO_CART',
+        payload: {product: product, cartQuantity: qty} 
+    }
+}
+
 export const removeFromCart = id => {
     return {
         type: 'REMOVE_FROM_CART',
