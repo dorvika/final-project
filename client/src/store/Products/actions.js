@@ -1,5 +1,8 @@
 import { fetchData } from "../../utils/api";
 
+/* code review: good
+  запити до сервера зроблені в redux-thunk
+ */
 export const fetchProducts = () => (dispatch) => {
   dispatch({
     type: "START_FETCH_PRODUCTS",

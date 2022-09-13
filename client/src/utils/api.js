@@ -10,6 +10,13 @@ API.interceptors.request.use(function (req) {
   return req;
 });
 
+
+/* code review: good, but could be better
+  не дуже поширена практика мати одну функцію, якій передається
+  ендпоінт і метод, краще робити окремі функції для кожного методу
+  наприклад, getProducts, getProductById, createProduct, updateProduct, deleteProduct
+  і зібрати це все в папці api
+ */
 export const fetchData = async (endpoint) => {
   const response = await API.get(endpoint);
   const { data } = response;

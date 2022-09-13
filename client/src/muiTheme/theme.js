@@ -1,5 +1,9 @@
 import { createTheme } from "@mui/material/styles";
 
+/* code review: good
+  загальні стилі для компонентів задані в темі
+ */
+
 const theme = createTheme({
   palette: {
     primary: {

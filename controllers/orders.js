@@ -18,7 +18,8 @@ exports.placeOrder = async (req, res, next) => {
     let cartProducts = [];
 
     if (req.body.deliveryAddress) {
-      order.deliveryAddress = JSON.parse(req.body.deliveryAddress);
+      // order.deliveryAddress = JSON.parse(req.body.deliveryAddress);
+      order.deliveryAddress = req.body.deliveryAddress;
     }
 
     if (req.body.shipping) {

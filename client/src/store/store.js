@@ -13,6 +13,14 @@ import cartReducer from "./Cart/reducer";
 import favoritesReducer from "./Favorites/reducer";
 import isLoggedInReducer from "./IsLogged/reducer";
 
+/* code review: good, but could be better
+ можна було б використати redux-toolkit,
+ щоб менше коду писати для редаксу
+
+ code review: good
+  добре розділений redux store
+ */
+
 export const rootReducer = combineReducers({
   modal: modalReducer,
   filters: filterReducer,

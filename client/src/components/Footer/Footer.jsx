@@ -3,6 +3,10 @@ import { styled } from "@mui/material/styles";
 import AccordionMenu from "./components/AccordionMenu.jsx";
 import RegularMenu from "./components/RegularMenu.jsx";
 
+/* code review: good
+    готовий Divider кастомізований під потрібні стилі
+    за допомогою styled-components
+ */
 const FooterHr = styled(Divider)(({ theme }) => ({
   borderColor: theme.palette.primary.main,
   margin: "0 auto",

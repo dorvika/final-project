@@ -1,3 +1,8 @@
+/* code review: good
+    логіка по корзині повністю відокремлена від інших компонентів
+    і знаходиться в reduxʼі
+ */
+
 export const addToCart = product => {
     return {
         type: 'ADD_TO_CART',

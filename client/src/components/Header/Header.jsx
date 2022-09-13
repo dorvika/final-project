@@ -45,6 +45,9 @@ const Header = () => {
                 }}
             >
                 <Link style={{ marginLeft: "-2.6041666666666665vw" }} to={"/"}>
+                    {/* code review: good, but could be better
+                        в таких випадках достатньо просто використати <Logo />
+                     */}
                     <Logo></Logo>
                 </Link>
                 <Catalog />
