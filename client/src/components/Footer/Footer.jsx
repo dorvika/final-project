@@ -45,8 +45,21 @@ const Footer = () => {
               </Typography>
             </Box>
           </Link>
-          <Typography variant="body">
+          <Typography
+            variant="body"
+            sx={(theme) => ({
+              [theme.breakpoints.down("sm")]: { display: "none" },
+            })}
+          >
             © 2021 — 2022 FE2_Online Studio
+          </Typography>
+          <Typography
+            variant="body"
+            sx={(theme) => ({
+              [theme.breakpoints.up("sm")]: { display: "none" },
+            })}
+          >
+            FE2_Online Studio
           </Typography>
         </Box>
       </Container>
