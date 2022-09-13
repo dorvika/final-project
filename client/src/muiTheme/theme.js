@@ -272,6 +272,15 @@ const theme = createTheme({
         },
       },
     },
+    MuiAccordion: {
+      styleOverrides: {
+        root: {
+          "&.MuiExpanded": {
+            margin: "0",
+          },
+        },
+      },
+    },
   },
   transitions: {
     duration: {
