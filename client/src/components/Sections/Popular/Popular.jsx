@@ -8,6 +8,9 @@ import {
   Link,
   useMediaQuery,
 } from "@mui/material";
+import { useEffect } from "react";
+import { useState } from "react";
+import { fetchData } from "../../../utils/api";
 import { popularArray } from "./dataPopular";
 import {
   CustomButton,
@@ -19,6 +22,25 @@ import {
 
 const Popular = () => {
   const matches = useMediaQuery("(max-width: 899px)");
+  // const [categories, setCatgories] = useState([]);
+  const [products, setProducts] = useState([]);
+
+  // useEffect(() => {
+  //   fetchData("/catalog").then((res) => setCatgories(res));
+  // }, []);
+
+  const shuffledCategories = products.categories.sort(
+    () => 0.5 - Math.random()
+  );
+  // function itemsToShow(quantity) {
+  const categoriesToShow = shuffledCategories.slice(0, 4);
+  //   return items;
+  // }
+  console.log(categoriesToShow);
+  useEffect(() => {
+    fetchData("/products").then((data) => setProducts(data));
+  }, []);
+  console.log("products", products);
 
   return (
     <Box
@@ -80,6 +102,6 @@ const Popular = () => {
       </CustomButton>
     </Box>
   );
-};
+};;;
 
 export default Popular;
