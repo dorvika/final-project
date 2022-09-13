@@ -8,10 +8,11 @@ import {
   Link,
   useMediaQuery,
 } from "@mui/material";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Preloader } from "../../../pages/Categories";
+import { fetchProducts } from "../../../store/Products/actions";
 import { fetchData } from "../../../utils/api";
-import { popularArray } from "./dataPopular";
 import {
   CustomButton,
   CustomCardContent,
@@ -22,25 +23,27 @@ import {
 
 const Popular = () => {
   const matches = useMediaQuery("(max-width: 899px)");
-  // const [categories, setCatgories] = useState([]);
-  const [products, setProducts] = useState([]);
-
-  // useEffect(() => {
-  //   fetchData("/catalog").then((res) => setCatgories(res));
-  // }, []);
-
-  const shuffledCategories = products.categories.sort(
-    () => 0.5 - Math.random()
+  const dispatch = useDispatch();
+  const [categories, setCategories] = useState([]);
+  const { products, isLoading, hasError } = useSelector(
+    (state) => state.products
   );
-  // function itemsToShow(quantity) {
-  const categoriesToShow = shuffledCategories.slice(0, 4);
-  //   return items;
-  // }
-  console.log(categoriesToShow);
+
   useEffect(() => {
-    fetchData("/products").then((data) => setProducts(data));
+    fetchData("/catalog").then((res) => setCategories(res));
   }, []);
-  console.log("products", products);
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
+
+  const shuffledCategories = categories.sort(() => 0.5 - Math.random());
+  const categoriesToShow = shuffledCategories.slice(0, 4);
+  const shuffledProducts = products.sort(() => 0.5 - Math.random());
+
+  const uniqProducts = categoriesToShow.map((el) =>
+    shuffledProducts.find((product) => product.categories === el.name)
+  );
 
   return (
     <Box
@@ -61,23 +64,36 @@ const Popular = () => {
       >
         Popular
       </Typography>
-      <Grid container spacing={10} sx={{ flexGrow: 1, marginBottom: "30px" }}>
-        {popularArray
-          .filter((e, count) => count < 4)
-          .map(({ id, urlImage, title, xs }) => (
-            <CustomGridItem item key={id} xs={matches ? 12 : xs}>
-              <Link href="/catalog?perPage=9&startPage=1">
+
+      {hasError && (
+        <div>
+          <p>Ooops, something went wrong</p>
+        </div>
+      )}
+      {isLoading ? (
+        <Preloader style={{ marginBottom: "15px" }} />
+      ) : (
+        <Grid container spacing={10} sx={{ flexGrow: 1 }}>
+          {uniqProducts.map((product, index) => (
+            <CustomGridItem
+              item
+              key={product.item}
+              xs={matches ? 12 : index === 0 || index === 3 ? 8 : 4}
+            >
+              <Link
+                href={`/catalog?categories=${product.categories}&perPage=9&startPage=1`}
+              >
                 <Card sx={{ maxWidth: "100%" }}>
                   <CardMedia
                     component="img"
                     height="340"
-                    image={urlImage}
+                    image={product.imageUrls[0]}
                     alt="popular-img"
                   />
                   <CustomCardContent sx={{ paddingRight: "20px" }}>
                     <CardContent sx={{ paddingRight: "45px" }}>
                       <CustomTypography variant="p" component="p">
-                        {title}
+                        {product.categories}
                       </CustomTypography>
                       <CustomButton>Shop</CustomButton>
                     </CardContent>
@@ -86,8 +102,10 @@ const Popular = () => {
               </Link>
             </CustomGridItem>
           ))}
-      </Grid>
-      <CustomButton sx={{ margin: "0", padding: "0" }}>
+        </Grid>
+      )}
+
+      <CustomButton sx={{ mt: "30px", padding: "0" }}>
         <Link
           href="/catalog?perPage=9&startPage=1"
           sx={{
@@ -102,6 +120,6 @@ const Popular = () => {
       </CustomButton>
     </Box>
   );
-};;;
+};;;;;;;;;;;;
 
 export default Popular;
