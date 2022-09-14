@@ -54,6 +54,12 @@ export const customerCart = () => {
     } catch (error) {
       dispatch(loadSuccess());
       dispatch(loadedWithError());
+
+export const changesToCart = (product, qty) => {
+    return {
+        type: 'CHANGES_TO_CART',
+        payload: {product: product, cartQuantity: qty} 
+
     }
   };
 };
@@ -71,6 +77,7 @@ export const removeFromCart = (id) => {
         type: "REMOVE_FROM_CART",
         payload: { id },
       });
+
     }
   };
 };

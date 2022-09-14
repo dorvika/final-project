@@ -23,6 +23,7 @@ import {
   removeFromCart,
   addToCart,
   decreaseCartItem,
+  changesToCart
 } from "../../store/Cart/actions";
 import { addFavorite, removeFavorite } from "../../store/Favorites/actions";
 
@@ -52,8 +53,8 @@ const CartProductCard = ({ cartQuantity, product }) => {
   const removeFromFavorite = () => {
     dispatch(removeFavorite(product));
   };
-  const handleQuantityChange = (event) => {
-    setQuantityValue(event.target.value);
+  const handleQuantityChange = () => {
+   dispatch(changesToCart(product,quantityValue))
   };
 
   const increaseQuantity = () => {
@@ -66,6 +67,7 @@ const CartProductCard = ({ cartQuantity, product }) => {
       dispatch(decreaseCartItem(product));
     }
   };
+  
   return (
     <>
       <Card
@@ -159,10 +161,17 @@ const CartProductCard = ({ cartQuantity, product }) => {
                 </Box>
                 <Stack direction="row" alignItems="center">
                   <TextField
+                    onBlur={handleQuantityChange}
                     value={quantityValue}
-                    onChange={handleQuantityChange}
+                    type="number"
+                      onChange={(e)=>{
+                        let value = parseInt(e.target.value)
+                        if(value <= 0 || isNaN(value)) value = 1;
+                        setQuantityValue(value)
+                      }}
                     style={{ width: "50px" }}
                     size="small"
+                    
                   ></TextField>
                   <Stack>
                     <IconButton

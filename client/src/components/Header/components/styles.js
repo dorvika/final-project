@@ -1,4 +1,5 @@
 import {
+    Popper,
     Input,
     Box,
 } from "@mui/material";
@@ -39,5 +40,38 @@ export const HeaderLinks = styled(Box)(({ theme }) => ({
         display: "none"
     }
 }))
+
+export const CustomPopper = styled(Popper)(() => ({
+    height: "600px",
+    zIndex: "1000",
+    overflowY: "auto",
+    overflowX: "none",
+    // display: "none",
+
+    '&::-webkit-scrollbar': {
+        width: '10px',
+    },
+
+    /* Track */
+    '&::-webkit-scrollbar-track': {
+        background: 'black',
+        width: '2px',
+        border: '3px solid white',
+        borderRadius: '10px',
+    },
+
+    /* Handle */
+    '&::-webkit-scrollbar-thumb': {
+        background: '#373F41',
+        height: '100px',
+        borderRadius: '10px',
+    },
+
+    /* Handle on hover */
+    '&::-webkit-scrollbar-thumb:hover': {
+        background: 'black',
+    }
+}))
+
 
 

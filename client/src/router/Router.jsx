@@ -14,6 +14,7 @@ import {
   Blog,
   CheckOut,
   Favorites,
+  SpecialOffer,
 } from "../pages";
 
 export default function Router() {
@@ -34,6 +35,7 @@ export default function Router() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/profile" element={<Blog />} />
+        <Route path="/special-offer/:id" element={<SpecialOffer />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </main>

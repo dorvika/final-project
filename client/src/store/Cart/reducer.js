@@ -44,6 +44,16 @@ const reducer = (state = initialState.cart, action) => {
                 cart: [...state.cart, {product: action.payload.product, cartQuantity: 1}] 
             }
 		}
+    case 'CHANGES_TO_CART': { 
+			const isExist = state.cart.some((products)=> products.product._id === action.payload.product._id);
+        if (isExist) return {
+                ...state,
+                cart: state.cart.map((products) => products.product._id === action.payload.product._id ? {product: products.product, cartQuantity: action.payload.cartQuantity} : products)}
+            return {
+                ...state, 
+                cart: [...state.cart, {product: action.payload.product, cartQuantity: action.payload.cartQuantity}] 
+            }
+		}
     case 'DECREASE_CART_ITEM': {
       return {
         ...state,

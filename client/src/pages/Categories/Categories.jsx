@@ -1,4 +1,12 @@
-import { Breadcrumbs, Link, Stack, Box, Pagination } from "@mui/material";
+import {
+  Breadcrumbs,
+  Link,
+  Stack,
+  Box,
+  Pagination,
+  Button,
+  useMediaQuery,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 import { CustomPaginationItem } from "./Catalog Product List/styles.js";
 import {
@@ -23,10 +31,17 @@ const Categories = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const [showFilterMenu, setShowFilterMenu] = useState(false);
 
   const showQty = Number(searchParams.get("perPage")) || 9;
   const totalPages = Math.ceil(filteredProductsQty / showQty);
   const queryString = useLocation().search;
+
+  const toggleFilterMenu = () => {
+    setShowFilterMenu((prevValue) => !prevValue);
+  };
+
+  const matches = useMediaQuery("(min-width:900px)");
 
   useEffect(() => {
     setCurrentPage(Number(searchParams.get("startPage")));
@@ -58,7 +73,12 @@ const Categories = () => {
 
   return (
     <CategoriesMainContainer>
-      <Breadcrumbs sx={{ mb: "30px" }}>
+      <Breadcrumbs
+        sx={(theme) => ({
+          mb: "30px",
+          [theme.breakpoints.down("md")]: { mb: "10px" },
+        })}
+      >
         <Link underline="hover" color="inherit" href="/">
           Shop
         </Link>
@@ -70,9 +90,30 @@ const Categories = () => {
           Catalog
         </Link>
       </Breadcrumbs>
-      <Stack direction="row" gap="20px" alignItems="flex-start">
-        <CategoriesFilter />
-        <Box sx={{ width: "75%" }}>
+      <Stack
+        direction={{ md: "row", sm: "column" }}
+        gap="20px"
+        alignItems="flex-start"
+        sx={(theme) => ({
+          [theme.breakpoints.down("sm")]: { gap: "10px" },
+        })}
+      >
+        <Button
+          variant="outlined"
+          sx={(theme) => ({
+            ml: "auto",
+            p: "10px",
+            fontSize: 14,
+            backgroundColor: theme.palette.primary.main,
+            color: theme.palette.primary.contrastText,
+            [theme.breakpoints.up("md")]: { display: "none" },
+          })}
+          onClick={toggleFilterMenu}
+        >
+          {showFilterMenu ? "Close" : "Open"} Filters Menu
+        </Button>
+        {(showFilterMenu || matches) && <CategoriesFilter />}
+        <Box sx={{ width: { md: "75%", sm: "100%" } }}>
           <TopFilter />
           <Stack
             direction="row"
@@ -92,7 +133,10 @@ const Categories = () => {
                 count={totalPages}
                 page={currentPage}
                 onChange={handleChange}
-                sx={{ mt: "50px" }}
+                sx={(theme) => ({
+                  mt: "50px",
+                  [theme.breakpoints.down("md")]: { mt: "0" },
+                })}
                 renderItem={(item) => <CustomPaginationItem {...item} />}
               />
             )}
