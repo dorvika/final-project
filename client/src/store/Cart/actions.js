@@ -44,7 +44,7 @@ import {
           console.log(cartResponse);
           dispatch(loadSuccess());
           dispatch(loadedWithoutError());
-          dispatch(getCartLS(cartResponse.data.products));
+          dispatch(getCartLS(cartResponse.data));
           console.log("not exist");
         } else if(isCart.products.length === 0 && lsCart.length !== 0){
           const updatedCart = lsCart.map((product) => {
@@ -60,12 +60,12 @@ import {
             console.log(cartResponse);
             dispatch(loadSuccess());
             dispatch(loadedWithoutError());
-            dispatch(getCartLS(cartResponse.data.products));
+            dispatch(getCartLS(cartResponse.data));
             console.log("exist local");
         } else {
           dispatch(loadSuccess());
           dispatch(loadedWithoutError());
-          dispatch(getCartLS(isCart.products));
+          dispatch(getCartLS(isCart));
           console.log("exist");
         }
       } catch (error) {

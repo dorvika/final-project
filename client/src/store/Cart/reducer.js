@@ -31,7 +31,8 @@ const reducer = (state = initialState.cart, action) => {
     case "GET_CART_LOCALSTORAGE": {
       return {
         ...state,
-        cart: [...action.payload.data]
+        cart: [...action.payload.data.products],
+        customer: action.payload.data.customerId
       }
 		}
 		case 'ADD_TO_CART': { 

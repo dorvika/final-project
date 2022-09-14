@@ -12,7 +12,7 @@ const steps = ["Shopping Bag", "Shipping Details", "Payment Options"];
 
 export default function HorizontalNonLinearStepper({products}) {
   const customerEmail = useSelector((state) => state.loggedIn.userData.email);
-  const isCustomer = useSelector((state) => state.loggedIn.userData._id);
+  const isCustomer = useSelector((state) => state.cart.customer);
  
   const [activeStep, setActiveStep] = useState(0);
   const [completed, setCompleted] = useState({});
@@ -95,7 +95,7 @@ export default function HorizontalNonLinearStepper({products}) {
     }
 
     if(isCustomer !== undefined){
-      newOrder = {...newOrder, customerId: isCustomer}
+      newOrder = {...newOrder, customerId: isCustomer._id}
     } else {
       newOrder = {...newOrder, products: products}
     }
