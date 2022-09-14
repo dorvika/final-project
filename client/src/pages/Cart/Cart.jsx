@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 import { Breadcrumbs, Link } from "@mui/material";
 const Cart = () => {
   const cart = useSelector((state) => state.cart.cart);
-
   const isCartEmpty = cart.length !== 0;
 
   return (
