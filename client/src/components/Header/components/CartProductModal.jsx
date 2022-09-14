@@ -7,7 +7,7 @@ import {
   IconButton,
   Stack,
 } from "@mui/material";
-import { Close } from "@mui/icons-material/";
+import { Cancel } from "@mui/icons-material/";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { removeFromCart } from "../../../store/Cart/actions";
@@ -51,7 +51,7 @@ const CartProductModal = ({ product }) => {
               }}
             >
               <IconButton sx={{ color: "primary" }}>
-                <Close />
+                <Cancel />
               </IconButton>
             </Box>
             <CardMedia
