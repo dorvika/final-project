@@ -20,6 +20,15 @@ export const postData = async (endpoint, obj) => {
   const response = await API.post(endpoint, obj);
   return response;
 };
+export const putData = async (endpoint) => {
+  const response = await API.put(endpoint);
+  return response;
+};
+
+export const deleteData = async (endpoint) => {
+  const response = await API.delete(endpoint);
+  return response;
+};
 
 export const getDataLS = (category) => {
   const lScategory = localStorage.getItem(category);

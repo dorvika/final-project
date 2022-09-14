@@ -8,6 +8,26 @@ const initialState = {
 
 const reducer = (state = initialState.cart, action) => {
   switch (action.type) {
+    case "LOAD_REQUEST": {
+      return {
+        ...state, isLoading: true
+      }
+    }
+    case "LOAD_SUCCESS": {
+      return {
+        ...state, isLoading: false
+      }
+    }
+    case "GET_PRODUCTS_WITHOUT_ERROR": {
+      return {
+        ...state, hasError: false
+      }
+    }
+    case "GET_PRODUCTS_WITH_ERROR": {
+      return {
+        ...state, hasError: true
+      }
+    }
     case "GET_CART_LOCALSTORAGE": {
       return {
         ...state,
