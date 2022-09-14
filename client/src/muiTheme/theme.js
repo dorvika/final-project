@@ -230,6 +230,10 @@ const theme = createTheme({
           lineHeight: 24,
           fontWeight: 300,
           padding: "15px 0 2px",
+          [`@media screen and (max-width: 599px)`]: {
+            fontSize: 14,
+            lineHeight: 18,
+          },
         },
       },
     },
