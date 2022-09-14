@@ -82,7 +82,7 @@ import {
           type: "REMOVE_FROM_CART",
           payload: { id },
         });
-        deleteData(`/cart/product/${id}`);
+        deleteData(`/cart/${id}`);
       } else {
         dispatch({
           type: "REMOVE_FROM_CART",

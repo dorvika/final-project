@@ -30,6 +30,11 @@ export const updateCustomerCart = async (endpoint, obj) => {
   return response;
 };
 
+export const placeOrder = async (endpoint, obj) => {
+  const response = await API.post(endpoint, obj);
+  return response;
+};
+
 export const deleteData = async (endpoint) => {
   const response = await API.delete(endpoint);
   return response;

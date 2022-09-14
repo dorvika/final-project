@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { Container, Box, Stepper, Step, StepButton } from "@mui/material";
 import stepperStyle from "./style";
 import {
@@ -10,7 +11,9 @@ import {
 const steps = ["Shopping Bag", "Shipping Details", "Payment Options"];
 
 export default function HorizontalNonLinearStepper({products}) {
-  
+  const customerEmail = useSelector((state) => state.loggedIn.userData.email);
+  const isCustomer = useSelector((state) => state.loggedIn.userData._id);
+ 
   const [activeStep, setActiveStep] = useState(0);
   const [completed, setCompleted] = useState({});
   const [data, setData] = useState({
@@ -76,9 +79,8 @@ export default function HorizontalNonLinearStepper({products}) {
   };
 
   const makeOrder = () => {
-    const newOrder = {
-      products: products,
-      email: "test@gmail.com",
+    let newOrder = {
+      email: customerEmail !== undefined ? customerEmail : "paladin567@gmail.com",
       mobile: data.phone,
       letterSubject: "Thank you for order! You are welcome!",
       letterHtml: "<h1>Your order is placed. OrderNo is 023689452.</h1><p>{Other details about order in your HTML}</p>",
@@ -90,6 +92,12 @@ export default function HorizontalNonLinearStepper({products}) {
       },
       shipping: data.delivery,
       paymentInfo: data.paymentmethod,
+    }
+
+    if(isCustomer !== undefined){
+      newOrder = {...newOrder, customerId: isCustomer}
+    } else {
+      newOrder = {...newOrder, products: products}
     }
     return newOrder
   }
