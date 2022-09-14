@@ -35,73 +35,74 @@ const Header = () => {
         dispatch(openModal());
     };
     return (
-        <header>
-            <Container
-                sx={{
-                    fontSize: "16px",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                }}
+      <header>
+        <Container
+          sx={{
+            fontSize: "16px",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Link style={{ marginLeft: "-2.6041666666666665vw" }} to={"/"}>
+            <Logo></Logo>
+          </Link>
+          <Catalog />
+
+          <HeaderLinks>
+            <Link to="/aboutus" style={{ textDecoration: "none" }}>
+              <Typography variant="body">About</Typography>
+            </Link>
+            <Link to="/contact" style={{ textDecoration: "none" }}>
+              <Typography variant="body">Contact</Typography>
+            </Link>
+            <Link to="/blog" style={{ textDecoration: "none" }}>
+              <Typography variant="body">Blog</Typography>
+            </Link>
+          </HeaderLinks>
+          <Box>
+            <HeaderInput
+              endAdornment={
+                <InputAdornment position={"start"}>
+                  <Search></Search>
+                </InputAdornment>
+              }
+              id="standard-basic"
+              placeholder="Search"
+              variant="standard"
+            />
+          </Box>
+          <IconsButtonContainer
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              width: "10%",
+            }}
+          >
+            {isLoggedIn ? (
+              <LoginPopper />
+            ) : (
+              <IconButton onClick={handleOpen}>
+                <PersonOutlined sx={{ color: "primary.main" }} />
+              </IconButton>
+            )}
+
+            <IconButton
+              sx={{ color: "primary.main" }}
+              // style={{ textDecoration: "none", color: "#373F41" }}
+              href={"/favorites"}
             >
-                <Link style={{ marginLeft: "-2.6041666666666665vw" }} to={"/"}>
-                    <Logo></Logo>
-                </Link>
-                <Catalog />
-
-                <HeaderLinks>
-                <Link to="/aboutus" style={{ textDecoration: "none" }}>
-                    <Typography variant="body">About</Typography>
-                </Link>
-                <Link to="/contact" style={{ textDecoration: "none" }}>
-                    <Typography variant="body">Contact</Typography>
-                </Link>
-                <Link to="/blog" style={{ textDecoration: "none" }}>
-                    <Typography variant="body">Blog</Typography>
-                </Link>
-                </HeaderLinks>
-                <Box>
-                    <HeaderInput
-                        endAdornment={
-                            <InputAdornment position={"start"}>
-                                <Search></Search>
-                            </InputAdornment>
-                        }
-                        id="standard-basic"
-                        placeholder="Search"
-                        variant="standard"
-                    />
-                </Box>
-                <IconsButtonContainer
-                    sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        width: "10%",
-                    }}
-                >
-                    {isLoggedIn ? (
-                        <LoginPopper />
-                    ) : (
-                        <IconButton sx={{ p: "0" }} onClick={handleOpen}>
-                            <PersonOutlined sx={{ color: "primary.main" }} />
-                        </IconButton>
-                    )}
-
-                    <Link
-                        style={{ textDecoration: "none", color: "#373F41" }}
-                        to={"/favorites"}
-                    >
-                        <Badge badgeContent={favorites.length} color="error">
-                            <FavoriteBorderOutlined />
-                        </Badge>
-                    </Link>
-                    <BagPopper />
-                </IconsButtonContainer>
-                {modal && <Authorization />}
-            </Container>
-            <Divider sx={{ borderColor: "primary.main", mb: "20px" }} />
-        </header>
+              <Badge badgeContent={favorites.length} color="error">
+                <FavoriteBorderOutlined />
+              </Badge>
+            </IconButton>
+            <BagPopper />
+          </IconsButtonContainer>
+          {modal && <Authorization />}
+        </Container>
+        <Divider sx={{ borderColor: "primary.main", mb: "20px" }} />
+      </header>
     );
 };
 
