@@ -43,95 +43,182 @@ const FavoritesProductCard = ({ product }) => {
           mt: "20px",
         }}
       >
-        <Stack direction="row">
-          <Link
-            to={`/catalog/${product.itemNo}`}
-            style={{ textDecoration: "none" }}
+        <Stack
+          sx={(theme) => ({
+            [theme.breakpoints.down("sm")]: { flexDirection: "column" },
+            [theme.breakpoints.up("sm")]: { flexDirection: "row" },
+          })}
+          // direction="row"
+        >
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="flex-start"
           >
-            <CardMedia
-              component="img"
-              height="200px"
-              sx={{ width: "200px", mr: "80px" }}
-              image={`${product.imageUrls[0]}`}
-            ></CardMedia>
-          </Link>
+            <Link
+              to={`/catalog/${product.itemNo}`}
+              style={{ textDecoration: "none" }}
+            >
+              <CardMedia
+                component="img"
+                // height="200px"
+                sx={(theme) => ({
+                  [theme.breakpoints.up("sm")]: {
+                    width: "200px",
+                    mr: "80px",
+                  },
+                  [theme.breakpoints.down("sm")]: {
+                    // mr: "80px",
+                  },
+                })}
+                image={`${product.imageUrls[0]}`}
+              ></CardMedia>
+            </Link>
+            {/* <IconButton
+              sx={(theme) => ({
+                // ml: "75px",
+                p: "0px",
+                [theme.breakpoints.up("sm")]: {
+                  display: "none",
+                },
+              })}
+              onClick={handleRemoveProduct}
+            >
+              <Close />
+            </IconButton> */}
+          </Stack>
           <CardContent>
             <Box>
-              <Link
-                to={`/catalog/${product.itemNo}`}
-                style={{ textDecoration: "none" }}
-              >
+              <Box>
+                <Link
+                  to={`/catalog/${product.itemNo}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <Typography
+                    variant="h4"
+                    fontFamily="Abel"
+                    sx={{
+                      color: "primary.main",
+                      letterSpacing: "0.04em",
+                      textTransform: "uppercase",
+                      pb: "8px",
+                    }}
+                  >
+                    {product.name}
+                  </Typography>
+                </Link>
                 <Typography
-                  variant="h4"
-                  fontFamily="Abel"
+                  variant="subtitle2"
+                  sx={(theme) => ({
+                    [theme.breakpoints.up("sm")]: {
+                      color: "primary.main",
+                      maxWidth: "380px",
+                      pb: "27px",
+                      lineHeight: "19px",
+                    },
+                    [theme.breakpoints.down("sm")]: {
+                      color: "primary.main",
+                      maxWidth: "380px",
+                      pb: "10px",
+                      lineHeight: "19px",
+                    },
+                  })}
+                >
+                  {product.description}
+                </Typography>
+
+                <Box
                   sx={{
-                    color: "primary.main",
-                    letterSpacing: "0.04em",
-                    textTransform: "uppercase",
-                    pb: "8px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
                   }}
                 >
-                  {product.name}
-                </Typography>
-              </Link>
-              <Typography
-                variant="subtitle2"
-                sx={{
-                  color: "primary.main",
-                  maxWidth: "380px",
-                  pb: "27px",
-                  lineHeight: "19px",
-                }}
-              >
-                {product.description}
-              </Typography>
-              <Typography variant="h5" sx={{ pb: "10px" }}>
-                ${product.currentPrice}
-              </Typography>
-              <Box sx={{ display: "flex", alignItems: "center" }}>
-                <Box sx={{ mr: "80px" }}>
-                  <Box sx={{ display: "flex", alignItems: "center" }}>
-                    <Typography
-                      variant="h5"
+                  <Box>
+                    <Box>
+                      <Typography variant="h5" sx={{ pb: "10px" }}>
+                        ${product.currentPrice}
+                      </Typography>
+                    </Box>
+                    <Box
                       sx={{
-                        textTransform: "uppercase",
-                        fontWeight: "400",
-                        mr: "10px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
                       }}
                     >
-                      Color:
-                    </Typography>
-                    <Typography
-                      variant="h5"
-                      sx={{ textTransform: "uppercase", fontWeight: "200" }}
-                    >
-                      {product.color}
-                    </Typography>
+                      <Typography
+                        variant="h5"
+                        sx={{
+                          textTransform: "uppercase",
+                          fontWeight: "400",
+                          mr: "10px",
+                        }}
+                      >
+                        Color:
+                      </Typography>
+                      <Typography
+                        variant="h5"
+                        sx={{ textTransform: "uppercase", fontWeight: "200" }}
+                      >
+                        {product.color}
+                      </Typography>
+                    </Box>
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                      <Typography
+                        variant="h5"
+                        sx={{
+                          textTransform: "uppercase",
+                          fontWeight: "400",
+                          mr: "10px",
+                        }}
+                      >
+                        size:
+                      </Typography>
+                      <Typography
+                        variant="h5"
+                        sx={{ textTransform: "uppercase", fontWeight: "200" }}
+                      >
+                        {product.size}
+                      </Typography>
+                    </Box>
                   </Box>
-                  <Box sx={{ display: "flex", alignItems: "center" }}>
-                    <Typography
-                      variant="h5"
-                      sx={{
-                        textTransform: "uppercase",
-                        fontWeight: "400",
-                        mr: "10px",
-                      }}
+                  <Stack justifyContent="flex-end" alignItems="flex-end">
+                    <IconButton
+                      sx={(theme) => ({
+                        // ml: "75px",
+                        mb: "10px",
+                        p: "0",
+                        [theme.breakpoints.up("sm")]: {
+                          display: "none",
+                        },
+                      })}
+                      onClick={handleRemoveProduct}
                     >
-                      size:
-                    </Typography>
-                    <Typography
-                      variant="h5"
-                      sx={{ textTransform: "uppercase", fontWeight: "200" }}
+                      <Close />
+                    </IconButton>
+                    <Button
+                      textAlign="center"
+                      onClick={isInBasket ? removeFromBasket : addToBasket}
+                      variant={isInBasket ? "outlined" : "contained"}
+                      disabled={isInBasket ? true : false}
+                      sx={(theme) => ({
+                        padding: "10px 30px",
+                        [theme.breakpoints.up("sm")]: { display: "none" },
+                      })}
                     >
-                      {product.size}
-                    </Typography>
-                  </Box>
+                      {isInBasket ? "remove from bag" : "add to bag"}
+                    </Button>
+                  </Stack>
                 </Box>
               </Box>
             </Box>
           </CardContent>
         </Stack>
         <Box
+          sx={(theme) => ({
+            [theme.breakpoints.down("sm")]: { display: "none" },
+          })}
           display="flex"
           flexDirection="column"
           alignItems="flex-end"
@@ -140,16 +227,14 @@ const FavoritesProductCard = ({ product }) => {
           <IconButton onClick={handleRemoveProduct}>
             <Close />
           </IconButton>
-          <Stack direction="row" alignItems="center">
-            <Button
-              onClick={isInBasket ? removeFromBasket : addToBasket}
-              variant={isInBasket ? "outlined" : "contained"}
-              // disabled={isInBasket ? true : false}
-              sx={{ padding: "10px 30px" }}
-            >
-              {isInBasket ? "remove from bag" : "add to bag"}
-            </Button>
-          </Stack>
+          <Button
+            onClick={isInBasket ? removeFromBasket : addToBasket}
+            variant={isInBasket ? "outlined" : "contained"}
+            disabled={isInBasket ? true : false}
+            sx={{ padding: "10px 30px" }}
+          >
+            {isInBasket ? "remove from bag" : "add to bag"}
+          </Button>
         </Box>
       </Card>
       <CustomHr />
