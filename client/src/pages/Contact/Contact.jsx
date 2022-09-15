@@ -79,13 +79,7 @@ const Contact = () => {
               sx={{ mb: "15px" }}
             >
               <Email color="primary" />
-              <Link
-                href="javascript:void(0)"
-                onClick={() =>
-                  (window.location = "mailto:postilmarket@gmail.com")
-                }
-                underline="hover"
-              >
+              <Link href="mailto:postilmarket@gmail.com" underline="hover">
                 <Typography
                   variant="h3"
                   sx={(theme) => ({
