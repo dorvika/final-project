@@ -20,7 +20,7 @@ import {
 } from "../CustomInputs/CustomInputs";
 import {validationSchemaShipping} from "../validationSchema/formsSchema.js"
 
-const ShippingForm = ({ data, next, prev }) => {
+const ShippingForm = ({ data, next, prev, shipping }) => {
  
   const handleSubmit = (value) => {
     next(value);
@@ -181,6 +181,7 @@ const ShippingForm = ({ data, next, prev }) => {
                   <Grid item xs={12} md={6} sx={{ paddingRight: {md: "10px", xs: "0"}, paddingBottom:{md:"0", xs:"15px"}}}>
                     <CustomLabel
                       value="free"
+                      onClick={()=> shipping("free")}
                       control={<CustomRadio />}
                       label={
                         <Box
@@ -202,6 +203,7 @@ const ShippingForm = ({ data, next, prev }) => {
                   <Grid item xs={12} md={6} sx={{ paddingLeft: {md: "10px", xs: "0"}}}>
                     <CustomLabel
                       value="nextday"
+                      onClick={()=> shipping("nextday")}
                       label={
                         <Box
                           style={{

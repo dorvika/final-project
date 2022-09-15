@@ -1,12 +1,13 @@
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import ShoppingBag from "../components/ShoppingBagProducts/ShoppingBag.jsx";
-
+import { useState } from "react";
 import { CustomHr } from "../../Cart/index";
 
 import Summary from "../components/Summary/Summary.jsx";
 import ShippingForm from "../components/FormikForms/ShippingForm.jsx";
 
 const ShippingDetailsPage = ({ data, next, prev, title, products, subtotal }) => {
+  const [shipping, setShipping] = useState();
   const handleSubmit = (values) => {
     next(values);
   };
@@ -36,7 +37,7 @@ const ShippingDetailsPage = ({ data, next, prev, title, products, subtotal }) =>
             </Typography>
             <CustomHr sx={{ m: "20px 0" }} />
             <Box>
-              <ShippingForm data={data} next={handleSubmit} prev={handleBack} />
+              <ShippingForm data={data} next={handleSubmit} prev={handleBack} shipping={setShipping}/>
             </Box>
           </Box>
         </Grid>
@@ -62,7 +63,7 @@ const ShippingDetailsPage = ({ data, next, prev, title, products, subtotal }) =>
             <CustomHr sx={{ mb: "10px" }} />
             <ShoppingBag products={products} small={true}/>
             <CustomHr sx={{ mt: "10px" }} />
-            <Summary subtotal={subtotal} shipping={data.delivery}/>
+            <Summary subtotal={subtotal} shipping={shipping}/>
             <Button
               variant="contained"
               form="shipping"
