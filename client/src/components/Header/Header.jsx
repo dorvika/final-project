@@ -90,7 +90,6 @@ const Header = () => {
 
             <IconButton
               sx={{ color: "primary.main" }}
-              // style={{ textDecoration: "none", color: "#373F41" }}
               href={"/favorites"}
             >
               <Badge badgeContent={favorites.length} color="error">

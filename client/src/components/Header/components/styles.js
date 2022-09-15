@@ -46,15 +46,17 @@ export const CustomPopper = styled(Popper)(() => ({
     zIndex: "1000",
     overflowY: "auto",
     overflowX: "none",
-    // display: "none",
 
+    //////////////////// CUSTOM SCROLLER STYLES/////////////////////////////
+
+    // Scrollbar
     '&::-webkit-scrollbar': {
         width: '10px',
     },
 
     /* Track */
     '&::-webkit-scrollbar-track': {
-        background: 'black',
+        background: '#8C8C8C',
         width: '2px',
         border: '3px solid white',
         borderRadius: '10px',
