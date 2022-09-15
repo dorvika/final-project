@@ -55,10 +55,11 @@ const RegularMenu = () => {
           </Typography>
           <ListItem>
             <Link
-              href="javascript:void(0)"
-              onClick={() =>
-                (window.location = "mailto:postilmarket@gmail.com")
-              }
+              href="mailto:postilmarket@gmail.com"
+              // href="javascript:void(0)"
+              // onClick={() =>
+              //   (window.location = "mailto:postilmarket@gmail.com")
+              // }
               underline="hover"
             >
               <Typography variant="body">postilmarket@gmail.com</Typography>
@@ -87,7 +88,7 @@ const RegularMenu = () => {
           <ListItem>
             <TextField
               size="small"
-              id="outlined-basic"
+              id="subscribe-adaptive"
               label="E-mail"
               variant="outlined"
             />
