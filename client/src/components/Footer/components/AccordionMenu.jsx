@@ -98,10 +98,11 @@ const AccordionMenu = () => {
             <List>
               <ListItem sx={{ pb: "5px" }}>
                 <Link
-                  href="javascript:void(0)"
-                  onClick={() =>
-                    (window.location = "mailto:postilmarket@gmail.com")
-                  }
+                  // href="javascript:void(0)"
+                  // onClick={() =>
+                  //   (window.location = "mailto:postilmarket@gmail.com")
+                  // }
+                  href="mailto:postilmarket@gmail.com"
                   underline="hover"
                 >
                   <Typography variant="body">postilmarket@gmail.com</Typography>
@@ -147,7 +148,7 @@ const AccordionMenu = () => {
               <ListItem>
                 <TextField
                   size="small"
-                  id="outlined-basic"
+                  id="subscribe-regular"
                   label="E-mail"
                   variant="outlined"
                 />
