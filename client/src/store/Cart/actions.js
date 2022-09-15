@@ -117,9 +117,18 @@ import {
   };
   
   export const removeAllFromCart = () => {
-    return {
-      type: "REMOVE_ALL_FROM_CART",
-    };
+    return async function (dispatch) {
+        if (token.length !== 0 || !token) {
+          dispatch({
+            type: "REMOVE_ALL_FROM_CART",
+          });
+          deleteData("/cart");
+        } else {
+          dispatch({
+            type: "REMOVE_ALL_FROM_CART",
+          });
+        }
+      };
   };
   
   export const getCartLS = (data) => {

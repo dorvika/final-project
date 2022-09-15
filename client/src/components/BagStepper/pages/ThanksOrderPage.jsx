@@ -9,7 +9,6 @@ const ThanksOrderPage = ({ makeOrder }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     placeOrder("/orders", makeOrder())
-    console.log(makeOrder());
     dispatch(removeAllFromCart());
   }, []);
   return (
