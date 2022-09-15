@@ -57,7 +57,21 @@ const Authorization = () => {
         </Box>
 
         <DialogContent
-          sx={{ pt: "0", pr: "55px", pl: "55px", maxWidth: "560px" }}
+          sx={(theme) => ({
+            [theme.breakpoints.up("sm")]: {
+              pt: "0",
+              pr: "55px",
+              pl: "55px",
+              maxWidth: "560px",
+            },
+
+            [theme.breakpoints.down("sm")]: {
+              pt: "0",
+              pr: "20px",
+              pl: "20px",
+              maxWidth: "560px",
+            },
+          })}
         >
           <Box sx={{ width: "100%", height: "100%", typography: "body1" }}>
             <TabContext value={value}>

@@ -6,6 +6,7 @@ import {
   IconButton,
   Popper,
   Stack,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import { useState } from "react";
@@ -81,8 +82,9 @@ const LoginPopper = () => {
               </Fade>
             )}
           </Popper>
-
-          <PersonOutlined sx={{ color: "primary.main" }} />
+          <Tooltip title={userData.firstName + " " + userData.lastName}>
+            <PersonOutlined sx={{ color: "primary.main" }} />
+          </Tooltip>
         </IconButton>
       </ClickAwayListener>
     </>

@@ -1,4 +1,4 @@
-import { Stack, Typography, Checkbox } from "@mui/material";
+import { Stack, Typography, Checkbox, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { closeModal } from "../../store/Modal/actions";
@@ -10,26 +10,59 @@ const ConfirmationPromo = () => {
   };
   return (
     <>
-      <Stack direction="row" spacing={10} marginTop="16px" marginBottom="20px">
-        <Checkbox
-          size="small"
-          defaultChecked
-          sx={{
-            color: "#6FB7AC",
-            "&.Mui-checked": {
+      <Stack
+        direction="row"
+        // spacing={10}
+        mt="20px"
+        mb="20px"
+        alignItems="center"
+        sx={(theme) => ({
+          [theme.breakpoints.down("sm")]: { mb: "10px" },
+        })}
+      >
+        <Box>
+          <Checkbox
+            size="small"
+            defaultChecked
+            sx={{
               color: "#6FB7AC",
-            },
-          }}
-        />
-        <Typography variant="subtitle1">
+              "&.Mui-checked": {
+                color: "#6FB7AC",
+              },
+            }}
+          />
+        </Box>
+        <Typography
+          sx={(theme) => ({
+            [theme.breakpoints.down("sm")]: { display: "none" },
+          })}
+          variant="subtitle1"
+        >
           Let&#39;s get personal! We&#39;ll send you only the good stuff:
           Exclusive early access to Sale, new arrivals and promotions. No
           nasties.
         </Typography>
+        <Typography
+          sx={(theme) => ({
+            [theme.breakpoints.up("sm")]: { display: "none" },
+            fontSize: 12,
+          })}
+          variant="subtitle1"
+        >
+          Let&#39;s get personal! We&#39;ll send you only the good stuff.
+        </Typography>
       </Stack>
       <Typography
         variant="subtitle1"
-        sx={{ fontWeight: 300, color: "#8C8C8C", mb: "10px" }}
+        sx={(theme) => ({
+          [theme.breakpoints.down("sm")]: {
+            fontSize: 12,
+            color: "#8C8C8C",
+            mb: "5px",
+          },
+          color: "#8C8C8C",
+          mb: "10px",
+        })}
       >
         By signing up you agree to{" "}
         <Link
