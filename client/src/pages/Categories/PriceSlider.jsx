@@ -1,5 +1,6 @@
 import { Stack, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { debounce } from "lodash";
+import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { CustomPriceSlider, CustomTextField } from "./styles";
 
@@ -38,6 +39,11 @@ const PriceSlider = () => {
     setParams(newValue[0] === 0 ? 1 : newValue[0], newValue[1]);
   };
 
+  const debouncedSliderHandler = useMemo(
+    () => debounce(handleSliderChange, 100),
+    []
+  );
+
   const handleInputChange = (event) => {
     const name = event.target.name;
     const newPrice = {
@@ -68,7 +74,7 @@ const PriceSlider = () => {
     <>
       <CustomPriceSlider
         value={sliderValues}
-        onChange={handleSliderChange}
+        onChange={debouncedSliderHandler}
         step={10}
         max={500}
         disableSwap
