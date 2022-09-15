@@ -11,7 +11,6 @@ import {
 const steps = ["Shopping Bag", "Shipping Details", "Payment Options"];
 
 export default function HorizontalNonLinearStepper({products}) {
-  const customerEmail = useSelector((state) => state.loggedIn.userData.email);
   const isCustomer = useSelector((state) => state.cart.customer);
  
   const [activeStep, setActiveStep] = useState(0);
@@ -23,7 +22,7 @@ export default function HorizontalNonLinearStepper({products}) {
     address2: "",
     country: "",
     city: "",
-    zip: "",
+    email: "",
     phone: "",
     delivery: "",
     paymentmethod: "",
@@ -80,7 +79,7 @@ export default function HorizontalNonLinearStepper({products}) {
 
   const makeOrder = () => {
     let newOrder = {
-      email: customerEmail !== undefined ? customerEmail : "paladin567@gmail.com",
+      email: data.email,
       mobile: data.phone,
       letterSubject: "Thank you for order! You are welcome!",
       letterHtml: "<h1>Your order is placed. OrderNo is 023689452.</h1><p>{Other details about order in your HTML}</p>",

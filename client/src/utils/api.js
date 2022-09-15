@@ -55,9 +55,9 @@ export const syncLS = function (store) {
   return function (next) {
     return function (action) {
       if (action.type === "LOGGED_OUT") {
-        store.getState();
         const result = next(action);
-        localStorage.removeItem("cart");
+        store.getState();
+        localStorage.clear()
         return result;
       }
       if (action.type === "ADD_FAVORITE" || action.type === "REMOVE_FAVORITE") {

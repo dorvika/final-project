@@ -45,7 +45,7 @@ import {
           dispatch(loadSuccess());
           dispatch(loadedWithoutError());
           dispatch(getCartLS(cartResponse.data));
-          console.log("not exist");
+          
         } else if(isCart !== null && lsCart.length !== 0){
             const prevCart = isCart.products.map(prevItem => {
                 return {
@@ -53,7 +53,7 @@ import {
                     cartQuantity: prevItem.cartQuantity,
                 }
             })
-            console.log(prevCart);
+            
           let updatedCart = lsCart.map((product) => {
               return {
                 product: product.product._id,
@@ -62,19 +62,27 @@ import {
             });
            
             updatedCart = [...updatedCart, ...prevCart]
+            
+            const uniqueProducts = updatedCart.reduce((acc, item) => {
+              if (!acc.some(e => e.product == item.product)) {
+                 acc.push(item);
+              }
+              return acc;
+           }, []);
+          
             const cartResponse = await updateCustomerCart("/cart", {
-              products: updatedCart,
+              products: uniqueProducts,
             });
             
             dispatch(loadSuccess());
             dispatch(loadedWithoutError());
             dispatch(getCartLS(cartResponse.data));
-            console.log("exist local");
+            
         } else {
           dispatch(loadSuccess());
           dispatch(loadedWithoutError());
           dispatch(getCartLS(isCart));
-          console.log("exist");
+          
         }
       } catch (error) {
         dispatch(loadSuccess());

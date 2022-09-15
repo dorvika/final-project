@@ -12,7 +12,7 @@ import {
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoggedOut } from "../../../store/IsLogged/actions";
-
+import { removeAllFromCart } from "../../../store/Cart/actions";
 const LoginPopper = () => {
   const dispatch = useDispatch();
   const { userData } = useSelector((state) => state.loggedIn);
@@ -28,8 +28,8 @@ const LoginPopper = () => {
   };
 
   const handleLogOut = () => {
-    localStorage.setItem("userToken", []);
     dispatch(setLoggedOut());
+    dispatch(removeAllFromCart())
   };
 
   const handleClickAway = () => {
