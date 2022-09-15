@@ -21,6 +21,7 @@ import { closeModal } from "../../store/Modal/actions";
 import ConfirmationPromo from "./ConfirmationPromo.jsx";
 import { validationLogInForm } from "./ValidationForm.jsx";
 import { setLoggedIn } from "../../store/IsLogged/actions.js";
+import { customerCart } from "../../store/Cart/actions.js";
 
 const Login = () => {
   const [loginData, setLoginData] = useState({ status: "", data: "" });
@@ -57,6 +58,7 @@ const Login = () => {
       .then(() => {
         fetchData("/customers/customer").then((res) => {
           dispatch(setLoggedIn(res));
+          dispatch(customerCart());
         });
       })
       .catch((error) => {
