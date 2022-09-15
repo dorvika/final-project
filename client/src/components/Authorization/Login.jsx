@@ -160,7 +160,14 @@ const Login = () => {
                   variant="contained"
                   type="submit"
                   disabled={props.isSubmitting}
-                  sx={{ padding: "15px 94px", mb: "30px" }}
+                  sx={(theme) => ({
+                    [theme.breakpoints.down("sm")]: {
+                      p: "5px 60px",
+                      mb: "10px",
+                    },
+                    p: "15px 94px",
+                    mb: "30px",
+                  })}
                 >
                   log in
                 </Button>

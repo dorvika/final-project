@@ -4,6 +4,7 @@ import { Header, Footer } from "./components";
 import Router from "./router/Router.jsx";
 import { fetchLoggedInUserData } from "./store/IsLogged/actions";
 import { getDataLS } from "./utils/api";
+import { isTokenExpired } from "./utils/helpers";
 import { customerCart } from "./store/Cart/actions";
 
 function App() {
@@ -12,7 +13,9 @@ function App() {
   const token = getDataLS("userToken");
 
   useEffect(() => {
-    if (token.length !== 0) dispatch(fetchLoggedInUserData());
+    if (token.length !== 0) {
+      !isTokenExpired(token) && dispatch(fetchLoggedInUserData());
+    }
   }, []);
 
   useEffect(() => {

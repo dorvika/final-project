@@ -1,5 +1,7 @@
-import { CardContent, CardMedia, Link } from "@mui/material";
+import { CardContent, CardMedia, Link, Stack } from "@mui/material";
+import { debounce } from "lodash";
 import { useEffect, useState, useMemo } from "react";
+import { Preloader } from "../../../pages/Categories";
 import { fetchData } from "../../../utils/api";
 import {
   CustomBox,
@@ -14,6 +16,7 @@ import {
 
 const MightLike = ({ sectionTitle, category, id }) => {
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const shuffledProducts = useMemo(
     () => products.sort(() => 0.5 - Math.random()),
@@ -21,13 +24,26 @@ const MightLike = ({ sectionTitle, category, id }) => {
   );
   const productsToShow = shuffledProducts.slice(0, 6);
 
+  const setProductsFromDB = (products) => {
+    setProducts(products);
+  };
+
+  const debouncedProducts = useMemo(() => debounce(setProductsFromDB, 500), []);
+
   useEffect(() => {
+    setIsLoading(true);
     if (category) {
-      fetchData(`/products/filter?categories=${category}`).then((data) =>
-        setProducts(data.products.filter((product) => product.itemNo !== id))
-      );
+      fetchData(`/products/filter?categories=${category}`).then((data) => {
+        debouncedProducts(
+          data.products.filter((product) => product.itemNo !== id)
+        );
+        setIsLoading(false);
+      });
     } else {
-      fetchData("/products").then((data) => setProducts(data));
+      fetchData("/products").then((data) => {
+        debouncedProducts(data);
+        setIsLoading(false);
+      });
     }
   }, []);
 
@@ -43,9 +59,16 @@ const MightLike = ({ sectionTitle, category, id }) => {
   return (
     <CustomBox variant="section" component="section">
       <CustomTitle component="h3">{sectionTitle}</CustomTitle>
+
       <CustomSliderBox>
         <CustomLeftIcon onClick={slideLeft} />
+
         <CustomSlider id="slider" variant="div" component="div">
+          {isLoading && (
+            <Stack justifyContent="center" sx={{ height: "380px" }}>
+              <Preloader />
+            </Stack>
+          )}
           {productsToShow.length > 0 && (
             <>
               {productsToShow.map(

@@ -116,11 +116,11 @@ import {
       }
     };
   };
+  
   export const changesToCart = (product, qty) => {
     return {
         type: 'CHANGES_TO_CART',
         payload: {product: product, cartQuantity: qty} 
-
     }
   };
   

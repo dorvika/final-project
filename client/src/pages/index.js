@@ -13,3 +13,4 @@ export { default as Blog } from "./Blog/Blog.jsx";
 export { default as CheckOut } from "./CheckOut/CheckOut.jsx";
 export { default as Favorites } from "./Favorites/Favorites.jsx";
 export { default as SpecialOffer } from "./SpecialOffer/SpecialOffer.jsx";
+export { default as Contact } from "./Contact/Contact.jsx";

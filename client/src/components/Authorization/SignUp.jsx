@@ -16,10 +16,11 @@ import { Form, Formik } from "formik";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { closeModal } from "../../store/Modal/actions";
-import { postData } from "../../utils/api";
+import { fetchData, postData } from "../../utils/api";
 import ConfirmationPromo from "./ConfirmationPromo.jsx";
 import { validationForm } from "./ValidationForm.jsx";
 import Preloader from "../../pages/Categories/Catalog Product List/Preloader.jsx";
+import { setLoggedIn } from "../../store/IsLogged/actions";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -56,6 +57,24 @@ const SignUp = () => {
           status: savedCustomer.status,
           message: savedCustomer,
         });
+      })
+      .then(() => {
+        postData("/customers/login", {
+          loginOrEmail: values.email,
+          password: values.password,
+        })
+          .then((loginRequest) => {
+            const token = loginRequest.data.token;
+            localStorage.setItem("userToken", JSON.stringify(token));
+            setTimeout(() => {
+              handleClose();
+            }, 3000);
+          })
+          .then(() => {
+            fetchData("/customers/customer").then((res) => {
+              dispatch(setLoggedIn(res));
+            });
+          });
       })
       .catch((error) => {
         setSignUpResponse({
@@ -166,12 +185,17 @@ const SignUp = () => {
                     endAdornment={
                       <InputAdornment position="end">
                         <IconButton
+                          size="small"
                           data-password-id="passwordId"
                           aria-label="toggle password visibility"
                           onClick={handleClickShowPassword}
                           onMouseDown={handleMouseDownPassword}
                         >
-                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                          {showPassword ? (
+                            <VisibilityOff size="small" />
+                          ) : (
+                            <Visibility size="small" />
+                          )}
                         </IconButton>
                       </InputAdornment>
                     }
@@ -246,9 +270,16 @@ const SignUp = () => {
                 )}
                 <Button
                   variant="contained"
-                  disabled={props.isSubmitting || !props.dirty}
+                  disabled={props.isSubmitting}
                   type="submit"
-                  sx={{ p: "15px 94px", mb: "30px" }}
+                  sx={(theme) => ({
+                    [theme.breakpoints.down("sm")]: {
+                      p: "5px 60px",
+                      mb: "10px",
+                    },
+                    p: "15px 94px",
+                    mb: "30px",
+                  })}
                 >
                   Sign Up
                 </Button>
@@ -273,7 +304,7 @@ const SignUp = () => {
             Our congratulation with success registration.
           </Typography>
           <Typography variant="subtitle1" sx={{ mb: "25px" }}>
-            To enter the cabinet please use your credentials at the LOGIN tab.
+            Welcome in your account
           </Typography>
           <Button
             variant="contained"

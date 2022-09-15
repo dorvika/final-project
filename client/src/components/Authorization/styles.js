@@ -4,9 +4,13 @@ import { styled } from "@mui/material/styles";
 export const CustomTab = styled(Tab)(({ theme }) => ({
   color: theme.palette.primary.main,
   backgroundColor: theme.palette.primary.contrastText,
-  paddingRight: "77px",
-  paddingLeft: "77px",
+
+  width: "222px",
   borderBottom: "1px solid",
+
+  [theme.breakpoints.down("sm")]: {
+    width: "145px",
+  },
   "&.Mui-selected": {
     borderLeft: "1px solid",
     borderTop: "1px solid",
