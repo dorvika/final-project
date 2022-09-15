@@ -46,7 +46,7 @@ import {
           dispatch(loadedWithoutError());
           dispatch(getCartLS(cartResponse.data));
           console.log("not exist");
-        } else if(isCart.products.length === 0 && lsCart.length !== 0){
+        } else if(isCart.products.length !== 0 && lsCart.length !== 0){
           const updatedCart = lsCart.map((product) => {
               return {
                 product: product.product._id,

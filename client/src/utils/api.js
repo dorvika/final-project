@@ -54,6 +54,12 @@ export const getDataLS = (category) => {
 export const syncLS = function (store) {
   return function (next) {
     return function (action) {
+      if (action.type === "LOGGED_OUT") {
+        store.getState();
+        const result = next(action);
+        localStorage.removeItem("cart");
+        return result;
+      }
       if (action.type === "ADD_FAVORITE" || action.type === "REMOVE_FAVORITE") {
         store.getState();
         const result = next(action);
