@@ -5,8 +5,10 @@ import Router from "./router/Router.jsx";
 import { fetchLoggedInUserData } from "./store/IsLogged/actions";
 import { getDataLS } from "./utils/api";
 import { isTokenExpired } from "./utils/helpers";
+import { customerCart } from "./store/Cart/actions";
 
 function App() {
+  
   const dispatch = useDispatch();
   const token = getDataLS("userToken");
 
@@ -16,6 +18,9 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    if (token.length !== 0) dispatch(customerCart());
+  }, [dispatch, token.length]);
   return (
     <>
       <Header />

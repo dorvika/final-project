@@ -8,7 +8,8 @@ import {
   Link,
   useMediaQuery,
 } from "@mui/material";
-import { popularArray } from "./dataPopular";
+import { useEffect, useState } from "react";
+import { fetchData } from "../../../utils/api";
 import {
   CustomButton,
   CustomCardContent,
@@ -19,6 +20,14 @@ import {
 
 const Popular = () => {
   const matches = useMediaQuery("(max-width: 899px)");
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    fetchData("/catalog").then((res) => setCategories(res));
+  }, []);
+
+  const shuffledCategories = categories.sort(() => 0.5 - Math.random());
+  const categoriesToShow = shuffledCategories.slice(0, 4);
 
   return (
     <Box
@@ -39,33 +48,40 @@ const Popular = () => {
       >
         Popular
       </Typography>
-      <Grid container spacing={10} sx={{ flexGrow: 1, marginBottom: "30px" }}>
-        {popularArray
-          .filter((e, count) => count < 4)
-          .map(({ id, urlImage, title, xs }) => (
-            <CustomGridItem item key={id} xs={matches ? 12 : xs}>
-              <Link href="/catalog?perPage=9&startPage=1">
-                <Card sx={{ maxWidth: "100%" }}>
-                  <CardMedia
-                    component="img"
-                    height="340"
-                    image={urlImage}
-                    alt="popular-img"
-                  />
-                  <CustomCardContent sx={{ paddingRight: "20px" }}>
-                    <CardContent sx={{ paddingRight: "45px" }}>
-                      <CustomTypography variant="p" component="p">
-                        {title}
-                      </CustomTypography>
-                      <CustomButton>Shop</CustomButton>
-                    </CardContent>
-                  </CustomCardContent>
-                </Card>
-              </Link>
-            </CustomGridItem>
-          ))}
+
+      <Grid container spacing={10} sx={{ flexGrow: 1 }}>
+        {categoriesToShow.map((category, index) => (
+          <CustomGridItem
+            item
+            key={category.id}
+            xs={matches ? 12 : index === 0 || index === 3 ? 8 : 4}
+          >
+            <Link
+              href={`/catalog?categories=${category.name}&perPage=9&startPage=1`}
+            >
+              <Card sx={{ maxWidth: "100%" }}>
+                <CardMedia
+                  component="img"
+                  height="340"
+                  image={category.imgUrl}
+                  alt="popular-img"
+                />
+                <CustomCardContent sx={{ paddingRight: "20px" }}>
+                  <CardContent sx={{ paddingRight: "45px" }}>
+                    <CustomTypography variant="p" component="p">
+                      {category.name}
+                    </CustomTypography>
+                    <CustomButton>Shop</CustomButton>
+                  </CardContent>
+                </CustomCardContent>
+              </Card>
+            </Link>
+          </CustomGridItem>
+        ))}
       </Grid>
-      <CustomButton sx={{ margin: "0", padding: "0" }}>
+      {/* )} */}
+
+      <CustomButton sx={{ mt: "30px", padding: "0" }}>
         <Link
           href="/catalog?perPage=9&startPage=1"
           sx={{
@@ -80,6 +96,6 @@ const Popular = () => {
       </CustomButton>
     </Box>
   );
-};
+};;;;;;;;;;;;
 
 export default Popular;
