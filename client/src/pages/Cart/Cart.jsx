@@ -1,4 +1,4 @@
-import {CartProductList, MightLike} from "../../components";
+import { CartProductList, MightLike } from "../../components";
 import { EmptyCart } from "../../components";
 import { Container } from "@mui/system";
 
@@ -20,7 +20,11 @@ const Cart = () => {
           </Link>
         </Breadcrumbs>
         {isCartEmpty ? <CartProductList products={cart} /> : <EmptyCart />}
-        <MightLike sectionTitle="YOU MIGHT LIKE IT TOO" />
+        <MightLike
+          sectionTitle={
+            isCartEmpty ? "YOU MIGHT LIKE IT TOO" : "YOU MIGHT LIKE IT"
+          }
+        />
       </Container>
     </>
   );
