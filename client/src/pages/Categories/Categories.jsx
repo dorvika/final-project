@@ -69,6 +69,10 @@ const Categories = () => {
     searchParams.set("startPage", value);
     searchParams.set("perPage", showQty);
     setSearchParams(searchParams);
+    window.scrollTo({
+      top: 1000,
+      behavior: "smooth",
+    });
   };
 
   return (

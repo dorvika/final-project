@@ -15,6 +15,7 @@ import {
   CheckOut,
   Favorites,
   SpecialOffer,
+  Contact,
 } from "../pages";
 
 export default function Router() {
@@ -26,6 +27,7 @@ export default function Router() {
         <Route path="/catalog/:id" element={<ProductCard />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/cart/checkout" element={<CheckOut />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/returns" element={<Returns />} />
         <Route path="/privacypolicy" element={<PrivacyPolicy />} />
