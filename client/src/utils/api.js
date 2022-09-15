@@ -25,6 +25,16 @@ export const putData = async (endpoint) => {
   return response;
 };
 
+export const updateCustomerCart = async (endpoint, obj) => {
+  const response = await API.put(endpoint, obj);
+  return response;
+};
+
+export const placeOrder = async (endpoint, obj) => {
+  const response = await API.post(endpoint, obj);
+  return response;
+};
+
 export const deleteData = async (endpoint) => {
   const response = await API.delete(endpoint);
   return response;
@@ -44,6 +54,12 @@ export const getDataLS = (category) => {
 export const syncLS = function (store) {
   return function (next) {
     return function (action) {
+      if (action.type === "LOGGED_OUT") {
+        store.getState();
+        const result = next(action);
+        localStorage.removeItem("cart");
+        return result;
+      }
       if (action.type === "ADD_FAVORITE" || action.type === "REMOVE_FAVORITE") {
         store.getState();
         const result = next(action);

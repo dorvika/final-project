@@ -1,135 +1,168 @@
 import {
-  fetchData,
-  postData,
-  putData,
-  deleteData,
-  getDataLS,
-} from "../../utils/api";
-const token = getDataLS("userToken");
-
-export const addToCart = (product) => {
-  return async function (dispatch) {
-    if (token.length !== 0 || !token) {
-      dispatch({
-        type: "ADD_TO_CART",
-        payload: { product },
-      });
-      putData(`/cart/${product._id}`);
-    } else {
-      dispatch({
-        type: "ADD_TO_CART",
-        payload: { product },
-      });
-    }
-  };
-};
-
-export const customerCart = () => {
-  return async function (dispatch) {
-    dispatch(loadRequest());
-    try {
-      const isCart = await fetchData("/cart");
-      if (isCart === null) {
-        const lsCart = getDataLS("cart");
-        const lsCartProducts = lsCart.map((product) => {
-          return {
-            product: product.product._id,
-            cartQuantity: product.cartQuantity,
-          };
+    fetchData,
+    postData,
+    putData,
+    updateCustomerCart,
+    deleteData,
+    getDataLS,
+  } from "../../utils/api";
+  const token = getDataLS("userToken");
+  
+  export const addToCart = (product) => {
+    return async function (dispatch) {
+      if (token.length !== 0 || !token) {
+        dispatch({
+          type: "ADD_TO_CART",
+          payload: { product },
         });
-        const cartResponse = await postData("/cart", {
-          products: lsCartProducts,
-        });
-        console.log(cartResponse);
-        dispatch(loadSuccess());
-        dispatch(loadedWithoutError());
-        dispatch(getCartLS(cartResponse.data.products));
-        console.log("not exist");
+        putData(`/cart/${product._id}`);
       } else {
-        dispatch(loadSuccess());
-        dispatch(loadedWithoutError());
-        dispatch(getCartLS(isCart.products));
-        console.log("exist");
+        dispatch({
+          type: "ADD_TO_CART",
+          payload: { product },
+        });
       }
-    } catch (error) {
-      dispatch(loadSuccess());
-      dispatch(loadedWithError());
+    };
+  };
+  
+  export const customerCart = () => {
+    return async function (dispatch) {
+      dispatch(loadRequest());
+      try {
+        const isCart = await fetchData("/cart");
+        const lsCart = getDataLS("cart");
+
+        if (isCart === null) {
+          const newCart = lsCart.map((product) => {
+            return {
+              product: product.product._id,
+              cartQuantity: product.cartQuantity,
+            };
+          });
+          const cartResponse = await postData("/cart", {
+            products: newCart,
+          });
+          dispatch(loadSuccess());
+          dispatch(loadedWithoutError());
+          dispatch(getCartLS(cartResponse.data));
+          console.log("not exist");
+        } else if(isCart !== null && lsCart.length !== 0){
+            const prevCart = isCart.products.map(prevItem => {
+                return {
+                    product: prevItem.product._id,
+                    cartQuantity: prevItem.cartQuantity,
+                }
+            })
+            console.log(prevCart);
+          let updatedCart = lsCart.map((product) => {
+              return {
+                product: product.product._id,
+                cartQuantity: product.cartQuantity,
+              };
+            });
+           
+            updatedCart = [...updatedCart, ...prevCart]
+            const cartResponse = await updateCustomerCart("/cart", {
+              products: updatedCart,
+            });
+            
+            dispatch(loadSuccess());
+            dispatch(loadedWithoutError());
+            dispatch(getCartLS(cartResponse.data));
+            console.log("exist local");
+        } else {
+          dispatch(loadSuccess());
+          dispatch(loadedWithoutError());
+          dispatch(getCartLS(isCart));
+          console.log("exist");
+        }
+      } catch (error) {
+        dispatch(loadSuccess());
+        dispatch(loadedWithError());
+      }
+    };
+  };
+  
+  export const removeFromCart = (id) => {
+    return async function (dispatch) {
+      if (token.length !== 0 || !token) {
+        dispatch({
+          type: "REMOVE_FROM_CART",
+          payload: { id },
+        });
+        deleteData(`/cart/${id}`);
+      } else {
+        dispatch({
+          type: "REMOVE_FROM_CART",
+          payload: { id },
+        });
+      }
+    };
+  };
+  
+  export const decreaseCartItem = (product) => {
+    return async function (dispatch) {
+      if (token.length !== 0 || !token) {
+        dispatch({
+          type: "DECREASE_CART_ITEM",
+          payload: { product },
+        });
+        deleteData(`/cart/product/${product._id}`);
+      } else {
+        dispatch({
+          type: "DECREASE_CART_ITEM",
+          payload: { product },
+        });
+      }
+    };
+  };
+  
+  export const changesToCart = (product, qty) => {
+    return {
+        type: 'CHANGES_TO_CART',
+        payload: {product: product, cartQuantity: qty} 
     }
   };
-};
-
-export const changesToCart = (product, qty) => {
-  return {
-    type: "CHANGES_TO_CART",
-    payload: { product: product, cartQuantity: qty },
+  
+  export const removeAllFromCart = () => {
+    return async function (dispatch) {
+        if (token.length !== 0 || !token) {
+          dispatch({
+            type: "REMOVE_ALL_FROM_CART",
+          });
+          deleteData("/cart");
+        } else {
+          dispatch({
+            type: "REMOVE_ALL_FROM_CART",
+          });
+        }
+      };
   };
-};
-
-export const removeFromCart = (id) => {
-  return async function (dispatch) {
-    if (token.length !== 0 || !token) {
-      dispatch({
-        type: "REMOVE_FROM_CART",
-        payload: { id },
-      });
-      deleteData(`/cart/${id}`);
-    } else {
-      dispatch({
-        type: "REMOVE_FROM_CART",
-        payload: { id },
-      });
-
-    }
-  };
-};
-
-export const decreaseCartItem = (product) => {
-  return async function (dispatch) {
-    if (token.length !== 0 || !token) {
-      dispatch({
-        type: "DECREASE_CART_ITEM",
-        payload: { product },
-      });
-      deleteData(`/cart/product/${product._id}`);
-    } else {
-      dispatch({
-        type: "DECREASE_CART_ITEM",
-        payload: { product },
-      });
-    }
-  };
-};
-
-export const removeAllFromCart = () => {
-  return {
-    type: "REMOVE_ALL_FROM_CART",
-  };
-};
-
-export const getCartLS = (data) => {
-  return {
-    type: "GET_CART_LOCALSTORAGE",
-    payload: { data },
-  };
-};
-
-export const loadRequest = () => {
+  
+  export const getCartLS = (data) => {
     return {
-      type: "LOAD_REQUEST",
+      type: "GET_CART_LOCALSTORAGE",
+      payload: { data },
     };
   };
-  export const loadSuccess = () => {
-    return {
-      type: "LOAD_SUCCESS",
+  
+  export const loadRequest = () => {
+      return {
+        type: "LOAD_REQUEST",
+      };
     };
-  };
-  export const loadedWithError = () => {
-    return {
-      type: "GET_PRODUCTS_WITH_ERROR",
+    export const loadSuccess = () => {
+      return {
+        type: "LOAD_SUCCESS",
+      };
     };
-  };
-  export const loadedWithoutError = () => {
-    return {
-      type: "GET_PRODUCTS_WITHOUT_ERROR",
+    export const loadedWithError = () => {
+      return {
+        type: "GET_PRODUCTS_WITH_ERROR",
+      };
     };
-  };
+    export const loadedWithoutError = () => {
+      return {
+        type: "GET_PRODUCTS_WITHOUT_ERROR",
+      };
+    };
