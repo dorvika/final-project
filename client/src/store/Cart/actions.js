@@ -31,6 +31,7 @@ import {
       try {
         const isCart = await fetchData("/cart");
         const lsCart = getDataLS("cart");
+
         if (isCart === null) {
           const newCart = lsCart.map((product) => {
             return {
@@ -41,23 +42,30 @@ import {
           const cartResponse = await postData("/cart", {
             products: newCart,
           });
-          console.log(cartResponse);
           dispatch(loadSuccess());
           dispatch(loadedWithoutError());
           dispatch(getCartLS(cartResponse.data));
           console.log("not exist");
-        } else if(isCart.products.length !== 0 && lsCart.length !== 0){
-          const updatedCart = lsCart.map((product) => {
+        } else if(isCart !== null && lsCart.length !== 0){
+            const prevCart = isCart.products.map(prevItem => {
+                return {
+                    product: prevItem.product._id,
+                    cartQuantity: prevItem.cartQuantity,
+                }
+            })
+            console.log(prevCart);
+          let updatedCart = lsCart.map((product) => {
               return {
                 product: product.product._id,
                 cartQuantity: product.cartQuantity,
               };
             });
-            console.log(updatedCart);
+           
+            updatedCart = [...updatedCart, ...prevCart]
             const cartResponse = await updateCustomerCart("/cart", {
               products: updatedCart,
             });
-            console.log(cartResponse);
+            
             dispatch(loadSuccess());
             dispatch(loadedWithoutError());
             dispatch(getCartLS(cartResponse.data));
