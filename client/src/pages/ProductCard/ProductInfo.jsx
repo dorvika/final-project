@@ -43,7 +43,7 @@ const ProductInfo = ({
   const isFavorite = favorites.some((elem) => elem.itemNo === product.itemNo);
   const isCart = cart.some((elem) => elem.product._id === product._id);
   const matches = useMediaQuery("(max-width:425px)");
-
+  
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
@@ -69,7 +69,7 @@ const ProductInfo = ({
   const colorCssValue = colors?.filter(
     (colorFromDB) => colorFromDB.name.toLowerCase() === color.toLowerCase()
   );
-
+  
   return (
     <ProductInfoContainer>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
@@ -134,6 +134,25 @@ const ProductInfo = ({
       </Stack>
       <Stack
         direction="row"
+        gap="10px"
+        alignItems="center"
+        sx={{ mt: "20px", mb: "10px" }}
+      >
+        <Typography variant="body" component="p">
+          IN STOCK :
+        </Typography>
+        <Typography
+          variant="body"
+          component="span"
+          sx={{
+            textTransform: "uppercase",
+          }}
+        >
+          {product.quantity < 1 ? "Unavailable" : product.quantity}
+        </Typography>
+      </Stack>
+      <Stack
+        direction="row"
         justifyContent="space-between"
         alignItems="center"
         sx={{ my: "25px" }}
@@ -155,6 +174,7 @@ const ProductInfo = ({
             width: "35%",
             [theme.breakpoints.down("sm")]: { width: "40%", p: "13px 0" },
           })}
+          disabled={product.quantity < 1 ? true : false}
           onClick={isCart ? removeFromBag : addToBag}
         >
           {isCart ? "DELETE FROM BAG" : "ADD TO BAG"}
