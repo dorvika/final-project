@@ -14,10 +14,10 @@ import {
   Box,
   Button,
   Divider,
-  // IconButton,
   Link,
   Stack,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { ProductInfoContainer, SocialMediaContainer } from "./styles";
@@ -42,6 +42,7 @@ const ProductInfo = ({
   const cart = useSelector((state) => state.cart.cart);
   const isFavorite = favorites.some((elem) => elem.itemNo === product.itemNo);
   const isCart = cart.some((elem) => elem.product._id === product._id);
+  const matches = useMediaQuery("(max-width:425px)");
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
@@ -144,7 +145,7 @@ const ProductInfo = ({
           fontWeight="fontWeightMedium"
           sx={{ flexGrow: 1 }}
         >
-          USD ${currentPrice}
+          {matches ? `$${currentPrice}` : `USD $${currentPrice}`}
         </Typography>
         <Button
           variant="contained"
@@ -152,7 +153,7 @@ const ProductInfo = ({
             fontWeight: "200",
             p: "13px",
             width: "35%",
-            [theme.breakpoints.down("sm")]: { width: "30%", p: "13px 0" },
+            [theme.breakpoints.down("sm")]: { width: "40%", p: "13px 0" },
           })}
           onClick={isCart ? removeFromBag : addToBag}
         >
@@ -246,6 +247,6 @@ const ProductInfo = ({
       </Accordion>
     </ProductInfoContainer>
   );
-};;;;;;;;;;;
+};
 
 export default ProductInfo;

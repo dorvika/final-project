@@ -20,7 +20,11 @@ const Favorites = () => {
           </Link>
         </Breadcrumbs>
         {isFavoritesEmpty ? <FavoritesProductList /> : <EmptyFavorites />}
-        <MightLike sectionTitle="YOU MIGHT LIKE IT TOO" />
+        <MightLike
+          sectionTitle={
+            isFavoritesEmpty ? "YOU MIGHT LIKE IT TOO" : "YOU MIGHT LIKE IT"
+          }
+        />
       </Container>
     </>
   );
