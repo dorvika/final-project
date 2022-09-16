@@ -21,11 +21,9 @@ import {
 import {validationSchemaShipping} from "../validationSchema/formsSchema.js"
 
 const ShippingForm = ({ data, next, prev, shipping }) => {
- 
+
   const handleSubmit = (value) => {
-    next(value);
-    console.log(data);
-    
+    next(value); 
   };
   const handleBack = (values) => {
     prev(values);
@@ -135,16 +133,16 @@ const ShippingForm = ({ data, next, prev, shipping }) => {
             </Grid>
             <Grid item xs={12} md={6}>
               <TextFieldShipping
-                id="zip"
-                name="zip"
-                label="Zip/Postal Code"
-                placeholder="Zip/Postal Code"
+                id="email"
+                name="email"
+                label="Email"
+                placeholder="Email"
                 size="small"
-                value={props.values.zip}
+                value={props.values.email}
                 onChange={props.handleChange}
                 fullWidth
-                error={props.touched.zip && Boolean(props.errors.zip)}
-                helperText={props.touched.zip && props.errors.zip}
+                error={props.touched.email && Boolean(props.errors.email)}
+                helperText={props.touched.email && props.errors.email}
               />
             </Grid>
             <Grid item xs={12} md={6}>
