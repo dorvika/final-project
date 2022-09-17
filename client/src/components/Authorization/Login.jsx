@@ -19,7 +19,7 @@ import { fetchData, postData,} from "../../utils/api";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "../../store/modal/actions";
 import ConfirmationPromo from "./ConfirmationPromo.jsx";
-import { validationLogInForm } from "./ValidationForm.jsx";
+import { validationLogInForm } from "../../utils/ValidationSchema.js";
 import { setLoggedIn } from "../../store/isLogged/actions.js";
 import { customerCart } from "../../store/cart/actions.js";
 

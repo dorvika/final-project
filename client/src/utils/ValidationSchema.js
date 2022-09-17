@@ -24,7 +24,7 @@ function strongPasswordMethod() {
   });
 }
 
-export const validationForm = object({
+export const validationSignUpForm = object({
   firstName: string()
     .min(2, "First Name is too short.")
     .max(20, "First Name is too Long.")
@@ -51,8 +51,12 @@ export const validationForm = object({
 });
 
 export const validationLogInForm = object({
-  email: string().required("Email or Login is required"),
+  email: string().email("Invalid Email").required("Email or Login is required"),
   password: string()
     .required("Password is required")
     .min(8, "Password must contain 8 or more characters"),
+});
+
+export const validationSubscribeForm = object({
+  email: string().email("Invalid Email").required("Email is required"),
 });
