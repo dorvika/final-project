@@ -28,7 +28,8 @@ import BagPopper from "./components/BagPopper.jsx";
 import LoginPopper from "./components/LoginPopper.jsx";
 import { useEffect, useMemo, useState } from "react";
 import { debounce } from "lodash";
-// import { postSearchQuery } from "../../utils/api.js";
+import { postSearchQuery } from "../../utils/api.js";
+// import { setSearchedProducts } from "../../store/Filters/actions.js";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -42,16 +43,19 @@ const Header = () => {
   };
 
   const debouncedChangeHandler = useMemo(
-    () => debounce(changeHandler, 300),
+    () => debounce(changeHandler, 500),
     []
   );
 
   useEffect(() => {
-    // if (searchPhrase) {
-    //   postSearchQuery("products/search", { query: searchPhrase }).then((data) =>
-    //     console.log(data)
-    //   );
-    // }
+    if (searchPhrase) {
+      postSearchQuery("products/search", { query: searchPhrase }).then(
+        ({ data }) => {
+          console.log(data);
+          // dispatch(setSearchedProducts(data));
+        }
+      );
+    }
   }, [searchPhrase]);
 
   useEffect(() => {
