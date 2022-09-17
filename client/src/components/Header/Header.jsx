@@ -5,64 +5,24 @@ import { Link } from "react-router-dom";
 import {
   Typography,
   Container,
-  Box,
-  InputAdornment,
   IconButton,
   Divider,
   Badge,
 } from "@mui/material";
-import {
-  HeaderInput,
-  HeaderLinks,
-  IconsButtonContainer,
-} from "./components/styles";
+import { HeaderLinks, IconsButtonContainer } from "./components/styles";
 import Catalog from "./components/catalogButton.jsx";
 import Logo from "./components/logoSvg";
-import {
-  FavoriteBorderOutlined,
-  PersonOutlined,
-  Search,
-} from "@mui/icons-material";
+import { FavoriteBorderOutlined, PersonOutlined } from "@mui/icons-material";
 
 import BagPopper from "./components/BagPopper.jsx";
 import LoginPopper from "./components/LoginPopper.jsx";
-import { useEffect, useMemo, useState } from "react";
-import { debounce } from "lodash";
-import { postSearchQuery } from "../../utils/api.js";
-// import { setSearchedProducts } from "../../store/Filters/actions.js";
+import SearchBar from "./components/SearchBar.jsx";
 
 const Header = () => {
   const dispatch = useDispatch();
   const { isLoggedIn } = useSelector((state) => state.loggedIn);
   const modal = useSelector((state) => state.modal);
   const favorites = useSelector((state) => state.favorites.favorites);
-  const [searchPhrase, setSearchPhrase] = useState("");
-
-  const changeHandler = (event) => {
-    setSearchPhrase(event.target.value);
-  };
-
-  const debouncedChangeHandler = useMemo(
-    () => debounce(changeHandler, 500),
-    []
-  );
-
-  useEffect(() => {
-    if (searchPhrase) {
-      postSearchQuery("products/search", { query: searchPhrase }).then(
-        ({ data }) => {
-          console.log(data);
-          // dispatch(setSearchedProducts(data));
-        }
-      );
-    }
-  }, [searchPhrase]);
-
-  useEffect(() => {
-    return () => {
-      debouncedChangeHandler.cancel();
-    };
-  }, []);
 
   const handleOpen = () => {
     dispatch(openModal());
@@ -78,7 +38,7 @@ const Header = () => {
         }}
       >
         <Link style={{ marginLeft: "-2.6041666666666665vw" }} to={"/"}>
-          <Logo></Logo>
+          <Logo />
         </Link>
         <Catalog />
 
@@ -93,19 +53,7 @@ const Header = () => {
             <Typography variant="body">Blog</Typography>
           </Link>
         </HeaderLinks>
-        <Box>
-          <HeaderInput
-            endAdornment={
-              <InputAdornment position={"start"}>
-                <Search></Search>
-              </InputAdornment>
-            }
-            id="standard-basic"
-            placeholder="Search"
-            variant="standard"
-            onChange={debouncedChangeHandler}
-          />
-        </Box>
+        <SearchBar />
         <IconsButtonContainer
           sx={{
             display: "flex",
