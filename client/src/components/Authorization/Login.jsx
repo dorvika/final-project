@@ -17,11 +17,11 @@ import { useState } from "react";
 import Preloader from "../../pages/Categories/Catalog Product List/Preloader.jsx";
 import { fetchData, postData,} from "../../utils/api";
 import { useDispatch, useSelector } from "react-redux";
-import { closeModal } from "../../store/Modal/actions";
+import { closeModal } from "../../store/modal/actions";
 import ConfirmationPromo from "./ConfirmationPromo.jsx";
 import { validationLogInForm } from "./ValidationForm.jsx";
-import { setLoggedIn } from "../../store/IsLogged/actions.js";
-import { customerCart } from "../../store/Cart/actions.js";
+import { setLoggedIn } from "../../store/isLogged/actions.js";
+import { customerCart } from "../../store/cart/actions.js";
 
 const Login = () => {
   const [loginData, setLoginData] = useState({ status: "", data: "" });

@@ -21,7 +21,7 @@ import { useLocation, useSearchParams } from "react-router-dom";
 import {
   setFilteredProducts,
   setFilteredProductsQty,
-} from "../../store/Filters/actions.js";
+} from "../../store/filters/actions.js";
 import { CategoriesMainContainer } from "./styles";
 import { fetchData } from "../../utils/api.js";
 

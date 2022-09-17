@@ -12,8 +12,8 @@ import { Close } from "@mui/icons-material/";
 import { CustomHr } from "./index";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { removeFavorite } from "../../store/Favorites/actions";
-import { addToCart, removeFromCart } from "../../store/Cart/actions";
+import { removeFavorite } from "../../store/favorites/actions";
+import { addToCart, removeFromCart } from "../../store/cart/actions";
 
 const FavoritesProductCard = ({ product }) => {
   const dispatch = useDispatch();

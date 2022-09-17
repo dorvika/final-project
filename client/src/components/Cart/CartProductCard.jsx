@@ -23,9 +23,9 @@ import {
   removeFromCart,
   addToCart,
   decreaseCartItem,
-  changesToCart
-} from "../../store/Cart/actions";
-import { addFavorite, removeFavorite } from "../../store/Favorites/actions";
+  changesToCart,
+} from "../../store/cart/actions";
+import { addFavorite, removeFavorite } from "../../store/favorites/actions";
 
 const CartProductCard = ({ cartQuantity, product }) => {
   const {

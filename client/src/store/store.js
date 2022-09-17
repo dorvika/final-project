@@ -6,12 +6,12 @@ import {
 } from "redux";
 import { syncLS } from "../utils/api";
 import thunk from "redux-thunk";
-import modalReducer from "./Modal/reducer";
-import filterReducer from "./Filters/reducer";
-import productsReducer from "./Products/reducer";
-import cartReducer from "./Cart/reducer";
-import favoritesReducer from "./Favorites/reducer";
-import isLoggedInReducer from "./IsLogged/reducer";
+import modalReducer from "./modal/reducer";
+import filterReducer from "./filters/reducer";
+import productsReducer from "./products/reducer";
+import cartReducer from "./cart/reducer";
+import favoritesReducer from "./favorites/reducer";
+import isLoggedInReducer from "./isLogged/reducer";
 
 export const rootReducer = combineReducers({
   modal: modalReducer,

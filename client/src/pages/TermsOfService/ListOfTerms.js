@@ -34,13 +34,13 @@ const listOfTerms = [
     chapter: "delivery",
     content: [
       {
-        panelId: 1,
+        panelId: 5,
         panelTitle: "cancelations",
         panelText:
           "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. ",
       },
       {
-        panelId: 2,
+        panelId: 6,
         panelTitle: "preorders",
         panelText:
           "Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.",
@@ -52,31 +52,31 @@ const listOfTerms = [
     chapter: "RETURNS & REFUNDS",
     content: [
       {
-        panelId: 1,
+        panelId: 7,
         panelTitle: "CUSTOMISED ITEMS",
         panelText:
           "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. ",
       },
       {
-        panelId: 2,
+        panelId: 8,
         panelTitle: "REFUNDS",
         panelText:
           "Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.",
       },
       {
-        panelId: 3,
+        panelId: 9,
         panelTitle: "FINAL SALE",
         panelText:
           "Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.",
       },
       {
-        panelId: 4,
+        panelId: 10,
         panelTitle: "RETURNS PROCESS",
         panelText:
           "Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.",
       },
       {
-        panelId: 5,
+        panelId: 11,
         panelTitle: "RETURNS POLICY & PROCESS",
         panelText:
           "Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.",
@@ -88,37 +88,37 @@ const listOfTerms = [
     chapter: "payment",
     content: [
       {
-        panelId: 1,
+        panelId: 12,
         panelTitle: "WHICH CURRENCIES CAN I SHOP IN?",
         panelText:
           "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. ",
       },
       {
-        panelId: 2,
+        panelId: 13,
         panelTitle: "WHEN WILL MY CARD BE CHARGED?",
         panelText:
           "Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.",
       },
       {
-        panelId: 3,
+        panelId: 14,
         panelTitle: "WHICH PAYMENT METHODS DO YOU ACCEPT?",
         panelText:
           "Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.",
       },
       {
-        panelId: 4,
+        panelId: 15,
         panelTitle: "WILL MY PERSONAL DETAILS STAY SAFE?",
         panelText:
           "Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.",
       },
       {
-        panelId: 5,
+        panelId: 16,
         panelTitle: "HOW TO FIND PRODUCTS",
         panelText:
           "Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.",
       },
       {
-        panelId: 6,
+        panelId: 17,
         panelTitle: "HOW TO ORDER & PAY",
         panelText:
           "Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.",
