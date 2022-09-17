@@ -35,10 +35,10 @@ const Header = () => {
   const { isLoggedIn } = useSelector((state) => state.loggedIn);
   const modal = useSelector((state) => state.modal);
   const favorites = useSelector((state) => state.favorites.favorites);
-  const [query, setQuery] = useState("");
+  const [searchPhrase, setSearchPhrase] = useState("");
 
   const changeHandler = (event) => {
-    setQuery(event.target.value);
+    setSearchPhrase(event.target.value);
   };
 
   const debouncedChangeHandler = useMemo(
@@ -47,10 +47,12 @@ const Header = () => {
   );
 
   useEffect(() => {
-    // postSearchQuery("products/search", {query}).then((data) =>
-    //   console.log(data)
-    // );
-  }, [query]);
+    // if (searchPhrase) {
+    //   postSearchQuery("products/search", { query: searchPhrase }).then((data) =>
+    //     console.log(data)
+    //   );
+    // }
+  }, [searchPhrase]);
 
   useEffect(() => {
     return () => {
