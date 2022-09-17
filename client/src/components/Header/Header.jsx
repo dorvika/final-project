@@ -28,7 +28,7 @@ import BagPopper from "./components/BagPopper.jsx";
 import LoginPopper from "./components/LoginPopper.jsx";
 import { useEffect, useMemo, useState } from "react";
 import { debounce } from "lodash";
-import { postSearchQuery } from "../../utils/api.js";
+// import { postSearchQuery } from "../../utils/api.js";
 
 const Header = () => {
   const dispatch = useDispatch();
