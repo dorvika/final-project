@@ -37,7 +37,9 @@ const CartProductCard = ({ cartQuantity, product }) => {
     size,
     _id,
     itemNo,
+    quantity
   } = product;
+  
   let [quantityValue, setQuantityValue] = useState(cartQuantity);
   const dispatch = useDispatch();
   const favorites = useSelector((state) => state.favorites.favorites);
@@ -54,12 +56,21 @@ const CartProductCard = ({ cartQuantity, product }) => {
     dispatch(removeFavorite(product));
   };
   const handleQuantityChange = () => {
-   dispatch(changesToCart(product,quantityValue))
+    if(quantity >= quantityValue){
+      dispatch(changesToCart(product,quantityValue))
+    } else {
+      setQuantityValue(quantity);
+      dispatch(changesToCart(product,quantity))
+    }
   };
 
   const increaseQuantity = () => {
-    setQuantityValue(cartQuantity + 1);
-    dispatch(addToCart(product));
+    if(quantity > quantityValue){
+      setQuantityValue(cartQuantity + 1);
+      dispatch(addToCart(product));
+    } else {
+      return
+    }
   };
   const decreaseQuantity = () => {
     if (quantityValue > 1) {

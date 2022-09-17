@@ -13,7 +13,7 @@ import { ExpandMore, ExpandLess } from "@mui/icons-material/";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addToCart, decreaseCartItem } from "../../../../store/Cart/actions";
+import { addToCart, decreaseCartItem, changesToCart } from "../../../../store/Cart/actions";
 const CustomCard = styled(Card)(({ theme }) => ({
   [theme.breakpoints.down("670")]: {
     "& .stack": {
@@ -38,18 +38,26 @@ const CustomCard = styled(Card)(({ theme }) => ({
 }));
 
 const BagCartModel = ({ cartQuantity, product }) => {
-  const { imageUrls, currentPrice, name, description, itemNo } = product
+  const { imageUrls, currentPrice, name, description, itemNo, quantity } = product
   const dispatch = useDispatch();
   let [quantityValue, setQuantityValue] = useState(cartQuantity);
 
-  const handleQuantityChange = (event) => {
-    setQuantityValue(event.target.value);
-    console.log(quantityValue);
+  const handleQuantityChange = () => {
+    if(quantity >= quantityValue){
+      dispatch(changesToCart(product,quantityValue))
+    } else {
+      setQuantityValue(quantity);
+      dispatch(changesToCart(product,quantity))
+    }
   };
 
   const increaseQuantity = () => {
-    setQuantityValue(cartQuantity + 1);
-    dispatch(addToCart(product));
+    if(quantity > quantityValue){
+      setQuantityValue(cartQuantity + 1);
+      dispatch(addToCart(product));
+    } else {
+      return
+    }
   };
 
   const decreaseQuantity = () => {
@@ -116,11 +124,18 @@ const BagCartModel = ({ cartQuantity, product }) => {
                   ${currentPrice}
                 </Typography>
                 <Stack direction="row" alignItems="center">
-                  <TextField
+                <TextField
+                    onBlur={handleQuantityChange}
                     value={quantityValue}
-                    onChange={handleQuantityChange}
+                    type="number"
+                      onChange={(e)=>{
+                        let value = parseInt(e.target.value)
+                        if(value <= 0 || isNaN(value)) value = 1;
+                        setQuantityValue(value)
+                      }}
                     style={{ width: "50px" }}
                     size="small"
+                    
                   ></TextField>
                   <Stack>
                     <IconButton
