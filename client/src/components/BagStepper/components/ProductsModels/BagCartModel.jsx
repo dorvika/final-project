@@ -13,7 +13,11 @@ import { ExpandMore, ExpandLess } from "@mui/icons-material/";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addToCart, decreaseCartItem, changesToCart } from "../../../../store/Cart/actions";
+import {
+  addToCart,
+  decreaseCartItem,
+  changesToCart,
+} from "../../../../store/cart/actions";
 const CustomCard = styled(Card)(({ theme }) => ({
   [theme.breakpoints.down("670")]: {
     "& .stack": {

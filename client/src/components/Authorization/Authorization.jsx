@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { Close } from "@mui/icons-material/";
 import { TabContext } from "@mui/lab";
-import { closeModal } from "../../store/Modal/actions";
+import { closeModal } from "../../store/modal/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { forwardRef, useState } from "react";
 import SignUp from "./SignUp.jsx";

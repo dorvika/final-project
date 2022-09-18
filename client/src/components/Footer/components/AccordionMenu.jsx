@@ -10,16 +10,15 @@ import {
   AccordionDetails,
   AccordionSummary,
   Box,
-  Button,
   IconButton,
   Link,
   List,
   ListItem,
-  TextField,
   Typography,
 } from "@mui/material";
 import { Fragment, useState } from "react";
 import menuList from "../MenuList";
+import Subscription from "./Subscription.jsx";
 
 const AccordionMenu = () => {
   const [expanded, setExpanded] = useState("");
@@ -97,14 +96,7 @@ const AccordionMenu = () => {
           <AccordionDetails>
             <List>
               <ListItem sx={{ pb: "5px" }}>
-                <Link
-                  // href="javascript:void(0)"
-                  // onClick={() =>
-                  //   (window.location = "mailto:postilmarket@gmail.com")
-                  // }
-                  href="mailto:postilmarket@gmail.com"
-                  underline="hover"
-                >
+                <Link href="mailto:postilmarket@gmail.com" underline="hover">
                   <Typography variant="body">postilmarket@gmail.com</Typography>
                 </Link>
               </ListItem>
@@ -146,20 +138,7 @@ const AccordionMenu = () => {
                 </Typography>
               </ListItem>
               <ListItem>
-                <TextField
-                  size="small"
-                  id="subscribe-regular"
-                  label="E-mail"
-                  variant="outlined"
-                />
-                <Button
-                  variant="contained"
-                  sx={{
-                    p: "5px 40px",
-                  }}
-                >
-                  Send
-                </Button>
+                <Subscription />
               </ListItem>
               <ListItem>
                 <Box

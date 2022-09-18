@@ -15,12 +15,12 @@ import {
 import { Form, Formik } from "formik";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { closeModal } from "../../store/Modal/actions";
+import { closeModal } from "../../store/modal/actions";
 import { fetchData, postData } from "../../utils/api";
 import ConfirmationPromo from "./ConfirmationPromo.jsx";
-import { validationForm } from "./ValidationForm.jsx";
+import { validationSignUpForm } from "../../utils/ValidationSchema.js";
 import Preloader from "../../pages/Categories/Catalog Product List/Preloader.jsx";
-import { setLoggedIn } from "../../store/IsLogged/actions";
+import { setLoggedIn } from "../../store/isLogged/actions";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -97,7 +97,7 @@ const SignUp = () => {
             password: "",
             confirmPassword: "",
           }}
-          validationSchema={validationForm}
+          validationSchema={validationSignUpForm}
           validateOnChange
           validateOnBlur
           onSubmit={handleSubmit}

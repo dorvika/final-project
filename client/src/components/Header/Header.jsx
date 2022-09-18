@@ -1,5 +1,5 @@
 import Authorization from "../Authorization/Authorization.jsx";
-import { openModal } from "../../store/Modal/actions";
+import { openModal } from "../../store/modal/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {

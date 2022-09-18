@@ -1,4 +1,11 @@
-import { Box, Container, Divider, Typography, Link } from "@mui/material";
+import {
+  Box,
+  Container,
+  Divider,
+  Typography,
+  Link,
+  Stack,
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
 import AccordionMenu from "./components/AccordionMenu.jsx";
 import RegularMenu from "./components/RegularMenu.jsx";
@@ -20,12 +27,12 @@ const Footer = () => {
 
       <FooterHr />
       <Container>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
+        <Stack
+        // sx={{
+        //   display: "flex",
+        //   justifyContent: "space-between",
+        //   alignItems: "center",
+        // }}
         >
           <Link to="/" style={{ textDecoration: "none" }}>
             <Box
@@ -61,7 +68,7 @@ const Footer = () => {
           >
             FE2_Online Studio
           </Typography>
-        </Box>
+        </Stack>
       </Container>
     </footer>
   );
