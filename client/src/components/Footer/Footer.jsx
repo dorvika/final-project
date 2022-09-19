@@ -27,13 +27,7 @@ const Footer = () => {
 
       <FooterHr />
       <Container>
-        <Stack
-        // sx={{
-        //   display: "flex",
-        //   justifyContent: "space-between",
-        //   alignItems: "center",
-        // }}
-        >
+        <Stack>
           <Link to="/" style={{ textDecoration: "none" }}>
             <Box
               sx={{
