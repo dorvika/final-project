@@ -3,10 +3,9 @@ import {
   Typography,
   Card,
   CardMedia,
-  CardContent,
   IconButton,
   TextField,
-  Stack,
+  Stack, CardContent,
 } from "@mui/material";
 import {
   ExpandMore,
@@ -26,6 +25,9 @@ import {
   changesToCart,
 } from "../../store/cart/actions";
 import { addFavorite, removeFavorite } from "../../store/favorites/actions";
+import theme from "../../muiTheme/theme";
+// eslint-disable-next-line import/named
+import {StyledBox, StyledStack} from "./styles";
 
 const CartProductCard = ({ cartQuantity, product }) => {
   const {
@@ -87,19 +89,22 @@ const CartProductCard = ({ cartQuantity, product }) => {
           justifyContent: "space-between",
           mb: "20px",
           mt: "20px",
+          [theme.breakpoints.down("sm")]: {
+                flexDirection: "column",
+          }
         }}
       >
-        <Stack direction="row">
+        <StyledStack direction="row">
           <Link to={`/catalog/${itemNo}`} style={{ textDecoration: "none" }}>
             <CardMedia
               component="img"
               height="200px"
-              sx={{ width: "200px", mr: "80px" }}
+              sx={{ width: "200px", mr: "80px", [theme.breakpoints.down("sm")]: { mr: "0" } }}
               image={`${imageUrls[0]}`}
             ></CardMedia>
           </Link>
           <CardContent>
-            <Box>
+            <StyledBox>
               <Link
                 to={`/catalog/${itemNo}`}
                 style={{ textDecoration: "none" }}
@@ -132,7 +137,7 @@ const CartProductCard = ({ cartQuantity, product }) => {
                 ${currentPrice}
               </Typography>
               <Box sx={{ display: "flex", alignItems: "center" }}>
-                <Box sx={{ mr: "80px" }}>
+                <Box sx={{ mr: "80px",[theme.breakpoints.down("sm")]: {mr: "0" }}}>
                   <Box sx={{ display: "flex", alignItems: "center" }}>
                     <Typography
                       variant="h5"
@@ -199,9 +204,9 @@ const CartProductCard = ({ cartQuantity, product }) => {
                   </Stack>
                 </Stack>
               </Box>
-            </Box>
+            </StyledBox>
           </CardContent>
-        </Stack>
+        </StyledStack>
         <Box
           display="flex"
           flexDirection="column"

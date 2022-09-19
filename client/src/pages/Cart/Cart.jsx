@@ -1,5 +1,5 @@
-import { CartProductList, MightLike } from "../../components";
-import { EmptyCart } from "../../components";
+import { CartProductList, MightLike , EmptyCart } from "../../components";
+
 import { Container } from "@mui/system";
 
 import { useSelector } from "react-redux";
