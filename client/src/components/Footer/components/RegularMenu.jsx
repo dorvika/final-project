@@ -1,19 +1,21 @@
 import { FacebookOutlined, Instagram, Twitter } from "@mui/icons-material";
 import {
   Box,
-  Button,
   IconButton,
   Link,
   List,
   ListItem,
   Stack,
-  TextField,
   Typography,
 } from "@mui/material";
+
 import { Fragment } from "react";
+
 import menuList from "../MenuList";
+import Subscription from "./Subscription.jsx";
 
 const RegularMenu = () => {
+  
   return (
     <>
       <Stack
@@ -54,14 +56,7 @@ const RegularMenu = () => {
             Contact Us
           </Typography>
           <ListItem>
-            <Link
-              href="mailto:postilmarket@gmail.com"
-              // href="javascript:void(0)"
-              // onClick={() =>
-              //   (window.location = "mailto:postilmarket@gmail.com")
-              // }
-              underline="hover"
-            >
+            <Link href="mailto:postilmarket@gmail.com" underline="hover">
               <Typography variant="body">postilmarket@gmail.com</Typography>
             </Link>
           </ListItem>
@@ -86,29 +81,10 @@ const RegularMenu = () => {
             </Typography>
           </ListItem>
           <ListItem>
-            <TextField
-              size="small"
-              id="subscribe-adaptive"
-              label="E-mail"
-              variant="outlined"
-            />
-            <Button
-              variant="contained"
-              sx={{
-                p: "5px 40px",
-              }}
-            >
-              Send
-            </Button>
+            <Subscription />
           </ListItem>
           <ListItem>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
+            <Stack direction="row" alignItems="center">
               <Typography variant="h6" sx={{ marginRight: "35px" }}>
                 Follow Us
               </Typography>
@@ -135,7 +111,7 @@ const RegularMenu = () => {
               >
                 <Instagram color="primary" />
               </IconButton>
-            </Box>
+            </Stack>
           </ListItem>
         </Box>
       </Stack>

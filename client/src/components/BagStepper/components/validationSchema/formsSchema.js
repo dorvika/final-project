@@ -16,11 +16,7 @@ export const validationSchemaShipping = object({
         /^[a-zA-ZА-ЩЬЮЯҐЄІЇа-щьюяґєії]+$/,
         'Not a valid. Only characters'
       ),
-    zip: string()
-    .required()
-    .matches(/^[0-9]+$/, "Must be only digits")
-    .min(5, 'Must be exactly 5 digits')
-    .max(5, 'Must be exactly 5 digits'),
+    email: string().email("Invalid Email").required("Email is required"),
     phone: string().matches(/((\+38)?\(?\d{3}\)?[\s/.-]?(\d{7}|\d{3}[\s/.-]\d{2}[\s/.-]\d{2}|\d{3}-\d{4}))/, "Phone is not valid")
                     .required("Phone is required"),
                    

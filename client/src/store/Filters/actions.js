@@ -12,9 +12,9 @@ export const setFilteredProductsQty = (quantity) => {
   };
 };
 
-export const newQuantity = (quantity) => {
+export const setSearchedProducts = (searchedProducts) => {
   return {
-    type: "SET_QUANTITY_ON_PAGE",
-    payload: quantity,
+    type: "SET_SEARCHED_PRODUCTS",
+    payload: searchedProducts,
   };
 };
