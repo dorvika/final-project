@@ -85,6 +85,7 @@ const CartProductCard = ({ cartQuantity, product }) => {
     <>
       <Card
         sx={{
+          position: "relative",
           display: "flex",
           justifyContent: "space-between",
           mb: "20px",
@@ -99,7 +100,7 @@ const CartProductCard = ({ cartQuantity, product }) => {
             <CardMedia
               component="img"
               height="200px"
-              sx={{ width: "200px", mr: "80px", [theme.breakpoints.down("sm")]: { mr: "0" } }}
+              sx={{ width: "200px", mr: "80px", [theme.breakpoints.down("sm")]: { mr: "0", width: "300px" } }}
               image={`${imageUrls[0]}`}
             ></CardMedia>
           </Link>
@@ -117,6 +118,7 @@ const CartProductCard = ({ cartQuantity, product }) => {
                     letterSpacing: "0.04em",
                     textTransform: "uppercase",
                     pb: "8px",
+                    mt: "10px",
                   }}
                 >
                   {name}
@@ -129,6 +131,7 @@ const CartProductCard = ({ cartQuantity, product }) => {
                   maxWidth: "380px",
                   pb: "27px",
                   lineHeight: "19px",
+                  textAlign: "center",
                 }}
               >
                 {description}
@@ -136,9 +139,9 @@ const CartProductCard = ({ cartQuantity, product }) => {
               <Typography variant="h5" sx={{ pb: "10px" }}>
                 ${currentPrice}
               </Typography>
-              <Box sx={{ display: "flex", alignItems: "center" }}>
+              <Box sx={{ display: "flex", alignItems: "center", [theme.breakpoints.down("sm")]: { flexDirection: "column", } }}>
                 <Box sx={{ mr: "80px",[theme.breakpoints.down("sm")]: {mr: "0" }}}>
-                  <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <Box sx={{ display: "flex", alignItems: "center", [theme.breakpoints.down("sm")]: { justifyContent: "center", } }}>
                     <Typography
                       variant="h5"
                       sx={{
@@ -156,7 +159,7 @@ const CartProductCard = ({ cartQuantity, product }) => {
                       {color}
                     </Typography>
                   </Box>
-                  <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <Box sx={{ display: "flex", alignItems: "center", [theme.breakpoints.down("sm")]: { justifyContent: "center", } }}>
                     <Typography
                       variant="h5"
                       sx={{
@@ -175,7 +178,7 @@ const CartProductCard = ({ cartQuantity, product }) => {
                     </Typography>
                   </Box>
                 </Box>
-                <Stack direction="row" alignItems="center">
+                <Stack direction="row" alignItems="center" sx={{[theme.breakpoints.down("sm")]: { mb: "10px", mt: "10px"}}}>
                   <TextField
                     onBlur={handleQuantityChange}
                     value={quantityValue}
@@ -185,9 +188,9 @@ const CartProductCard = ({ cartQuantity, product }) => {
                         if(value <= 0 || isNaN(value)) value = 1;
                         setQuantityValue(value)
                       }}
-                    style={{ width: "50px" }}
+                    style={{ width: "50px",}}
                     size="small"
-                    
+
                   ></TextField>
                   <Stack>
                     <IconButton
@@ -213,7 +216,16 @@ const CartProductCard = ({ cartQuantity, product }) => {
           alignItems="flex-end"
           justifyContent="space-between"
         >
-          <IconButton onClick={handleRemoveProduct}>
+          <IconButton onClick={handleRemoveProduct}
+          sx={{
+            [theme.breakpoints.down("sm")]: {
+              zIndex: "300",
+              position: "absolute",
+              top: "0",
+              right: "0",
+            }
+          }}
+          >
             <Close />
           </IconButton>
           <Stack direction="row" alignItems="center">

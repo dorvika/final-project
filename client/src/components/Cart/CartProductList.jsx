@@ -1,6 +1,7 @@
 import { CartProductCard, CustomHr } from "./index";
 import { Box, Container, Typography, Button } from "@mui/material";
 import { Link } from "react-router-dom";
+import theme from "../../muiTheme/theme";
 const CartProductList = ({ products }) => {
   const cartTotalSum = () => {
     return products.reduce((sum, cartItem) => {
@@ -26,6 +27,9 @@ const CartProductList = ({ products }) => {
               color: "primary.main",
               textTransform: "uppercase",
               letterSpacing: "0.04em",
+                [theme.breakpoints.down("sm")]: {
+                    fontSize: "20px"
+                }
             }}
           >
             shopping bag
@@ -37,9 +41,12 @@ const CartProductList = ({ products }) => {
               textTransform: "uppercase",
               letterSpacing: "0.04em",
               fontWeight: "600",
+                [theme.breakpoints.down("sm")]: {
+                    fontSize: "20px"
+                }
             }}
           >
-            total usd {cartTotalSum()}
+            total usd {cartTotalSum()}$
           </Typography>
         </Box>
         <CustomHr />
