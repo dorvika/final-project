@@ -12,7 +12,11 @@ import {
 import { HeaderLinks, IconsButtonContainer } from "./components/styles";
 import Catalog from "./components/catalogButton.jsx";
 import Logo from "./components/logoSvg";
-import { FavoriteBorderOutlined, PersonOutlined } from "@mui/icons-material";
+import {
+  FavoriteBorderOutlined,
+  PersonOutlined,
+  ShoppingBagOutlined,
+} from "@mui/icons-material";
 
 import BagPopper from "./components/BagPopper.jsx";
 import LoginPopper from "./components/LoginPopper.jsx";
@@ -23,6 +27,8 @@ const Header = () => {
   const { isLoggedIn } = useSelector((state) => state.loggedIn);
   const modal = useSelector((state) => state.modal);
   const favorites = useSelector((state) => state.favorites.favorites);
+  const bag = useSelector((state) => state.cart);
+  const isBagEmpty = bag.cart.length === 0;
 
   const handleOpen = () => {
     dispatch(openModal());
@@ -75,7 +81,15 @@ const Header = () => {
               <FavoriteBorderOutlined />
             </Badge>
           </IconButton>
-          <BagPopper />
+          {isBagEmpty ? (
+            <IconButton sx={{ color: "primary.main" }} href={"/cart"}>
+              <Badge badgeContent={bag.cart.length} color="error">
+                <ShoppingBagOutlined />
+              </Badge>
+            </IconButton>
+          ) : (
+            <BagPopper />
+          )}
         </IconsButtonContainer>
         {modal && <Authorization />}
       </Container>

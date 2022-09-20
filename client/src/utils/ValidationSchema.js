@@ -51,7 +51,7 @@ export const validationSignUpForm = object({
 });
 
 export const validationLogInForm = object({
-  email: string().email("Invalid Email").required("Email or Login is required"),
+  email: string().required("Email or Login is required"),
   password: string()
     .required("Password is required")
     .min(8, "Password must contain 8 or more characters"),
