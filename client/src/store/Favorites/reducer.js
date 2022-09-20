@@ -23,6 +23,15 @@ const reducer = (state = initialState, action) => {
           ),
         };
       }
+      case "GET_FAVORITE_LOCALSTORAGE": {
+        return {
+          favorites: [...action.payload.data.products]
+        }
+      }
+      case 'REMOVE_ALL_FROM_WISHLIST': {
+        return {
+          favorites: state.favorites.filter((product) => !product._id)}
+      }
       default: {
         return state;
       }

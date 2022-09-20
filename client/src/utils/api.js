@@ -33,6 +33,10 @@ export const updateCustomerCart = async (endpoint, obj) => {
   const response = await API.put(endpoint, obj);
   return response;
 };
+export const updateCustomerWishlist = async (endpoint, obj) => {
+  const response = await API.put(endpoint, obj);
+  return response;
+};
 
 export const placeOrder = async (endpoint, obj) => {
   const response = await API.post(endpoint, obj);

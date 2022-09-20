@@ -22,6 +22,7 @@ import ConfirmationPromo from "./ConfirmationPromo.jsx";
 import { validationLogInForm } from "../../utils/ValidationSchema.js";
 import { setLoggedIn } from "../../store/isLogged/actions.js";
 import { customerCart } from "../../store/cart/actions.js";
+import { customerWishlist } from "../../store/favorites/actions"
 
 const Login = () => {
   const [loginData, setLoginData] = useState({ status: "", data: "" });
@@ -59,6 +60,7 @@ const Login = () => {
         fetchData("/customers/customer").then((res) => {
           dispatch(setLoggedIn(res));
           dispatch(customerCart());
+          dispatch(customerWishlist());
         });
       })
       .catch((error) => {
