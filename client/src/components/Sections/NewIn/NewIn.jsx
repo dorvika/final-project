@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { fetchProducts } from "../../../store/products/actions";
+import { fetchProducts } from "../../../store/Products/actions";
 
 const CustomTypography = styled(Typography)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,

@@ -3,7 +3,7 @@ import { Box } from "@mui/system";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { removeAllFromCart } from "../../../store/cart/actions";
+import { removeAllFromCart } from "../../../store/Cart/actions";
 import { placeOrder } from "../../../utils/api"
 const ThanksOrderPage = ({ makeOrder }) => {
   const dispatch = useDispatch();

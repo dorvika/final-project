@@ -1,7 +1,7 @@
 import { Stack, Typography, Checkbox, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { closeModal } from "../../store/modal/actions";
+import { closeModal } from "../../store/Modal/actions";
 
 const ConfirmationPromo = () => {
   const dispatch = useDispatch();

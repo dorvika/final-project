@@ -2,7 +2,7 @@ import { Grid, Typography } from "@mui/material";
 import ProductCard from "./ProductCard.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { fetchProducts } from "../../../store/products/actions";
+import { fetchProducts } from "../../../store/Products/actions";
 import "./style.scss";
 import Preloader from "./Preloader.jsx";
 import { useLocation } from "react-router-dom";

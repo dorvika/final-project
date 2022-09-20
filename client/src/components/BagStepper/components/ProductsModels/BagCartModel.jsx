@@ -17,7 +17,7 @@ import {
   addToCart,
   decreaseCartItem,
   changesToCart,
-} from "../../../../store/cart/actions";
+} from "../../../../store/Cart/actions";
 const CustomCard = styled(Card)(({ theme }) => ({
   [theme.breakpoints.down("670")]: {
     "& .stack": {

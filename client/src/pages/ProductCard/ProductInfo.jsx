@@ -22,9 +22,9 @@ import {
 import { useEffect, useState } from "react";
 import { ProductInfoContainer, SocialMediaContainer } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, removeFromCart } from "../../store/cart/actions";
+import { addToCart, removeFromCart } from "../../store/Cart/actions";
 import { fetchData } from "../../utils/api";
-import { addFavorite, removeFavorite } from "../../store/favorites/actions";
+import { addFavorite, removeFavorite } from "../../store/Favorites/actions";
 
 const ProductInfo = ({
   name,

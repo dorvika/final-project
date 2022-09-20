@@ -11,7 +11,7 @@ import { useState } from "react";
 import { CustomCardContent, HoverCardContent } from "./styles";
 import { Link } from "react-router-dom";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
-import { addFavorite, removeFavorite } from "../../../store/favorites/actions";
+import { addFavorite, removeFavorite } from "../../../store/Favorites/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const ProductCard = ({ image, title, price, size, itemNo, product }) => {

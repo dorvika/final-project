@@ -10,7 +10,7 @@ import {
 import { Cancel } from "@mui/icons-material/";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { removeFromCart } from "../../../store/cart/actions";
+import { removeFromCart } from "../../../store/Cart/actions";
 
 const CartProductModal = ({ product }) => {
   const { imageUrls, currentPrice, name, color, size, _id, itemNo } = product;
