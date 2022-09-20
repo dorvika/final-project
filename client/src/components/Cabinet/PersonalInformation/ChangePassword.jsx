@@ -23,6 +23,10 @@ import { validationChangePassword } from "../../../utils/ValidationSchema";
 const ChangePassword = () => {
   const [open, setOpen] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [changePasswordResponse, setChangePasswordResponse] = useState({
+    status: "",
+    data: "",
+  });
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -38,6 +42,10 @@ const ChangePassword = () => {
 
   const handleClose = () => {
     setOpen(false);
+    setChangePasswordResponse({
+      status: "",
+      data: "",
+    });
   };
 
   const handleSubmit = (values, actions) => {
@@ -46,16 +54,23 @@ const ChangePassword = () => {
       password: values.currentPassword,
       newPassword: values.newPassword,
     };
-    console.log(passwords);
     putData("/customers/password", passwords)
       .then((response) => {
-        console.log(response);
-      })
+        setChangePasswordResponse({
+          status: response.status,
+          data: response.data,
+        });
+        setTimeout(() => {
+          handleClose();
+        }, 3000);
+           })
       .catch((error) => {
-        console.log(error);
+        setChangePasswordResponse({
+          status: error.status,
+          data: error.data,
+        });
       })
       .finally(() => actions.setSubmitting(false));
-    console.log(values);
   };
 
   return (
@@ -70,15 +85,14 @@ const ChangePassword = () => {
 
       <Dialog
         open={open}
-        maxWidth="md"
+        fullWidth={true}
+        maxWidth="sm"
         onClose={handleClose}
         aria-labelledby="changePassword-dialog-title"
         aria-describedby="changePassword-dialog-description"
       >
-        <DialogTitle id="changePassword-dialog-title">
-          <Typography variant="h4" color="primary.main">
-            Change Password
-          </Typography>
+        <DialogTitle sx={{ fontSize: "22px" }} id="changePassword-dialog-title">
+          Change Password
         </DialogTitle>
         <DialogContent>
           <Formik
@@ -221,12 +235,49 @@ const ChangePassword = () => {
                     <Preloader />
                   </Box>
                 )}
-                <Stack sx={{ mt: "40px", mb: "20px" }} direction="row">
+                {!props.isSubmitting && changePasswordResponse.status === 400 && (
+                  <Typography
+                    variant="subtitle2"
+                    sx={{
+                      color: "error.main",
+                      mb: "10px",
+                      mt: "20px",
+                      fontWeight: 700,
+                      textAlign: "center",
+                    }}
+                  >
+                    Unknown error, try again
+                  </Typography>
+                )}
+                {!props.isSubmitting && changePasswordResponse.status === 200 && (
+                  <Typography
+                    variant="subtitle2"
+                    sx={{
+                      color: changePasswordResponse.data.password
+                        ? "error.main"
+                        : "green",
+                      mb: "10px",
+                      mt: "40px",
+                      textAlign: "center",
+                      fontWeight: 700,
+                    }}
+                  >
+                    {changePasswordResponse.data.password
+                      ? changePasswordResponse.data.password
+                      : changePasswordResponse.data.message}
+                  </Typography>
+                )}
+
+                <Stack
+                  sx={{ mt: "40px", mb: "20px" }}
+                  direction="row"
+                  justifyContent="space-evenly"
+                >
                   <Button
                     variant="contained"
                     disabled={props.isSubmitting}
                     type="submit"
-                    sx={{ p: "5px 30px", mr: "30px" }}
+                    sx={{ p: "5px 30px" }}
                   >
                     Change
                   </Button>

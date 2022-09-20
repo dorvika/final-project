@@ -12,13 +12,13 @@ import { useNavigate } from "react-router-dom";
 import { removeAllFromCart } from "../../../store/cart/actions";
 import { setLoggedOut } from "../../../store/isLogged/actions";
 import ChangePassword from "./ChangePassword.jsx";
+import EditPersonalData from "./EditPersonalData.jsx";
 
 const PersonalInformation = () => {
   const { userData } = useSelector((state) => state.loggedIn);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log(userData);
 
   const handleLogOut = () => {
     dispatch(setLoggedOut());
@@ -116,9 +116,7 @@ const PersonalInformation = () => {
       </Box>
       <Stack direction="column" alignItems="center">
         {/* <Divider /> */}
-        <Button variant="contained" sx={{ p: "5px 50px", mt: "35px" }}>
-          Edit
-        </Button>
+        <EditPersonalData />
 
         {/* <Divider /> */}
       </Stack>
