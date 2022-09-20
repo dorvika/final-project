@@ -30,6 +30,7 @@ const Footer = () => {
         <Stack
           direction="row"
           justifyContent="space-between"
+          alignItems="center"
           // sx={{
           //   display: "flex",
           //   justifyContent: "space-between",

@@ -2,7 +2,7 @@ import { Search } from "@mui/icons-material";
 import { Box, InputAdornment, Stack, Typography } from "@mui/material";
 import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setSearchedProducts } from "../../../store/Filters/actions";
+import { setSearchedProducts } from "../../../store/filters/actions";
 import { postSearchQuery } from "../../../utils/api";
 import SearchProductCard from "./SearchProductCard.jsx";
 import { CustomDialog, CustomLink, HeaderInput } from "./styles";
