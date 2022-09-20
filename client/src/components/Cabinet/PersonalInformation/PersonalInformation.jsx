@@ -28,7 +28,14 @@ const PersonalInformation = () => {
 
   return (
     <>
-      <Typography variant="h2">Personal Information</Typography>
+      <Typography
+        variant="h2"
+        sx={(theme) => ({
+          [theme.breakpoints.down("sm")]: { fontSize: "22px" },
+        })}
+      >
+        Personal Information
+      </Typography>
 
       <Divider />
       <Stack
@@ -53,14 +60,14 @@ const PersonalInformation = () => {
       <Box sx={{ flexGrow: 1, mt: "35px" }}>
         <Grid
           container
-          spacing={{ sm: 10, md: 80 }}
-          columns={{ xs: 4, sm: 8, md: 12 }}
+          spacing={{ sm: 10, md: 30 }}
+          columns={{ xs: 2, sm: 8, md: 12 }}
         >
           <Grid item xs={2} sm={4} md={4}>
             <Typography variant="h3" color="neutral.main">
               First Name:
             </Typography>
-            <Typography marginTop="15px" variant="h3">
+            <Typography marginTop="10px" marginBottom="15px" variant="h3">
               {userData.firstName}
             </Typography>
           </Grid>
@@ -68,7 +75,7 @@ const PersonalInformation = () => {
             <Typography variant="h3" color="neutral.main">
               Last Name:
             </Typography>
-            <Typography marginTop="15px" variant="h3">
+            <Typography marginTop="10px" marginBottom="15px" variant="h3">
               {userData.lastName}
             </Typography>
           </Grid>
@@ -76,23 +83,15 @@ const PersonalInformation = () => {
             <Typography variant="h3" color="neutral.main">
               Gender:
             </Typography>
-            <Typography marginTop="15px" variant="h3">
+            <Typography marginTop="10px" marginBottom="15px" variant="h3">
               {userData.gender ? userData.gender : "Not specified"}
             </Typography>
           </Grid>
-        </Grid>
-      </Box>
-      <Box sx={{ flexGrow: 1, mt: "35px" }}>
-        <Grid
-          container
-          spacing={{ sm: 10, md: 80 }}
-          columns={{ xs: 4, sm: 8, md: 12 }}
-        >
           <Grid item xs={2} sm={4} md={4}>
             <Typography variant="h3" color="neutral.main">
               Login:
             </Typography>
-            <Typography marginTop="15px" variant="h3">
+            <Typography marginTop="10px" marginBottom="15px" variant="h3">
               {userData.login}
             </Typography>
           </Grid>
@@ -100,7 +99,7 @@ const PersonalInformation = () => {
             <Typography variant="h3" color="neutral.main">
               Email:
             </Typography>
-            <Typography marginTop="15px" variant="h3">
+            <Typography marginTop="10px" marginBottom="15px" variant="h3">
               {userData.email}
             </Typography>
           </Grid>
@@ -108,7 +107,7 @@ const PersonalInformation = () => {
             <Typography variant="h3" color="neutral.main">
               Phone:
             </Typography>
-            <Typography marginTop="15px" variant="h3">
+            <Typography marginTop="10px" marginBottom="15px" variant="h3">
               {userData.telephone ? userData.telephone : "Not specified"}
             </Typography>
           </Grid>

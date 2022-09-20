@@ -42,10 +42,12 @@ const ChangePassword = () => {
 
   const handleSubmit = (values, actions) => {
     actions.setSubmitting(true);
-    putData("/customers/password", {
+    const passwords = {
       password: values.currentPassword,
       newPassword: values.newPassword,
-    })
+    };
+    console.log(passwords);
+    putData("/customers/password", passwords)
       .then((response) => {
         console.log(response);
       })
@@ -59,7 +61,6 @@ const ChangePassword = () => {
   return (
     <>
       <Button
-        marginTop="35px"
         variant="text"
         sx={{ mt: "40px", mb: "70px" }}
         onClick={handleClickOpen}
