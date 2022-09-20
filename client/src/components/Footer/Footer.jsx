@@ -31,11 +31,6 @@ const Footer = () => {
           direction="row"
           justifyContent="space-between"
           alignItems="center"
-          // sx={{
-          //   display: "flex",
-          //   justifyContent: "space-between",
-          //   alignItems: "center",
-          // }}
         >
           <Link to="/" style={{ textDecoration: "none" }}>
             <Box
