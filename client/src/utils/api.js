@@ -15,6 +15,10 @@ export const fetchData = async (endpoint) => {
   const { data } = response;
   return data;
 };
+export const postSearchQuery = async (endpoint, query) => {
+  const response = await API.post(endpoint, query);
+  return response;
+};
 
 export const postData = async (endpoint, obj) => {
   const response = await API.post(endpoint, obj);
@@ -57,7 +61,7 @@ export const syncLS = function (store) {
       if (action.type === "LOGGED_OUT") {
         const result = next(action);
         store.getState();
-        localStorage.clear()
+        localStorage.clear();
         return result;
       }
       if (action.type === "ADD_FAVORITE" || action.type === "REMOVE_FAVORITE") {
@@ -69,7 +73,13 @@ export const syncLS = function (store) {
         );
         return result;
       }
-      if (action.type === "ADD_TO_CART" || action.type === "REMOVE_FROM_CART" || action.type === "REMOVE_ALL_FROM_CART" || action.type === "DECREASE_CART_ITEM" || action.type === "CHANGES_TO_CART") {
+      if (
+        action.type === "ADD_TO_CART" ||
+        action.type === "REMOVE_FROM_CART" ||
+        action.type === "REMOVE_ALL_FROM_CART" ||
+        action.type === "DECREASE_CART_ITEM" ||
+        action.type === "CHANGES_TO_CART"
+      ) {
         store.getState();
         const result = next(action);
         localStorage.setItem(

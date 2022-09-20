@@ -15,3 +15,5 @@ export { default as Favorites } from "./Favorites/Favorites.jsx";
 export { default as SpecialOffer } from "./SpecialOffer/SpecialOffer.jsx";
 export { default as Contact } from "./Contact/Contact.jsx";
 export { default as Cabinet } from "./Cabinet/Cabinet.jsx";
+export { default as Search } from "./Search/Search.jsx";
+

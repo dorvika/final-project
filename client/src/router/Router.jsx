@@ -17,6 +17,7 @@ import {
   SpecialOffer,
   Contact,
   Cabinet,
+  Search,
 } from "../pages";
 
 export default function Router() {
@@ -39,6 +40,7 @@ export default function Router() {
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/cabinet" element={<Cabinet />} />
         <Route path="/special-offer/:id" element={<SpecialOffer />} />
+        <Route path="/search" element={<Search />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </main>

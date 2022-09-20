@@ -51,7 +51,7 @@ const SpecialOffer = () => {
         >
           {selectedOffer?.description
             ? selectedOffer?.description
-            : "Postil' Bedding it's always the best quality with the best price ever. To go the catalog and you'll see"}
+            : "Postil' Bedding it's always the best quality with the best price. To go the catalog and you'll see"}
           .
         </Typography>
         <Button variant="contained" href="/catalog?perPage=9&startPage=1">

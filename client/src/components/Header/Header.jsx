@@ -26,7 +26,7 @@ import {
 } from "@mui/icons-material";
 
 import BagPopper from "./components/BagPopper.jsx";
-// import LoginPopper from "./components/LoginPopper.jsx";
+import SearchBar from "./components/SearchBar.jsx";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -48,7 +48,7 @@ const Header = () => {
         }}
       >
         <Link style={{ marginLeft: "-2.6041666666666665vw" }} to={"/"}>
-          <Logo></Logo>
+          <Logo />
         </Link>
         <Catalog />
 
@@ -75,6 +75,7 @@ const Header = () => {
             variant="standard"
           />
         </Box>
+        <SearchBar />
         <IconsButtonContainer
           sx={{
             display: "flex",
@@ -84,7 +85,6 @@ const Header = () => {
           }}
         >
           {isLoggedIn ? (
-            // <LoginPopper />
             <>
               <IconButton href="/cabinet">
                 <Tooltip title={userData.firstName + " " + userData.lastName}>
