@@ -5,8 +5,8 @@ import { Tabs } from "@mui/material";
 // import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { CustomTab } from "../Authorization/styles";
-import PersonalInformation from "./PersonalInformation.jsx";
-import MyBasket from "./MyBasket.jsx";
+import PersonalInformation from "./PersonalInformation/PersonalInformation.jsx";
+// import MyBasket from "./MyBasket.jsx";
 
 // import TabPanel from "@mui/lab/TabPanel";
 
@@ -69,10 +69,10 @@ const CabinetMenu = () => {
         }}
       >
         <CustomTab label="Personal Information" {...a11yProps(0)} />
-        <CustomTab label="My favorites list" {...a11yProps(1)} />
-        <CustomTab label="My basket" {...a11yProps(2)} />
-        <CustomTab label="My orders" {...a11yProps(3)} />
-        <CustomTab label="My subscriptions" {...a11yProps(4)} />
+        <CustomTab label="My wish list" {...a11yProps(1)} />
+        <CustomTab label="My orders" {...a11yProps(2)} />
+        <CustomTab label="My subscriptions" {...a11yProps(3)} />
+        {/* <CustomTab label="My subscriptions" {...a11yProps(4)} /> */}
         {/* <CustomTab label="Item Six" {...a11yProps(5)} />
         <CustomTab label="Item Seven" {...a11yProps(6)} /> */}
       </Tabs>
@@ -83,14 +83,14 @@ const CabinetMenu = () => {
         Favorites
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <MyBasket />
+        My orders
       </TabPanel>
       <TabPanel value={value} index={3}>
-        Item Four
+        My subscription
       </TabPanel>
-      <TabPanel value={value} index={4}>
+      {/* <TabPanel value={value} index={4}>
         Item Five
-      </TabPanel>
+      </TabPanel> */}
       {/* <TabPanel value={value} index={5}>
         Item Six
       </TabPanel>

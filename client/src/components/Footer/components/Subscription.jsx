@@ -64,7 +64,7 @@ const Subscription = () => {
             <TextField
               size="small"
               type="email"
-              id="subscribe-adaptive"
+              id="subscribe-field"
               name="email"
               label="E-mail"
               variant="outlined"

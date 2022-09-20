@@ -51,7 +51,7 @@ export const validationSignUpForm = object({
 });
 
 export const validationLogInForm = object({
-  email: string().email("Invalid Email").required("Email or Login is required"),
+  email: string().required("Email or Login is required"),
   password: string()
     .required("Password is required")
     .min(8, "Password must contain 8 or more characters"),
@@ -59,4 +59,18 @@ export const validationLogInForm = object({
 
 export const validationSubscribeForm = object({
   email: string().email("Invalid Email").required("Email is required"),
+});
+
+export const validationChangePassword = object({
+  currentPassword: string()
+    .required("Password is required")
+    .min(8, "Password must contain 8 or more characters")
+    .strongPassword(),
+  newPassword: string()
+    .required("Password is required")
+    .min(8, "Password must contain 8 or more characters")
+    .strongPassword(),
+  confirmNewPassword: string()
+    .required("Password confirmation is required")
+    .oneOf([ref("newPassword"), null], "Passwords must match"),
 });
