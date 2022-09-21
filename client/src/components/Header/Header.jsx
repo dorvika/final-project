@@ -5,24 +5,17 @@ import { Link } from "react-router-dom";
 import {
   Typography,
   Container,
-  Box,
-  InputAdornment,
   IconButton,
   Divider,
   Badge,
   Tooltip,
 } from "@mui/material";
-import {
-  HeaderInput,
-  HeaderLinks,
-  IconsButtonContainer,
-} from "./components/styles";
+import { HeaderLinks, IconsButtonContainer } from "./components/styles";
 import Catalog from "./components/catalogButton.jsx";
 import Logo from "./components/logoSvg";
 import {
   FavoriteBorderOutlined,
   PersonOutlined,
-  Search,
   ShoppingBagOutlined,
 } from "@mui/icons-material";
 
@@ -66,18 +59,6 @@ const Header = () => {
             <Typography variant="body">Blog</Typography>
           </Link>
         </HeaderLinks>
-        <Box>
-          <HeaderInput
-            endAdornment={
-              <InputAdornment position={"start"}>
-                <Search></Search>
-              </InputAdornment>
-            }
-            id="standard-basic"
-            placeholder="Search"
-            variant="standard"
-          />
-        </Box>
         <SearchBar />
         <IconsButtonContainer
           sx={{
