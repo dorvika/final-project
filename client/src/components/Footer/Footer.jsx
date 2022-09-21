@@ -27,7 +27,11 @@ const Footer = () => {
 
       <FooterHr />
       <Container>
-        <Stack>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+        >
           <Link to="/" style={{ textDecoration: "none" }}>
             <Box
               sx={{

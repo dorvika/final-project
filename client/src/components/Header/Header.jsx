@@ -23,6 +23,7 @@ import {
   FavoriteBorderOutlined,
   PersonOutlined,
   Search,
+  ShoppingBagOutlined,
 } from "@mui/icons-material";
 
 import BagPopper from "./components/BagPopper.jsx";
@@ -33,6 +34,8 @@ const Header = () => {
   const { isLoggedIn, userData } = useSelector((state) => state.loggedIn);
   const modal = useSelector((state) => state.modal);
   const favorites = useSelector((state) => state.favorites.favorites);
+  const bag = useSelector((state) => state.cart);
+  const isBagEmpty = bag.cart.length === 0;
 
   const handleOpen = () => {
     dispatch(openModal());
@@ -103,7 +106,15 @@ const Header = () => {
               <FavoriteBorderOutlined />
             </Badge>
           </IconButton>
-          <BagPopper />
+          {isBagEmpty ? (
+            <IconButton sx={{ color: "primary.main" }} href={"/cart"}>
+              <Badge badgeContent={bag.cart.length} color="error">
+                <ShoppingBagOutlined />
+              </Badge>
+            </IconButton>
+          ) : (
+            <BagPopper />
+          )}
         </IconsButtonContainer>
         {modal && <Authorization />}
       </Container>
