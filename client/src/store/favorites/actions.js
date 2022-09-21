@@ -25,6 +25,7 @@ export const addFavorite = (product) => {
   };
 };
 
+
 export const removeFavorite = (product) => {
   return async function (dispatch) {
     if (token.length !== 0 || !token) {
