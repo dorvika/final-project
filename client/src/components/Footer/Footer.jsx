@@ -28,11 +28,9 @@ const Footer = () => {
       <FooterHr />
       <Container>
         <Stack
-        // sx={{
-        //   display: "flex",
-        //   justifyContent: "space-between",
-        //   alignItems: "center",
-        // }}
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
         >
           <Link to="/" style={{ textDecoration: "none" }}>
             <Box
@@ -48,7 +46,7 @@ const Footer = () => {
                 alt="logo"
               ></img>
               <Typography fontFamily="Roboto" variant="h6" paddingLeft="10px">
-                POSTEL&#39;
+                POSTIL&#39;
               </Typography>
             </Box>
           </Link>

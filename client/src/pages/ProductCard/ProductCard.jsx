@@ -1,4 +1,4 @@
-import { Breadcrumbs, Link } from "@mui/material";
+import { Breadcrumbs, Link, Stack } from "@mui/material";
 import ProductInfo from "./ProductInfo.jsx";
 import ProductSlider from "./ProductSlider.jsx";
 import { ProductCardContainer, ProductCardMainContainer } from "./styles.js";
@@ -6,11 +6,13 @@ import { MightLike } from "../../components";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchData } from "../../utils/api.js";
+import { Preloader } from "../Categories/index.js";
 
 const ProductCard = () => {
   const { id } = useParams();
 
   const [productData, setProductData] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     itemNo,
@@ -24,13 +26,22 @@ const ProductCard = () => {
   } = productData;
 
   useEffect(() => {
-    fetchData(`products/${id}`).then((data) => setProductData(data));
+    setIsLoading(true);
+    fetchData(`products/${id}`).then((data) => {
+      setProductData(data);
+      setIsLoading(false);
+    });
   }, []);
 
   const images = imageUrls?.filter((imageUrl, index) => index < 4);
 
   return (
     <ProductCardMainContainer>
+      {isLoading && (
+        <Stack height="200px" alignItems="center" justifyContent="center">
+          <Preloader />
+        </Stack>
+      )}
       {Object.values(productData).length > 0 && (
         <>
           <Breadcrumbs
