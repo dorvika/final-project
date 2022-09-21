@@ -1,12 +1,10 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { Tabs } from "@mui/material";
-// import Tab from "@mui/material/Tab";
-// import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-// import { CustomTab } from "../Authorization/styles";
 import PersonalInformation from "./PersonalInformation/PersonalInformation.jsx";
 import { CustomCabinetTab } from "./style.js";
+import Subscriptions from "./Subscriptions.jsx";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -43,7 +41,6 @@ const CabinetMenu = () => {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    // console.log(event.target);
   };
 
   return (
@@ -80,7 +77,7 @@ const CabinetMenu = () => {
         My orders
       </TabPanel>
       <TabPanel value={value} index={3}>
-        My subscription
+        <Subscriptions />
       </TabPanel>
     </Box>
   );

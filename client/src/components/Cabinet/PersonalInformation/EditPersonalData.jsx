@@ -47,7 +47,6 @@ const EditPersonalData = () => {
           status: error.response.status,
           data: error.response.data,
         });
-        console.log(error);
       })
       .finally(() => {
         actions.setSubmitting(false);
@@ -62,8 +61,6 @@ const EditPersonalData = () => {
   const handleClickOpen = () => {
     setOpen(true);
   };
-
-  console.log(responseData);
 
   return (
     <>
