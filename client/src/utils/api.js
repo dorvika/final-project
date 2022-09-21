@@ -24,8 +24,8 @@ export const postData = async (endpoint, obj) => {
   const response = await API.post(endpoint, obj);
   return response;
 };
-export const putData = async (endpoint) => {
-  const response = await API.put(endpoint);
+export const putData = async (endpoint, obj) => {
+  const response = await API.put(endpoint, obj);
   return response;
 };
 
