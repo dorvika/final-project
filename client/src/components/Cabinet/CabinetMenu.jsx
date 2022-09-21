@@ -7,9 +7,6 @@ import Box from "@mui/material/Box";
 // import { CustomTab } from "../Authorization/styles";
 import PersonalInformation from "./PersonalInformation/PersonalInformation.jsx";
 import { CustomCabinetTab } from "./style.js";
-// import MyBasket from "./MyBasket.jsx";
-
-// import TabPanel from "@mui/lab/TabPanel";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
