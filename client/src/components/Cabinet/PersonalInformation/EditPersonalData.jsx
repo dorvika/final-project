@@ -10,8 +10,9 @@ import {
 } from "@mui/material";
 import { Form, Formik } from "formik";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Preloader } from "../../../pages/Categories";
+import { updateData } from "../../../store/isLogged/actions";
 import { putData } from "../../../utils/api";
 import { validationEditPersonalData } from "../../../utils/ValidationSchema";
 import { PhoneNumberFormat } from "../style";
@@ -19,6 +20,7 @@ import { PhoneNumberFormat } from "../style";
 const EditPersonalData = () => {
   const { userData } = useSelector((state) => state.loggedIn);
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
   const [responseData, setResponseData] = useState({
     status: "",
     data: "",
@@ -38,6 +40,7 @@ const EditPersonalData = () => {
     putData("/customers", updatedCustomer)
       .then((response) => {
         setResponseData({ status: response.status, data: response.data });
+        dispatch(updateData(response.data));
         setTimeout(() => {
           handleClose();
         }, 3000);
@@ -267,5 +270,5 @@ const EditPersonalData = () => {
       </Dialog>
     </>
   );
-};
+};;;
 export default EditPersonalData;

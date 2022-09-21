@@ -26,7 +26,12 @@ const reducer = (state = initialState.loggedIn, action) => {
         userData: action.payload,
       };
     }
-
+    case "UPDATE_USER_DATA": {
+      return {
+        isLoggedIn: true,
+        userData: action.payload.data,
+      };
+    }
     case "LOGGED_OUT": {
       return {
         isLoggedIn: false,
