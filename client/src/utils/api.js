@@ -88,6 +88,15 @@ export const syncLS = function (store) {
         );
         return result;
       }
+      if (action.type === "SET_SEARCHED_PRODUCTS") {
+        store.getState();
+        const result = next(action);
+        localStorage.setItem(
+          "search",
+          JSON.stringify(store.getState().filters.searchedProducts)
+        );
+        return result;
+      }
       return next(action);
     };
   };

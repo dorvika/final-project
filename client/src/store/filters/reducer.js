@@ -1,7 +1,9 @@
+import { getDataLS } from "../../utils/api";
+
 const initialState = {
   filteredProducts: [],
   filteredProductsQty: 0,
-  searchedProducts: [],
+  searchedProducts: getDataLS("search"),
 };
 
 const reducer = (state = initialState, action) => {
