@@ -20,7 +20,7 @@ import {
 } from "@mui/icons-material";
 
 import BagPopper from "./components/BagPopper.jsx";
-// import SearchBar from "./components/SearchBar.jsx";
+import SearchBar from "./components/SearchBar.jsx";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -60,7 +60,7 @@ const Header = () => {
             <Typography variant="body">Blog</Typography>
           </Link>
         </HeaderLinks>
-        {/* <SearchBar /> */}
+        <SearchBar />
         <IconsButtonContainer
           sx={{
             display: "flex",
