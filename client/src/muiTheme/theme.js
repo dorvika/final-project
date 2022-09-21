@@ -31,12 +31,6 @@ const theme = createTheme({
     fontWeightExtraLight: 200,
     fontWeightMedium: 600,
     button: {
-      //   fontWeight: 400,
-      // fontFamily: "Abel",
-      // paddingLeft: "40px",
-      // paddingRight: "40px",
-      // paddingBottom: "15px",
-      // paddingTop: "15px",
       color: "#FFFFFF",
       backgroundColor: "#373F41",
     },

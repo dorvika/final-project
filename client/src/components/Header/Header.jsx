@@ -5,26 +5,33 @@ import { Link } from "react-router-dom";
 import {
   Typography,
   Container,
+  Box,
+  InputAdornment,
   IconButton,
   Divider,
   Badge,
+  Tooltip,
 } from "@mui/material";
-import { HeaderLinks, IconsButtonContainer } from "./components/styles";
+import {
+  HeaderInput,
+  HeaderLinks,
+  IconsButtonContainer,
+} from "./components/styles";
 import Catalog from "./components/catalogButton.jsx";
 import Logo from "./components/logoSvg";
 import {
   FavoriteBorderOutlined,
   PersonOutlined,
+  Search,
   ShoppingBagOutlined,
 } from "@mui/icons-material";
 
 import BagPopper from "./components/BagPopper.jsx";
-import LoginPopper from "./components/LoginPopper.jsx";
 import SearchBar from "./components/SearchBar.jsx";
 
 const Header = () => {
   const dispatch = useDispatch();
-  const { isLoggedIn } = useSelector((state) => state.loggedIn);
+  const { isLoggedIn, userData } = useSelector((state) => state.loggedIn);
   const modal = useSelector((state) => state.modal);
   const favorites = useSelector((state) => state.favorites.favorites);
   const bag = useSelector((state) => state.cart);
@@ -59,6 +66,18 @@ const Header = () => {
             <Typography variant="body">Blog</Typography>
           </Link>
         </HeaderLinks>
+        <Box>
+          <HeaderInput
+            endAdornment={
+              <InputAdornment position={"start"}>
+                <Search></Search>
+              </InputAdornment>
+            }
+            id="standard-basic"
+            placeholder="Search"
+            variant="standard"
+          />
+        </Box>
         <SearchBar />
         <IconsButtonContainer
           sx={{
@@ -69,7 +88,13 @@ const Header = () => {
           }}
         >
           {isLoggedIn ? (
-            <LoginPopper />
+            <>
+              <IconButton href="/cabinet">
+                <Tooltip title={userData.firstName + " " + userData.lastName}>
+                  <PersonOutlined sx={{ color: "primary.main" }} />
+                </Tooltip>
+              </IconButton>
+            </>
           ) : (
             <IconButton onClick={handleOpen}>
               <PersonOutlined sx={{ color: "primary.main" }} />
