@@ -13,6 +13,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoggedOut } from "../../../store/isLogged/actions";
 import { removeAllFromCart } from "../../../store/cart/actions";
+import { removeAllFromWishlist } from "../../../store/favorites/actions"
 const LoginPopper = () => {
   const dispatch = useDispatch();
   const { userData } = useSelector((state) => state.loggedIn);
@@ -30,6 +31,7 @@ const LoginPopper = () => {
   const handleLogOut = () => {
     dispatch(setLoggedOut());
     dispatch(removeAllFromCart())
+    dispatch(removeAllFromWishlist())
   };
 
   const handleClickAway = () => {

@@ -6,6 +6,7 @@ import { fetchLoggedInUserData } from "./store/isLogged/actions";
 import { getDataLS } from "./utils/api";
 import { isTokenExpired } from "./utils/helpers";
 import { customerCart } from "./store/cart/actions";
+import {customerWishlist} from "./store/favorites/actions"
 
 function App() {
   
@@ -15,12 +16,10 @@ function App() {
   useEffect(() => {
     if (token.length !== 0) {
       !isTokenExpired(token) && dispatch(fetchLoggedInUserData());
+      !isTokenExpired(token) && dispatch(customerCart());
+      !isTokenExpired(token) && dispatch(customerWishlist());
     }
-  }, []);
-
-  useEffect(() => {
-    if (token.length !== 0) dispatch(customerCart());
-  }, [dispatch, token.length]);
+  }, [dispatch, token]);
   return (
     <>
       <Header />
