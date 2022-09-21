@@ -198,12 +198,12 @@ const FavoritesProductCard = ({ product }) => {
                       <Close />
                     </IconButton>
                     <Button
-                      textAlign="center"
                       onClick={isInBasket ? removeFromBasket : addToBasket}
                       variant={isInBasket ? "outlined" : "contained"}
                       disabled={isInBasket ? true : false}
                       sx={(theme) => ({
                         padding: "10px 30px",
+                        textAlign: "center",
                         [theme.breakpoints.up("sm")]: { display: "none" },
                       })}
                     >
