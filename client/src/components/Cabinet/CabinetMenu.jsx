@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import PersonalInformation from "./PersonalInformation/PersonalInformation.jsx";
 import { CustomCabinetTab } from "./style.js";
 import Subscriptions from "./Subscriptions.jsx";
+import MyOrders from "./Orders/MyOrders.jsx";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -74,7 +75,7 @@ const CabinetMenu = () => {
         Favorites
       </TabPanel>
       <TabPanel value={value} index={2}>
-        My orders
+        <MyOrders />
       </TabPanel>
       <TabPanel value={value} index={3}>
         <Subscriptions />

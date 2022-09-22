@@ -33,7 +33,7 @@ const Header = () => {
   const handleOpen = () => {
     dispatch(openModal());
   };
-  console.log(isLoggedIn);
+
   return (
     <header>
       <Container

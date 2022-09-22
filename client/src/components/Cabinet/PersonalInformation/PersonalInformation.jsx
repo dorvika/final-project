@@ -115,10 +115,7 @@ const PersonalInformation = () => {
         <Divider sx={{ mt: "35px" }} />
       </Box>
       <Stack direction="column" alignItems="center">
-        {/* <Divider /> */}
         <EditPersonalData />
-
-        {/* <Divider /> */}
       </Stack>
       <ChangePassword />
     </>
