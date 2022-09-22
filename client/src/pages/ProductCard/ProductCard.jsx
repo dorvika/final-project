@@ -31,7 +31,7 @@ const ProductCard = () => {
       setProductData(data);
       setIsLoading(false);
     });
-  }, []);
+  }, [id]);
 
   const images = imageUrls?.filter((imageUrl, index) => index < 4);
 
