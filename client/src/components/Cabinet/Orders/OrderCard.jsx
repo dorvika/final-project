@@ -20,6 +20,10 @@ const OrderCard = ({ order }) => {
     setExpanded(isExpanded ? panel : false);
   };
 
+  const date = new Date(order.date);
+  const purchaseDate = date.toLocaleDateString();
+  console.log(order);
+
   return (
     <>
       <Accordion
@@ -38,6 +42,7 @@ const OrderCard = ({ order }) => {
               borderColor: "primary.main",
               borderWidth: "3px",
               borderRadius: "5px",
+              backgroundColor: "primary.main",
             }}
           />
 
@@ -45,7 +50,7 @@ const OrderCard = ({ order }) => {
             variant="subtitle2"
             sx={{ ml: "15px", width: "33%", flexShrink: 0 }}
           >
-            №{order.orderNo} from {order.date}
+            № {order.orderNo} from {purchaseDate}
           </Typography>
           {expanded !== "panel1" && (
             <>

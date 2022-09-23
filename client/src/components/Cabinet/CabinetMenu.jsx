@@ -6,6 +6,7 @@ import PersonalInformation from "./PersonalInformation/PersonalInformation.jsx";
 import { CustomCabinetTab } from "./style.js";
 import Subscriptions from "./Subscriptions.jsx";
 import MyOrders from "./Orders/MyOrders.jsx";
+import WishList from "./Wishlist/Wishlist.jsx";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -72,7 +73,7 @@ const CabinetMenu = () => {
         <PersonalInformation />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Favorites
+        <WishList />
       </TabPanel>
       <TabPanel value={value} index={2}>
         <MyOrders />
