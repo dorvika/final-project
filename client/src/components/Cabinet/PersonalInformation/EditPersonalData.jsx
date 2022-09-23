@@ -10,16 +10,17 @@ import {
 } from "@mui/material";
 import { Form, Formik } from "formik";
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { Preloader } from "../../../pages/Categories";
+import { updateData } from "../../../store/isLogged/actions";
 import { putData } from "../../../utils/api";
 import { validationEditPersonalData } from "../../../utils/ValidationSchema";
+import { PhoneNumberFormat } from "../style";
 
 const EditPersonalData = () => {
   const { userData } = useSelector((state) => state.loggedIn);
-  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
   const [responseData, setResponseData] = useState({
     status: "",
     data: "",
@@ -39,19 +40,25 @@ const EditPersonalData = () => {
     putData("/customers", updatedCustomer)
       .then((response) => {
         setResponseData({ status: response.status, data: response.data });
+        dispatch(updateData(response.data));
         setTimeout(() => {
           handleClose();
-          navigate("/cabinet");
         }, 3000);
       })
       .catch((error) => {
-        setResponseData({ status: error.status, data: error.data });
+        setResponseData({
+          status: error.response.status,
+          data: error.response.data,
+        });
       })
-      .finally(() => actions.setSubmitting(false));
+      .finally(() => {
+        actions.setSubmitting(false);
+      });
   };
 
   const handleClose = () => {
     setOpen(false);
+    setResponseData({ status: "", data: "" });
   };
 
   const handleClickOpen = () => {
@@ -182,6 +189,9 @@ const EditPersonalData = () => {
                     value={props.values.phone}
                     onChange={props.handleChange}
                     onBlur={props.handleBlur}
+                    InputProps={{
+                      inputComponent: PhoneNumberFormat,
+                    }}
                     error={props.touched.phone && Boolean(props.errors.phone)}
                     helperText={props.touched.phone && props.errors.phone}
                   />
@@ -217,6 +227,20 @@ const EditPersonalData = () => {
                     You personal data has been updated
                   </Typography>
                 )}
+                {!props.isSubmitting && responseData.status === 400 && (
+                  <Typography
+                    variant="subtitle2"
+                    sx={{
+                      color: "error.main",
+                      mb: "10px",
+                      mt: "40px",
+                      textAlign: "center",
+                      fontWeight: 700,
+                    }}
+                  >
+                    {responseData.data.telephone}
+                  </Typography>
+                )}
 
                 <Stack
                   sx={{ mt: "40px", mb: "20px" }}
@@ -246,5 +270,5 @@ const EditPersonalData = () => {
       </Dialog>
     </>
   );
-};
+};;;
 export default EditPersonalData;

@@ -24,6 +24,12 @@ export const loadedData = (userData) => {
     payload: { data: userData },
   };
 };
+export const updateData = (userData) => {
+  return {
+    type: "UPDATE_USER_DATA",
+    payload: { data: userData },
+  };
+};
 
 export const setLoggedOut = () => {
   return {

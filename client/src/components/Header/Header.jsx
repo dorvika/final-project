@@ -33,6 +33,7 @@ const Header = () => {
   const handleOpen = () => {
     dispatch(openModal());
   };
+
   return (
     <header>
       <Container
