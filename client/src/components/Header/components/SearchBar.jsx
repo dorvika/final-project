@@ -54,6 +54,7 @@ const SearchBar = () => {
         image={imageUrls[0]}
         price={currentPrice}
         size={size}
+        handleClose={handleClose}
       />
     ));
 
