@@ -200,7 +200,7 @@ const FavoritesProductCard = ({ product }) => {
                     <Button
                       onClick={isInBasket ? removeFromBasket : addToBasket}
                       variant={isInBasket ? "outlined" : "contained"}
-                      disabled={isInBasket ? true : false}
+                      // disabled={isInBasket ? true : false}
                       sx={(theme) => ({
                         padding: "10px 30px",
                         textAlign: "center",
@@ -230,7 +230,7 @@ const FavoritesProductCard = ({ product }) => {
           <Button
             onClick={isInBasket ? removeFromBasket : addToBasket}
             variant={isInBasket ? "outlined" : "contained"}
-            disabled={isInBasket ? true : false}
+            // disabled={isInBasket ? true : false}
             sx={{ padding: "10px 30px" }}
           >
             {isInBasket ? "remove from bag" : "add to bag"}
