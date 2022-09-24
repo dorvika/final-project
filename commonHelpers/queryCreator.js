@@ -1,7 +1,7 @@
 const FormValidator = require("../validation/FormValidator");
 const isJSON = require("./isJSON");
 
-const excludedParams = ["letterSubject", "letterHtml"];
+const excludedParams = ["letterSubject"];
 
 module.exports = function queryCreator(data) {
   return Object.keys(data).reduce((queryObject, param) => {

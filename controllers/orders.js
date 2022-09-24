@@ -7,9 +7,16 @@ const queryCreator = require("../commonHelpers/queryCreator");
 const productAvailibilityChecker = require("../commonHelpers/productAvailibilityChecker");
 const subtractProductsFromCart = require("../commonHelpers/subtractProductsFromCart");
 const _ = require("lodash");
+const handlebars = require("handlebars");
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
+const insecureHandlebars = allowInsecurePrototypeAccess(handlebars);
+const { promisify } = require("util");
+const fs = require("fs")
+
 
 const uniqueRandom = require("unique-random");
 const rand = uniqueRandom(1000000, 9999999);
+const readFile = promisify(fs.readFile);
 
 exports.placeOrder = async (req, res, next) => {
   try {
@@ -65,8 +72,15 @@ exports.placeOrder = async (req, res, next) => {
     } else {
       const subscriberMail = req.body.email;
       const letterSubject = req.body.letterSubject;
-      const letterHtml = req.body.letterHtml;
-
+      // const letterHtml = req.body.letterHtml;
+      let html = await readFile("./mailTemplates/placeOrder.html", "utf-8");
+      let template = insecureHandlebars.compile(html);
+      let data = {
+        orderNo: order.orderNo,
+        products: order.products,
+        totalSum: order.totalSum,
+      }
+      const letterHtml = template(data)
       const { errors, isValid } = validateOrderForm(req.body);
 
       // Check Validation
