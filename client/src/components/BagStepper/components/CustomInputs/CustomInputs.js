@@ -73,7 +73,7 @@ export const NumberFormatCustom = React.forwardRef(function NumberFormatCustom(
       case "cvv":
         return "###";
       case "phone":
-        return "+##(###)###-##-##";
+        return "+38(###) ###-##-##";
       default:
         "";
     }

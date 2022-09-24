@@ -1,10 +1,8 @@
-// import { CartProductCard, CustomHr } from "./index";
-
 import { Container, Button, Typography, Stack, Box } from "@mui/material";
 import { Link } from "react-router-dom";
-// import products from "./ProductsExamples.jsx";
 
-const EmptyFavorites = () => {
+const EmptyFavorites = ({ primaryText, secondaryText }) => {
+  // const { primaryText, secondaryText } = this.props;
   return (
     <>
       <Container>
@@ -12,31 +10,36 @@ const EmptyFavorites = () => {
           <Typography
             variant="h2"
             sx={(theme) => ({
+              textTransform: "uppercase",
               [theme.breakpoints.up("sm")]: {
                 lineHeight: "45px",
                 m: "0 auto",
                 pt: "100px",
               },
               [theme.breakpoints.down("sm")]: {
-                lineHeight: "45px",
+                lineHeight: "22px",
                 m: "0 auto",
-                pt: "50px",
-                fontSize: "24px",
+                pt: "25px",
+                fontSize: "20px",
               },
             })}
           >
-            YOUR FAVORITES IS FEELING LONELY - ADD
+            {primaryText}
           </Typography>
           {/* <Box sx={{}}> */}
           <Typography
             variant="h2"
             sx={(theme) => ({
+              textTransform: "uppercase",
               lineHeight: "45px",
               m: "0 auto",
-              [theme.breakpoints.down("sm")]: { fontSize: "24px" },
+              [theme.breakpoints.down("sm")]: {
+                fontSize: "20px",
+                lineHeight: "22px",
+              },
             })}
           >
-            SOME BEAUTIFUL NEW TO IT!
+            {secondaryText}
           </Typography>
         </Stack>
 

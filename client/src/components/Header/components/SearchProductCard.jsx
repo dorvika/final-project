@@ -1,7 +1,8 @@
-import { Box, Link, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 
 
-const SearchProductCard = ({ name, image, price, id, size }) => {
+const SearchProductCard = ({ name, image, price, id, size, handleClose }) => {
   return (
     <Box
       sx={{
@@ -10,7 +11,11 @@ const SearchProductCard = ({ name, image, price, id, size }) => {
         width: "370px",
       }}
     >
-      <Link href={`/catalog/${id}`} sx={{ textDecoration: "none" }}>
+      <Link
+        to={`/catalog/${id}`}
+        style={{ textDecoration: "none" }}
+        onClick={handleClose}
+      >
         <Stack direction="row" gap={5} alignItems="center">
           <img src={image} alt={name} height="150" />
           <Stack alignItems="center" flexGrow={1} gap={5}>

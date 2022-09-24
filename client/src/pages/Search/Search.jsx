@@ -1,7 +1,8 @@
-import { Box, Container, Link, Stack, Typography } from "@mui/material";
+import { Box, Container, Stack, Typography } from "@mui/material";
 import Masonry from "@mui/lab/Masonry";
 import { useSelector } from "react-redux";
 import { CustomSearchTypography } from "./styles";
+import { Link } from "react-router-dom";
 
 const Search = () => {
   const { searchedProducts } = useSelector((state) => state.filters);
@@ -13,7 +14,7 @@ const Search = () => {
         boxShadow: "0px 1px 1px rgba(0, 0, 0, 0.25)",
       }}
     >
-      <Link href={`/catalog/${item.itemNo}`}>
+      <Link to={`/catalog/${item.itemNo}`}>
         <CustomSearchTypography variant="h2">
           <div>{item.name}</div>
           <div style={{ fontSize: "32px" }}>${item.currentPrice}</div>

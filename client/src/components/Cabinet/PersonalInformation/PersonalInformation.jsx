@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { Preloader } from "../../../pages/Categories";
 import { removeAllFromCart } from "../../../store/cart/actions";
 import { setLoggedOut } from "../../../store/isLogged/actions";
 import { removeAllFromWishlist } from "../../../store/favorites/actions";
@@ -40,6 +41,7 @@ const PersonalInformation = () => {
       </Typography>
 
       <Divider />
+      {userData.keys === 0 && <Preloader />}
       <Stack
         direction="row"
         justifyContent="space-between"
@@ -117,10 +119,7 @@ const PersonalInformation = () => {
         <Divider sx={{ mt: "35px" }} />
       </Box>
       <Stack direction="column" alignItems="center">
-        {/* <Divider /> */}
         <EditPersonalData />
-
-        {/* <Divider /> */}
       </Stack>
       <ChangePassword />
     </>
