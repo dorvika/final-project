@@ -1,6 +1,3 @@
-// import { Typography } from "@mui/material";
-// import { Fragment } from "react";
-
 import { useEffect, useState } from "react";
 import { Preloader } from "../../../pages/Categories";
 import { fetchData } from "../../../utils/api";
