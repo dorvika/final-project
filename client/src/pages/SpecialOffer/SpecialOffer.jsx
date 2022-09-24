@@ -1,6 +1,6 @@
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link as LinkRouter } from "react-router-dom";
 import { fetchData } from "../../utils/api";
 
 const SpecialOffer = () => {
@@ -54,7 +54,7 @@ const SpecialOffer = () => {
             : "Postil' Bedding it's always the best quality with the best price. To go the catalog and you'll see"}
           .
         </Typography>
-        <Button variant="contained" href="/catalog?perPage=9&startPage=1">
+        <Button LinkComponent={LinkRouter} variant="contained" to="/catalog?perPage=9&startPage=1">
           Go to Shopping
         </Button>
       </Stack>

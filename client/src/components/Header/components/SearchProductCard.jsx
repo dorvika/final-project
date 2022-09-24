@@ -1,5 +1,6 @@
 import { Box, Link, Stack, Typography } from "@mui/material";
 
+
 const SearchProductCard = ({ name, image, price, id, size }) => {
   return (
     <Box

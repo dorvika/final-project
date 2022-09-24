@@ -8,6 +8,7 @@ import {
   Link,
   useMediaQuery,
 } from "@mui/material";
+import { Link as LinkRouter } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchData } from "../../../utils/api";
 import {
@@ -56,8 +57,8 @@ const Popular = () => {
             key={category.id}
             xs={matches ? 12 : index === 0 || index === 3 ? 8 : 4}
           >
-            <Link
-              href={`/catalog?categories=${category.name}&perPage=9&startPage=1`}
+            <Link component={LinkRouter}
+              to={`/catalog?categories=${category.name}&perPage=9&startPage=1`}
             >
               <Card sx={{ maxWidth: "100%" }}>
                 <CardMedia

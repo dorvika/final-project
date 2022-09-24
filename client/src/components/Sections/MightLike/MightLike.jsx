@@ -1,4 +1,5 @@
 import { CardContent, CardMedia, Link, Stack } from "@mui/material";
+import { Link as LinkRouter } from "react-router-dom";
 import { debounce } from "lodash";
 import { useEffect, useState, useMemo } from "react";
 import { Preloader } from "../../../pages/Categories";
@@ -73,7 +74,7 @@ const MightLike = ({ sectionTitle, category, id }) => {
             <>
               {productsToShow.map(
                 ({ name, imageUrls, currentPrice, itemNo }) => (
-                  <Link href={`/catalog/${itemNo}`} key={itemNo}>
+                  <Link component={LinkRouter} to={`/catalog/${itemNo}`} key={itemNo}>
                     <CustomItem component="div">
                       <CardMedia
                         component="img"
