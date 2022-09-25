@@ -3,8 +3,14 @@ import {
   AccordionDetails,
   AccordionSummary,
   Box,
+  Button,
   Card,
   CardMedia,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   Divider,
   Stack,
   Typography,
@@ -12,9 +18,15 @@ import {
 import { ExpandMore } from "@mui/icons-material";
 import { useState } from "react";
 import theme from "../../../muiTheme/theme";
+import { putData } from "../../../utils/api";
+import { Preloader } from "../../../pages/Categories";
 
 const OrderCard = ({ order }) => {
   const [expanded, setExpanded] = useState(false);
+  const [open, setOpen] = useState(false);
+  const isCancelled = order.canceled === true;
+  const [cancelData, setCancelData] = useState({ status: "", data: "" });
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -22,7 +34,32 @@ const OrderCard = ({ order }) => {
 
   const date = new Date(order.date);
   const purchaseDate = date.toLocaleDateString();
-  console.log(order);
+
+  const handleCancel = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setCancelData({ status: "", data: "" });
+  };
+
+  const handleConfirm = () => {
+    setIsLoading(true);
+    putData(`/orders/cancel/${order._id}`, {
+      email: `${order.email}`,
+      letterSubject: "Order Cancelation",
+      letterHtml: `<p>Your order № ${order.orderNo} has been cancelled</p>`,
+    })
+      .then((order) => {
+        setCancelData({ status: order.status, data: order.data });
+        setIsLoading(false);
+        setTimeout(handleClose, 3000);
+      })
+      .catch((error) => {
+        setCancelData({ status: error.status, data: error.data });
+      });
+  };
 
   return (
     <>
@@ -39,19 +76,20 @@ const OrderCard = ({ order }) => {
             orientation="vertical"
             flexItem
             sx={{
-              borderColor: "primary.main",
+              borderColor: !isCancelled ? "primary.main" : "#DADADA",
               borderWidth: "3px",
               borderRadius: "5px",
-              backgroundColor: "primary.main",
+              backgroundColor: !isCancelled ? "primary.main" : "#DADADA",
             }}
           />
-
-          <Typography
-            variant="subtitle2"
-            sx={{ ml: "15px", width: "33%", flexShrink: 0 }}
-          >
-            № {order.orderNo} from {purchaseDate}
-          </Typography>
+          <Box sx={{ ml: "15px", width: "33%", flexShrink: 0 }}>
+            <Typography variant="subtitle2">
+              № {order.orderNo} from {purchaseDate}
+            </Typography>
+            <Typography variant="body" textTransform="capitalize">
+              {isCancelled ? "cancelled" : order.status}
+            </Typography>
+          </Box>
           {expanded !== "panel1" && (
             <>
               <Box sx={{ width: "33%" }}>
@@ -233,6 +271,7 @@ const OrderCard = ({ order }) => {
                   {order.shipping}
                 </Typography>
               </Stack>
+
               <Stack
                 direction="row"
                 justifyContent="space-between"
@@ -251,10 +290,81 @@ const OrderCard = ({ order }) => {
                   ${order.totalSum}
                 </Typography>
               </Stack>
+              <Stack
+                direction="column"
+                justifyContent="center"
+                alignItems="center"
+                sx={{ mt: "20px" }}
+              >
+                {!isCancelled && order.status === "confirmed" && (
+                  <Button
+                    onClick={handleCancel}
+                    variant="contained"
+                    sx={{ p: "5px 30px" }}
+                  >
+                    Cancel
+                  </Button>
+                )}
+              </Stack>
             </Box>
           </Stack>
         </AccordionDetails>
       </Accordion>
+      <Dialog
+        open={open}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle>
+          {/* <Typography variant="h2">Order Cancelation</Typography> */}
+          Order Cancelation
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            <Typography variant="body">
+              Are you sure you want to cancel the order {order.orderNo}?
+            </Typography>
+          </DialogContentText>
+
+          {isLoading && (
+            <Box sx={{ mt: "15px" }}>
+              <Preloader />
+            </Box>
+          )}
+          <Box sx={{ mt: "10px", textAlign: "center" }}>
+            {cancelData.status === 200 && (
+              <Typography variant="body">
+                Your order has been cancelled
+              </Typography>
+            )}
+            {cancelData.status === 400 && (
+              <Typography variant="body">
+                Opps, something went wrong, try again
+              </Typography>
+            )}
+          </Box>
+        </DialogContent>
+        <DialogActions
+          sx={{ m: "10px 0", display: "flex", justifyContent: "space-around" }}
+        >
+          <Button
+            variant="contained"
+            disabled={isLoading ? true : false}
+            sx={{ p: "5px 30px" }}
+            onClick={handleConfirm}
+          >
+            Confirm
+          </Button>
+          <Button
+            variant="outlined"
+            sx={{ p: "5px 30px", lineHeight: "32px" }}
+            onClick={handleClose}
+          >
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };

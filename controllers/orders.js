@@ -260,7 +260,7 @@ exports.cancelOrder = (req, res, next) => {
         { new: true }
       )
         .populate("customerId")
-        .then(async order => {
+        .then(async (order) => {
           const mailResult = await sendMail(
             subscriberMail,
             letterSubject,
@@ -270,9 +270,9 @@ exports.cancelOrder = (req, res, next) => {
 
           res.json({ order, mailResult });
         })
-        .catch(err =>
+        .catch((err) =>
           res.status(400).json({
-            message: `Error happened on server: "${err}" `
+            message: `Error happened on server: "${err}" `,
           })
         );
     }
