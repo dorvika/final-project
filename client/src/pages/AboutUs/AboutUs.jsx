@@ -1,9 +1,35 @@
 import { DoneSharp } from "@mui/icons-material";
-import { Box, Container, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Breadcrumbs,
+  Container,
+  Link,
+  Stack,
+  Typography,
+} from "@mui/material";
+import { Link as LinkRouter } from "react-router-dom";
 
 const AboutUs = () => {
   return (
-    <Container sx={{ pt: "20px", pb: "40px" }}>
+    <Container sx={{ pb: "40px" }}>
+      <Breadcrumbs
+        sx={(theme) => ({
+          mb: "30px",
+          [theme.breakpoints.down("sm")]: { mb: "15px", fontSize: "16px" },
+        })}
+      >
+        <Link component={LinkRouter} underline="hover" color="inherit" to="/">
+          Home
+        </Link>
+        <Link
+          component={LinkRouter}
+          underline="hover"
+          color="inherit"
+          to="/aboutus"
+        >
+          About Us
+        </Link>
+      </Breadcrumbs>
       <Stack direction={{ xs: "column-reverse", md: "row" }} gap={10}>
         <Box sx={{ width: { sm: "100%", md: "50%" } }}>
           <Typography variant="h2" textAlign="center" sx={{ pb: "10px" }}>

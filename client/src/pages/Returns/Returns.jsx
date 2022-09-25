@@ -1,4 +1,5 @@
-import { Container, Stack, Typography } from "@mui/material";
+import { Breadcrumbs, Container, Link, Stack, Typography } from "@mui/material";
+import { Link as LinkRouter } from "react-router-dom";
 import { data } from "./data";
 import { CustomReturnsBox, CustomReturnsButton } from "./styles";
 
@@ -19,6 +20,26 @@ const Returns = () => {
 
   return (
     <>
+      <Container>
+        <Breadcrumbs
+          sx={(theme) => ({
+            mb: "30px",
+            [theme.breakpoints.down("sm")]: { mb: "15px", fontSize: "16px" },
+          })}
+        >
+          <Link component={LinkRouter} underline="hover" color="inherit" to="/">
+            Home
+          </Link>
+          <Link
+            component={LinkRouter}
+            underline="hover"
+            color="inherit"
+            to="/returns"
+          >
+            Returns
+          </Link>
+        </Breadcrumbs>
+      </Container>
       <CustomReturnsBox>
         <Typography color="white" mb="20px">
           365 DAY GUARANTEE
