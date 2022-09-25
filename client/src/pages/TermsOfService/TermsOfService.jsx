@@ -37,11 +37,11 @@ const TermsOfService = () => {
           </Link>
         </Breadcrumbs>
         <Stack
-          direction="row"
+          direction={{ sm: "column", md: "row" }}
           justifyContent="space-between"
           sx={{ mb: "80px" }}
         >
-          <Box sx={{ mt: "15px" }}>
+          <Box sx={{ mt: "15px", width: { sm: "100%", md: "30%", lg: "20%" } }}>
             <Typography
               variant="h5"
               sx={{
@@ -71,7 +71,7 @@ const TermsOfService = () => {
               })}
             </List>
           </Box>
-          <Box sx={{ ml: "98px", maxWidth: "850px" }}>
+          <Box sx={{ width: { sm: "100%", md: "70%", lg: "80%" } }}>
             {listOfTerms.map((termItem) => {
               return (
                 <Fragment key={termItem.id}>
