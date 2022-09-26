@@ -82,7 +82,20 @@ const OrderCard = ({ order }) => {
               backgroundColor: !isCancelled ? "primary.main" : "#DADADA",
             }}
           />
-          <Box sx={{ ml: "15px", width: "33%", flexShrink: 0 }}>
+          <Box
+            sx={(theme) => ({
+              [theme.breakpoints.up("md")]: {
+                ml: "15px",
+                width: "33%",
+                flexShrink: 0,
+              },
+              [theme.breakpoints.down("md")]: {
+                ml: "5px",
+                width: "33%",
+                flexShrink: 0,
+              },
+            })}
+          >
             <Typography variant="subtitle2">
               № {order.orderNo} from {purchaseDate}
             </Typography>
@@ -92,14 +105,38 @@ const OrderCard = ({ order }) => {
           </Box>
           {expanded !== "panel1" && (
             <>
-              <Box sx={{ width: "33%" }}>
+              <Box
+                sx={(theme) => ({
+                  [theme.breakpoints.up("md")]: {
+                    ml: "15px",
+                    width: "33%",
+                    flexShrink: 0,
+                  },
+                  [theme.breakpoints.down("md")]: {
+                    ml: "5px",
+                    width: "33%",
+                    flexShrink: 0,
+                  },
+                })}
+              >
                 <Typography variant="subtitle2">Amount of order</Typography>
                 <Typography variant="body">${order.totalSum}</Typography>
               </Box>
               <Stack
                 direction="row"
                 justifyContent="flex-end"
-                sx={{ width: "33%" }}
+                sx={(theme) => ({
+                  [theme.breakpoints.up("md")]: {
+                    ml: "15px",
+                    width: "33%",
+                    flexShrink: 0,
+                  },
+                  [theme.breakpoints.down("md")]: {
+                    ml: "5px",
+                    width: "33%",
+                    flexShrink: 0,
+                  },
+                })}
               >
                 {order.products.map((product) => {
                   return (
@@ -124,8 +161,18 @@ const OrderCard = ({ order }) => {
           )}
         </AccordionSummary>
         <AccordionDetails>
-          <Stack direction="row" sx={{ ml: "24px" }}>
-            <Box sx={{ mr: "50px" }}>
+          <Stack
+            direction="row"
+            sx={(theme) => ({
+              [theme.breakpoints.up("md")]: { ml: "24px" },
+            })}
+          >
+            <Box
+              sx={(theme) => ({
+                [theme.breakpoints.up("md")]: { mr: "50px" },
+                [theme.breakpoints.down("md")]: { mr: "20px" },
+              })}
+            >
               <Typography
                 variant="subtitle2"
                 sx={{ mb: "20px", fontSize: "16px" }}
@@ -181,17 +228,28 @@ const OrderCard = ({ order }) => {
                 return (
                   <Card
                     key={product.product.itemNo}
-                    sx={{ display: "flex", alignItems: "center", mb: "20px" }}
+                    sx={(theme) => ({
+                      [theme.breakpoints.up("md")]: {
+                        display: "flex",
+                        alignItems: "center",
+                        mb: "20px",
+                      },
+                      [theme.breakpoints.down("md")]: {
+                        display: "flex",
+                        alignItems: "center",
+                        mb: "20px",
+                      },
+                    })}
                   >
                     <CardMedia
                       component="img"
                       height="56px"
                       sx={{
                         width: "56px",
-                        [theme.breakpoints.down("sm")]: {
+                        [theme.breakpoints.down("md")]: {
                           mr: "5px",
                         },
-                        [theme.breakpoints.up("sm")]: {
+                        [theme.breakpoints.up("md")]: {
                           mr: "15px",
                         },
                       }}
@@ -200,16 +258,27 @@ const OrderCard = ({ order }) => {
                     <Typography
                       component="p"
                       variant="body"
-                      sx={{
-                        fontSize: "14px",
-                        m: "0 20px",
-                        textTransform: "capitalize",
-                        width: "60%",
-                      }}
+                      sx={(theme) => ({
+                        [theme.breakpoints.up("md")]: {
+                          fontSize: "14px",
+                          m: "0 20px",
+                          textTransform: "capitalize",
+                          width: "60%",
+                        },
+                        [theme.breakpoints.down("md")]: {
+                          m: "0 10px",
+                          textTransform: "capitalize",
+                          width: "60%",
+                        },
+                      })}
                     >
                       {product.product.name}
                     </Typography>
-                    <Box sx={{ m: "0 40px" }}>
+                    <Box
+                      sx={(theme) => ({
+                        [theme.breakpoints.up("md")]: { m: "0 40px" },
+                      })}
+                    >
                       <Typography variant="subtitle2">Price</Typography>
                       <Typography
                         component="p"
@@ -219,7 +288,12 @@ const OrderCard = ({ order }) => {
                         ${product.product.currentPrice}
                       </Typography>
                     </Box>
-                    <Box sx={{ m: "0 40px" }}>
+                    <Box
+                      sx={(theme) => ({
+                        [theme.breakpoints.up("md")]: { m: "0 40px" },
+                        [theme.breakpoints.down("md")]: { m: "0 15px" },
+                      })}
+                    >
                       <Typography variant="subtitle2">Quantity</Typography>
                       <Typography
                         component="p"
@@ -229,7 +303,12 @@ const OrderCard = ({ order }) => {
                         {product.cartQuantity}
                       </Typography>
                     </Box>
-                    <Box sx={{ m: "0 40px" }}>
+                    <Box
+                      sx={(theme) => ({
+                        [theme.breakpoints.up("md")]: { m: "0 40px" },
+                        [theme.breakpoints.down("md")]: { m: "0 15px" },
+                      })}
+                    >
                       <Typography variant="subtitle2">Amount</Typography>
                       <Typography
                         component="p"
