@@ -15,7 +15,7 @@ import {
   CustomLabel,
   NumberFormatCustom,
 } from "../CustomInputs/CustomInputs";
-import { validationSchemaPayment } from "../validationSchema/formsSchema.js";
+import { validationSchemaPayment } from "../../../../utils/ValidationSchema";
 
 const PaymentForm = ({ data, next, prev }) => {
   const handleSubmit = (values) => {
