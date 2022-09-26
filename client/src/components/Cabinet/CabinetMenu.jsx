@@ -7,6 +7,12 @@ import { CustomCabinetTab } from "./style.js";
 import Subscriptions from "./Subscriptions.jsx";
 import MyOrders from "./Orders/MyOrders.jsx";
 import WishList from "./Wishlist/Wishlist.jsx";
+import {
+  AccountCircleOutlined,
+  ArchiveOutlined,
+  FavoriteBorderOutlined,
+  SubscriptionsOutlined,
+} from "@mui/icons-material";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -63,10 +69,62 @@ const CabinetMenu = () => {
           borderColor: "divider",
         }}
       >
-        <CustomCabinetTab label="Personal Information" {...a11yProps(0)} />
-        <CustomCabinetTab label="My wish list" {...a11yProps(1)} />
-        <CustomCabinetTab label="My orders" {...a11yProps(2)} />
-        <CustomCabinetTab label="My subscriptions" {...a11yProps(3)} />
+        {/* <CustomCabinetTab
+          label="Personal Information"
+          {...a11yProps(0)}
+          sx={(theme) => ({
+            [theme.breakpoints.down("md")]: { display: "none" },
+          })}
+        /> */}
+        <CustomCabinetTab
+          icon={<AccountCircleOutlined />}
+          {...a11yProps(0)}
+          sx={(theme) => ({
+            [theme.breakpoints.up("md")]: { display: "none" },
+          })}
+        />
+        {/* <CustomCabinetTab
+          label="My wish list"
+          {...a11yProps(1)}
+          sx={(theme) => ({
+            [theme.breakpoints.down("md")]: { display: "none" },
+          })}
+        /> */}
+        <CustomCabinetTab
+          icon={<FavoriteBorderOutlined />}
+          {...a11yProps(1)}
+          sx={(theme) => ({
+            [theme.breakpoints.up("md")]: { display: "none" },
+          })}
+        />
+        {/* <CustomCabinetTab
+          label="My orders"
+          {...a11yProps(2)}
+          sx={(theme) => ({
+            [theme.breakpoints.down("md")]: { display: "none" },
+          })}
+        /> */}
+        <CustomCabinetTab
+          icon={<ArchiveOutlined />}
+          {...a11yProps(2)}
+          sx={(theme) => ({
+            [theme.breakpoints.up("md")]: { display: "none" },
+          })}
+        />
+        {/* <CustomCabinetTab
+          label="My subscriptions"
+          {...a11yProps(3)}
+          sx={(theme) => ({
+            [theme.breakpoints.down("md")]: { display: "none" },
+          })}
+        /> */}
+        <CustomCabinetTab
+          icon={<SubscriptionsOutlined />}
+          {...a11yProps(3)}
+          sx={(theme) => ({
+            [theme.breakpoints.up("md")]: { display: "none" },
+          })}
+        />
       </Tabs>
 
       <TabPanel sx={{ p: "0 0 0 30px" }} value={value} index={0}>

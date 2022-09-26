@@ -2,7 +2,6 @@ import { Container, Button, Typography, Stack, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 
 const EmptyFavorites = ({ primaryText, secondaryText }) => {
-  // const { primaryText, secondaryText } = this.props;
   return (
     <>
       <Container>
@@ -26,7 +25,6 @@ const EmptyFavorites = ({ primaryText, secondaryText }) => {
           >
             {primaryText}
           </Typography>
-          {/* <Box sx={{}}> */}
           <Typography
             variant="h2"
             sx={(theme) => ({

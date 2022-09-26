@@ -10,7 +10,7 @@ export const CustomCabinetTab = styled(Tab)(({ theme }) => ({
   fontSize: "20px",
   padding: "15px 0 15px 0px",
 
-  width: "220px",
+  Width: "220px",
 
   "&.MuiTabs-indicator": { width: "3px", left: 0 },
   [theme.breakpoints.down("sm")]: {
