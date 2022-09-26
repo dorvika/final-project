@@ -4,6 +4,7 @@ import { Container } from "@mui/system";
 
 import { useSelector } from "react-redux";
 import { Breadcrumbs, Link } from "@mui/material";
+import { Link as LinkRouter } from "react-router-dom";
 const Cart = () => {
   const cart = useSelector((state) => state.cart.cart);
   const isCartEmpty = cart.length !== 0;
@@ -12,10 +13,10 @@ const Cart = () => {
     <>
       <Container>
         <Breadcrumbs>
-          <Link underline="hover" color="inherit" href="/">
+          <Link component={LinkRouter} underline="hover" color="inherit" to="/">
             Home
           </Link>
-          <Link underline="hover" color="inherit" href="/cart">
+          <Link component={LinkRouter} underline="hover" color="inherit" to="/cart">
             Shopping Bag
           </Link>
         </Breadcrumbs>

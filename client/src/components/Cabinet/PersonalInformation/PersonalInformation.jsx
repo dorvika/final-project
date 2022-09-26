@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { Preloader } from "../../../pages/Categories";
 import { removeAllFromCart } from "../../../store/cart/actions";
 import { setLoggedOut } from "../../../store/isLogged/actions";
+import { removeAllFromWishlist } from "../../../store/favorites/actions";
 import ChangePassword from "./ChangePassword.jsx";
 import EditPersonalData from "./EditPersonalData.jsx";
 
@@ -24,6 +25,7 @@ const PersonalInformation = () => {
   const handleLogOut = () => {
     dispatch(setLoggedOut());
     dispatch(removeAllFromCart());
+    dispatch(removeAllFromWishlist())
     navigate("/");
   };
 

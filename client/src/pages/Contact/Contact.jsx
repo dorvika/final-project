@@ -15,6 +15,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { Link as LinkRouter } from "react-router-dom";
 
 const Contact = () => {
   return (
@@ -25,13 +26,14 @@ const Contact = () => {
           [theme.breakpoints.down("sm")]: { mb: "15px", fontSize: "16px" },
         })}
       >
-        <Link underline="hover" color="inherit" href="/">
+        <Link component={LinkRouter} underline="hover" color="inherit" to="/">
           Shop
         </Link>
         <Link
+          component={LinkRouter}
           underline="hover"
           color="inherit"
-          href="/catalog?perPage=9&startPage=1"
+          to="/catalog?perPage=9&startPage=1"
         >
           Contact
         </Link>

@@ -8,6 +8,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { Link as LinkRouter } from "react-router-dom";
 
 import { Fragment } from "react";
 
@@ -37,7 +38,7 @@ const RegularMenu = () => {
                     return (
                       <Fragment key={menuItem.key}>
                         <ListItem>
-                          <Link href={menuItem.link} underline="hover">
+                          <Link component={LinkRouter} to={menuItem.link} underline="hover">
                             <Typography variant="body">
                               {menuItem.title}
                             </Typography>
