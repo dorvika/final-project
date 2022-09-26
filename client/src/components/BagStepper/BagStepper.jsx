@@ -86,11 +86,12 @@ export default function HorizontalNonLinearStepper({products}) {
         country: data.country,
         city: data.city,
         address: data.address1,
-        postal: data.zip
+        postal: data.zip,
       },
       shipping: data.delivery,
       paymentInfo: data.paymentmethod,
-    }
+      status: "confirmed",
+    };
 
     if(isCustomer !== undefined){
       newOrder = {...newOrder, customerId: isCustomer._id}
