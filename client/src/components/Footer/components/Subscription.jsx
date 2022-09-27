@@ -82,9 +82,14 @@ const Subscription = () => {
               variant="contained"
               type="submit"
               disabled={props.isSubmitting}
-              sx={{
-                p: "5px 40px",
-              }}
+              sx={(theme) => ({
+                [theme.breakpoints.up("sm")]: {
+                  p: "5px 40px",
+                },
+                [theme.breakpoints.down("sm")]: {
+                  p: "5px 25px",
+                },
+              })}
             >
               Send
             </Button>

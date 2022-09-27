@@ -12,6 +12,9 @@ export const ProductCardMainContainer = styled(Container)(({ theme }) => ({
   [theme.breakpoints.down("md")]: {
     marginBottom: "40px",
   },
+  [theme.breakpoints.down("sm")]: {
+    marginBottom: "20px",
+  },
 }));
 
 export const ProductCardContainer = styled(Stack)(({ theme }) => ({
@@ -24,6 +27,13 @@ export const ProductCardContainer = styled(Stack)(({ theme }) => ({
     flexDirection: "column",
     gap: "40px",
     height: "auto",
+    marginBottom: "45px",
+  },
+  [theme.breakpoints.down("sm")]: {
+    flexDirection: "column",
+    gap: "20px",
+    height: "auto",
+    marginBottom: "25px",
   },
 }));
 

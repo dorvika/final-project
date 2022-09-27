@@ -73,7 +73,12 @@ const ProductInfo = ({
   return (
     <ProductInfoContainer>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <Typography variant="h2" sx={{ textTransform: "uppercase" }}>
+        <Typography
+          variant="h2"
+          sx={() => ({
+            textTransform: "uppercase",
+          })}
+        >
           {name}
         </Typography>
         <SocialMediaContainer>
@@ -95,7 +100,10 @@ const ProductInfo = ({
         direction="row"
         gap="10px"
         alignItems="center"
-        sx={{ mt: "25px", mb: "10px" }}
+        sx={(theme) => ({
+          [theme.breakpoints.up("md")]: { mt: "25px", mb: "10px" },
+          [theme.breakpoints.down("md")]: { mt: "15px", mb: "5px" },
+        })}
       >
         <Typography variant="body" component="p">
           COLOR :
@@ -117,7 +125,10 @@ const ProductInfo = ({
         direction="row"
         gap="10px"
         alignItems="center"
-        sx={{ mt: "20px", mb: "10px" }}
+        sx={(theme) => ({
+          [theme.breakpoints.up("md")]: { mt: "25px", mb: "10px" },
+          [theme.breakpoints.down("md")]: { m: 0 },
+        })}
       >
         <Typography variant="body" component="p">
           SIZE :
@@ -136,7 +147,10 @@ const ProductInfo = ({
         direction="row"
         gap="10px"
         alignItems="center"
-        sx={{ mt: "20px", mb: "10px" }}
+        sx={(theme) => ({
+          [theme.breakpoints.up("md")]: { mt: "20px", mb: "10px" },
+          [theme.breakpoints.down("md")]: { mt: "10px", mb: "10px" },
+        })}
       >
         <Typography variant="body" component="p">
           IN STOCK :
@@ -172,7 +186,7 @@ const ProductInfo = ({
             fontWeight: "200",
             p: "13px",
             width: "35%",
-            [theme.breakpoints.down("sm")]: { width: "40%", p: "13px 0" },
+            [theme.breakpoints.down("sm")]: { width: "40%", p: "5px 0" },
           })}
           disabled={product.quantity < 1 ? true : false}
           onClick={isCart ? removeFromBag : addToBag}
@@ -186,7 +200,7 @@ const ProductInfo = ({
             fontWeight: "200",
             p: "13px",
             width: "10%",
-            [theme.breakpoints.down("sm")]: { width: "5%" },
+            [theme.breakpoints.down("sm")]: { width: "5%", p: "7px" },
           })}
         >
           {isFavorite ? <Favorite /> : <FavoriteBorder />}
