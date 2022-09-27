@@ -11,7 +11,7 @@ import {
 import { Form, Formik } from "formik";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Preloader } from "../../../pages/Categories";
+import Preloader from "../../../utils/Preloader.jsx";
 import { updateData } from "../../../store/isLogged/actions";
 import { putData } from "../../../utils/api";
 import { validationEditPersonalData } from "../../../utils/ValidationSchema";
@@ -70,7 +70,13 @@ const EditPersonalData = () => {
       <Button
         variant="contained"
         onClick={handleClickOpen}
-        sx={{ p: "5px 50px", mt: "35px" }}
+        sx={(theme) => ({
+          [theme.breakpoints.up("sm")]: { p: "5px 50px", mt: "35px" },
+          [theme.breakpoints.down("sm")]: {
+            p: "4px 30px",
+            mt: "15px",
+          },
+        })}
       >
         Edit
       </Button>
@@ -78,11 +84,10 @@ const EditPersonalData = () => {
       <Dialog
         open={open}
         fullWidth={true}
-        maxWidth="sm"
+        maxWidth="md"
         onClose={handleClose}
         aria-labelledby="changePassword-dialog-title"
         aria-describedby="changePassword-dialog-description"
-        sx={{ p: "100px" }}
       >
         <DialogTitle sx={{ fontSize: "22px" }} id="changePassword-dialog-title">
           Update your personal data

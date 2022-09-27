@@ -6,7 +6,7 @@ import { MightLike } from "../../components";
 import { useParams, Link as LinkRouter } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchData } from "../../utils/api.js";
-import { Preloader } from "../Categories/index.js";
+import Preloader from "../../utils/Preloader.jsx";
 
 
 const ProductCard = () => {

@@ -7,6 +7,7 @@ const MyOrders = () => {
       <Typography
         variant="h2"
         sx={(theme) => ({
+          [theme.breakpoints.down("md")]: { fontSize: "28px" },
           [theme.breakpoints.down("sm")]: { fontSize: "22px" },
         })}
       >

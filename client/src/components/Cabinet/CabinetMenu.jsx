@@ -1,12 +1,18 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import { Tabs } from "@mui/material";
+import { Tabs, useMediaQuery } from "@mui/material";
 import Box from "@mui/material/Box";
 import PersonalInformation from "./PersonalInformation/PersonalInformation.jsx";
 import { CustomCabinetTab } from "./style.js";
 import Subscriptions from "./Subscriptions.jsx";
 import MyOrders from "./Orders/MyOrders.jsx";
 import WishList from "./Wishlist/Wishlist.jsx";
+import {
+  AccountCircleOutlined,
+  ArchiveOutlined,
+  FavoriteBorderOutlined,
+  SubscriptionsOutlined,
+} from "@mui/icons-material";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -18,9 +24,18 @@ function TabPanel(props) {
       id={`vertical-tabpanel-${index}`}
       aria-labelledby={`vertical-tab-${index}`}
       {...other}
-      width="100%"
+      width="fit-content"
     >
-      {value === index && <Box sx={{ pl: 30, width: "100%" }}>{children}</Box>}
+      {value === index && (
+        <Box
+          sx={(theme) => ({
+            [theme.breakpoints.up("sm")]: { pl: "30px", width: "100%" },
+            [theme.breakpoints.down("sm")]: { pl: "10px", width: "100%" },
+          })}
+        >
+          {children}
+        </Box>
+      )}
     </div>
   );
 }
@@ -40,6 +55,7 @@ function a11yProps(index) {
 
 const CabinetMenu = () => {
   const [value, setValue] = useState(0);
+  const matches = useMediaQuery("(max-width:900px)");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -47,29 +63,68 @@ const CabinetMenu = () => {
 
   return (
     <Box
-      sx={{
-        display: "flex",
-        mb: "130px",
-      }}
+      sx={(theme) => ({
+        [theme.breakpoints.up("md")]: {
+          display: "flex",
+          mb: "130px",
+        },
+        [theme.breakpoints.down("md")]: {
+          display: "flex",
+          mb: "30px",
+        },
+        // [theme.breakpoints.down("sm")]: {
+        //   display: "flex",
+        //   mb: "50px",
+        // },
+      })}
     >
       <Tabs
         orientation="vertical"
         value={value}
         onChange={handleChange}
-        aria-label="Vertical tabs example"
-        sx={{
+        aria-label="Vertical cabinet tab"
+        sx={(theme) => ({
           textAlign: "left",
           borderRight: 1,
           borderColor: "divider",
-        }}
+          // [theme.breakpoints.down("sm")]: { width: "150px" },
+          [theme.breakpoints.up("md")]: { width: "300px" },
+        })}
       >
-        <CustomCabinetTab label="Personal Information" {...a11yProps(0)} />
-        <CustomCabinetTab label="My wish list" {...a11yProps(1)} />
-        <CustomCabinetTab label="My orders" {...a11yProps(2)} />
-        <CustomCabinetTab label="My subscriptions" {...a11yProps(3)} />
+        {matches ? (
+          <CustomCabinetTab
+            icon={<AccountCircleOutlined size="small" sx={{ m: 0 }} />}
+            {...a11yProps(0)}
+          />
+        ) : (
+          <CustomCabinetTab label="Personal Information" {...a11yProps(0)} />
+        )}
+        {matches ? (
+          <CustomCabinetTab
+            icon={<FavoriteBorderOutlined />}
+            {...a11yProps(1)}
+          />
+        ) : (
+          <CustomCabinetTab label="My wish list" {...a11yProps(1)} />
+        )}
+
+        {matches ? (
+          <CustomCabinetTab icon={<ArchiveOutlined />} {...a11yProps(2)} />
+        ) : (
+          <CustomCabinetTab label="My orders" {...a11yProps(2)} />
+        )}
+
+        {matches ? (
+          <CustomCabinetTab
+            icon={<SubscriptionsOutlined />}
+            {...a11yProps(3)}
+          />
+        ) : (
+          <CustomCabinetTab label="My subscriptions" {...a11yProps(3)} />
+        )}
       </Tabs>
 
-      <TabPanel sx={{ p: "0 0 0 30px" }} value={value} index={0}>
+      <TabPanel value={value} index={0}>
         <PersonalInformation />
       </TabPanel>
       <TabPanel value={value} index={1}>
