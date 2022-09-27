@@ -4,11 +4,11 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { removeAllFromCart } from "../../../store/cart/actions";
-import { placeOrder } from "../../../utils/api"
+import { placeOrder } from "../../../utils/api";
 const ThanksOrderPage = ({ makeOrder }) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    placeOrder("/orders", makeOrder())
+    placeOrder("/orders", makeOrder());
     dispatch(removeAllFromCart());
   }, []);
   return (
@@ -24,6 +24,7 @@ const ThanksOrderPage = ({ makeOrder }) => {
       >
         <Typography
           variant="h2"
+          textAlign="center"
           sx={{ mb: "50px", textTransform: "uppercase" }}
         >
           Thank you for your order!

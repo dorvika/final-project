@@ -1,5 +1,7 @@
+import { Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Preloader } from "../../pages/Categories";
 import { fetchData } from "../../utils/api";
 import {
   SliderContainer,
@@ -18,9 +20,14 @@ import {
 const ImageSlider = () => {
   const [slides, setSlides] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    fetchData("/slides").then((result) => setSlides(result));
+    setIsLoading(true);
+    fetchData("/slides").then((result) => {
+      setSlides(result);
+      setIsLoading(false);
+    });
   }, []);
 
   useEffect(() => {
@@ -48,6 +55,15 @@ const ImageSlider = () => {
 
   return (
     <SliderContainer>
+      {isLoading && (
+        <Stack
+          alignItems="center"
+          justifyContent="center"
+          sx={{ height: { sm: "300px", md: "400px" } }}
+        >
+          <Preloader />
+        </Stack>
+      )}
       <Slider>
         <LeftArrow onClick={goToPreviousSlide} />
         <Link to={`/special-offer/${currentIndex + 1}`}>
