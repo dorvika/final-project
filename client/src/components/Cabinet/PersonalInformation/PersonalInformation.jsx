@@ -34,6 +34,7 @@ const PersonalInformation = () => {
       <Typography
         variant="h2"
         sx={(theme) => ({
+          [theme.breakpoints.down("md")]: { fontSize: "28px" },
           [theme.breakpoints.down("sm")]: { fontSize: "22px" },
         })}
       >
@@ -43,10 +44,24 @@ const PersonalInformation = () => {
       <Divider />
       {userData.keys === 0 && <Preloader />}
       <Stack
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-        sx={{ mt: "30px" }}
+        maxWidth="900px"
+        // direction="row"
+        // justifyContent="space-between"
+        // alignItems="center"
+        sx={(theme) => ({
+          [theme.breakpoints.up("sm")]: {
+            mt: "30px",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          },
+          [theme.breakpoints.down("sm")]: {
+            mt: "15px",
+            // direction: "row",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
+          },
+        })}
       >
         <Avatar
           alr={userData.firstName + " " + userData.lastName}
@@ -56,7 +71,10 @@ const PersonalInformation = () => {
         <Button
           onClick={handleLogOut}
           variant="outlined"
-          sx={{ p: "5px 30px" }}
+          sx={(theme) => ({
+            p: "5px 30px",
+            [theme.breakpoints.down("sm")]: { mt: "15px" },
+          })}
         >
           Logout
         </Button>

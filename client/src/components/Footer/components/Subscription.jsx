@@ -47,7 +47,10 @@ const Subscription = () => {
         });
         handleClickOpen();
       })
-      .finally(() => actions.setSubmitting(false));
+      .finally(() => {
+        actions.setSubmitting(false);
+        actions.resetForm();
+      });
   };
 
   return (

@@ -29,6 +29,12 @@ const SignUp = () => {
     status,
     message: "",
   });
+  const [checked, setChecked] = useState(true);
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+  };
+
   const dispatch = useDispatch();
 
   const handleClose = () => {
@@ -45,6 +51,17 @@ const SignUp = () => {
 
   const handleSubmit = (values, actions) => {
     actions.setSubmitting(true);
+
+    const newSubscriber = {
+      email: values.email,
+      enabled: checked,
+      letterSubject: `Postil Bedding. Thank you for ${
+        checked ? "signing up and subscribing us" : "signing up"
+      }`,
+      letterHtml:
+        "<!DOCTYPE html><html lang='en'> <head> <meta charset='UTF-8' /> <meta name='viewport' content='width=device-width, initial-scale=1.0' /> <meta http-equiv='X-UA-Compatible' content='ie=edge' /> <title>Document</title> <style> </style> </head> <body> <h1>Thank you for your registration</h1> <h3>We promise we will not be obsessive and will send only intersting and relevant content</h3> <h4>will be in touch</h4> <p>sincerely yours,</p> <h4>Postil Bedding Team</h4> </body></html>",
+    };
+
     postData("/customers", {
       firstName: values.firstName,
       lastName: values.lastName,
@@ -57,6 +74,9 @@ const SignUp = () => {
           status: savedCustomer.status,
           message: savedCustomer,
         });
+      })
+      .then(() => {
+        postData("/subscribers", newSubscriber);
       })
       .then(() => {
         postData("/customers/login", {
@@ -84,7 +104,7 @@ const SignUp = () => {
       })
       .finally(() => actions.setSubmitting(false));
   };
-
+  console.log(checked);
   return (
     <>
       {signUpResponse === "" || signUpResponse.status !== 200 ? (
@@ -244,7 +264,11 @@ const SignUp = () => {
                     )}
                 </FormControl>
               </Stack>
-              <ConfirmationPromo />
+              <ConfirmationPromo
+                checked={checked}
+                handleChange={handleChange}
+                isCheckBox={true}
+              />
               <DialogActions
                 sx={{
                   display: "flex",

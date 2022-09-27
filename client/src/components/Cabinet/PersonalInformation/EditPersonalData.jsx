@@ -78,11 +78,10 @@ const EditPersonalData = () => {
       <Dialog
         open={open}
         fullWidth={true}
-        maxWidth="sm"
+        maxWidth="md"
         onClose={handleClose}
         aria-labelledby="changePassword-dialog-title"
         aria-describedby="changePassword-dialog-description"
-        sx={{ p: "100px" }}
       >
         <DialogTitle sx={{ fontSize: "22px" }} id="changePassword-dialog-title">
           Update your personal data

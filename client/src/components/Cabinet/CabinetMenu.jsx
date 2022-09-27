@@ -1,6 +1,6 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import { Tabs } from "@mui/material";
+import { Tabs, useMediaQuery } from "@mui/material";
 import Box from "@mui/material/Box";
 import PersonalInformation from "./PersonalInformation/PersonalInformation.jsx";
 import { CustomCabinetTab } from "./style.js";
@@ -24,9 +24,18 @@ function TabPanel(props) {
       id={`vertical-tabpanel-${index}`}
       aria-labelledby={`vertical-tab-${index}`}
       {...other}
-      width="100%"
+      // width="100%"
     >
-      {value === index && <Box sx={{ pl: 30, width: "100%" }}>{children}</Box>}
+      {value === index && (
+        <Box
+          sx={(theme) => ({
+            [theme.breakpoints.up("sm")]: { pl: "30px", width: "100%" },
+            [theme.breakpoints.down("sm")]: { pl: "10px", width: "100%" },
+          })}
+        >
+          {children}
+        </Box>
+      )}
     </div>
   );
 }
@@ -46,6 +55,7 @@ function a11yProps(index) {
 
 const CabinetMenu = () => {
   const [value, setValue] = useState(0);
+  const matches = useMediaQuery("(max-width:900px)");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -53,90 +63,73 @@ const CabinetMenu = () => {
 
   return (
     <Box
-      sx={{
-        display: "flex",
-        mb: "130px",
-      }}
+      sx={(theme) => ({
+        [theme.breakpoints.up("sm")]: {
+          display: "flex",
+          mb: "130px",
+        },
+        [theme.breakpoints.down("sm")]: {
+          display: "flex",
+          mb: "50px",
+        },
+      })}
     >
       <Tabs
         orientation="vertical"
         value={value}
         onChange={handleChange}
-        aria-label="Vertical tabs example"
-        sx={{
+        aria-label="Vertical cabinet tab"
+        sx={(theme) => ({
           textAlign: "left",
           borderRight: 1,
           borderColor: "divider",
-        }}
+          [theme.breakpoints.down("sm")]: { width: "150px" },
+          [theme.breakpoints.up("md")]: { width: "300px" },
+        })}
       >
-        {/* <CustomCabinetTab
-          label="Personal Information"
-          {...a11yProps(0)}
-          sx={(theme) => ({
-            [theme.breakpoints.down("md")]: { display: "none" },
-          })}
-        /> */}
-        <CustomCabinetTab
-          icon={<AccountCircleOutlined />}
-          {...a11yProps(0)}
-          sx={(theme) => ({
-            [theme.breakpoints.up("md")]: { display: "none" },
-          })}
-        />
-        {/* <CustomCabinetTab
-          label="My wish list"
-          {...a11yProps(1)}
-          sx={(theme) => ({
-            [theme.breakpoints.down("md")]: { display: "none" },
-          })}
-        /> */}
-        <CustomCabinetTab
-          icon={<FavoriteBorderOutlined />}
-          {...a11yProps(1)}
-          sx={(theme) => ({
-            [theme.breakpoints.up("md")]: { display: "none" },
-          })}
-        />
-        {/* <CustomCabinetTab
-          label="My orders"
-          {...a11yProps(2)}
-          sx={(theme) => ({
-            [theme.breakpoints.down("md")]: { display: "none" },
-          })}
-        /> */}
-        <CustomCabinetTab
-          icon={<ArchiveOutlined />}
-          {...a11yProps(2)}
-          sx={(theme) => ({
-            [theme.breakpoints.up("md")]: { display: "none" },
-          })}
-        />
-        {/* <CustomCabinetTab
-          label="My subscriptions"
-          {...a11yProps(3)}
-          sx={(theme) => ({
-            [theme.breakpoints.down("md")]: { display: "none" },
-          })}
-        /> */}
-        <CustomCabinetTab
-          icon={<SubscriptionsOutlined />}
-          {...a11yProps(3)}
-          sx={(theme) => ({
-            [theme.breakpoints.up("md")]: { display: "none" },
-          })}
-        />
+        {matches ? (
+          <CustomCabinetTab
+            icon={<AccountCircleOutlined size="small" sx={{ m: 0 }} />}
+            {...a11yProps(0)}
+          />
+        ) : (
+          <CustomCabinetTab label="Personal Information" {...a11yProps(0)} />
+        )}
+        {matches ? (
+          <CustomCabinetTab
+            icon={<FavoriteBorderOutlined />}
+            {...a11yProps(1)}
+          />
+        ) : (
+          <CustomCabinetTab label="My wish list" {...a11yProps(1)} />
+        )}
+
+        {matches ? (
+          <CustomCabinetTab icon={<ArchiveOutlined />} {...a11yProps(2)} />
+        ) : (
+          <CustomCabinetTab label="My orders" {...a11yProps(2)} />
+        )}
+
+        {matches ? (
+          <CustomCabinetTab
+            icon={<SubscriptionsOutlined />}
+            {...a11yProps(3)}
+          />
+        ) : (
+          <CustomCabinetTab label="My subscriptions" {...a11yProps(3)} />
+        )}
       </Tabs>
 
-      <TabPanel sx={{ p: "0 0 0 30px" }} value={value} index={0}>
+      <TabPanel value={value} index={0} sx={{ width: "100%" }}>
         <PersonalInformation />
       </TabPanel>
-      <TabPanel value={value} index={1}>
+      <TabPanel value={value} index={1} sx={{ width: "100%" }}>
         <WishList />
       </TabPanel>
-      <TabPanel value={value} index={2}>
+      <TabPanel value={value} index={2} sx={{ width: "100%" }}>
         <MyOrders />
       </TabPanel>
-      <TabPanel value={value} index={3}>
+      <TabPanel value={value} index={3} sx={{ width: "100%" }}>
         <Subscriptions />
       </TabPanel>
     </Box>
