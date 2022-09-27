@@ -19,7 +19,7 @@ import { closeModal } from "../../store/modal/actions";
 import { fetchData, postData } from "../../utils/api";
 import ConfirmationPromo from "./ConfirmationPromo.jsx";
 import { validationSignUpForm } from "../../utils/ValidationSchema.js";
-import Preloader from "../../pages/Categories/Catalog Product List/Preloader.jsx";
+import Preloader from "../../utils/Preloader.jsx";
 import { setLoggedIn } from "../../store/isLogged/actions";
 
 const SignUp = () => {

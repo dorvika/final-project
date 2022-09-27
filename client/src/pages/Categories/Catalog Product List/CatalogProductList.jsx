@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchProducts } from "../../../store/products/actions";
 import "./style.scss";
-import Preloader from "./Preloader.jsx";
+import Preloader from "../../../utils/Preloader.jsx";
 import { useLocation } from "react-router-dom";
 
 const CatalogProductList = ({ isLoadingFilter }) => {

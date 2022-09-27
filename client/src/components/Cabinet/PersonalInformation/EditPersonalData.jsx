@@ -11,7 +11,7 @@ import {
 import { Form, Formik } from "formik";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Preloader } from "../../../pages/Categories";
+import Preloader from "../../../utils/Preloader.jsx";
 import { updateData } from "../../../store/isLogged/actions";
 import { putData } from "../../../utils/api";
 import { validationEditPersonalData } from "../../../utils/ValidationSchema";

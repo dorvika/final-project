@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Preloader } from "../../../pages/Categories";
+import Preloader from "../../../utils/Preloader.jsx";
 import { removeAllFromCart } from "../../../store/cart/actions";
 import { setLoggedOut } from "../../../store/isLogged/actions";
 import { removeAllFromWishlist } from "../../../store/favorites/actions";

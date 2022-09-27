@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { Form, Formik } from "formik";
 import { useState } from "react";
-import Preloader from "../../pages/Categories/Catalog Product List/Preloader.jsx";
+import Preloader from "../../utils/Preloader.jsx";
 import { fetchData, postData,} from "../../utils/api";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "../../store/modal/actions";

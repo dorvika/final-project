@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import { Form, Formik } from "formik";
 import { useState } from "react";
-import { Preloader } from "../../../pages/Categories";
+import Preloader from "../../../utils/Preloader.jsx";
 import { putData } from "../../../utils/api";
 import { validationChangePassword } from "../../../utils/ValidationSchema";
 

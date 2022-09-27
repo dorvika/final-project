@@ -2,7 +2,7 @@ import { CardContent, CardMedia, Link, Stack } from "@mui/material";
 import { Link as LinkRouter } from "react-router-dom";
 import { debounce } from "lodash";
 import { useEffect, useState, useMemo } from "react";
-import { Preloader } from "../../../pages/Categories";
+import Preloader from "../../../utils/Preloader.jsx";
 import { fetchData } from "../../../utils/api";
 import {
   CustomBox,

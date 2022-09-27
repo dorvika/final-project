@@ -6,8 +6,9 @@ import { setSearchedProducts } from "../../../store/filters/actions";
 import { postSearchQuery } from "../../../utils/api";
 import SearchProductCard from "./SearchProductCard.jsx";
 import { CustomDialog, CustomLink, HeaderInput } from "./styles";
-import Preloader from "../../../pages/Categories/Catalog Product List/Preloader.jsx";
+
 import { debounce } from "lodash";
+import Preloader from "../../../utils/Preloader.jsx";
 
 const SearchBar = () => {
   const dispatch = useDispatch();

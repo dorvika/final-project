@@ -24,7 +24,7 @@ function TabPanel(props) {
       id={`vertical-tabpanel-${index}`}
       aria-labelledby={`vertical-tab-${index}`}
       {...other}
-      // width="100%"
+      width="fit-content"
     >
       {value === index && (
         <Box
@@ -83,7 +83,7 @@ const CabinetMenu = () => {
           textAlign: "left",
           borderRight: 1,
           borderColor: "divider",
-          [theme.breakpoints.down("sm")]: { width: "150px" },
+          // [theme.breakpoints.down("sm")]: { width: "150px" },
           [theme.breakpoints.up("md")]: { width: "300px" },
         })}
       >
@@ -120,16 +120,16 @@ const CabinetMenu = () => {
         )}
       </Tabs>
 
-      <TabPanel value={value} index={0} sx={{ width: "100%" }}>
+      <TabPanel value={value} index={0}>
         <PersonalInformation />
       </TabPanel>
-      <TabPanel value={value} index={1} sx={{ width: "100%" }}>
+      <TabPanel value={value} index={1}>
         <WishList />
       </TabPanel>
-      <TabPanel value={value} index={2} sx={{ width: "100%" }}>
+      <TabPanel value={value} index={2}>
         <MyOrders />
       </TabPanel>
-      <TabPanel value={value} index={3} sx={{ width: "100%" }}>
+      <TabPanel value={value} index={3}>
         <Subscriptions />
       </TabPanel>
     </Box>

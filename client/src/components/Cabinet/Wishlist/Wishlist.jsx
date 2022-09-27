@@ -38,8 +38,15 @@ const WishList = () => {
         direction="row"
         flexWrap="wrap"
         alignItems="center"
-        sx={{ mt: "30px" }}
-        // maxWidth="900px"
+        justifyContent="center"
+        sx={(theme) => ({
+          [theme.breakpoints.up("sm")]: { mt: "30px", maxWidth: "900px" },
+          [theme.breakpoints.down("sm")]: {
+            mt: "15px",
+            maxWidth: "400px",
+            minWidth: "250px",
+          },
+        })}
       >
         {favorites.map((product) => {
           return <WishProductCard key={product.itemNo} product={product} />;

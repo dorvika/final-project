@@ -8,7 +8,6 @@ import {
 } from "@mui/material";
 import { Close, ShoppingCartOutlined, ShoppingCart } from "@mui/icons-material";
 import { Link } from "react-router-dom";
-// import { Box } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "../../../store/cart/actions";
 import { removeFavorite } from "../../../store/favorites/actions";
@@ -34,23 +33,41 @@ const WishProductCard = ({ product }) => {
   return (
     <>
       <Card
-        sx={{
+        sx={(theme) => ({
           border: "1px solid #8C8C8C",
           borderRadius: "4px",
-          p: "30px",
-          m: "15px ",
           position: "relative",
-        }}
+          [theme.breakpoints.up("sm")]: {
+            p: "30px",
+            m: "15px ",
+            justifyContent: "center",
+          },
+          [theme.breakpoints.down("sm")]: {
+            p: "20px 15px",
+            mb: "15px",
+            justifyContent: "center",
+          },
+        })}
       >
-        {/* <Stack direction="column" alignItems="flex-end">
-          <Box> */}
         <IconButton
           onClick={handleRemoveProduct}
-          sx={{ p: "5px", position: "absolute", right: 0, top: 0 }}
+          sx={(theme) => ({
+            [theme.breakpoints.up("sm")]: {
+              p: "5px",
+              position: "absolute",
+              right: 0,
+              top: 0,
+            },
+            [theme.breakpoints.down("sm")]: {
+              p: "1px",
+              position: "absolute",
+              right: 0,
+              top: 0,
+            },
+          })}
         >
           <Close size="small" fontSize="small" />
         </IconButton>
-        {/* </Box> */}
         <Link
           to={`/catalog/${product.itemNo}`}
           style={{ textDecoration: "none" }}
@@ -63,7 +80,6 @@ const WishProductCard = ({ product }) => {
             alt={`${product.name}`}
           />
         </Link>
-        {/* </Stack> */}
         <CardContent sx={{ mt: "25px" }}>
           <Typography
             variant="body"

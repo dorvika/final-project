@@ -20,7 +20,7 @@ import { ExpandMore } from "@mui/icons-material";
 import { useState } from "react";
 import theme from "../../../muiTheme/theme";
 import { putData } from "../../../utils/api";
-import { Preloader } from "../../../pages/Categories";
+import Preloader from "../../../utils/Preloader.jsx";
 
 const OrderCard = ({ order }) => {
   const [expanded, setExpanded] = useState(false);

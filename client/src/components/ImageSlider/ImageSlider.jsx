@@ -1,7 +1,7 @@
 import { Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Preloader } from "../../pages/Categories";
+import Preloader from "../../utils/Preloader.jsx";
 import { fetchData } from "../../utils/api";
 import {
   SliderContainer,
