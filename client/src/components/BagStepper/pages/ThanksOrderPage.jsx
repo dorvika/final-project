@@ -6,6 +6,7 @@ import { Preloader } from "../../../pages/Categories";
 import { removeAllFromCart } from "../../../store/cart/actions";
 import { placeOrder } from "../../../utils/api";
 import CustomMessage from "../components/CustomOrderMessage/CustomMessage.jsx";
+
 const ThanksOrderPage = ({ makeOrder }) => {
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -51,6 +52,7 @@ const ThanksOrderPage = ({ makeOrder }) => {
           <CustomMessage text="Thank you for your order!"/>
         </CustomBox>
       )}
+
     </>
   );
 };

@@ -1,16 +1,20 @@
-import {styled} from "@mui/material/styles";
-import {Box, Typography} from "@mui/material";
-import {ArrowBackIosNew, ArrowForwardIos} from "@mui/icons-material";
+import { styled } from "@mui/material/styles";
+import { Box, Typography } from "@mui/material";
+import { ArrowBackIosNew, ArrowForwardIos } from "@mui/icons-material";
 
-export const CustomTitle = styled(Typography)(() => ({
+export const CustomTitle = styled(Typography)(({ theme }) => ({
   letterSpacing: "5px",
   color: "#373F41",
   fontWeight: "400",
   fontSize: "32px",
-  lineHeight: "58px",
+  lineHeight: "45px",
+  textAlign: "center",
   textTransform: "uppercase",
   marginBottom: "10px",
-}))
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "24px",
+  },
+}));
 
 export const CustomBox = styled(Box)(() => ({
   width: "100%",
@@ -20,15 +24,15 @@ export const CustomBox = styled(Box)(() => ({
   flexDirection: "column",
   alignItems: "center",
   marginBottom: "80px",
-}))
+}));
 
 export const CustomSliderBox = styled(Box)(() => ({
   width: "100%",
   height: "380px",
   position: "relative",
-}))
+}));
 
-export const CustomLeftIcon = styled(ArrowBackIosNew)(({theme}) => ({
+export const CustomLeftIcon = styled(ArrowBackIosNew)(({ theme }) => ({
   left: "-16px",
   top: "50%",
   backgroundColor: theme.palette.primary.contrastText,
@@ -39,9 +43,9 @@ export const CustomLeftIcon = styled(ArrowBackIosNew)(({theme}) => ({
   width: "35px",
   height: "65px",
   zIndex: "3",
-}))
+}));
 
-export const CustomRightIcon = styled(ArrowForwardIos)(({theme}) => ({
+export const CustomRightIcon = styled(ArrowForwardIos)(({ theme }) => ({
   right: "-16px",
   top: "50%",
   backgroundColor: theme.palette.primary.contrastText,
@@ -52,7 +56,7 @@ export const CustomRightIcon = styled(ArrowForwardIos)(({theme}) => ({
   width: "35px",
   height: "65px",
   zIndex: "3",
-}))
+}));
 
 export const CustomSlider = styled(Typography)(() => ({
   width: "100%",
@@ -71,8 +75,8 @@ export const CustomSlider = styled(Typography)(() => ({
   },
   "& > :last-child": {
     paddingRight: "0",
-  }
-}))
+  },
+}));
 
 export const CustomItem = styled(Typography)(() => ({
   width: "380px",
@@ -80,12 +84,12 @@ export const CustomItem = styled(Typography)(() => ({
   display: "inline-block",
   borderRadius: "10px",
   position: "relative",
-}))
+}));
 
-export const CustomContent = styled(Typography)(({theme}) => ({
+export const CustomContent = styled(Typography)(({ theme }) => ({
   fontSize: "18px",
   padding: "10px",
   backgroundColor: theme.palette.primary.main,
   color: theme.palette.primary.contrastText,
   width: "100%",
-}))
+}));

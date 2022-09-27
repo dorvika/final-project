@@ -3,9 +3,12 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Breadcrumbs,
   Container,
+  Link,
   Typography,
 } from "@mui/material";
+import { Link as LinkRouter } from "react-router-dom";
 import { useState } from "react";
 import { data } from "./data";
 
@@ -44,6 +47,24 @@ const PrivacyPolicy = () => {
 
   return (
     <Container sx={{ mb: "20px" }}>
+      <Breadcrumbs
+        sx={(theme) => ({
+          mb: "30px",
+          [theme.breakpoints.down("sm")]: { mb: "15px", fontSize: "16px" },
+        })}
+      >
+        <Link component={LinkRouter} underline="hover" color="inherit" to="/">
+          Home
+        </Link>
+        <Link
+          component={LinkRouter}
+          underline="hover"
+          color="inherit"
+          to="/privacypolicy"
+        >
+          Privacy Policy
+        </Link>
+      </Breadcrumbs>
       <Typography variant="h2" textAlign="center">
         Privacy Policy
       </Typography>

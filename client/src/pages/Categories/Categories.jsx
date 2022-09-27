@@ -17,7 +17,11 @@ import {
   CatalogProductList,
 } from "./index.js";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useSearchParams, Link as LinkRouter } from "react-router-dom";
+import {
+  useLocation,
+  useSearchParams,
+  Link as LinkRouter,
+} from "react-router-dom";
 import {
   setFilteredProducts,
   setFilteredProductsQty,
@@ -70,7 +74,8 @@ const Categories = () => {
     searchParams.set("perPage", showQty);
     setSearchParams(searchParams);
     window.scrollTo({
-      top: 1000,
+      top: 0,
+      left: 0,
       behavior: "smooth",
     });
   };

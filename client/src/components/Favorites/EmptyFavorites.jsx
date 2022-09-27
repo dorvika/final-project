@@ -9,6 +9,7 @@ const EmptyFavorites = ({ primaryText, secondaryText }) => {
         <Stack justifyContent="center">
           <Typography
             variant="h2"
+            textAlign="center"
             sx={(theme) => ({
               textTransform: "uppercase",
               [theme.breakpoints.up("sm")]: {

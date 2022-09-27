@@ -1,5 +1,14 @@
-import { Button, Container, Grid, Stack, Typography } from "@mui/material";
+import {
+  Breadcrumbs,
+  Button,
+  Container,
+  Grid,
+  Link,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { ArrowRightAlt } from "@mui/icons-material";
+import { Link as LinkRouter } from "react-router-dom";
 import { CustomBox, CustomImgBox } from "./styles";
 import { data } from "./data";
 
@@ -39,6 +48,26 @@ const Blog = () => {
 
   return (
     <>
+      <Container>
+        <Breadcrumbs
+          sx={(theme) => ({
+            mb: "30px",
+            [theme.breakpoints.down("sm")]: { mb: "15px", fontSize: "16px" },
+          })}
+        >
+          <Link component={LinkRouter} underline="hover" color="inherit" to="/">
+            Home
+          </Link>
+          <Link
+            component={LinkRouter}
+            underline="hover"
+            color="inherit"
+            to="/blog"
+          >
+            Blog
+          </Link>
+        </Breadcrumbs>
+      </Container>
       <CustomBox>
         <Typography
           variant="h2"

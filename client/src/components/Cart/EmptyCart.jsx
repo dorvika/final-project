@@ -11,6 +11,7 @@ const EmptyCart = () => {
         <Stack justifyContent="center">
           <Typography
             variant="h2"
+            textAlign="center"
             sx={{
               lineHeight: "45px",
               m: "0 auto",
@@ -22,6 +23,7 @@ const EmptyCart = () => {
           {/* <Box sx={{}}> */}
           <Typography
             variant="h2"
+            textAlign="center"
             sx={{
               lineHeight: "45px",
               m: "0 auto",

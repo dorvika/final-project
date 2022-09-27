@@ -52,7 +52,7 @@ export const IconsButtonContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  width: "10%",
+  width: "15%",
   [theme.breakpoints.down("md")]: {
     width: "20%",
   },

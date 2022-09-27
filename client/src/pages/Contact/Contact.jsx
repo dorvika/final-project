@@ -26,8 +26,8 @@ const Contact = () => {
           [theme.breakpoints.down("sm")]: { mb: "15px", fontSize: "16px" },
         })}
       >
-        <Link component={LinkRouter} underline="hover" color="inherit" to="/">
-          Shop
+        <Link underline="hover" color="inherit" href="/">
+          Home
         </Link>
         <Link
           component={LinkRouter}
