@@ -17,6 +17,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Fragment, useState } from "react";
+import { Link as LinkRouter } from "react-router-dom";
 import menuList from "../MenuList";
 import Subscription from "./Subscription.jsx";
 
@@ -62,7 +63,7 @@ const AccordionMenu = () => {
                     {menuChapter.menuItems.map((menuItem) => {
                       return (
                         <ListItem key={menuItem.key} sx={{ pb: "5px" }}>
-                          <Link href={menuItem.link} underline="hover">
+                          <Link component={LinkRouter} to={menuItem.link} underline="hover">
                             <Typography variant="body">
                               {menuItem.title}
                             </Typography>

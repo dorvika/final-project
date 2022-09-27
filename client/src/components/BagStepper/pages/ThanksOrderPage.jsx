@@ -28,14 +28,13 @@ const ThanksOrderPage = ({ makeOrder }) => {
         >
           Thank you for your order!
         </Typography>
-        <Link
-          to="/catalog?perPage=9&startPage=1"
-          style={{ textDecoration: "none" }}
-        >
-          <Button variant="contained" sx={{ p: "15px 85px" }}>
+          <Button 
+          LinkComponent={Link} 
+          variant="contained" 
+          to="/catalog?perPage=9&startPage=1" 
+          sx={{ p: "15px 85px", textDecoration: "none" }}>
             Continue Shopping
           </Button>
-        </Link>
       </Box>
     </>
   );

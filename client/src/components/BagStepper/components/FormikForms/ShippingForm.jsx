@@ -18,7 +18,7 @@ import {
   TextFieldShipping,
   NumberFormatCustom
 } from "../CustomInputs/CustomInputs";
-import {validationSchemaShipping} from "../validationSchema/formsSchema.js"
+import { validationSchemaShipping } from "../../../../utils/ValidationSchema";
 
 const ShippingForm = ({ data, next, prev, shipping }) => {
 

@@ -17,7 +17,7 @@ import {
   CatalogProductList,
 } from "./index.js";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams, Link as LinkRouter } from "react-router-dom";
 import {
   setFilteredProducts,
   setFilteredProductsQty,
@@ -83,13 +83,14 @@ const Categories = () => {
           [theme.breakpoints.down("md")]: { mb: "10px" },
         })}
       >
-        <Link underline="hover" color="inherit" href="/">
+        <Link component={LinkRouter} underline="hover" color="inherit" to="/">
           Shop
         </Link>
         <Link
+          component={LinkRouter}
           underline="hover"
           color="inherit"
-          href="/catalog?perPage=9&startPage=1"
+          to="/catalog?perPage=9&startPage=1"
         >
           Catalog
         </Link>

@@ -1,6 +1,7 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
+
 const SearchProductCard = ({ name, image, price, id, size, handleClose }) => {
   return (
     <Box
