@@ -64,8 +64,8 @@ export const syncLS = function (store) {
     return function (action) {
       if (action.type === "LOGGED_OUT") {
         const result = next(action);
-        store.getState();
         localStorage.clear();
+        store.getState();
         return result;
       }
       if (action.type === "ADD_FAVORITE" || action.type === "REMOVE_FAVORITE") {
@@ -105,3 +105,4 @@ export const syncLS = function (store) {
     };
   };
 };
+
