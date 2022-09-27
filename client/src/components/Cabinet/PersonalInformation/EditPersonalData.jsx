@@ -70,7 +70,13 @@ const EditPersonalData = () => {
       <Button
         variant="contained"
         onClick={handleClickOpen}
-        sx={{ p: "5px 50px", mt: "35px" }}
+        sx={(theme) => ({
+          [theme.breakpoints.up("sm")]: { p: "5px 50px", mt: "35px" },
+          [theme.breakpoints.down("sm")]: {
+            p: "4px 30px",
+            mt: "15px",
+          },
+        })}
       >
         Edit
       </Button>

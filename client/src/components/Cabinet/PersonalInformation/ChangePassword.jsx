@@ -77,7 +77,13 @@ const ChangePassword = () => {
     <>
       <Button
         variant="text"
-        sx={{ mt: "40px", mb: "70px" }}
+        sx={(theme) => ({
+          [theme.breakpoints.up("sm")]: { mt: "40px", mb: "70px" },
+          [theme.breakpoints.down("sm")]: {
+            mt: "20px",
+            mb: "20px",
+          },
+        })}
         onClick={handleClickOpen}
       >
         Change Password

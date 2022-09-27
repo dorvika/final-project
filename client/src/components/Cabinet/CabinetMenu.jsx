@@ -64,14 +64,18 @@ const CabinetMenu = () => {
   return (
     <Box
       sx={(theme) => ({
-        [theme.breakpoints.up("sm")]: {
+        [theme.breakpoints.up("md")]: {
           display: "flex",
           mb: "130px",
         },
-        [theme.breakpoints.down("sm")]: {
+        [theme.breakpoints.down("md")]: {
           display: "flex",
-          mb: "50px",
+          mb: "30px",
         },
+        // [theme.breakpoints.down("sm")]: {
+        //   display: "flex",
+        //   mb: "50px",
+        // },
       })}
     >
       <Tabs

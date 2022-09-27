@@ -52,7 +52,13 @@ const Subscriptions = () => {
   return (
     <>
       <Box
-        sx={(theme) => ({ [theme.breakpoints.down("sm")]: { width: "300px" } })}
+        sx={(theme) => ({
+          [theme.breakpoints.up("sm")]: { maxWidth: "900px" },
+          [theme.breakpoints.down("sm")]: {
+            maxWidth: "400px",
+            minWidth: "250px",
+          },
+        })}
       >
         <Typography
           variant="h2"
