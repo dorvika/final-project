@@ -40,6 +40,14 @@ const theme = createTheme({
       lineHeight: "58px",
       color: "#373F41",
       letterSpacing: "5px",
+      [`@media screen and (max-width: 900px)`]: {
+        fontSize: 28,
+        lineHeight: "38px",
+      },
+      [`@media screen and (max-width: 600px)`]: {
+        fontSize: 24,
+        lineHeight: "32px",
+      },
       [`@media screen and (max-width: 396px)`]: {
         fontSize: 26,
         lineHeight: "38px",
