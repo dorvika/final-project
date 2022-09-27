@@ -12,6 +12,7 @@ const WishList = () => {
       <Typography
         variant="h2"
         sx={(theme) => ({
+          [theme.breakpoints.down("md")]: { fontSize: "28px" },
           [theme.breakpoints.down("sm")]: { fontSize: "22px" },
         })}
       >
@@ -38,7 +39,7 @@ const WishList = () => {
         flexWrap="wrap"
         alignItems="center"
         sx={{ mt: "30px" }}
-        maxWidth="900px"
+        // maxWidth="900px"
       >
         {favorites.map((product) => {
           return <WishProductCard key={product.itemNo} product={product} />;
