@@ -32,10 +32,11 @@ const Popular = () => {
 
   return (
     <Box
-      sx={{
-        pb: 40,
+      sx={(theme) => ({
         textAlign: "center",
-      }}
+        [theme.breakpoints.up("md")]: { pb: "80px" },
+        [theme.breakpoints.down("md")]: { pb: "20px" },
+      })}
     >
       <Typography
         variant="h2"
@@ -57,7 +58,8 @@ const Popular = () => {
             key={category.id}
             xs={matches ? 12 : index === 0 || index === 3 ? 8 : 4}
           >
-            <Link component={LinkRouter}
+            <Link
+              component={LinkRouter}
               to={`/catalog?categories=${category.name}&perPage=9&startPage=1`}
             >
               <Card sx={{ maxWidth: "100%" }}>
