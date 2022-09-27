@@ -8,13 +8,34 @@ import {
   TableHead,
   TableRow,
   Paper,
+  Breadcrumbs,
+  Link,
 } from "@mui/material";
 import { Check } from "@mui/icons-material";
+import { Link as LinkRouter } from "react-router-dom";
 import { CustomLink, StyledTableCell, StyledTableRow } from "./styles";
 
 const Payment = () => {
   return (
     <Container>
+      <Breadcrumbs
+        sx={(theme) => ({
+          mb: "30px",
+          [theme.breakpoints.down("sm")]: { mb: "15px", fontSize: "16px" },
+        })}
+      >
+        <Link component={LinkRouter} underline="hover" color="inherit" to="/">
+          Home
+        </Link>
+        <Link
+          component={LinkRouter}
+          underline="hover"
+          color="inherit"
+          to="/payment"
+        >
+          Payment & Delivery
+        </Link>
+      </Breadcrumbs>
       <Typography variant="h2" textAlign="center" mb="20px">
         Delivery
       </Typography>
