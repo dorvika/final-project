@@ -26,7 +26,7 @@ const Contact = () => {
         })}
       >
         <Link underline="hover" color="inherit" href="/">
-          Shop
+          Home
         </Link>
         <Link
           underline="hover"
