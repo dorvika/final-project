@@ -7,9 +7,18 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { useEffect } from "react";
 import { Link as LinkRouter } from "react-router-dom";
 
 const AboutUs = () => {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
   return (
     <Container sx={{ pb: "40px" }}>
       <Breadcrumbs
