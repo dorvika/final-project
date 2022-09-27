@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Preloader } from "../../../pages/Categories";
+import Preloader from "../../../utils/Preloader.jsx";
 import { fetchData } from "../../../utils/api";
 import OrderCard from "./OrderCard.jsx";
 

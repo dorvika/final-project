@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import { Form, Formik } from "formik";
 import { useState } from "react";
-import { Preloader } from "../../../pages/Categories";
+import Preloader from "../../../utils/Preloader.jsx";
 import { putData } from "../../../utils/api";
 import { validationChangePassword } from "../../../utils/ValidationSchema";
 
@@ -77,7 +77,13 @@ const ChangePassword = () => {
     <>
       <Button
         variant="text"
-        sx={{ mt: "40px", mb: "70px" }}
+        sx={(theme) => ({
+          [theme.breakpoints.up("sm")]: { mt: "40px", mb: "70px" },
+          [theme.breakpoints.down("sm")]: {
+            mt: "20px",
+            mb: "20px",
+          },
+        })}
         onClick={handleClickOpen}
       >
         Change Password

@@ -79,16 +79,19 @@ const NewIn = () => {
     dispatch(fetchProducts());
   }, []);
   const { products } = useSelector((state) => state.products);
-  // Shuffle array
   const shuffledProducts = products.sort(() => 0.5 - Math.random());
-  // Get sub-array of first n elements after shuffled
   let newInProducts = shuffledProducts.slice(0, 4);
 
   return (
     <Box
-      sx={{
-        pb: 40,
-      }}
+      sx={(theme) => ({
+        [theme.breakpoints.up("md")]: {
+          pb: "80px",
+        },
+        [theme.breakpoints.down("md")]: {
+          pb: "40px",
+        },
+      })}
     >
       <Typography
         variant="h2"

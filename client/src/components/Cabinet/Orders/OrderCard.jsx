@@ -14,12 +14,13 @@ import {
   Divider,
   Stack,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import { ExpandMore } from "@mui/icons-material";
 import { useState } from "react";
 import theme from "../../../muiTheme/theme";
 import { putData } from "../../../utils/api";
-import { Preloader } from "../../../pages/Categories";
+import Preloader from "../../../utils/Preloader.jsx";
 
 const OrderCard = ({ order }) => {
   const [expanded, setExpanded] = useState(false);
@@ -27,6 +28,7 @@ const OrderCard = ({ order }) => {
   const isCancelled = order.canceled === true;
   const [cancelData, setCancelData] = useState({ status: "", data: "" });
   const [isLoading, setIsLoading] = useState(false);
+  const matches = useMediaQuery("(max-width:600px");
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -82,7 +84,20 @@ const OrderCard = ({ order }) => {
               backgroundColor: !isCancelled ? "primary.main" : "#DADADA",
             }}
           />
-          <Box sx={{ ml: "15px", width: "33%", flexShrink: 0 }}>
+          <Box
+            sx={(theme) => ({
+              [theme.breakpoints.up("sm")]: {
+                ml: "15px",
+                width: "33%",
+                flexShrink: 0,
+              },
+              [theme.breakpoints.down("sm")]: {
+                ml: "5px",
+                width: "33%",
+                // flexShrink: 0,
+              },
+            })}
+          >
             <Typography variant="subtitle2">
               № {order.orderNo} from {purchaseDate}
             </Typography>
@@ -92,40 +107,101 @@ const OrderCard = ({ order }) => {
           </Box>
           {expanded !== "panel1" && (
             <>
-              <Box sx={{ width: "33%" }}>
+              <Box
+                sx={(theme) => ({
+                  [theme.breakpoints.up("sm")]: {
+                    ml: "15px",
+                    width: "33%",
+                    flexShrink: 0,
+                  },
+                  [theme.breakpoints.down("sm")]: {
+                    ml: "5px",
+                    width: "33%",
+                    // flexShrink: 0,
+                  },
+                })}
+              >
                 <Typography variant="subtitle2">Amount of order</Typography>
                 <Typography variant="body">${order.totalSum}</Typography>
               </Box>
               <Stack
                 direction="row"
                 justifyContent="flex-end"
-                sx={{ width: "33%" }}
-              >
-                {order.products.map((product) => {
-                  return (
-                    <Card key={product.product.itemNo} sx={{ mr: "10px" }}>
-                      <CardMedia
-                        component="img"
-                        height="56px"
-                        sx={{
-                          width: "56px",
-                          [theme.breakpoints.down("sm")]: {
-                            mr: "0",
-                            width: "300px",
-                          },
-                        }}
-                        image={product.product.imageUrls[0]}
-                      />
-                    </Card>
-                  );
+                sx={(theme) => ({
+                  [theme.breakpoints.up("sm")]: {
+                    ml: "15px",
+                    width: "33%",
+                    // flexShrink: 0,
+                  },
+                  [theme.breakpoints.down("sm")]: {
+                    ml: "5px",
+                    width: "33%",
+                    flexShrink: 0,
+                  },
                 })}
+              >
+                {matches && (
+                  <Card
+                    key={order.products[0].product.itemNo}
+                    sx={{ mr: "10px" }}
+                  >
+                    <CardMedia
+                      component="img"
+                      height="56px"
+                      sx={{
+                        width: "56px",
+                        [theme.breakpoints.down("sm")]: {
+                          mr: "0",
+                          // width: "300px",
+                        },
+                      }}
+                      image={order.products[0].product.imageUrls[0]}
+                    />
+                  </Card>
+                )}
+                {!matches &&
+                  order.products.map((product) => {
+                    return (
+                      <Card key={product.product.itemNo} sx={{ mr: "10px" }}>
+                        <CardMedia
+                          component="img"
+                          height="56px"
+                          sx={{
+                            width: "56px",
+                            // [theme.breakpoints.up("sm")]: {
+                            //   mr: "50px",
+                            // },
+                          }}
+                          image={product.product.imageUrls[0]}
+                        />
+                      </Card>
+                    );
+                  })}
               </Stack>
             </>
           )}
         </AccordionSummary>
         <AccordionDetails>
-          <Stack direction="row" sx={{ ml: "24px" }}>
-            <Box sx={{ mr: "50px" }}>
+          <Stack
+            direction="row"
+            sx={(theme) => ({
+              [theme.breakpoints.up("sm")]: {
+                ml: "24px",
+                flexDirection: "row",
+              },
+              [theme.breakpoints.down("sm")]: {
+                flexDirection: "column",
+                ml: "12px",
+              },
+            })}
+          >
+            <Box
+              sx={(theme) => ({
+                [theme.breakpoints.up("md")]: { mr: "50px" },
+                [theme.breakpoints.down("md")]: { mr: "20px" },
+                [theme.breakpoints.down("sm")]: { mr: "10px" },
+              })}
+            >
               <Typography
                 variant="subtitle2"
                 sx={{ mb: "20px", fontSize: "16px" }}
@@ -173,7 +249,11 @@ const OrderCard = ({ order }) => {
             <Box>
               <Typography
                 variant="subtitle2"
-                sx={{ mb: "20px", fontSize: "16px" }}
+                sx={(theme) => ({
+                  mb: "20px",
+                  fontSize: "16px",
+                  [theme.breakpoints.down("sm")]: { mt: "15px" },
+                })}
               >
                 Products
               </Typography>
@@ -181,63 +261,140 @@ const OrderCard = ({ order }) => {
                 return (
                   <Card
                     key={product.product.itemNo}
-                    sx={{ display: "flex", alignItems: "center", mb: "20px" }}
+                    sx={(theme) => ({
+                      [theme.breakpoints.up("md")]: {
+                        display: "flex",
+                        flexDirection: "row",
+
+                        alignItems: "center",
+                        mb: "20px",
+                      },
+                      [theme.breakpoints.down("md")]: {
+                        display: "flex",
+                        alignItems: "center",
+                        mb: "20px",
+                      },
+                      [theme.breakpoints.down("sm")]: {
+                        display: "flex",
+
+                        flexDirection: "column",
+                        alignItems: "flex-start",
+                        mb: "20px",
+                      },
+                    })}
                   >
-                    <CardMedia
-                      component="img"
-                      height="56px"
-                      sx={{
-                        width: "56px",
+                    <Box
+                      sx={(theme) => ({
                         [theme.breakpoints.down("sm")]: {
-                          mr: "5px",
+                          display: "flex",
+                          width: "100%",
                         },
                         [theme.breakpoints.up("sm")]: {
-                          mr: "15px",
+                          display: "flex",
+                          width: "50%",
                         },
-                      }}
-                      image={product.product.imageUrls[0]}
-                    ></CardMedia>
-                    <Typography
-                      component="p"
-                      variant="body"
-                      sx={{
-                        fontSize: "14px",
-                        m: "0 20px",
-                        textTransform: "capitalize",
-                        width: "60%",
-                      }}
+                      })}
                     >
-                      {product.product.name}
-                    </Typography>
-                    <Box sx={{ m: "0 40px" }}>
-                      <Typography variant="subtitle2">Price</Typography>
+                      <CardMedia
+                        component="img"
+                        height="56px"
+                        sx={{
+                          width: "56px",
+                          [theme.breakpoints.down("md")]: {
+                            mr: "5px",
+                          },
+                          [theme.breakpoints.up("md")]: {
+                            mr: "15px",
+                          },
+                        }}
+                        image={product.product.imageUrls[0]}
+                      ></CardMedia>
                       <Typography
                         component="p"
                         variant="body"
-                        sx={{ fontSize: "14px" }}
+                        sx={(theme) => ({
+                          [theme.breakpoints.up("md")]: {
+                            fontSize: "14px",
+                            m: "0 20px",
+                            textTransform: "capitalize",
+                            // width: "60%",
+                          },
+                          [theme.breakpoints.down("md")]: {
+                            m: "0 10px",
+                            textTransform: "capitalize",
+                            // width: "60%",
+                          },
+                        })}
                       >
-                        ${product.product.currentPrice}
+                        {product.product.name}
                       </Typography>
                     </Box>
-                    <Box sx={{ m: "0 40px" }}>
-                      <Typography variant="subtitle2">Quantity</Typography>
-                      <Typography
-                        component="p"
-                        variant="body"
-                        sx={{ fontSize: "14px" }}
+                    <Box
+                      sx={(theme) => ({
+                        [theme.breakpoints.down("sm")]: {
+                          display: "flex",
+                          width: "100%",
+                          mt: "10px",
+                        },
+                        [theme.breakpoints.up("sm")]: { display: "flex" },
+                      })}
+                    >
+                      <Box
+                        sx={(theme) => ({
+                          [theme.breakpoints.up("md")]: { m: "0 40px" },
+                          [theme.breakpoints.down("md")]: {
+                            width: "33%",
+                            m: "0 15px",
+                          },
+                          [theme.breakpoints.down("sm")]: { width: "33%" },
+                        })}
                       >
-                        {product.cartQuantity}
-                      </Typography>
-                    </Box>
-                    <Box sx={{ m: "0 40px" }}>
-                      <Typography variant="subtitle2">Amount</Typography>
-                      <Typography
-                        component="p"
-                        variant="body"
-                        sx={{ fontSize: "14px" }}
+                        <Typography variant="subtitle2">Price</Typography>
+                        <Typography
+                          component="p"
+                          variant="body"
+                          sx={{ fontSize: "14px" }}
+                        >
+                          ${product.product.currentPrice}
+                        </Typography>
+                      </Box>
+                      <Box
+                        sx={(theme) => ({
+                          [theme.breakpoints.up("md")]: { m: "0 40px" },
+                          [theme.breakpoints.down("md")]: {
+                            width: "33%",
+                            m: "0 15px",
+                          },
+                          [theme.breakpoints.down("sm")]: { width: "33%" },
+                        })}
                       >
-                        ${product.cartQuantity * product.product.currentPrice}
-                      </Typography>
+                        <Typography variant="subtitle2">Quantity</Typography>
+                        <Typography
+                          component="p"
+                          variant="body"
+                          sx={{ fontSize: "14px" }}
+                        >
+                          {product.cartQuantity}
+                        </Typography>
+                      </Box>
+                      <Box
+                        sx={(theme) => ({
+                          [theme.breakpoints.up("md")]: { m: "0 40px" },
+                          [theme.breakpoints.down("md")]: {
+                            width: "33%",
+                            m: "0 15px",
+                          },
+                        })}
+                      >
+                        <Typography variant="subtitle2">Amount</Typography>
+                        <Typography
+                          component="p"
+                          variant="body"
+                          sx={{ fontSize: "14px" }}
+                        >
+                          ${product.cartQuantity * product.product.currentPrice}
+                        </Typography>
+                      </Box>
                     </Box>
                   </Card>
                 );
@@ -246,7 +403,7 @@ const OrderCard = ({ order }) => {
                 direction="row"
                 justifyContent="space-between"
                 alignItems="center"
-                sx={{ mt: "20px" }}
+                sx={{ mt: "20px", mr: "15px" }}
               >
                 <Typography variant="subtitle2"> Payment</Typography>
                 <Typography
@@ -261,6 +418,7 @@ const OrderCard = ({ order }) => {
                 direction="row"
                 justifyContent="space-between"
                 alignItems="center"
+                sx={{ mr: "15px" }}
               >
                 <Typography variant="subtitle2"> Delivery</Typography>
                 <Typography
@@ -276,6 +434,7 @@ const OrderCard = ({ order }) => {
                 direction="row"
                 justifyContent="space-between"
                 alignItems="center"
+                sx={{ mr: "15px" }}
               >
                 <Typography variant="subtitle2"> Total Sum</Typography>
                 <Typography
@@ -367,5 +526,5 @@ const OrderCard = ({ order }) => {
       </Dialog>
     </>
   );
-};
+};;;
 export default OrderCard;

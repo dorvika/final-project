@@ -67,25 +67,11 @@ const FavoritesProductCard = ({ product }) => {
                     width: "200px",
                     mr: "80px",
                   },
-                  [theme.breakpoints.down("sm")]: {
-                    // mr: "80px",
-                  },
+                  [theme.breakpoints.down("sm")]: {},
                 })}
                 image={`${product.imageUrls[0]}`}
               ></CardMedia>
             </Link>
-            {/* <IconButton
-              sx={(theme) => ({
-                // ml: "75px",
-                p: "0px",
-                [theme.breakpoints.up("sm")]: {
-                  display: "none",
-                },
-              })}
-              onClick={handleRemoveProduct}
-            >
-              <Close />
-            </IconButton> */}
           </Stack>
           <CardContent>
             <Box>

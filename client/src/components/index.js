@@ -10,3 +10,4 @@ export { default as MightLike } from "./Sections/MightLike/MightLike.jsx";
 export { default as EmptyFavorites } from "./Favorites/EmptyFavorites.jsx";
 export { default as FavoritesProductList } from "./Favorites/FavoritesProductList.jsx";
 export { default as CabinetMenu } from "./Cabinet/CabinetMenu.jsx";
+export { default as ServiceTerms } from "./TermsOfService/ServiceTerms.jsx";
