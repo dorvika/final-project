@@ -6,22 +6,15 @@ import {
     deleteData,
     getDataLS,
   } from "../../utils/api";
-  const token = getDataLS("userToken");
   
   export const addToCart = (product) => {
-    return async function (dispatch) {
-      if (token.length !== 0 || !token) {
+    return async function (dispatch, getState) {
+      const isLogged = getState().loggedIn.isLoggedIn;
         dispatch({
           type: "ADD_TO_CART",
           payload: { product },
         });
-        putData(`/cart/${product._id}`);
-      } else {
-        dispatch({
-          type: "ADD_TO_CART",
-          payload: { product },
-        });
-      }
+        if(isLogged) {putData(`/cart/${product._id}`)};
     };
   };
   
@@ -92,36 +85,26 @@ import {
   };
   
   export const removeFromCart = (id) => {
-    return async function (dispatch) {
-      if (token.length !== 0 || !token) {
+    return async function (dispatch, getState) {
+      const isLogged = getState().loggedIn.isLoggedIn;
         dispatch({
           type: "REMOVE_FROM_CART",
           payload: { id },
         });
-        deleteData(`/cart/${id}`);
-      } else {
-        dispatch({
-          type: "REMOVE_FROM_CART",
-          payload: { id },
-        });
-      }
+        if(isLogged) {deleteData(`/cart/${id}`);}
+        
     };
   };
   
   export const decreaseCartItem = (product) => {
-    return async function (dispatch) {
-      if (token.length !== 0 || !token) {
+    return async function (dispatch, getState) {
+      const isLogged = getState().loggedIn.isLoggedIn;
         dispatch({
           type: "DECREASE_CART_ITEM",
           payload: { product },
         });
-        deleteData(`/cart/product/${product._id}`);
-      } else {
-        dispatch({
-          type: "DECREASE_CART_ITEM",
-          payload: { product },
-        });
-      }
+        if(isLogged){deleteData(`/cart/product/${product._id}`);}
+        
     };
   };
   
@@ -133,17 +116,13 @@ import {
   };
   
   export const removeAllFromCart = () => {
-    return async function (dispatch) {
-        if (token.length !== 0 || !token) {
+    return async function (dispatch, getState) {
+      const isLogged = getState().loggedIn.isLoggedIn;
           dispatch({
             type: "REMOVE_ALL_FROM_CART",
           });
-          deleteData("/cart");
-        } else {
-          dispatch({
-            type: "REMOVE_ALL_FROM_CART",
-          });
-        }
+          if(isLogged){deleteData("/cart");}
+          
       };
   };
   

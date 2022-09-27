@@ -6,40 +6,28 @@ import {
   deleteData,
   getDataLS,
 } from "../../utils/api";
-const token = getDataLS("userToken");
 
 export const addFavorite = (product) => {
-  return async function (dispatch) {
-    if (token.length !== 0 || !token) {
+  return async function (dispatch, getState) {
+    const isLogged = getState().loggedIn.isLoggedIn;
       dispatch({
         type: "ADD_FAVORITE",
         payload: { product },
       });
-      putData(`/wishlist/${product._id}`);
-    } else {
-      dispatch({
-        type: "ADD_FAVORITE",
-        payload: { product },
-      });
-    }
+      if(isLogged) {putData(`/wishlist/${product._id}`)};
+  
   };
 };
 
 
 export const removeFavorite = (product) => {
-  return async function (dispatch) {
-    if (token.length !== 0 || !token) {
+  return async function (dispatch, getState) {
+    const isLogged = getState().loggedIn.isLoggedIn;
       dispatch({
         type: "REMOVE_FAVORITE",
         payload: { product },
       });
-      deleteData(`/wishlist/${product._id}`);
-    } else {
-      dispatch({
-        type: "REMOVE_FAVORITE",
-        payload: { product },
-      });
-    }
+      if(isLogged) {deleteData(`/wishlist/${product._id}`)};
   };
 };
 
