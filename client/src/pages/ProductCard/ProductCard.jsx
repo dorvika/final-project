@@ -3,10 +3,11 @@ import ProductInfo from "./ProductInfo.jsx";
 import ProductSlider from "./ProductSlider.jsx";
 import { ProductCardContainer, ProductCardMainContainer } from "./styles.js";
 import { MightLike } from "../../components";
-import { useParams } from "react-router-dom";
+import { useParams, Link as LinkRouter } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchData } from "../../utils/api.js";
 import { Preloader } from "../Categories/index.js";
+
 
 const ProductCard = () => {
   const { id } = useParams();
@@ -50,29 +51,32 @@ const ProductCard = () => {
               [theme.breakpoints.down("sm")]: { mb: "15px", fontSize: "16px" },
             })}
           >
-            <Link underline="hover" color="inherit" href="/">
+            <Link component={LinkRouter} underline="hover" color="inherit" to="/">
               Shop
             </Link>
             <Link
+              component={LinkRouter}
               underline="hover"
               color="inherit"
-              href="/catalog?perPage=9&startPage=1"
+              to="/catalog?perPage=9&startPage=1"
             >
               Catalog
             </Link>
             <Link
+              component={LinkRouter}
               sx={{ textTransform: "capitalize" }}
               underline="hover"
               color="inherit"
-              href={`/catalog?categories=${categories}&perPage=9&startPage=1`}
+              to={`/catalog?categories=${categories}&perPage=9&startPage=1`}
             >
               {categories}
             </Link>
             <Link
+              component={LinkRouter}
               sx={{ textTransform: "capitalize" }}
               underline="hover"
               color="inherit"
-              href={`/catalog/${itemNo}`}
+              to={`/catalog/${itemNo}`}
             >
               {name}
             </Link>

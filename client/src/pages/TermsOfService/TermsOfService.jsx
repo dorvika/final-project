@@ -9,6 +9,7 @@ import {
   Typography,
   Stack,
 } from "@mui/material";
+import { Link as LinkRouter } from "react-router-dom";
 import { Fragment, useState } from "react";
 import listOfTerms from "./ListOfTerms";
 import {
@@ -29,10 +30,10 @@ const TermsOfService = () => {
     <>
       <Container>
         <Breadcrumbs sx={{ pb: "30px" }}>
-          <Link underline="hover" color="inherit" href="/">
+          <Link component={LinkRouter} underline="hover" color="inherit" to="/">
             Home
           </Link>
-          <Link underline="hover" color="inherit" href="/termsofservice">
+          <Link component={LinkRouter} underline="hover" color="inherit" to="/termsofservice">
             Terms of Service
           </Link>
         </Breadcrumbs>
@@ -58,7 +59,8 @@ const TermsOfService = () => {
                   <Fragment key={term.id}>
                     <CustomListItem>
                       <Link
-                        href={`#${term.chapter}`}
+                        component={LinkRouter}
+                        to={`#${term.chapter}`}
                         variant="h6"
                         underline="hover"
                         sx={{ letterSpacing: "0.04em" }}

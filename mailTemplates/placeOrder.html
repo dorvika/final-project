@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place order</title>
+</head>
+<body>
+    <div style="max-width: max-content;
+    margin: 0 auto;">
+        <header style="border-bottom: 2px solid #373F41; 
+        background-image: url('https://res.cloudinary.com/dipjt24ep/image/upload/v1664045286/POSTIL_LOGO_zyoyin.png'); 
+        background-repeat: no-repeat; 
+        background-position: center; 
+        height: 70px;">
+        </header>
+        <main>
+            <h1 style="text-align: center;
+            font-family: 'Verdana';
+            font-weight: 700;
+            font-size: 24px;
+            color: #373F41;">Thanks for your order</h1>
+
+            <h2 style="text-align: center;
+            font-family: 'Verdana';
+            font-size: 20px;
+            font-weight: 400;
+            color: #373F41;">Your order: <b>{{orderNo}}</b> successfully placed</h2>
+            <div class="grid-products">
+                <table style="font-size: 16px;
+                font-family: 'Verdana';
+                margin: 0 auto; text-align: center;" cellpadding="10" cellspacing="0">
+                    <tr>
+                        <th colspan="2">Products</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                    </tr>
+                    {{#each products}}
+                    <tr>
+                        <th><img src="{{this.product.imageUrls.[0]}}" alt="" width="100"></th>
+                        <td style="text-transform: capitalize;">{{this.product.name}}</td>
+                        <td>{{this.product.currentPrice}}$</td>
+                        <td>{{this.cartQuantity}}</td>
+                    </tr>
+                    {{/each}}
+                </table>
+            </div>
+            <div>
+                <p style="text-align: center;
+                font-family: 'Tahoma';
+                font-size: 20px;
+                font-weight: 600;
+                color: #373F41;">Total sum (without TAX): {{totalSum}}$</p>
+            </div>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+</body>
+</html>

@@ -1,4 +1,5 @@
 import { Container, Stack, Typography, Link } from "@mui/material";
+import { Link as LinkRouter } from "react-router-dom";
 
 const Error = () => {
   return (
@@ -26,7 +27,7 @@ const Error = () => {
             [theme.breakpoints.down("xs")]: { fontSize: 20 },
           })}
         >
-          Please, go <Link href="/">Home</Link>
+          Please, go <Link component={LinkRouter} to="/">Home</Link>
         </Typography>
       </Stack>
     </Container>

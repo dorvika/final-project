@@ -1,5 +1,6 @@
 import { FavoritesProductCard, CustomHr } from "./index";
-import { Box, Button, Container, Link, Typography } from "@mui/material";
+import { Box, Button, Container, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const FavoritesProductList = () => {
@@ -41,7 +42,7 @@ const FavoritesProductList = () => {
             alignItems: "center",
           }}
         >
-          <Link href="/catalog?perPage=9&startPage=1" sx={{ textDecoration: "none" }}>
+          <Link to="/catalog?perPage=9&startPage=1" sx={{ textDecoration: "none" }}>
             <Button
               variant="contained"
               sx={{

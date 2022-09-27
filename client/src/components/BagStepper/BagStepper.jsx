@@ -82,16 +82,16 @@ export default function HorizontalNonLinearStepper({products}) {
       email: data.email,
       mobile: data.phone,
       letterSubject: "Thank you for order! You are welcome!",
-      letterHtml: "<h1>Your order is placed. OrderNo is 023689452.</h1><p>{Other details about order in your HTML}</p>",
       deliveryAddress: {
         country: data.country,
         city: data.city,
         address: data.address1,
-        postal: data.zip
+        postal: data.zip,
       },
       shipping: data.delivery,
       paymentInfo: data.paymentmethod,
-    }
+      status: "confirmed",
+    };
 
     if(isCustomer !== undefined){
       newOrder = {...newOrder, customerId: isCustomer._id}

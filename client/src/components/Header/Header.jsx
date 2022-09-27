@@ -70,7 +70,7 @@ const Header = () => {
         >
           {isLoggedIn ? (
             <>
-              <IconButton href="/cabinet">
+              <IconButton component={Link} to="/cabinet">
                 <Tooltip title={userData.firstName + " " + userData.lastName}>
                   <PersonOutlined sx={{ color: "primary.main" }} />
                 </Tooltip>
@@ -82,13 +82,13 @@ const Header = () => {
             </IconButton>
           )}
 
-          <IconButton sx={{ color: "primary.main" }} href={"/favorites"}>
+          <IconButton sx={{ color: "primary.main" }} component={Link} to="/favorites">
             <Badge badgeContent={favorites.length} color="error">
               <FavoriteBorderOutlined />
             </Badge>
           </IconButton>
           {isBagEmpty ? (
-            <IconButton sx={{ color: "primary.main" }} href={"/cart"}>
+            <IconButton sx={{ color: "primary.main" }} component={Link} to="/cart">
               <Badge badgeContent={bag.cart.length} color="error">
                 <ShoppingBagOutlined />
               </Badge>

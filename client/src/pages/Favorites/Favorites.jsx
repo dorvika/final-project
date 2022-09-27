@@ -1,7 +1,7 @@
-import { MightLike } from "../../components";
-import { EmptyFavorites, FavoritesProductList } from "../../components";
+import { EmptyFavorites, FavoritesProductList, MightLike } from "../../components";
 import { useSelector } from "react-redux";
 import { Breadcrumbs, Link, Container } from "@mui/material";
+import { Link as LinkRouter } from "react-router-dom";
 
 const Favorites = () => {
   const favorites = useSelector((state) => state.favorites.favorites);
@@ -12,10 +12,10 @@ const Favorites = () => {
     <>
       <Container>
         <Breadcrumbs>
-          <Link underline="hover" color="inherit" href="/">
+          <Link component={LinkRouter} underline="hover" color="inherit" to="/">
             Home
           </Link>
-          <Link underline="hover" color="inherit" href="/favorites">
+          <Link component={LinkRouter} underline="hover" color="inherit" to="/favorites">
             Favorites
           </Link>
         </Breadcrumbs>
