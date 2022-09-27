@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import {
   Cart,
-  Categories,
+  Catalog,
   Error,
   Home,
   ProductCard,
@@ -25,7 +25,7 @@ export default function Router() {
     <main>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/catalog" element={<Categories />} />
+        <Route path="/catalog" element={<Catalog />} />
         <Route path="/catalog/:id" element={<ProductCard />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/cart/checkout" element={<CheckOut />} />

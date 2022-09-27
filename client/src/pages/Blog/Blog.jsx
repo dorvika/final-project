@@ -11,8 +11,17 @@ import { ArrowRightAlt } from "@mui/icons-material";
 import { Link as LinkRouter } from "react-router-dom";
 import { CustomBox, CustomImgBox } from "./styles";
 import { data } from "./data";
+import { useEffect } from "react";
 
 const Blog = () => {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
   const blogItems = data.map(({ id, img, category, title, subtitle, btn }) => (
     <Grid item xs={12} lg={6} key={id}>
       <Stack
@@ -69,21 +78,24 @@ const Blog = () => {
         </Breadcrumbs>
       </Container>
       <CustomBox>
-        <Typography
-          variant="h2"
-          textAlign="center"
-          sx={(theme) => ({
-            width: "80%",
-            [theme.breakpoints.down("sm")]: {
-              lineHeight: "30px",
-              fontSize: "20px",
-              width: "95%",
-            },
-          })}
-        >
-          Blog from design inspiration and healthy lifestyle tips to stories of
-          sustainability and environmental impact.
-        </Typography>
+        <Container>
+          <Typography
+            variant="h2"
+            sx={(theme) => ({
+              width: "80%",
+              m: "0 auto",
+              textAlign: "center",
+              [theme.breakpoints.down("sm")]: {
+                lineHeight: "30px",
+                fontSize: "20px",
+                width: "95%",
+              },
+            })}
+          >
+            Blog from design inspiration and healthy lifestyle tips to stories
+            of sustainability and environmental impact.
+          </Typography>
+        </Container>
       </CustomBox>
       <Container>
         <Grid container spacing={8} my="20px">

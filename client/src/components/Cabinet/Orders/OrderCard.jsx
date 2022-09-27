@@ -94,7 +94,6 @@ const OrderCard = ({ order }) => {
               [theme.breakpoints.down("sm")]: {
                 ml: "5px",
                 width: "33%",
-                // flexShrink: 0,
               },
             })}
           >
@@ -117,7 +116,6 @@ const OrderCard = ({ order }) => {
                   [theme.breakpoints.down("sm")]: {
                     ml: "5px",
                     width: "33%",
-                    // flexShrink: 0,
                   },
                 })}
               >
@@ -131,7 +129,6 @@ const OrderCard = ({ order }) => {
                   [theme.breakpoints.up("sm")]: {
                     ml: "15px",
                     width: "33%",
-                    // flexShrink: 0,
                   },
                   [theme.breakpoints.down("sm")]: {
                     ml: "5px",
@@ -152,7 +149,6 @@ const OrderCard = ({ order }) => {
                         width: "56px",
                         [theme.breakpoints.down("sm")]: {
                           mr: "0",
-                          // width: "300px",
                         },
                       }}
                       image={order.products[0].product.imageUrls[0]}
@@ -168,9 +164,6 @@ const OrderCard = ({ order }) => {
                           height="56px"
                           sx={{
                             width: "56px",
-                            // [theme.breakpoints.up("sm")]: {
-                            //   mr: "50px",
-                            // },
                           }}
                           image={product.product.imageUrls[0]}
                         />
@@ -317,12 +310,10 @@ const OrderCard = ({ order }) => {
                             fontSize: "14px",
                             m: "0 20px",
                             textTransform: "capitalize",
-                            // width: "60%",
                           },
                           [theme.breakpoints.down("md")]: {
                             m: "0 10px",
                             textTransform: "capitalize",
-                            // width: "60%",
                           },
                         })}
                       >
@@ -475,10 +466,7 @@ const OrderCard = ({ order }) => {
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>
-          {/* <Typography variant="h2">Order Cancelation</Typography> */}
-          Order Cancelation
-        </DialogTitle>
+        <DialogTitle>Order Cancelation</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
             <Typography variant="body">
@@ -526,5 +514,5 @@ const OrderCard = ({ order }) => {
       </Dialog>
     </>
   );
-};;;
+};
 export default OrderCard;

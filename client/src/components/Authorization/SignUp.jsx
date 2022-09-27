@@ -104,7 +104,7 @@ const SignUp = () => {
       })
       .finally(() => actions.setSubmitting(false));
   };
-  console.log(checked);
+
   return (
     <>
       {signUpResponse === "" || signUpResponse.status !== 200 ? (
@@ -341,6 +341,6 @@ const SignUp = () => {
       )}
     </>
   );
-};;;;;;;;
+};
 
 export default SignUp;

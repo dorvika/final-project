@@ -13,7 +13,6 @@ const ConfirmationPromo = ({ checked, handleChange, isCheckBox }) => {
       {isCheckBox && (
         <Stack
           direction="row"
-          // spacing={10}
           mt="20px"
           alignItems="center"
           sx={(theme) => ({

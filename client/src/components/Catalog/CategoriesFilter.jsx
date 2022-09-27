@@ -1,7 +1,7 @@
 import { Button, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { CategoriesAccordion, PriceSlider, CategoriesRadio } from "./index.js";
-import { ColorBox } from "./styles.js";
+import { ColorBox } from "./styles";
 import { fetchData } from "../../utils/api.js";
 import { useSearchParams } from "react-router-dom";
 

@@ -8,11 +8,17 @@ import CustomBackButton from "../components/CustomBackButton/CustomBackButton.js
 const ShoppingBagPage = ({ title, products, next, subtotal }) => {
   return (
     <Container
-      sx={{
+      sx={(theme) => ({
         p: "80px 0",
-      }}
+        [theme.breakpoints.down("md")]: {
+          p: "40px 0",
+        },
+        [theme.breakpoints.down("sm")]: {
+          p: "20px 0",
+        },
+      })}
     >
-      <Grid container spacing={40}>
+      <Grid container spacing={20}>
         <Grid item md={8} xs={12}>
           <Box>
             <Typography
@@ -60,10 +66,14 @@ const ShoppingBagPage = ({ title, products, next, subtotal }) => {
             </Typography>
             <CustomHr sx={{ mb: "10px" }} />
             <Summary subtotal={subtotal} />
-            <Button 
+            <Button
               variant="contained"
-              sx={theme => ({ p: "15px 85px", alignSelf: "flex-end", [theme.breakpoints.down("670")]:{alignSelf: "center"} })}
-              onClick={()=>next()}
+              sx={(theme) => ({
+                p: "15px 85px",
+                alignSelf: "flex-end",
+                [theme.breakpoints.down("670")]: { alignSelf: "center" },
+              })}
+              onClick={() => next()}
             >
               Buy
             </Button>

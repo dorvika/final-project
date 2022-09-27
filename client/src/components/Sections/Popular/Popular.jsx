@@ -82,7 +82,6 @@ const Popular = () => {
           </CustomGridItem>
         ))}
       </Grid>
-      {/* )} */}
 
       <CustomButton sx={{ mt: "30px", padding: "0" }}>
         <Link
@@ -99,6 +98,6 @@ const Popular = () => {
       </CustomButton>
     </Box>
   );
-};;;;;;;;;;;;
+};
 
 export default Popular;

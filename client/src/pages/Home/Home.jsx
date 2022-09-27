@@ -1,5 +1,5 @@
 import { Container } from "@mui/material";
-import {ImageSlider, NewInSection, PopularSection} from "../../components";
+import { ImageSlider, NewInSection, PopularSection } from "../../components";
 import { SliderWrapper } from "./styles";
 
 const Home = () => {
@@ -9,10 +9,9 @@ const Home = () => {
         <ImageSlider />
       </SliderWrapper>
       <Container>
-        {/* решту компонентів Home Page писати сюди */}
-        <NewInSection/>
-        <PopularSection/>
-        </Container>
+        <NewInSection />
+        <PopularSection />
+      </Container>
     </>
   );
 };

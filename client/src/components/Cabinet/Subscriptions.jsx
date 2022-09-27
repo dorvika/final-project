@@ -124,7 +124,6 @@ const Subscriptions = () => {
             [theme.breakpoints.down("sm")]: {
               fontSize: "14px",
               margin: "10px",
-              // maxWidth: "900px",
               lineHeight: "20px",
             },
           })}

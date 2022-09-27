@@ -1,8 +1,5 @@
-// import { CartProductCard, CustomHr } from "./index";
-
 import { Container, Button, Typography, Stack, Box } from "@mui/material";
 import { Link } from "react-router-dom";
-// import products from "./ProductsExamples.jsx";
 
 const EmptyCart = () => {
   return (
@@ -20,7 +17,6 @@ const EmptyCart = () => {
           >
             YOUR BAG IS FEELING LONELY - ADD
           </Typography>
-          {/* <Box sx={{}}> */}
           <Typography
             variant="h2"
             textAlign="center"

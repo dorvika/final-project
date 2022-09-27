@@ -9,16 +9,8 @@ export const CustomCabinetTab = styled(Tab)(({ theme }) => ({
   alignItems: "flex-start",
   justifyContent: "flex-start",
   fontSize: "20px",
-  // marginRight: "50px",
-  // padding: "15px 0 15px 0px",
   [theme.breakpoints.up("md")]: { width: "300px" },
-  // [theme.breakpoints.down("sm")]: { width: "60px" },
-  // width: "300px",
-
   "&.MuiTabs-indicator": { width: "3px", left: 0 },
-  // [theme.breakpoints.down("sm")]: {
-  //   width: "145px",
-  // },
 }));
 
 export const PhoneNumberFormat = forwardRef(function NumberFormatCustom(
