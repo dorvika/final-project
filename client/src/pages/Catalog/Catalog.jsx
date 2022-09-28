@@ -8,14 +8,14 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import { CustomPaginationItem } from "./Catalog Product List/styles.js";
+import { CustomPaginationItem } from "../../components/Catalog/Catalog Product List/styles.js";
 import {
   CategoriesFilter,
   TopFilter,
   ShowQuantity,
   SortBy,
   CatalogProductList,
-} from "./index.js";
+} from "../../components/Catalog/index.js";
 import { useDispatch, useSelector } from "react-redux";
 import {
   useLocation,
@@ -29,7 +29,7 @@ import {
 import { CategoriesMainContainer } from "./styles";
 import { fetchData } from "../../utils/api.js";
 
-const Categories = () => {
+const Catalog = () => {
   const dispatch = useDispatch();
   const { filteredProductsQty } = useSelector((state) => state.filters);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -79,6 +79,14 @@ const Categories = () => {
       behavior: "smooth",
     });
   };
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, []);
 
   return (
     <CategoriesMainContainer>
@@ -157,4 +165,4 @@ const Categories = () => {
   );
 };
 
-export default Categories;
+export default Catalog;

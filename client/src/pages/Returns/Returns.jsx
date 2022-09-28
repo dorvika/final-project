@@ -1,9 +1,18 @@
 import { Breadcrumbs, Container, Link, Stack, Typography } from "@mui/material";
+import { useEffect } from "react";
 import { Link as LinkRouter } from "react-router-dom";
 import { data } from "./data";
 import { CustomReturnsBox, CustomReturnsButton } from "./styles";
 
 const Returns = () => {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
   const returnsItems = data.map(({ id, title, list, btnText }) => (
     <Stack width={{ xs: "100%", sm: "50%" }} alignItems="flex-start" key={id}>
       <Typography variant="h3" fontWeight={600} mb="20px" mt="10px">
@@ -41,9 +50,15 @@ const Returns = () => {
         </Breadcrumbs>
       </Container>
       <CustomReturnsBox>
-        <Typography color="white" mb="20px">
-          365 DAY GUARANTEE
-        </Typography>
+        <Container>
+          <Typography
+            color="white"
+            mb="20px"
+            sx={{ m: "0 auto", textAlign: "center" }}
+          >
+            365 DAY GUARANTEE
+          </Typography>
+        </Container>
         <Typography
           color="white"
           mb="20px"

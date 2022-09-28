@@ -3,7 +3,6 @@ import {
   Box,
   Button,
   Dialog,
-  //   DialogActions,
   DialogContent,
   DialogTitle,
   FormControl,
@@ -63,7 +62,7 @@ const ChangePassword = () => {
         setTimeout(() => {
           handleClose();
         }, 3000);
-           })
+      })
       .catch((error) => {
         setChangePasswordResponse({
           status: error.status,

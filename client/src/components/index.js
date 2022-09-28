@@ -11,3 +11,5 @@ export { default as EmptyFavorites } from "./Favorites/EmptyFavorites.jsx";
 export { default as FavoritesProductList } from "./Favorites/FavoritesProductList.jsx";
 export { default as CabinetMenu } from "./Cabinet/CabinetMenu.jsx";
 export { default as ServiceTerms } from "./TermsOfService/ServiceTerms.jsx";
+export { default as ProductInfo } from "./ProductCard/ProductInfo.jsx";
+export { default as ProductSlider } from "./ProductCard/ProductSlider.jsx";

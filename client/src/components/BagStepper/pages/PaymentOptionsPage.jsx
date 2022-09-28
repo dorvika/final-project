@@ -15,11 +15,17 @@ const PaymentOptionsPage = ({ data, next, prev, title, products, subtotal }) => 
 
   return (
     <Container
-      sx={{
+      sx={(theme) => ({
         p: "80px 0",
-      }}
+        [theme.breakpoints.down("md")]: {
+          p: "40px 0",
+        },
+        [theme.breakpoints.down("sm")]: {
+          p: "20px 0",
+        },
+      })}
     >
-      <Grid container spacing={40}>
+      <Grid container spacing={{ xs: 10, sm: 20, md: 40 }}>
         <Grid item md={8} xs={12}>
           <Box>
             <Typography
@@ -61,12 +67,16 @@ const PaymentOptionsPage = ({ data, next, prev, title, products, subtotal }) => 
             <CustomHr sx={{ mb: "10px" }} />
             <ShoppingBag products={products} small={true} />
             <CustomHr sx={{ mt: "10px" }} />
-            <Summary subtotal={subtotal} shipping={data.delivery}/>
+            <Summary subtotal={subtotal} shipping={data.delivery} />
             <Button
               variant="contained"
               form="payment"
               type="submit"
-              sx={theme => ({ p: "15px 85px", alignSelf: "flex-end", [theme.breakpoints.down("670")]:{alignSelf: "center"} })}
+              sx={(theme) => ({
+                p: "15px 85px",
+                alignSelf: "flex-end",
+                [theme.breakpoints.down("670")]: { alignSelf: "center" },
+              })}
               onClick={() => {}}
             >
               Next

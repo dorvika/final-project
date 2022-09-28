@@ -14,8 +14,17 @@ import {
 import { Check } from "@mui/icons-material";
 import { Link as LinkRouter } from "react-router-dom";
 import { CustomLink, StyledTableCell, StyledTableRow } from "./styles";
+import { useEffect } from "react";
 
 const Payment = () => {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
   return (
     <Container>
       <Breadcrumbs

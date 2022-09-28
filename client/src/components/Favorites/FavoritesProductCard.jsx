@@ -45,10 +45,15 @@ const FavoritesProductCard = ({ product }) => {
       >
         <Stack
           sx={(theme) => ({
-            [theme.breakpoints.down("sm")]: { flexDirection: "column" },
-            [theme.breakpoints.up("sm")]: { flexDirection: "row" },
+            [theme.breakpoints.down("sm")]: {
+              flexDirection: "column",
+              width: "100%",
+            },
+            [theme.breakpoints.up("sm")]: {
+              flexDirection: "row",
+              width: "65%",
+            },
           })}
-          // direction="row"
         >
           <Stack
             direction="row"
@@ -61,13 +66,19 @@ const FavoritesProductCard = ({ product }) => {
             >
               <CardMedia
                 component="img"
-                // height="200px"
                 sx={(theme) => ({
                   [theme.breakpoints.up("sm")]: {
                     width: "200px",
+                    mr: "20px",
+                  },
+                  [theme.breakpoints.up("md")]: {
+                    width: "200px",
+                    mr: "40px",
+                  },
+                  [theme.breakpoints.up("lg")]: {
+                    width: "200px",
                     mr: "80px",
                   },
-                  [theme.breakpoints.down("sm")]: {},
                 })}
                 image={`${product.imageUrls[0]}`}
               ></CardMedia>
@@ -130,7 +141,7 @@ const FavoritesProductCard = ({ product }) => {
                       sx={{
                         display: "flex",
                         alignItems: "center",
-                        justifyContent: "space-between",
+                        justifyContent: "flex-start",
                       }}
                     >
                       <Typography
@@ -172,7 +183,6 @@ const FavoritesProductCard = ({ product }) => {
                   <Stack justifyContent="flex-end" alignItems="flex-end">
                     <IconButton
                       sx={(theme) => ({
-                        // ml: "75px",
                         mb: "10px",
                         p: "0",
                         [theme.breakpoints.up("sm")]: {
@@ -186,7 +196,6 @@ const FavoritesProductCard = ({ product }) => {
                     <Button
                       onClick={isInBasket ? removeFromBasket : addToBasket}
                       variant={isInBasket ? "outlined" : "contained"}
-                      // disabled={isInBasket ? true : false}
                       sx={(theme) => ({
                         padding: "10px 30px",
                         textAlign: "center",
@@ -204,6 +213,7 @@ const FavoritesProductCard = ({ product }) => {
         <Box
           sx={(theme) => ({
             [theme.breakpoints.down("sm")]: { display: "none" },
+            width: "35%",
           })}
           display="flex"
           flexDirection="column"
@@ -216,7 +226,6 @@ const FavoritesProductCard = ({ product }) => {
           <Button
             onClick={isInBasket ? removeFromBasket : addToBasket}
             variant={isInBasket ? "outlined" : "contained"}
-            // disabled={isInBasket ? true : false}
             sx={{ padding: "10px 30px" }}
           >
             {isInBasket ? "remove from bag" : "add to bag"}
@@ -224,7 +233,6 @@ const FavoritesProductCard = ({ product }) => {
         </Box>
       </Card>
       <CustomHr />
-      {/* </Link> */}
     </>
   );
 };

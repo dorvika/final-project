@@ -72,10 +72,6 @@ const CabinetMenu = () => {
           display: "flex",
           mb: "30px",
         },
-        // [theme.breakpoints.down("sm")]: {
-        //   display: "flex",
-        //   mb: "50px",
-        // },
       })}
     >
       <Tabs
@@ -87,7 +83,6 @@ const CabinetMenu = () => {
           textAlign: "left",
           borderRight: 1,
           borderColor: "divider",
-          // [theme.breakpoints.down("sm")]: { width: "150px" },
           [theme.breakpoints.up("md")]: { width: "300px" },
         })}
       >

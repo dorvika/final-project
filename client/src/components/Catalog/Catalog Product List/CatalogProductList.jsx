@@ -21,9 +21,15 @@ const CatalogProductList = ({ isLoadingFilter }) => {
   return (
     <>
       {hasError && (
-        <div>
+        <Typography
+          variant="h2"
+          sx={(theme) => ({
+            textAlign: "center",
+            [theme.breakpoints.down("xs")]: { fontSize: 20 },
+          })}
+        >
           <p>Ooops, something went wrong</p>
-        </div>
+        </Typography>
       )}
       {isLoading || isLoadingFilter ? (
         <Preloader />

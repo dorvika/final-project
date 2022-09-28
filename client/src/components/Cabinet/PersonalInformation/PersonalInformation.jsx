@@ -25,7 +25,7 @@ const PersonalInformation = () => {
   const handleLogOut = () => {
     dispatch(setLoggedOut());
     dispatch(removeAllFromCart());
-    dispatch(removeAllFromWishlist())
+    dispatch(removeAllFromWishlist());
     navigate("/");
   };
 
@@ -54,8 +54,6 @@ const PersonalInformation = () => {
         {userData.keys === 0 && <Preloader />}
         <Stack
           maxWidth="900px"
-          // direction="row"
-          // justifyContent="space-between"
           alignItems="center"
           sx={(theme) => ({
             [theme.breakpoints.up("sm")]: {
@@ -66,7 +64,6 @@ const PersonalInformation = () => {
             },
             [theme.breakpoints.down("sm")]: {
               mt: "15px",
-              // direction: "row",
               justifyContent: "space-between",
               alignItems: "flex-start",
             },

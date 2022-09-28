@@ -11,10 +11,8 @@ import {
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-// eslint-disable-next-line import/no-unresolved
-import CartProductModal from "./CartProductModal";
-// eslint-disable-next-line import/named
-import {CustomPopper} from "./styles";
+import CartProductModal from "./CartProductModal.jsx";
+import { CustomPopper } from "./styles";
 
 const BagPopper = () => {
   const cart = useSelector((state) => state.cart.cart);
@@ -40,21 +38,26 @@ const BagPopper = () => {
   return (
     <>
       <ClickAwayListener onClickAway={handleClickAway}>
-      <IconButton
-        style={{ position: "relative", textDecoration: "none", color: "#373F41" }}
-        aria-describedby={id}
-        onClick={handleClick}
-      >
-        {open && <CustomPopper
-            placement="bottom-end"
-            id={id}
-            open={open}
-            anchorEl={anchorEl}
-            transition
+        <IconButton
+          style={{
+            position: "relative",
+            textDecoration: "none",
+            color: "#373F41",
+          }}
+          aria-describedby={id}
+          onClick={handleClick}
         >
-          {({TransitionProps}) => (
-              <Fade {...TransitionProps} timeout={350}>
-                <Box
+          {open && (
+            <CustomPopper
+              placement="bottom-end"
+              id={id}
+              open={open}
+              anchorEl={anchorEl}
+              transition
+            >
+              {({ TransitionProps }) => (
+                <Fade {...TransitionProps} timeout={350}>
+                  <Box
                     sx={{
                       width: "340px",
                       padding: "14px",
@@ -62,49 +65,58 @@ const BagPopper = () => {
                       display: "flex",
                       flexDirection: "column",
                     }}
-                >
-                  <Typography>Bag({cart.length})</Typography>
-                  <Typography>TOTAL: USD ${cartTotalSum()}</Typography>
-                  <Link style={{textDecoration: "none"}} to={"/cart"}>
-                    <Button
-                        sx={{maxWidth: "320px", width: "100%", height: "40px"}}
-                        variant="outlined"
-                    >
-                      VIEW BAG
-                    </Button>
-                  </Link>
-                  <Link
-                      style={{textDecoration: "none", marginTop: "10px"}}
-                      to={"/cart/checkout"}
                   >
-                    <Button
-                        sx={{maxWidth: "320px", width: "100%", height: "40px"}}
-                        variant="contained"
+                    <Typography>Bag({cart.length})</Typography>
+                    <Typography>TOTAL: USD ${cartTotalSum()}</Typography>
+                    <Link style={{ textDecoration: "none" }} to={"/cart"}>
+                      <Button
+                        sx={{
+                          maxWidth: "320px",
+                          width: "100%",
+                          height: "40px",
+                        }}
+                        variant="outlined"
+                      >
+                        VIEW BAG
+                      </Button>
+                    </Link>
+                    <Link
+                      style={{ textDecoration: "none", marginTop: "10px" }}
+                      to={"/cart/checkout"}
                     >
-                      CHECKOUT
-                    </Button>
-                  </Link>
-                  <Box>
-                    {cart.map((cartItem) => {
-                      return (
+                      <Button
+                        sx={{
+                          maxWidth: "320px",
+                          width: "100%",
+                          height: "40px",
+                        }}
+                        variant="contained"
+                      >
+                        CHECKOUT
+                      </Button>
+                    </Link>
+                    <Box>
+                      {cart.map((cartItem) => {
+                        return (
                           <CartProductModal
-                              key={cartItem.product._id}
-                              cartQuantity={cartItem.cartQuantity}
-                              product={cartItem.product}
+                            key={cartItem.product._id}
+                            cartQuantity={cartItem.cartQuantity}
+                            product={cartItem.product}
                           />
-                      );
-                    })}
+                        );
+                      })}
+                    </Box>
                   </Box>
-                </Box>
-              </Fade>
+                </Fade>
+              )}
+            </CustomPopper>
           )}
-        </CustomPopper>}
 
-        <Badge badgeContent={cart.length} color="error">
-          <ShoppingBagOutlined />
-        </Badge>
-      </IconButton>
-    </ClickAwayListener>
+          <Badge badgeContent={cart.length} color="error">
+            <ShoppingBagOutlined />
+          </Badge>
+        </IconButton>
+      </ClickAwayListener>
     </>
   );
 };

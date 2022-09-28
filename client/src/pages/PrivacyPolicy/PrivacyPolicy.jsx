@@ -9,11 +9,19 @@ import {
   Typography,
 } from "@mui/material";
 import { Link as LinkRouter } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { data } from "./data";
 
 const PrivacyPolicy = () => {
   const [expanded, setExpanded] = useState("panel1");
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, []);
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);

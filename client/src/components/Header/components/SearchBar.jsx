@@ -61,46 +61,48 @@ const SearchBar = () => {
 
   return (
     <>
-      <HeaderInput
-        startAdornment={
-          <InputAdornment position={"start"}>
-            <Search />
-          </InputAdornment>
-        }
-        placeholder="Type and press Enter to search..."
-        onChange={handleChange}
-        onKeyDown={showResults}
-        value={searchPhrase}
-      />
-      <CustomDialog onClose={handleClose} open={open}>
-        {isLoading && (
-          <Stack
-            justifyContent="center"
-            sx={{ minWidth: "400px", minHeight: "100px" }}
-          >
-            <Preloader />
-          </Stack>
-        )}
-        {!isLoading && searchProductCard}
-        {searchedProducts.length > 5 && !isLoading && (
-          <CustomLink
-            to="/search"
-            onClick={handleClose}
-            style={{ textDecoration: "none" }}
-          >{`Show All (${searchedProducts.length})`}</CustomLink>
-        )}
-        {!searchedProducts.length && !isLoading && (
-          <Box p="15px" sx={{ textAlign: "center" }}>
-            <Typography
-              variant="h2"
-              sx={{ lineHeight: 1.2, letterSpacing: 0, fontSize: 24 }}
+      <Box position="relative">
+        <HeaderInput
+          startAdornment={
+            <InputAdornment position={"start"}>
+              <Search />
+            </InputAdornment>
+          }
+          placeholder="Type and press Enter to search..."
+          onChange={handleChange}
+          onKeyDown={showResults}
+          value={searchPhrase}
+        />
+        <CustomDialog onClose={handleClose} keepMounted open={open}>
+          {isLoading && (
+            <Stack
+              justifyContent="center"
+              sx={{ minWidth: "400px", minHeight: "100px" }}
             >
-              Sorry, but nothing was found according to your request. Please,
-              try again.
-            </Typography>
-          </Box>
-        )}
-      </CustomDialog>
+              <Preloader />
+            </Stack>
+          )}
+          {!isLoading && searchProductCard}
+          {searchedProducts.length > 5 && !isLoading && (
+            <CustomLink
+              to="/search"
+              onClick={handleClose}
+              style={{ textDecoration: "none" }}
+            >{`Show All (${searchedProducts.length})`}</CustomLink>
+          )}
+          {!searchedProducts.length && !isLoading && (
+            <Box p="15px" sx={{ textAlign: "center" }}>
+              <Typography
+                variant="h2"
+                sx={{ lineHeight: 1.2, letterSpacing: 0, fontSize: 24 }}
+              >
+                Sorry, but nothing was found according to your request. Please,
+                try again.
+              </Typography>
+            </Box>
+          )}
+        </CustomDialog>
+      </Box>
     </>
   );
 };

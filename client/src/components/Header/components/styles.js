@@ -15,7 +15,13 @@ export const CustomDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialog-container.MuiDialog-scrollPaper": {
     alignItems: "flex-start",
     justifyContent: "flex-end",
-    marginRight: "21rem",
+    position: "absolute",
+    [theme.breakpoints.down("lg")]: {
+      right: "15%",
+    },
+    [theme.breakpoints.up("lg")]: {
+      right: "25%",
+    },
   },
   "& .MuiPaper-root": {
     marginTop: "75px",

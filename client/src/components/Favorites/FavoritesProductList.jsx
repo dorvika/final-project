@@ -42,15 +42,25 @@ const FavoritesProductList = () => {
             alignItems: "center",
           }}
         >
-          <Link to="/catalog?perPage=9&startPage=1" sx={{ textDecoration: "none" }}>
+          <Link
+            to="/catalog?perPage=9&startPage=1"
+            style={{ textDecoration: "none" }}
+          >
             <Button
               variant="contained"
-              sx={{
+              sx={(theme) => ({
                 justifySelf: "center",
-                mt: "50px",
-                mb: "80px",
+
                 p: "15px 35px",
-              }}
+                [theme.breakpoints.up("md")]: {
+                  mt: "50px",
+                  mb: "80px",
+                },
+                [theme.breakpoints.down("md")]: {
+                  mt: "30px",
+                  mb: "30px",
+                },
+              })}
             >
               continue shopping
             </Button>

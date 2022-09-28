@@ -15,9 +15,18 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { useEffect } from "react";
 import { Link as LinkRouter } from "react-router-dom";
 
 const Contact = () => {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
   return (
     <Container sx={{ my: "20px" }}>
       <Breadcrumbs

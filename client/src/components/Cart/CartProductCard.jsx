@@ -5,7 +5,8 @@ import {
   CardMedia,
   IconButton,
   TextField,
-  Stack, CardContent,
+  Stack,
+  CardContent,
 } from "@mui/material";
 import {
   ExpandMore,
@@ -26,8 +27,7 @@ import {
 } from "../../store/cart/actions";
 import { addFavorite, removeFavorite } from "../../store/favorites/actions";
 import theme from "../../muiTheme/theme";
-// eslint-disable-next-line import/named
-import {StyledBox, StyledStack} from "./styles";
+import { StyledBox, StyledStack } from "./styles";
 
 const CartProductCard = ({ cartQuantity, product }) => {
   const {
@@ -39,9 +39,9 @@ const CartProductCard = ({ cartQuantity, product }) => {
     size,
     _id,
     itemNo,
-    quantity
+    quantity,
   } = product;
-  
+
   let [quantityValue, setQuantityValue] = useState(cartQuantity);
   const dispatch = useDispatch();
   const favorites = useSelector((state) => state.favorites.favorites);
@@ -58,20 +58,20 @@ const CartProductCard = ({ cartQuantity, product }) => {
     dispatch(removeFavorite(product));
   };
   const handleQuantityChange = () => {
-    if(quantity >= quantityValue){
-      dispatch(changesToCart(product,quantityValue))
+    if (quantity >= quantityValue) {
+      dispatch(changesToCart(product, quantityValue));
     } else {
       setQuantityValue(quantity);
-      dispatch(changesToCart(product,quantity))
+      dispatch(changesToCart(product, quantity));
     }
   };
 
   const increaseQuantity = () => {
-    if(quantity > quantityValue){
+    if (quantity > quantityValue) {
       setQuantityValue(cartQuantity + 1);
       dispatch(addToCart(product));
     } else {
-      return
+      return;
     }
   };
   const decreaseQuantity = () => {
@@ -80,7 +80,7 @@ const CartProductCard = ({ cartQuantity, product }) => {
       dispatch(decreaseCartItem(product));
     }
   };
-  
+
   return (
     <>
       <Card
@@ -90,9 +90,9 @@ const CartProductCard = ({ cartQuantity, product }) => {
           justifyContent: "space-between",
           mb: "20px",
           mt: "20px",
-          [theme.breakpoints.down("sm")]: {
-                flexDirection: "column",
-          }
+          [theme.breakpoints.down("md")]: {
+            flexDirection: "column",
+          },
         }}
       >
         <StyledStack direction="row">
@@ -100,7 +100,12 @@ const CartProductCard = ({ cartQuantity, product }) => {
             <CardMedia
               component="img"
               height="200px"
-              sx={{ width: "200px", mr: "80px", [theme.breakpoints.down("sm")]: { mr: "0", width: "300px" } }}
+              sx={{
+                width: "200px",
+                mr: "80px",
+                [theme.breakpoints.down("md")]: { mr: "20px", width: "300px" },
+                [theme.breakpoints.down("sm")]: { mr: "0", width: "300px" },
+              }}
               image={`${imageUrls[0]}`}
             ></CardMedia>
           </Link>
@@ -139,9 +144,28 @@ const CartProductCard = ({ cartQuantity, product }) => {
               <Typography variant="h5" sx={{ pb: "10px" }}>
                 ${currentPrice}
               </Typography>
-              <Box sx={{ display: "flex", alignItems: "center", [theme.breakpoints.down("sm")]: { flexDirection: "column", } }}>
-                <Box sx={{ mr: "80px",[theme.breakpoints.down("sm")]: {mr: "0" }}}>
-                  <Box sx={{ display: "flex", alignItems: "center", [theme.breakpoints.down("sm")]: { justifyContent: "center", } }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  [theme.breakpoints.down("sm")]: { flexDirection: "column" },
+                }}
+              >
+                <Box
+                  sx={{
+                    mr: "80px",
+                    [theme.breakpoints.down("sm")]: { mr: "0" },
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      [theme.breakpoints.down("sm")]: {
+                        justifyContent: "center",
+                      },
+                    }}
+                  >
                     <Typography
                       variant="h5"
                       sx={{
@@ -159,7 +183,15 @@ const CartProductCard = ({ cartQuantity, product }) => {
                       {color}
                     </Typography>
                   </Box>
-                  <Box sx={{ display: "flex", alignItems: "center", [theme.breakpoints.down("sm")]: { justifyContent: "center", } }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      [theme.breakpoints.down("sm")]: {
+                        justifyContent: "center",
+                      },
+                    }}
+                  >
                     <Typography
                       variant="h5"
                       sx={{
@@ -178,19 +210,24 @@ const CartProductCard = ({ cartQuantity, product }) => {
                     </Typography>
                   </Box>
                 </Box>
-                <Stack direction="row" alignItems="center" sx={{[theme.breakpoints.down("sm")]: { mb: "10px", mt: "10px"}}}>
+                <Stack
+                  direction="row"
+                  alignItems="center"
+                  sx={{
+                    [theme.breakpoints.down("sm")]: { mb: "10px", mt: "10px" },
+                  }}
+                >
                   <TextField
                     onBlur={handleQuantityChange}
                     value={quantityValue}
                     type="number"
-                      onChange={(e)=>{
-                        let value = parseInt(e.target.value)
-                        if(value <= 0 || isNaN(value)) value = 1;
-                        setQuantityValue(value)
-                      }}
-                    style={{ width: "50px",}}
+                    onChange={(e) => {
+                      let value = parseInt(e.target.value);
+                      if (value <= 0 || isNaN(value)) value = 1;
+                      setQuantityValue(value);
+                    }}
+                    style={{ width: "50px" }}
                     size="small"
-
                   ></TextField>
                   <Stack>
                     <IconButton
@@ -216,15 +253,16 @@ const CartProductCard = ({ cartQuantity, product }) => {
           alignItems="flex-end"
           justifyContent="space-between"
         >
-          <IconButton onClick={handleRemoveProduct}
-          sx={{
-            [theme.breakpoints.down("sm")]: {
-              zIndex: "300",
-              position: "absolute",
-              top: "0",
-              right: "0",
-            }
-          }}
+          <IconButton
+            onClick={handleRemoveProduct}
+            sx={{
+              [theme.breakpoints.down("md")]: {
+                zIndex: "300",
+                position: "absolute",
+                top: "0",
+                right: "0",
+              },
+            }}
           >
             <Close />
           </IconButton>

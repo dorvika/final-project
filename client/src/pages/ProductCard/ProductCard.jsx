@@ -1,13 +1,10 @@
 import { Breadcrumbs, Link, Stack } from "@mui/material";
-import ProductInfo from "./ProductInfo.jsx";
-import ProductSlider from "./ProductSlider.jsx";
 import { ProductCardContainer, ProductCardMainContainer } from "./styles.js";
-import { MightLike } from "../../components";
+import { MightLike, ProductInfo, ProductSlider } from "../../components";
 import { useParams, Link as LinkRouter } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchData } from "../../utils/api.js";
 import Preloader from "../../utils/Preloader.jsx";
-
 
 const ProductCard = () => {
   const { id } = useParams();
@@ -51,7 +48,12 @@ const ProductCard = () => {
               [theme.breakpoints.down("sm")]: { mb: "15px", fontSize: "16px" },
             })}
           >
-            <Link component={LinkRouter} underline="hover" color="inherit" to="/">
+            <Link
+              component={LinkRouter}
+              underline="hover"
+              color="inherit"
+              to="/"
+            >
               Shop
             </Link>
             <Link
