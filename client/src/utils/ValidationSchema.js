@@ -139,6 +139,35 @@ export const validationSchemaPayment = object({
         /([0-9]{2})\/([0-9]{2})/,
         'Not a valid'
       )
+      .test(
+        'test-credit-card-expiration-date',
+        'Not a valid',
+        expirationDate => {
+          if (!expirationDate) {
+            return false
+          }
+    
+          const today = new Date()
+          const monthToday = today.getMonth() + 1
+          const yearToday = today
+            .getFullYear()
+            .toString()
+            .substr(-2)
+    
+          const [expMonth, expYear] = expirationDate.split('/')
+    
+          if (Number(expYear) < Number(yearToday)) {
+            return false
+          } else if (
+            Number(expMonth) < monthToday &&
+            Number(expYear) <= Number(yearToday)
+          ) {
+            return false
+          }
+    
+          return true
+        }
+      )
       .required('required')
   }),
   cvv: number().when("paymentmethod", {
@@ -148,7 +177,7 @@ export const validationSchemaPayment = object({
   cardholdername: string().when("paymentmethod", {
       is: "creditcard",
       then: string().matches(
-          /^[a-zA-Z]+$/,
+          /^[a-zA-Z ]+$/,
           'Not a valid. Only characters'
         ).required("required")
   })
