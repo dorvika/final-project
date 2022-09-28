@@ -1,42 +1,58 @@
-import { Button, Typography } from "@mui/material";
+import { styled } from "@mui/material";
 import { Box } from "@mui/system";
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { Preloader } from "../../../pages/Categories";
 import { removeAllFromCart } from "../../../store/cart/actions";
 import { placeOrder } from "../../../utils/api";
+import CustomMessage from "../components/CustomOrderMessage/CustomMessage.jsx";
+
 const ThanksOrderPage = ({ makeOrder }) => {
+  const [error, setError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const dispatch = useDispatch();
   useEffect(() => {
-    placeOrder("/orders", makeOrder());
-    dispatch(removeAllFromCart());
+    setIsLoading(true);
+    const order = async () => {
+      await placeOrder("/orders", makeOrder());
+    };
+    order()
+      .then(() => {
+        dispatch(removeAllFromCart());
+      })
+      .catch(() => {
+        setError(true);
+      })
+      .finally(() => setIsLoading(false));
   }, []);
+
+  const CustomBox = styled(Box)(() => ({
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "150px 0",
+  }));
   return (
     <>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          padding: "150px 0",
-        }}
-      >
-        <Typography
-          variant="h2"
-          textAlign="center"
-          sx={{ mb: "50px", textTransform: "uppercase" }}
-        >
-          Thank you for your order!
-        </Typography>
-          <Button 
-          LinkComponent={Link} 
-          variant="contained" 
-          to="/catalog?perPage=9&startPage=1" 
-          sx={{ p: "15px 85px", textDecoration: "none" }}>
-            Continue Shopping
-          </Button>
-      </Box>
+      {isLoading && (
+        <CustomBox>
+          <Preloader />
+        </CustomBox>
+      )}
+      {!isLoading && error && (
+        <CustomBox>
+          <CustomMessage text="Oops! Something wrong with your order..."/>
+        </CustomBox>
+      )}
+
+      {!isLoading && !error && (
+        <CustomBox>
+          <CustomMessage text="Thank you for your order!"/>
+        </CustomBox>
+      )}
+
     </>
   );
 };

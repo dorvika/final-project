@@ -11,18 +11,18 @@ import {
 const steps = ["Shopping Bag", "Shipping Details", "Payment Options"];
 
 export default function HorizontalNonLinearStepper({products}) {
-  const isCustomer = useSelector((state) => state.cart.customer);
- 
+  const isCustomer = useSelector((state) => state.loggedIn.userData);
+
   const [activeStep, setActiveStep] = useState(0);
   const [completed, setCompleted] = useState({});
   const [data, setData] = useState({
-    firstname: "",
-    lastname: "",
+    firstname: isCustomer?.firstName || "",
+    lastname: isCustomer?.lastName || "",
     address1: "",
     address2: "",
     country: "",
     city: "",
-    email: "",
+    email: isCustomer?.email || "",
     phone: "",
     delivery: "",
     paymentmethod: "",
